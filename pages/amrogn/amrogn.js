@@ -1,0 +1,1 @@
+console.log("Amrogn Chicken Website Loaded Successfully");

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tomi Fashion - Shoes</title>
+    
+    <link rel="icon" type="image/png" href="/Pictures/tomy_icon.jpg">
+    <link rel="stylesheet" href="/Tomy/tomy-fashion.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="top-bar-content">
+        <p>
+            📍 22 Town Square Mall 310 , Addis Ababa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            📍 Bisrate Gebriel Adot ground 21 , Addis Ababa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            📞 +251 9 12 47 22 55 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            📞 Open 9AM - 9PM Daily
+        </p>
+    </div>
+</div>
+
+<header>
+    <nav class="navbar">
+        <h2 class="logo">Tomi Fashion</h2>
+       <ul class="nav-links">
+            <li><a href="../Tomy/tomy-fashion.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+        </div>
+    
+    </nav>
+</header>
+
+<section class="products">
+    <h2>Hoodies Collection</h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <img src="/Pictures/Hoodie/hoodie1.jpg" alt="Hoodie 1">
+            <h3>Classic Black Hoodie</h3>
+            <p>4,900 Birr</p>
+        </div>
+
+        <div class="product-card">
+            <img src="/Pictures/Hoodie/hoodie2.jpg" alt="Hoodie 2">
+            <h3>Oversized Grey Hoodie</h3>
+            <p>5,900 Birr</p>
+        </div>
+
+        <div class="product-card">
+            <img src="/Pictures/Hoodie/hoodie3.jpg" alt="Hoodie 3">
+            <h3>Minimal White Hoodie</h3>
+            <p>5,400 Birr</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- STORE BACKGROUND SECTION -->
+<section class="store-bg">
+    <div class="store-overlay">
+        <h2>Experience Tomi Fashion In Store</h2>
+        <p>Visit us in Addis Ababa</p>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+    <h2>About Tomi Fashion</h2>
+    <p>
+        &nbsp;
+    </p>
+    <p>
+        Tomi Fashion is built on simplicity, confidence and bold minimalism.
+        We design timeless pieces that blend comfort with street identity.
+    </p>
+</section>
+
+
+<footer id="contact">
+    <div class="footer-grid">
+        <div>
+            <h3>Tomi Fashion</h3>
+            <p>Modern streetwear brand.</p>
+        </div>
+
+
+        <div>
+            <h4>Contact</h4>
+            <p>Email: support@tomifashion.com</p>
+        </div>
+    </div>
+
+    <p class="copyright">© 2026 Tomi Fashion</p>
+</footer>
+
+<script>
+
+    document.querySelectorAll(".slider").forEach(slider => {
+
+    const slides = slider.querySelectorAll(".slide");
+    const leftBtn = slider.querySelector(".arrow.left");
+    const rightBtn = slider.querySelector(".arrow.right");
+
+    let current = 0;
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove("active"));
+        slides[index].classList.add("active");
+    }
+
+    rightBtn.addEventListener("click", () => {
+        current = (current + 1) % slides.length;
+        showSlide(current);
+    });
+
+    leftBtn.addEventListener("click", () => {
+        current = (current - 1 + slides.length) % slides.length;
+        showSlide(current);
+    });
+
+});
+
+document.querySelectorAll(".product-card").forEach(card => {
+    const image = card.querySelector(".main-image");
+    const colors = card.querySelectorAll(".color");
+
+    colors.forEach(color => {
+        color.addEventListener("click", () => {
+
+            // Fade out
+            image.style.opacity = "0";
+
+            setTimeout(() => {
+                image.src = color.dataset.image;
+                image.style.opacity = "1";
+            }, 150);
+
+            // Remove active from others
+            colors.forEach(c => c.classList.remove("active"));
+
+            // Add active to selected
+            color.classList.add("active");
+        });
+    });
+});
+
+</script>
+
+<script src="/pages/search.js"></script>
+</body>
+</html>

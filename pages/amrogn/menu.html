@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amrogn Chicken</title>
+    
+    <link rel="stylesheet" href="/pages/amrogn/amrogn.css">
+    <link rel="stylesheet" href="/pages/amrogn/menu.css">
+    <link rel="icon" type="image/png" href="/pages/amrogn/Pictures/amrogn logo.png">
+</head>
+<body>
+
+     <header class="navbar1">
+    <div class="nav-container1">
+
+         <div class="logo">
+        <img src="/pages/amrogn/Pictures/amrogn logo.png" alt="Amrogn Logo">
+        <h2 class="logo1">Amrogn Chicken</h2>
+         </div>
+
+        <nav class="nav-links1">
+            <a href="/pages/amrogn/amrogn.html">Home</a>
+            <a href="/pages/amrogn/menu.html">Menu</a>
+            <a href="/pages/amrogn/branches.html" class="active">Branches</a>
+            <a href="/pages/amrogn/contact.html">Contact</a>
+        </nav>
+
+    </div>
+</header>
+
+  <section class="menu-header">
+    <h1>OUR MENU</h1>
+    <p>Fresh • Affordable • Delicious</p>
+</section>
+
+<div class="branch-selector">
+    <span class="order-label">Order from:</span>
+
+    <button class="branch-btn active"
+        onclick="selectBranch('Bole','0911000000', this)">Bole</button>
+
+    <button class="branch-btn"
+        onclick="selectBranch('Piassa','0912000000', this)">Piassa</button>
+
+    <button class="branch-btn"
+        onclick="selectBranch('Sarbet','0913000000', this)">Sarbet</button>
+</div>
+
+<div class="selected-branch">
+    Call <span id="branchName">Bole</span>:
+    <a id="branchPhone" href="tel:0911000000">0911 000 000</a>
+</div>
+
+
+<!-- FRIED & GRILLED -->
+<section class="menu-block red-bg">
+    <h2>Fried & Grilled Chicken</h2>
+
+    <div class="menu-row">
+        <span>Fried Chicken (4 Pieces)</span>
+        <span class="price">ETB 1,463.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Fried Chicken (3 Pieces)</span>
+        <span class="price">ETB 1,078.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Fried Chicken (2 Pieces)</span>
+        <span class="price">ETB 814.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Half Roasted Chicken</span>
+        <span class="price">ETB 1,529.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Full Roasted Chicken</span>
+        <span class="price">ETB 2,827.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Half Grilled Chicken (Quarter Leg)</span>
+        <span class="price">ETB 1,364.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Full Grilled Chicken</span>
+        <span class="price">ETB 2,563.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Double Quarter Leg</span>
+        <span class="price">ETB 2,750.00</span>
+    </div>
+</section>
+
+<!-- SHAWARMA & SPECIALS -->
+<section class="menu-block brown-bg">
+    <h2>Shawarma, Wraps & Specials</h2>
+
+    <div class="menu-row highlight">
+        <span>Special Shawarma <small>POPULAR</small></span>
+        <span class="price">ETB 748.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Chicken Shawarma</span>
+        <span class="price">ETB 594.00</span>
+    </div>
+
+    <div class="menu-row unavailable">
+        <div class="item-left">
+            <span class="item-name">Shawarma Plate</span>
+            <span class="status">Not Available</span>
+        </div>
+        <span class="price">ETB 1,463.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Chicken Burger</span>
+        <span class="price">ETB 770.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Chicken Fajita</span>
+        <span class="price">ETB 1,023.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Chicken Kabsa</span>
+        <span class="price">ETB 1,441.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Chicken Mofu (Full)</span>
+        <span class="price">ETB 2,750.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Chicken Mofu (Half)</span>
+        <span class="price">ETB 1,430.00</span>
+    </div>
+</section>
+
+<!-- DRINKS -->
+<section class="menu-block yellow-bg">
+    <h2>Drinks</h2>
+
+    <div class="menu-row">
+        <span>Water (500ml)</span>
+        <span class="price">ETB 66.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Coca-Cola (350ml)</span>
+        <span class="price">ETB 143.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Sprite (350ml)</span>
+        <span class="price">ETB 143.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Fanta Orange (350ml)</span>
+        <span class="price">ETB 143.00</span>
+    </div>
+
+    <div class="menu-row">
+        <span>Fanta Pineapple (350ml)</span>
+        <span class="price">ETB 143.00</span>
+    </div>
+</section>
+
+
+<footer class="footer">
+
+<div class="footer-container">
+
+<div class="footer-brand">
+<img src="/pages/amrogn/Pictures/amrogn logo.png" alt="Amrogn Logo">
+<h3>Amrogn Chicken</h3>
+<p>
+Fresh chicken served daily across Ethiopia.  
+Visit one of our branches and enjoy the taste everyone loves.
+</p>
+</div>
+
+<div class="footer-links">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="/index.html">Home</a></li>
+<li><a href="/pages/menu/menu.html">Menu</a></li>
+<li><a href="/pages/branches/branches.html">Branches</a></li>
+<li><a href="/pages/amrogn/contact.html">Contact</a></li>
+</ul>
+</div>
+
+<div class="footer-contact">
+<h4>Contact</h4>
+<p>📍 Addis Ababa, Ethiopia</p>
+<p>📞 <a href="tel:+251911000000">+251 911 000 000</a></p>
+<p>📧 amrognchicken@gmail.com</p>
+<p>🕒 Open Daily: 10 AM – 10 PM</p>
+</div>
+
+<div class="footer-social">
+<h4>Follow Us</h4>
+<div class="social-icons">
+<a href="#">🌐</a>
+<a href="#">📸</a>
+<a href="#">🐦</a>
+<a href="#">📘</a>
+</div>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+<p>© 2026 Amrogn Chicken. All Rights Reserved.</p>
+</div>
+
+</footer>
+
+<script>
+function selectBranch(name, phone, element) {
+
+    document.getElementById("branchName").innerText = name;
+    document.getElementById("branchPhone").innerText = phone;
+    document.getElementById("branchPhone").href = "tel:" + phone;
+
+    document.querySelectorAll(".branch-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    element.classList.add("active");
+}
+</script>
+
+
+</body>
+</html>

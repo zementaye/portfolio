@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amrogn Chicken</title>
+    
+    <link rel="stylesheet" href="/pages/amrogn/amrogn.css">
+    <link rel="icon" type="image/png" href="/pages/amrogn/Pictures/amrogn logo.png">
+</head>
+<body>
+
+     <header class="navbar1">
+    <div class="nav-container1">
+
+         <div class="logo">
+        <img src="/pages/amrogn/Pictures/amrogn logo.png" alt="Amrogn Logo">
+        <h2 class="logo1">Amrogn Chicken</h2>
+         </div>
+
+        <nav class="nav-links1">
+            <a href="/pages/amrogn/amrogn.html">Home</a>
+            <a href="/pages/amrogn/menu.html">Menu</a>
+            <a href="/pages/amrogn/branches.html" class="active">Branches</a>
+            <a href="/pages/amrogn/contact.html">Contact</a>
+        </nav>
+
+    </div>
+</header>
+    
+
+   <section class="branches-section">
+
+<h2>Find an Amrogn Chicken Near You</h2>
+<p class="branch-subtitle">Fresh chicken served daily across Ethiopia</p>
+
+<div class="city-filter">
+<button onclick="filterCity('all')">All</button>
+<button onclick="filterCity('addis')">Addis Ababa</button>
+<button onclick="filterCity('hawassa')">Hawassa</button>
+<button onclick="filterCity('adama')">Adama</button>
+</div>
+
+<div class="branches-grid">
+
+<div class="branch-card" data-city="addis">
+<h3>📍 Bole Branch</h3>
+<p>Bole Road, Addis Ababa</p>
+<p>📞 +251 911 000 111</p>
+
+<iframe 
+src="https://www.google.com/maps?q=bole+addis+ababa&output=embed">
+</iframe>
+</div>
+
+<div class="branch-card" data-city="addis">
+<h3>📍 Megenagna Branch</h3>
+<p>Megenagna Square</p>
+<p>📞 +251 911 000 222</p>
+
+<iframe 
+src="https://www.google.com/maps?q=megenagna+addis+ababa&output=embed">
+</iframe>
+</div>
+
+<div class="branch-card" data-city="addis">
+<h3>📍 CMC </h3>
+<p>CMC Square</p>
+<p>📞 +251 911 000 222</p>
+
+<iframe 
+src="https://www.google.com/maps?q=megenagna+addis+ababa&output=embed">
+</iframe>
+</div>
+
+<div class="branch-card" data-city="addis">
+<h3>📍 4 Kilo Branch</h3>
+<p>4 kilo, New to Ambassador Building</p>
+<p>📞 +251 911 000 222</p>
+
+<iframe 
+src="https://www.google.com/maps?q=megenagna+addis+ababa&output=embed">
+</iframe>
+</div>
+
+<div class="branch-card" data-city="addis">
+<h3>📍 Mekanisa Branch</h3>
+<p>Mekanisa, Infront of Silk-Road Hospital</p>
+<p>📞 +251 911 000 222</p>
+
+<iframe 
+src="https://www.google.com/maps?q=megenagna+addis+ababa&output=embed">
+</iframe>
+</div>
+
+<div class="branch-card" data-city="hawassa">
+<h3>📍 Hawassa Branch</h3>
+<p>Lake Road, Hawassa</p>
+<p>📞 +251 911 000 333</p>
+
+<iframe 
+src="https://www.google.com/maps?q=hawassa+ethiopia&output=embed">
+</iframe>
+</div>
+
+<div class="branch-card" data-city="adama">
+<h3>📍 Adama Branch</h3>
+<p>Main Street, Adama</p>
+<p>📞 +251 911 000 444</p>
+
+<iframe 
+src="https://www.google.com/maps?q=adama+ethiopia&output=embed">
+</iframe>
+</div>
+
+</div>
+</section>
+<script>
+function filterCity(city){
+
+let branches = document.querySelectorAll(".branch-card");
+
+branches.forEach(branch => {
+
+if(city === "all"){
+branch.style.display="block";
+}
+
+else if(branch.dataset.city === city){
+branch.style.display="block";
+}
+
+else{
+branch.style.display="none";
+}
+
+});
+
+}
+</script>
+
+<footer class="footer">
+
+<div class="footer-container">
+
+<div class="footer-brand">
+<img src="/pages/amrogn/Pictures/amrogn logo.png" alt="Amrogn Logo">
+<h3>Amrogn Chicken</h3>
+<p>
+Fresh chicken served daily across Ethiopia.  
+Visit one of our branches and enjoy the taste everyone loves.
+</p>
+</div>
+
+<div class="footer-links">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="/index.html">Home</a></li>
+<li><a href="/pages/menu/menu.html">Menu</a></li>
+<li><a href="/pages/branches/branches.html">Branches</a></li>
+<li><a href="/pages/amrogn/contact.html">Contact</a></li>
+</ul>
+</div>
+
+<div class="footer-contact">
+<h4>Contact</h4>
+<p>📍 Addis Ababa, Ethiopia</p>
+<p>📞 <a href="tel:+251911000000">+251 911 000 000</a></p>
+<p>📧 amrognchicken@gmail.com</p>
+<p>🕒 Open Daily: 10 AM – 10 PM</p>
+</div>
+
+<div class="footer-social">
+<h4>Follow Us</h4>
+<div class="social-icons">
+<a href="#">🌐</a>
+<a href="#">📸</a>
+<a href="#">🐦</a>
+<a href="#">📘</a>
+</div>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+<p>© 2026 Amrogn Chicken. All Rights Reserved.</p>
+</div>
+
+</footer>
+
+</body>
+</html>

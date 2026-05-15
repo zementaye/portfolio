@@ -1,0 +1,312 @@
+/* Branch Selector */
+.branch-selector {
+    text-align: center;
+    margin: 30px 0 10px;
+}
+
+.order-label {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.branch-btn {
+    background: transparent;
+    border: 2px solid #B22222;
+    color: #B22222;
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.branch-btn:hover {
+    background: #B22222;
+    color: white;
+}
+
+.branch-btn.active {
+    background: #B22222;
+    color: white;
+}
+
+/* Selected branch phone display */
+.selected-branch {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.selected-branch a {
+    color: #B22222;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.selected-branch a:hover {
+    text-decoration: underline;
+}
+
+.menu-header {
+    text-align: center;
+    padding: 80px 20px;
+    background: #2C1B0E;
+    color: white;
+}
+
+.menu-header h1 {
+    font-size: 50px;
+}
+
+/* BLOCK STYLES */
+.menu-block {
+    padding: 60px 80px;
+}
+
+.red-bg {
+    background: #B22222;
+    color: white;
+}
+
+.yellow-bg {
+    background: #FFC107;
+}
+
+.white-bg {
+    background: #FFF8E1;
+}
+
+/* MENU ROW */
+.menu-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    font-size: 18px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.red-bg .menu-row {
+    border-color: rgba(255,255,255,0.3);
+}
+
+.price {
+    font-weight: bold;
+}
+
+.highlight {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.highlight small {
+    background: black;
+    color: yellow;
+    padding: 3px 6px;
+    margin-left: 8px;
+    font-size: 12px;
+}
+
+/* Structure */
+.menu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.item-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Unavailable Styling */
+.unavailable .item-name,
+.unavailable .price {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Status badge stays normal */
+.status {
+    background: #FFC107;
+    color: black;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* Status badge stays clean */
+.status {
+    background: #FFC107;
+    color: black;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-decoration: none; /* important */
+}
+
+.menu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+/* LEFT SIDE WRAPPER */
+.item-left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.menu-row:hover {
+    transform: scale(1.02);
+    transition: 0.2s ease;
+}
+
+.brown-bg {
+    background: #2C1B0E;
+    color: white;
+}
+
+.brown-bg .menu-row {
+    border-color: rgba(255,255,255,0.2);
+}
+
+.yellow-bg {
+    background: #FFC107;
+}
+
+.red-bg {
+    background: #B22222;
+    color: white;
+}
+
+.red-bg .menu-row {
+    border-color: rgba(255,255,255,0.3);
+}
+
+/* NAVBAR */
+.navbar {
+    background: #2C1B0E; /* dark brown */
+    padding: 18px 60px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* LOGO */
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #FFC107; /* yellow accent */
+}
+
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    gap: 45px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+/* Hover underline animation */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #FFC107;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* ORDER BUTTON */
+.order-btn {
+    background: #B22222; /* red */
+    color: white;
+    padding: 10px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.order-btn:hover {
+    background: #8B1A1A;
+}
+
+@media (max-width: 768px) {
+
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+}
+
+/* Sticky Order Bar */
+.order-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #B22222;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.order-content {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.order-content a {
+    color: #FFC107;
+    margin-left: 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.order-content a:hover {
+    text-decoration: underline;
+}
+
+html {
+    scroll-behavior: smooth;
+}
