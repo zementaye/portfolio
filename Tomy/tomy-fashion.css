@@ -74,7 +74,7 @@ header {
 .hero {
     position: relative;
     height: 90vh;
-    background: url("/Pictures/tomy_icon.jpg") center/cover no-repeat;
+    background: url("../../Pictures../Tomy_icon.jpg") center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
