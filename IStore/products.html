@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — iStore by Sophi</title>
+  <!-- Website Logo/Favicon -->
+    <link rel="icon" type="image/png" href="images/istore.png
+    ">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .cart-product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+  :root {
+    --gold: #B8924A;
+    --gold-light: #D4B07A;
+    --gold-pale: #F5ECD8;
+    --gold-dark: #8A6A30;
+    --black: #1C1A16;
+    --off-white: #FDFAF5;
+    --warm-50: #FAF7F2;
+    --warm-100: #F0EBE0;
+    --warm-200: #E0D8C8;
+    --text-dark: #1C1A16;
+    --text-mid: #4A4540;
+    --text-muted: #8A8278;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(253,250,245,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--warm-200);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); font-style: italic; font-size: 0.85em; }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-mid);
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    transition: opacity 0.2s, color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+    transform-origin: left;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a.active { opacity: 1; color: var(--gold); }
+  .nav-links a.active::after { transform: scaleX(1); }
+
+  .nav-cart-btn {
+    position: relative;
+    background: var(--text-dark);
+    color: var(--off-white);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: background 0.2s;
+  }
+  .nav-cart-btn:hover { background: var(--gold); }
+  .cart-count {
+    background: var(--gold);
+    color: #fff;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+  .cart-count.bump { animation: bump 0.3s ease; }
+  @keyframes bump { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4)} }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 10rem 3rem 4rem;
+    background: var(--warm-50);
+    border-bottom: 1px solid var(--warm-200);
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 90% 50%, rgba(184,146,74,0.09) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(184,146,74,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .page-header-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--warm-200) 1px, transparent 1px),
+      linear-gradient(90deg, var(--warm-200) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.5;
+    mask-image: radial-gradient(ellipse at 80% 50%, black 20%, transparent 70%);
+  }
+  .page-header-inner {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .page-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .page-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); opacity: 0.5; }
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.0;
+    color: var(--text-dark);
+  }
+  .page-title .accent { color: var(--gold); font-style: italic; }
+  .page-count {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+  }
+
+  /* TOOLBAR */
+  .toolbar {
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--warm-200);
+    padding: 1.25rem 3rem;
+    position: sticky;
+    top: 65px;
+    z-index: 100;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+    max-width: 420px;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+  #search-input {
+    width: 100%;
+    padding: 0.7rem 1rem 0.7rem 2.75rem;
+    border: 1px solid var(--warm-200);
+    background: var(--warm-50);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  #search-input:focus { border-color: var(--gold); background: #fff; }
+  #search-input::placeholder { color: var(--text-muted); }
+
+  .filter-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 0.5rem 1.1rem;
+    border: 1px solid var(--warm-200);
+    background: transparent;
+    color: var(--text-mid);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: var(--gold-light); color: var(--gold); }
+  .filter-btn.active { background: var(--text-dark); border-color: var(--text-dark); color: #fff; }
+
+  .sort-select {
+    padding: 0.5rem 2.2rem 0.5rem 0.9rem;
+    border: 1px solid var(--warm-200);
+    background: var(--warm-50);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8278' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    transition: border-color 0.2s;
+    margin-left: auto;
+  }
+  .sort-select:focus { border-color: var(--gold); }
+
+  /* PRODUCTS LAYOUT */
+  .products-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 3rem;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 6rem 2rem;
+    color: var(--text-muted);
+    display: none;
+  }
+  .no-results.visible { display: block; }
+  .no-results-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.3; }
+  .no-results h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  /* CATEGORY GROUP */
+  .category-group { margin-bottom: 4rem; }
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--warm-200);
+  }
+  .category-icon { font-size: 1.6rem; }
+  .category-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+  .category-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+
+  /* PRODUCT CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--warm-200);
+  }
+
+  .product-card {
+    background: #fff;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .product-card:hover { background: var(--warm-50); }
+  .product-card.hidden { display: none; }
+
+  .card-badge {
+    position: absolute;
+    top: 1.25rem; left: 1.25rem;
+    background: var(--text-dark);
+    color: var(--off-white);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    z-index: 2;
+  }
+  .card-badge.gold { background: var(--gold); }
+  .card-badge.green { background: #3A7A5A; }
+
+  .card-img-wrap {
+    aspect-ratio: 1;
+    background: var(--warm-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+  }
+  .product-card:hover .card-img-wrap { background: var(--warm-200); }
+
+  .card-img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.product-card:hover .card-img {
+  transform: scale(1.08);
+}
+  .card-body {
+    padding: 1.5rem 1.5rem 1.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+
+  .card-variant {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    flex: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .card-price {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+
+  .add-btn {
+    padding: 0.55rem 1.1rem;
+    background: var(--text-dark);
+    color: var(--off-white);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .add-btn:hover { background: var(--gold); transform: translateY(-1px); }
+  .add-btn:active { transform: translateY(0); }
+  .add-btn.added {
+    background: #3A7A5A;
+    animation: addPop 0.3s ease;
+  }
+  @keyframes addPop { 0%,100%{transform:scale(1)} 50%{transform:scale(0.95)} }
+
+  /* CART DRAWER */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(28,26,22,0.5);
+    z-index: 300;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+  .cart-drawer {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: min(440px, 100vw);
+    background: var(--off-white);
+    z-index: 400;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--warm-200);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+
+  .cart-head {
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--warm-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+  }
+  .cart-head-left {}
+  .cart-title-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .cart-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+  .cart-close {
+    width: 40px; height: 40px;
+    border: 1px solid var(--warm-200);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--text-mid);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .cart-close:hover { border-color: var(--gold); color: var(--gold); }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem 2rem;
+  }
+  .cart-items::-webkit-scrollbar { width: 4px; }
+  .cart-items::-webkit-scrollbar-track { background: var(--warm-100); }
+  .cart-items::-webkit-scrollbar-thumb { background: var(--warm-200); }
+
+  .cart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 1rem;
+    color: var(--text-muted);
+    padding: 3rem;
+    text-align: center;
+  }
+  .cart-empty-icon { font-size: 3.5rem; opacity: 0.25; }
+  .cart-empty h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--text-dark);
+  }
+  .cart-empty p { font-size: 0.85rem; line-height: 1.6; }
+
+  .cart-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--warm-200);
+    animation: slideIn 0.3s ease;
+  }
+  @keyframes slideIn { from { opacity:0; transform: translateX(20px); } to { opacity:1; transform:translateX(0); } }
+
+  .cart-item-img {
+    width: 64px; height: 64px;
+    background: var(--warm-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    border: 1px solid var(--warm-200);
+  }
+
+  .cart-item-info { flex: 1; min-width: 0; }
+  .cart-item-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cart-item-variant {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+  .cart-item-price {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+
+  .cart-item-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .qty-wrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--warm-200);
+    background: #fff;
+  }
+  .qty-btn {
+    width: 28px; height: 28px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, background 0.2s;
+  }
+  .qty-btn:hover { background: var(--warm-100); color: var(--gold); }
+  .qty-num {
+    min-width: 28px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+  .remove-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    padding: 0;
+  }
+  .remove-btn:hover { color: #C0392B; }
+
+  .cart-footer {
+    padding: 1.5rem 2rem 2rem;
+    border-top: 1px solid var(--warm-200);
+    background: #fff;
+  }
+  .cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.6rem;
+  }
+  .cart-summary-label { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .cart-summary-val { font-size: 1.25rem; font-weight: 500; color: var(--text-dark); }
+  .cart-summary-sub { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+  .checkout-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--text-dark);
+    color: var(--off-white);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 0.75rem;
+  }
+  .checkout-btn:hover { background: var(--gold); }
+
+  .clear-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--warm-200);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .clear-btn:hover { border-color: var(--gold-light); color: var(--gold); }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--text-dark);
+    color: var(--off-white);
+    padding: 0.875rem 1.75rem;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast-icon { color: var(--gold); font-size: 1rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--warm-50);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--warm-200);
+    margin-top: 4rem;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--text-dark); }
+  .footer-logo span { color: var(--gold); font-style: italic; font-size: 0.85em; }
+  .footer-loc { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.05em; margin-top: 0.25rem; }
+  .footer-copy { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  .reveal { opacity:0; transform:translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header { padding: 8rem 1.5rem 3rem; }
+    .toolbar { padding: 1rem 1.5rem; top: 60px; }
+    .products-layout { padding: 2rem 1.5rem; }
+    .sort-select { margin-left: 0; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+
+  /* ACTIVE NAV LINK */
+.nav-links a.active {
+  color: var(--gold);
+  opacity: 1;
+}
+
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="istore.html" class="nav-logo">iStore <span>by Sophi</span></a>
+  <ul class="nav-links">
+    <li><a href="istore.html">Home</a></li>
+    <li><a href="products.html" class="active">Products</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-cart-btn" onclick="toggleCart()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    Cart
+    <span class="cart-count" id="cart-count">0</span>
+  </button>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-header-inner">
+    <div>
+      <div class="page-eyebrow">iStore by Sophi</div>
+      <h1 class="page-title">The Full <span class="accent">Apple</span><br>Lineup</h1>
+      <p class="page-count" id="product-count">Showing all 28 products</p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search-input" placeholder="Search products…" autocomplete="off">
+  </div>
+  <div class="filter-group" id="filter-group">
+    <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="iphone">iPhone</button>
+    <button class="filter-btn" data-cat="mac">Mac</button>
+    <button class="filter-btn" data-cat="ipad">iPad</button>
+    <button class="filter-btn" data-cat="watch">Watch</button>
+    <button class="filter-btn" data-cat="audio">Audio</button>
+    <button class="filter-btn" data-cat="accessories">Accessories</button>
+  </div>
+  <select class="sort-select" id="sort-select">
+    <option value="default">Sort: Default</option>
+    <option value="price-asc">Price: Low → High</option>
+    <option value="price-desc">Price: High → Low</option>
+    <option value="name-asc">Name: A → Z</option>
+  </select>
+</div>
+
+<!-- PRODUCTS -->
+<div class="products-layout">
+  <div id="no-results" class="no-results">
+    <div class="no-results-icon">◎</div>
+    <h3>No products found</h3>
+    <p>Try a different search term or filter.</p>
+  </div>
+  <div id="products-container"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">iStore <span>by Sophi</span></div>
+    <div class="footer-loc">Bole Road, Addis Ababa, Ethiopia</div>
+  </div>
+  <div class="footer-copy">© 2025 iStore by Sophi. All rights reserved.</div>
+</footer>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-head">
+    <div class="cart-head-left">
+      <div class="cart-title-label">Your Selection</div>
+      <div class="cart-title">Shopping Cart</div>
+    </div>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer" id="cart-footer" style="display:none;">
+    <div class="cart-summary">
+      <span class="cart-summary-label">Total</span>
+      <span class="cart-summary-val" id="cart-total">ETB 0</span>
+    </div>
+    <p class="cart-summary-sub">Prices in Ethiopian Birr · Taxes may apply</p>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout ↗</button>
+    <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✦</span>
+  <span id="toast-msg">Added to cart</span>
+</div>
+
+<script>
+// ─── PRODUCT DATA ───────────────────────────────────────────────────────────
+const products = [
+  // IPHONE
+  { id:1,  cat:'iphone',      image:'images/iPhone_17_Pro_and_iPhone_17_Pro_Max-removebg-preview (1).png',   badge:'New',   badgeType:'New',     name:'iPhone 17 Pro Max',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
+  { id:18,  cat:'iphone',      image:'images/Apple_iPhone_17_256GB_-_Sage-removebg-preview.png',   badge:'New',   badgeType:'New',     name:'iPhone 17',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
+  { id:17,  cat:'iphone',      image:'images/Apple_iPhone_16_Pro_Max.png',   badge:'New',   badgeType:'Popular',     name:'iPhone 16 Pro Max',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
+  { id:2,  cat:'iphone',      image:'images/AppleiPhone16Pro-removebg-preview.png',   badge:'New',   badgeType:'Popular',     name:'iPhone 16 Pro',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
+  { id:3,  cat:'iphone',      image:'images/AppleiPhone16-removebg-preview.png', tag:'Popular',       badge:'Hot',   badgeType:'gold', name:'iPhone 16',           variant:'128GB / 256GB',                  desc:'A18 chip, new camera button, and all-day battery. The essential iPhone upgrade.',                        price: 89000  },
+  { id:4,  cat:'iphone',      image:'images/iphone 16 plus.png', tag:'Popular',       badge:'',      badgeType:'',     name:'iPhone 16 Plus',      variant:'128GB / 256GB',                  desc:'A18 chip with a massive 6.7-inch display. Superb battery life in a familiar design.',                    price: 95000  },
+  { id:7,  cat:'iphone',      image:'images/15promax.png',   badge:'',      badgeType:'',     name:'iPhone 15 Pro Max',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:5,  cat:'iphone',      image:'images/Apple_iPhone_15_Plus_bleu_128Go_avec_Forfait_5G-removebg-preview.png',   badge:'Deal',  badgeType:'green',name:'iPhone 15 Plus',           variant:'128GB / 256GB',                  desc:'A16 Bionic, Dynamic Island, and USB-C. An excellent value flagship.',                                   price: 72000  },
+  { id:6,  cat:'iphone',      image:'images/iPhone 15 Pro.png',   badge:'',      badgeType:'',     name:'iPhone 15 Pro',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:8,  cat:'iphone',      image:'images/iPhone_15___Mobile_Phones_Direct___MobilePhonesDirect-removebg-preview (1).png',   badge:'',      badgeType:'',     name:'iPhone 15',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+{ id:9,  cat:'iphone',      image:'images/14 pro max.png',   badge:'',      badgeType:'',     name:'iPhone 14 Pro Max',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:10,  cat:'iphone',      image:'images/14 plus.png',   badge:'Deal',  badgeType:'green',name:'iPhone 14 Plus',           variant:'128GB / 256GB',                  desc:'A16 Bionic, Dynamic Island, and USB-C. An excellent value flagship.',                                   price: 72000  },
+  { id:11,  cat:'iphone',      image:'images/Restored_Apple_iPhone_14_Pro_256gb_Silver__Verizon__Mq0x3ll_a_Used_Excellent_Condition-removebg-preview.png',   badge:'',      badgeType:'',     name:'iPhone 14 Pro',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:12,  cat:'iphone',      image:'images/14.png',   badge:'',      badgeType:'',     name:'iPhone 14',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+{ id:13,  cat:'iphone',      image:'images/13promax.png',   badge:'',      badgeType:'',     name:'iPhone 13 Pro Max',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:14,  cat:'iphone',      image:'images/13.png',   badge:'Deal',  badgeType:'green',name:'iPhone 13 Plus',           variant:'128GB / 256GB',                  desc:'A16 Bionic, Dynamic Island, and USB-C. An excellent value flagship.',                                   price: 72000  },
+  { id:15,  cat:'iphone',      image:'images/13 pro.png',   badge:'',      badgeType:'',     name:'iPhone 13 Pro',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:16,  cat:'iphone',      image:'images/13.png',   badge:'',      badgeType:'',     name:'iPhone 13',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+
+  // MAC
+  { id:7,  cat:'mac',         image:'images/mac14.png', tag:'Best Seller',   badge:'Top',   badgeType:'gold', name:'MacBook Pro 14"',     variant:'M3 Pro · 18GB / 36GB RAM',       desc:'M3 Pro chip, Liquid Retina XDR display, and up to 22hr battery. Built for creators.',                   price: 185000 },
+  { id:8,  cat:'mac',         image:'images/mac16.png', tag:'Pro Pick',      badge:'',      badgeType:'',     name:'MacBook Pro 16"',     variant:'M3 Max · 36GB / 128GB RAM',      desc:'M3 Max chip, the largest Liquid Retina XDR. Unmatched performance for professionals.',                  price: 265000 },
+  { id:9,  cat:'mac',         image:'images/macAir13.png', tag:'New',           badge:'New',   badgeType:'',     name:'MacBook Air 13"',     variant:'M3 · 8GB / 16GB RAM',            desc:'Featherweight at 1.24kg, M3 chip, and up to 18hr battery. The ultimate everyday laptop.',               price: 135000 },
+  { id:10, cat:'mac',         image:'images/macAir 15.png', tag:'New',           badge:'New',   badgeType:'',     name:'MacBook Air 15"',     variant:'M3 · 8GB / 16GB RAM',            desc:'All the power of MacBook Air in a larger 15.3-inch Liquid Retina display.',                            price: 155000 },
+  { id:11, cat:'mac',         image:'images/Apple_iMac_24.png', tag:'Desktop',       badge:'',      badgeType:'',     name:'iMac 24"',            variant:'M3 · 8GB / 24GB RAM',            desc:'All-in-one brilliance. Stunning 4.5K Retina display and M3 in a sleek, colourful design.',              price: 178000 },
+  { id:12, cat:'mac',         image:'images/Mac Mini.png', tag:'Pro Desktop',   badge:'',      badgeType:'',     name:'Mac Studio',          variant:'M3 Max / Ultra',                 desc:'Compact. Powerful. M3 Max or Ultra. The most capable Mac for the studio.',                             price: 310000 },
+  { id:13, cat:'mac',         image:'images/Mac Pro.png', tag:'Ultimate',      badge:'',      badgeType:'',     name:'Mac Pro',             variant:'M2 Ultra',                       desc:'The most expandable Mac ever. M2 Ultra with up to 192GB memory.',                                       price: 780000 },
+
+  // IPAD
+  { id:14, cat:'ipad',        image:'images/Ipad Pro 13.png', tag:'New',           badge:'New',   badgeType:'',     name:'iPad Pro 13"',        variant:'M4 · Wi-Fi / Wi-Fi + Cellular',  desc:'Ultra-thin, M4 chip, and OLED Tandem display. The most advanced iPad ever made.',                      price: 145000 },
+  { id:15, cat:'ipad',        image:'images/ipad pro 11.png', tag:'New',           badge:'New',   badgeType:'',     name:'iPad Pro 11"',        variant:'M4 · Wi-Fi / Wi-Fi + Cellular',  desc:'Same M4 power in a compact, portable form. Brilliant OLED display.',                                   price: 115000 },
+  { id:16, cat:'ipad',        image:'images/Ipad Air 13.png', tag:'Popular',       badge:'Hot',   badgeType:'gold', name:'iPad Air 13"',        variant:'M2 · Wi-Fi / Cellular',          desc:'Powerful M2 chip in a larger canvas. Perfect for creative work and productivity.',                      price: 88000  },
+  { id:17, cat:'ipad',        image:'images/Ipad Air 11.png', tag:'Popular',       badge:'',      badgeType:'',     name:'iPad Air 11"',        variant:'M2 · Wi-Fi / Cellular',          desc:'Versatile M2 chip, all-day battery, and a brilliant Liquid Retina display.',                           price: 72000  },
+  { id:18, cat:'ipad',        image:'images/Ipad 10 Gen.png', tag:'Great Value',   badge:'Deal',  badgeType:'green',name:'iPad (10th Gen)',      variant:'A14 · Wi-Fi / Cellular',         desc:'The essential iPad. All-screen design, USB-C, and 12MP camera. Perfect for everyone.',                 price: 48000  },
+  { id:19, cat:'ipad',        image:'images/iPad 7th.png', tag:'For Learning',  badge:'',      badgeType:'',     name:'iPad mini (7th Gen)', variant:'A17 Pro · Wi-Fi / Cellular',     desc:'Ultra-portable with a 8.3-inch display. A17 Pro chip in the palm of your hand.',                       price: 62000  },
+
+  // APPLE WATCH
+  { id:20, cat:'watch',       image:'images/Apple Watch Series 10.png', tag:'New',           badge:'New',   badgeType:'',     name:'Apple Watch Series 10',variant:'GPS / GPS + Cellular',           desc:'Thinner than ever, larger display, faster charging. The most capable Apple Watch yet.',                price: 42000  },
+  { id:21, cat:'watch',       image:'images/Apple Watch Ultra 2.png', tag:'Adventure',     badge:'',      badgeType:'',     name:'Apple Watch Ultra 2', variant:'Titanium · GPS + Cellular',       desc:'Built for endurance athletes. 60-hour battery, precision dual-frequency GPS.',                          price: 88000  },
+  { id:22, cat:'watch',       image:'images/Apple Watch SE (2nd Gen).png', tag:'Great Value',   badge:'Deal',  badgeType:'green',name:'Apple Watch SE (2nd Gen)', variant:'GPS · Aluminium',            desc:'The essentials of Apple Watch at an accessible price. Perfect first Apple Watch.',                      price: 24000  },
+
+  // AUDIO
+  { id:23, cat:'audio',       image:'images/AirPods Pro (2nd Gen).png', tag:'Featured',      badge:'Hot',   badgeType:'gold', name:'AirPods Pro (2nd Gen)', variant:'USB-C / Lightning',             desc:'Adaptive Audio, Personalised Spatial Audio, and Hearing Health features.',                             price: 18500  },
+  { id:24, cat:'audio',       image:'images/AirPods (4th Gen).png', tag:'Popular',       badge:'',      badgeType:'',     name:'AirPods (4th Gen)',    variant:'ANC / Standard',                 desc:'Completely redesigned with a new smaller case, USB-C, and improved sound quality.',                    price: 12500  },
+  { id:25, cat:'audio',       image:'images/AirPods Max.png', tag:'Over-Ear',      badge:'',      badgeType:'',     name:'AirPods Max',         variant:'USB-C · 6 colours',              desc:'High-fidelity audio, Active Noise Cancellation, and Adaptive Transparency in a premium headphone.',   price: 54000  },
+  { id:26, cat:'audio',       image:'images/HomePod (2nd Gen).png', tag:'Smart Home',    badge:'',      badgeType:'',     name:'HomePod (2nd Gen)',    variant:'Midnight / White',               desc:'Room-sensing Spatial Audio, ultra-wideband chip, and smart home hub.',                                 price: 38000  },
+  { id:27, cat:'audio',       image:'images/HomePod mini.png', tag:'Compact',       badge:'',      badgeType:'',     name:'HomePod mini',        variant:'5 colours',                      desc:'Surprisingly full sound in a compact design. A brilliant smart home speaker.',                          price: 14000  },
+
+  // ACCESSORIES
+  { id:28, cat:'accessories', image:'images/MagSafe Charger.png', tag:'Charging',      badge:'',      badgeType:'',     name:'MagSafe Charger',     variant:'1m / 2m Cable',                  desc:'The fastest wireless charging for iPhone 12 and later. Clicks on magnetically.',                        price: 2800   },
+  { id:29, cat:'accessories', image:'images/Magic Keyboard.png', tag:'Keyboard',      badge:'',      badgeType:'',     name:'Magic Keyboard',      variant:'Touch ID / Touch ID + Num Pad',  desc:'Wireless, rechargeable, with Touch ID for fast, secure authentication.',                               price: 9500   },
+  { id:30, cat:'accessories', image:'images/Magic Mouse.png', tag:'Input',         badge:'',      badgeType:'',     name:'Magic Mouse',         variant:'Space Grey / Silver / Black',    desc:'Multi-Touch surface for gestures. Wireless and rechargeable.',                                          price: 7500   },
+  { id:31, cat:'accessories', image:'images/Apple Pencil Pro.png', tag:'For iPad',      badge:'',      badgeType:'',     name:'Apple Pencil Pro',    variant:'Compatible: iPad Pro / Air M2+', desc:'Find My, double-tap, squeeze, and barrel roll. The most capable Apple Pencil.',                         price: 12000  },
+  { id:32, cat:'accessories', image:'images/Apple Pencil (USB-C).png', tag:'For iPad',      badge:'',      badgeType:'',     name:'Apple Pencil (USB-C)', variant:'Compatible: Most iPads',         desc:'Pixel-perfect precision for all the ways you use iPad. Simple USB-C pairing.',                         price: 6500   },
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let cart = [];
+let activeFilter = 'all';
+let searchTerm = '';
+let sortOrder = 'default';
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+const CATEGORIES = [
+  { key:'iphone',      label:'iPhone',      icon:'📱', sub:'Latest & Previous Generation' },
+  { key:'mac',         label:'Mac',         icon:'💻', sub:'Laptops & Desktops' },
+  { key:'ipad',        label:'iPad',        icon:'🪟', sub:'Pro, Air, Standard & Mini' },
+  { key:'watch',       label:'Apple Watch', icon:'⌚', sub:'Series 10, Ultra 2 & SE' },
+  { key:'audio',       label:'Audio',       icon:'🎧', sub:'AirPods & HomePod' },
+  { key:'accessories', label:'Accessories', icon:'🔌', sub:'Essentials & Add-ons' },
+];
+
+function getFiltered() {
+  let list = products.filter(p => {
+    const matchCat = activeFilter === 'all' || p.cat === activeFilter;
+    const q = searchTerm.toLowerCase();
+    const matchSearch = !q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.tag.toLowerCase().includes(q) || p.variant.toLowerCase().includes(q);
+    return matchCat && matchSearch;
+  });
+
+  if (sortOrder === 'price-asc') list.sort((a,b) => a.price - b.price);
+  else if (sortOrder === 'price-desc') list.sort((a,b) => b.price - a.price);
+  else if (sortOrder === 'name-asc') list.sort((a,b) => a.name.localeCompare(b.name));
+
+  return list;
+}
+
+function formatPrice(n) {
+  return 'ETB ' + n.toLocaleString('en-ET');
+}
+
+function renderProducts() {
+  const container = document.getElementById('products-container');
+  const noResults = document.getElementById('no-results');
+  const countEl = document.getElementById('product-count');
+
+  const filtered = getFiltered();
+  countEl.textContent = `Showing ${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
+
+  if (filtered.length === 0) {
+    container.innerHTML = '';
+    noResults.classList.add('visible');
+    return;
+  }
+  noResults.classList.remove('visible');
+
+  const catsToShow = activeFilter === 'all'
+    ? CATEGORIES.filter(c => filtered.some(p => p.cat === c.key))
+    : CATEGORIES.filter(c => c.key === activeFilter);
+
+  container.innerHTML = catsToShow.map(cat => {
+    const items = filtered.filter(p => p.cat === cat.key);
+    if (!items.length) return '';
+    return `
+      <div class="category-group reveal" data-cat="${cat.key}">
+        <div class="category-header">
+          <span class="category-icon">${cat.icon}</span>
+          <span class="category-name">${cat.label}</span>
+          <span class="category-sub">${cat.sub} · ${items.length} product${items.length!==1?'s':''}</span>
+        </div>
+        <div class="cards-grid">
+          ${items.map(p => renderCard(p)).join('')}
+        </div>
+      </div>`;
+  }).join('');
+
+  // Scroll reveal
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 60);
+    });
+  });
+}
+
+function renderCard(p) {
+  const inCart = cart.find(c => c.id === p.id);
+  const added = inCart ? 'added' : '';
+  const addedText = inCart ? `In Cart (${inCart.qty})` : 'Add to Cart';
+  return `
+    <div class="product-card" data-id="${p.id}">
+      ${p.badge ? `<div class="card-badge ${p.badgeType}">${p.badge}</div>` : ''}
+      <div class="card-img-wrap">
+  <img src="${p.image}" alt="${p.name}" class="card-img">
+    </div>
+      <div class="card-body">
+        <div class="card-tag">${p.tag}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-variant">${p.variant}</div>
+        <p class="card-desc">${p.desc}</p>
+        <div class="card-footer">
+          <div class="card-price">${formatPrice(p.price)}</div>
+          <button class="add-btn ${added}" onclick="addToCart(${p.id}, event)" id="add-btn-${p.id}">
+            ${addedText}
+          </button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ─── CART ────────────────────────────────────────────────────────────────────
+function addToCart(id, e) {
+  e && e.stopPropagation();
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(c => c.id === id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+  updateCartUI();
+  flashBtn(id);
+  showToast(`${product.name} added to cart`);
+}
+
+function flashBtn(id) {
+  const btn = document.getElementById(`add-btn-${id}`);
+  if (!btn) return;
+  const item = cart.find(c => c.id === id);
+  btn.classList.add('added');
+  btn.textContent = `In Cart (${item ? item.qty : ''})`;
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  updateCartUI();
+  renderProducts();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(c => c.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) { removeFromCart(id); return; }
+  updateCartUI();
+  const btn = document.getElementById(`add-btn-${id}`);
+  if (btn) btn.textContent = `In Cart (${item.qty})`;
+}
+
+function clearCart() {
+  cart = [];
+  updateCartUI();
+  renderProducts();
+  showToast('Cart cleared');
+}
+
+function updateCartUI() {
+  const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  const count = cart.reduce((s, c) => s + c.qty, 0);
+
+  // Count badge
+  const countEl = document.getElementById('cart-count');
+  countEl.textContent = count;
+  countEl.style.background = count > 0 ? 'var(--gold)' : 'var(--gold)';
+  countEl.classList.remove('bump');
+  void countEl.offsetWidth;
+  if (count > 0) countEl.classList.add('bump');
+
+  // Footer
+  const footer = document.getElementById('cart-footer');
+  footer.style.display = count > 0 ? 'block' : 'none';
+  document.getElementById('cart-total').textContent = formatPrice(total);
+
+  // Items list
+  const list = document.getElementById('cart-items-list');
+  if (count === 0) {
+    list.innerHTML = `
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛍</div>
+        <h3>Your cart is empty</h3>
+        <p>Add some Apple products to get started.</p>
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-img">
+  <img src="${item.image}" alt="${item.name}" class="cart-product-img">
+</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-variant">${item.variant}</div>
+        <div class="cart-item-price">${formatPrice(item.price * item.qty)}</div>
+      </div>
+      <div class="cart-item-controls">
+        <div class="qty-wrap">
+          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+        </div>
+        <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+      </div>
+    </div>`).join('');
+}
+
+function toggleCart() {
+  const overlay = document.getElementById('cart-overlay');
+  const drawer = document.getElementById('cart-drawer');
+  const open = drawer.classList.contains('open');
+  overlay.classList.toggle('open', !open);
+  drawer.classList.toggle('open', !open);
+  document.body.style.overflow = !open ? 'hidden' : '';
+}
+
+function checkout() {
+  showToast('Checkout coming soon — contact us to order!');
+  toggleCart();
+}
+
+// ─── TOAST ───────────────────────────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ─── FILTERS & SEARCH ────────────────────────────────────────────────────────
+document.getElementById('filter-group').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = btn.dataset.cat;
+  renderProducts();
+});
+
+let searchDebounce;
+document.getElementById('search-input').addEventListener('input', e => {
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(() => {
+    searchTerm = e.target.value.trim();
+    renderProducts();
+  }, 220);
+});
+
+document.getElementById('sort-select').addEventListener('change', e => {
+  sortOrder = e.target.value;
+  renderProducts();
+});
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+renderProducts();
+updateCartUI();
+</script>
+</body>
+</html>
