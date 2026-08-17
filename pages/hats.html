@@ -30,7 +30,7 @@
         <h2 class="logo">Tomi Fashion</h2>
        <ul class="nav-links">
             <li><a href="../Tomy/tomy-fashion.html">Home</a></li>
-            <li><a href="products.html">All Products</a></li>
+            <li><a href="products.html">Products</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -50,63 +50,7 @@
 <!--  -->
 <section class="products">
     <h2>Hats Collection</h2>
-    <div class="product-grid">
-
-        <div class="product-card" data-category="hats">
-            <img src="../Pictures/Hats/hat1.jpg" alt="Hat 1" width="1233" height="1280">
-            <h3 style="padding-top: 0.3cm;">Winter Hats</h3>
-            <p style="padding-top: 0.3cm;">500 Birr</p>
-        </div>
-
-        
-        <div class="product-card" data-category="hats">
-            <img src="../Pictures/Hats/hat2.jpg" alt="Hat 1" width="1080" height="1080">
-            <h3 style="padding-top: 0.3cm;">Fashion Hats</h3>
-            <p style="padding-top: 0.3cm;">500 Birr</p>
-        </div>
-
-        
-        <div class="product-card" data-category="hats">
-            <img src="../Pictures/Hats/hat3.jpg" alt="Hat 1" width="1268" height="1280">
-            <h3 style="padding-top: 0.3cm;">Sweater Hats</h3>
-            <p style="padding-top: 0.3cm;">300 Birr</p>
-        </div>
-
-        
-        <div class="product-card" data-category="hats">
-            <img src="../Pictures/Hats/hat4.jpg" alt="Hat 1" width="1280" height="1274">
-            <h3 style="padding-top: 0.3cm;">Sweater Hats</h3>
-            <p style="padding-top: 0.3cm;">300 Birr</p>
-        </div>
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</section>
-
-<!-- STORE BACKGROUND SECTION -->
-<section class="store-bg" style="--bg-image: url('../Pictures/Bg/bg2.jpg');">
-    <div class="store-overlay">
-        <h2>Experience Tomi Fashion In Store</h2>
-        <p>Visit us in Addis Ababa</p>
-    </div>
+    <div class="product-grid" data-products="hats"></div>
 </section>
 <!-- ABOUT -->
 <section id="about" class="about">
@@ -144,59 +88,7 @@
     <p class="copyright">© 2026 Tomi Fashion</p>
 </footer>
 
-<script>
-
-    document.querySelectorAll(".slider").forEach(slider => {
-
-    const slides = slider.querySelectorAll(".slide");
-    const leftBtn = slider.querySelector(".arrow.left");
-    const rightBtn = slider.querySelector(".arrow.right");
-
-    let current = 0;
-
-    function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove("active"));
-        slides[index].classList.add("active");
-    }
-
-    rightBtn.addEventListener("click", () => {
-        current = (current + 1) % slides.length;
-        showSlide(current);
-    });
-
-    leftBtn.addEventListener("click", () => {
-        current = (current - 1 + slides.length) % slides.length;
-        showSlide(current);
-    });
-
-});
-
-document.querySelectorAll(".product-card").forEach(card => {
-    const image = card.querySelector(".main-image");
-    const colors = card.querySelectorAll(".color");
-
-    colors.forEach(color => {
-        color.addEventListener("click", () => {
-
-            // Fade out
-            image.style.opacity = "0";
-
-            setTimeout(() => {
-                image.src = color.dataset.image;
-                image.style.opacity = "1";
-            }, 150);
-
-            // Remove active from others
-            colors.forEach(c => c.classList.remove("active"));
-
-            // Add active to selected
-            color.classList.add("active");
-        });
-    });
-});
-
-</script>
-
+<script src="../Tomy/products-api.js"></script>
 <script src="../pages/search.js"></script>
 <script src="../Tomy/cart.js"></script>
 </body>

@@ -1,0 +1,374 @@
+/* =========================================================
+   TOMI FASHION — Admin dashboard
+   Reuses design tokens from tomy-fashion.css
+   ========================================================= */
+
+.hidden{ display:none !important; }
+
+.admin-body{
+    background: var(--jet);
+    min-height:100vh;
+}
+
+/* ---------- Login ---------- */
+.admin-login{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: var(--gutter);
+}
+.admin-login-card{
+    width:100%;
+    max-width:380px;
+    background: var(--paper);
+    border-radius: var(--radius);
+    padding:40px 32px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+.admin-login-card h1{
+    font-family: var(--font-display);
+    font-size:26px;
+    margin-bottom:8px;
+}
+.admin-login-card label{
+    font-family: var(--font-mono);
+    font-size:12px;
+    color: var(--slate);
+}
+.admin-login-card input{
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size:15px;
+    background:#fff;
+}
+.admin-login-card .btn{
+    margin-top:6px;
+    border:none;
+    cursor:pointer;
+}
+.admin-hint{
+    font-family: var(--font-mono);
+    font-size:11px;
+    color: var(--slate);
+}
+.admin-hint code{
+    background: var(--panel);
+    padding:1px 5px;
+    border-radius:4px;
+}
+.admin-error{
+    font-family: var(--font-mono);
+    font-size:12px;
+    color: var(--signal);
+    min-height:14px;
+}
+
+/* ---------- Dashboard shell ---------- */
+.admin-dashboard{
+    max-width: var(--container);
+    margin:0 auto;
+    padding: 24px var(--gutter) 80px;
+    color: var(--paper);
+}
+.admin-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 0;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+    margin-bottom:24px;
+}
+.admin-header .logo{
+    color:#fff;
+    font-family: var(--font-display);
+    font-size:20px;
+}
+.admin-header .logo span{
+    color: var(--signal);
+}
+.admin-header-actions{
+    display:flex;
+    gap:10px;
+}
+.admin-header-actions .btn-ghost,
+.admin-header-actions .btn{
+    font-size:13px;
+    padding:9px 16px;
+}
+
+/* ---------- Toolbar ---------- */
+.admin-toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:16px;
+}
+.admin-filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+.admin-filters select,
+.admin-filters input,
+.admin-table-wrap select{
+    background: rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.16);
+    color:#fff;
+    padding:10px 12px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size:14px;
+}
+.admin-filters input::placeholder{
+    color: rgba(255,255,255,0.5);
+}
+.admin-toolbar .btn{
+    border:none;
+    cursor:pointer;
+}
+
+.admin-status{
+    font-family: var(--font-mono);
+    font-size:12px;
+    color: var(--signal);
+    min-height:16px;
+    margin-bottom:10px;
+}
+
+/* ---------- Table ---------- */
+.admin-table-wrap{
+    background: rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    overflow:hidden;
+}
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+}
+.admin-table th{
+    text-align:left;
+    font-family: var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color: rgba(255,255,255,0.55);
+    padding:14px 16px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.admin-table td{
+    padding:12px 16px;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    font-size:14px;
+    vertical-align:middle;
+}
+.admin-table tbody tr:last-child td{
+    border-bottom:none;
+}
+.admin-table tbody tr:hover{
+    background: rgba(255,255,255,0.03);
+}
+.admin-thumb{
+    width:44px;
+    height:56px;
+    object-fit:cover;
+    border-radius:6px;
+    display:block;
+    background: rgba(255,255,255,0.08);
+}
+.admin-cat-pill{
+    font-family: var(--font-mono);
+    font-size:11px;
+    text-transform:uppercase;
+    background: rgba(255,45,106,0.15);
+    color: var(--signal);
+    padding:3px 8px;
+    border-radius:20px;
+}
+.admin-featured-dot{
+    color: var(--signal);
+    font-size:16px;
+}
+.admin-row-actions{
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;
+}
+.admin-row-actions button{
+    background:none;
+    border:1px solid rgba(255,255,255,0.2);
+    color:#fff;
+    padding:6px 12px;
+    border-radius:6px;
+    font-size:12px;
+    cursor:pointer;
+    font-family: var(--font-mono);
+}
+.admin-row-actions button:hover{
+    border-color: var(--signal);
+    color: var(--signal);
+}
+.admin-loading, .admin-empty{
+    text-align:center;
+    padding:40px 0;
+    font-family: var(--font-mono);
+    color: rgba(255,255,255,0.5);
+}
+
+/* ---------- Modal ---------- */
+.admin-overlay{
+    position:fixed;
+    inset:0;
+    background: rgba(0,0,0,0.6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    z-index:100;
+}
+.admin-modal{
+    width:100%;
+    max-width:560px;
+    max-height:90vh;
+    overflow-y:auto;
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: var(--radius);
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+.admin-modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:6px;
+}
+.admin-modal-header h3{
+    font-family: var(--font-display);
+    font-size:20px;
+}
+.admin-modal-close{
+    background:none;
+    border:none;
+    font-size:22px;
+    line-height:1;
+    cursor:pointer;
+    color: var(--slate);
+}
+.admin-modal label{
+    font-family: var(--font-mono);
+    font-size:12px;
+    color: var(--slate);
+    display:block;
+    margin-bottom:4px;
+}
+.admin-modal input[type="text"],
+.admin-modal input[type="number"],
+.admin-modal select{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size:14px;
+    background:#fff;
+}
+.admin-field-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+.admin-checkbox{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family: var(--font-body) !important;
+    font-size:14px !important;
+    color: var(--ink) !important;
+}
+.admin-checkbox input{
+    width:auto;
+}
+.admin-images-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:6px;
+}
+.admin-images-header label{ margin:0; }
+.btn-small{
+    padding:6px 12px !important;
+    font-size:12px !important;
+}
+.admin-images-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+.admin-image-row{
+    display:grid;
+    grid-template-columns:1fr 140px auto;
+    gap:8px;
+    align-items:center;
+}
+.admin-image-row input{
+    padding:8px 10px;
+    border:1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size:13px;
+}
+.admin-image-remove{
+    background:none;
+    border:1px solid var(--line);
+    border-radius:6px;
+    color: var(--signal);
+    cursor:pointer;
+    padding:6px 10px;
+    font-size:12px;
+}
+.admin-modal-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:10px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+}
+.admin-modal-footer-right{
+    display:flex;
+    gap:10px;
+}
+.admin-modal .btn{
+    border:none;
+    cursor:pointer;
+}
+.btn-danger{
+    background:none;
+    border:1px solid var(--signal);
+    color: var(--signal);
+    padding:10px 16px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size:12px;
+    cursor:pointer;
+}
+.btn-danger:hover{
+    background: var(--signal);
+    color:#fff;
+}
+
+@media (max-width: 640px){
+    .admin-field-row{ grid-template-columns:1fr; }
+    .admin-image-row{ grid-template-columns:1fr; }
+    .admin-table th:nth-child(1), .admin-table td:nth-child(1){ display:none; }
+}

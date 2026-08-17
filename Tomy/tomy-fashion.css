@@ -1084,14 +1084,15 @@ footer p{
 .product-card .wishlist-btn{
     position:absolute;
     top:10px; right:10px;
-    width:32px; height:32px;
+    width:40px; height:40px;
     margin:0;
     padding:0;
     border-radius:50%;
     border:none;
     background: rgba(255,255,255,0.9);
     color: var(--ink);
-    font-size:15px;
+    font-size:24px;
+    line-height:1;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -1101,7 +1102,8 @@ footer p{
     transition: color 0.2s ease, transform 0.2s ease;
 }
 .product-card .wishlist-btn:hover{ transform: scale(1.08); }
-.product-card .wishlist-btn.active{ color: var(--signal); }
+/* default = hollow heart (♡), active = filled heart (♥) in red — icon glyph is swapped in JS */
+.product-card .wishlist-btn.active{ color: #e0272d; }
 
 .product-card .quickview-btn{
     position:absolute;
@@ -1113,7 +1115,7 @@ footer p{
     border:none;
     background: rgba(255,255,255,0.9);
     color: var(--ink);
-    font-size:13px;
+    font-size:16px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -1123,6 +1125,44 @@ footer p{
     transition: transform 0.2s ease;
 }
 .product-card .quickview-btn:hover{ transform: scale(1.08); }
+
+/* ---------- price row with % off (badge + old price) ---------- */
+/* Markup pattern for a discounted product:
+   <div class="price-row">
+       <span class="price-now">4,900 Birr</span>
+       <span class="price-was">6,900 Birr</span>
+       <span class="discount-badge">-29%</span>
+   </div>
+   For non-discounted products keep the plain <p>Price Birr</p> — cardMeta()
+   in cart.js reads .price-now first and falls back to the plain <p>, so both
+   forms work side by side until the admin page decides which cards get a badge. */
+.product-card .price-row{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:0;
+}
+.product-card .price-now{
+    font-weight:600;
+    color: var(--ink);
+}
+.product-card .price-was{
+    color: var(--slate);
+    text-decoration: line-through;
+    font-size:0.9em;
+}
+.product-card .discount-badge{
+    background: #e0272d;
+    color:#fff;
+    font-family: var(--font-mono);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    padding:2px 7px;
+    border-radius:999px;
+    line-height:1.5;
+}
 
 /* wishlist heart button when reused inside the quick-view panel (not a card overlay) */
 .wishlist-btn.qv{
@@ -1300,6 +1340,23 @@ footer p{
 .nav-links a.active{
     color:#fff;
     background: rgba(255,45,106,0.18);
+}
+
+/* =========================================================
+   PRODUCT GRID — loading / empty / error states (products-api.js)
+   ========================================================= */
+.products-loading,
+.products-empty,
+.products-error{
+    grid-column: 1 / -1;
+    font-family: var(--font-mono);
+    font-size:13px;
+    color: var(--slate);
+    text-align:center;
+    padding:40px 0;
+}
+.products-error{
+    color:#ff2d6a;
 }
 
 /* =========================================================

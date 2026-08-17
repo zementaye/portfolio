@@ -29,6 +29,8 @@
         return parseInt(digits, 10) || 0;
     }
     function money(n) { return n.toLocaleString("en-US") + " Birr"; }
+    /* hollow heart when not saved, filled red heart when saved (see .wishlist-btn.active in css) */
+    function heartIcon(active) { return active ? "\u2665" : "\u2661"; }
 
     /* ---------- focus management for drawers/modal (a11y) ---------- */
     let lastFocusedEl = null;
@@ -62,7 +64,8 @@
     /* ---------- read product data straight off the DOM ---------- */
     function cardMeta(card, idx) {
         const h3 = card.querySelector("h3");
-        const priceEl = card.querySelector("p");
+        // cards with a % off badge use .price-now/.price-was instead of a plain <p>
+        const priceEl = card.querySelector(".price-now") || card.querySelector("p");
         if (!h3 || !priceEl) return null;
         const name = h3.textContent.trim();
         const price = parsePrice(priceEl.textContent);
@@ -143,7 +146,10 @@
         list = already ? list.filter(i => i.id !== meta.id) : list.concat([meta]);
         saveWishlist(list);
         renderWishlistDrawer();
-        document.querySelectorAll('.wishlist-btn[data-id="' + meta.id + '"]').forEach(b => b.classList.toggle("active", !already));
+        document.querySelectorAll('.wishlist-btn[data-id="' + meta.id + '"]').forEach(b => {
+            b.classList.toggle("active", !already);
+            b.innerHTML = heartIcon(!already);
+        });
         if (!already) pulseFab("tomiWishFab");
     }
 
@@ -344,7 +350,10 @@
             const list2 = getWishlist().filter(i => i.id !== b.dataset.id);
             saveWishlist(list2);
             renderWishlistDrawer();
-            document.querySelectorAll('.wishlist-btn[data-id="' + b.dataset.id + '"]').forEach(x => x.classList.remove("active"));
+            document.querySelectorAll('.wishlist-btn[data-id="' + b.dataset.id + '"]').forEach(x => {
+                x.classList.remove("active");
+                x.innerHTML = heartIcon(false);
+            });
         }));
 
         itemsEl.querySelectorAll(".tomi-move-to-bag").forEach(b => b.addEventListener("click", () => {
@@ -374,10 +383,11 @@
 
             const btn = document.createElement("button");
             btn.type = "button";
-            btn.className = "wishlist-btn" + (isWishlisted(meta.id) ? " active" : "");
+            const saved = isWishlisted(meta.id);
+            btn.className = "wishlist-btn" + (saved ? " active" : "");
             btn.dataset.id = meta.id;
             btn.setAttribute("aria-label", "Save to wishlist");
-            btn.innerHTML = "♥";
+            btn.innerHTML = heartIcon(saved);
             btn.addEventListener("click", (e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -533,7 +543,7 @@
             btn.type = "button";
             btn.className = "quickview-btn";
             btn.setAttribute("aria-label", "Quick view");
-            btn.innerHTML = "🔍";
+            btn.innerHTML = "⛶"; // expand / full-screen glyph, replaces the old magnifying-glass emoji
             btn.addEventListener("click", (e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -763,4 +773,20 @@
     } else {
         init();
     }
+
+    /* ---------- public refresh hook ----------
+       Product cards used to always be present in the HTML at load time.
+       Now products-api.js can fetch and inject them *after* DOMContentLoaded,
+       so it calls this to (re)run just the per-card wiring — every injector
+       above already guards against doing its work twice. */
+    window.TomiCart = window.TomiCart || {};
+    window.TomiCart.refreshProductCards = function () {
+        injectAddToCartButtons();
+        injectSizeSelectors();
+        injectWishlistButtons();
+        injectQuickViewButtons();
+        injectCategoryFilters();
+        injectPriceFilters();
+        lazyLoadImages();
+    };
 })();
