@@ -10,7 +10,7 @@
  * Set API_BASE_URL below to your deployed backend (see Tomy/admin-backend/README.md).
  */
 
-const API_BASE_URL = "https://YOUR-BACKEND.onrender.com/api"; // <-- update after deploying
+const API_BASE_URL = "https://tomy-k4ad.onrender.com/api";
 
 function formatBirr(amount) {
   return Number(amount).toLocaleString("en-US") + " Birr";
