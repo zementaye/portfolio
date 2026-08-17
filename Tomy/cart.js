@@ -570,6 +570,48 @@
 
     function closeAllPanels() { closeDrawer(); closeWishDrawer(); closeQuickView(); }
 
+    /* ---------- category filters (only appears where cards carry data-category) ---------- */
+    function injectCategoryFilters() {
+        document.querySelectorAll(".product-grid").forEach(grid => {
+            if (grid.dataset.categoryFiltersInjected) return;
+            const cards = Array.from(grid.querySelectorAll(".product-card[data-category]"));
+            const cats = [];
+            cards.forEach(c => {
+                const cat = c.dataset.category;
+                if (cat && cats.indexOf(cat) === -1) cats.push(cat);
+            });
+            if (cats.length < 2) return; // nothing to filter if every card is the same category (or untagged)
+
+            const label = s => s.charAt(0).toUpperCase() + s.slice(1);
+            const allCards = Array.from(grid.querySelectorAll(".product-card"));
+            const bar = document.createElement("div");
+            bar.className = "filter-buttons category-filter";
+            bar.innerHTML = '<button type="button" data-cat="all" class="active">All</button>' +
+                cats.map(c => '<button type="button" data-cat="' + c + '">' + label(c) + '</button>').join("");
+            grid.parentElement.insertBefore(bar, grid);
+            grid.dataset.categoryFiltersInjected = "1";
+
+            bar.querySelectorAll("button").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    bar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    const cat = btn.dataset.cat;
+                    allCards.forEach(card => {
+                        card.classList.toggle("hide", cat !== "all" && card.dataset.category !== cat);
+                    });
+                    // a category switch can change which price buckets are relevant —
+                    // re-sync the price filter bar (if present) back to "All" so it
+                    // doesn't leave stale products hidden under the new category.
+                    const priceBar = grid.parentElement.querySelector(".price-filter");
+                    if (priceBar) {
+                        priceBar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+                        priceBar.querySelector("button").classList.add("active");
+                    }
+                });
+            });
+        });
+    }
+
     /* ---------- price filters ---------- */
     function injectPriceFilters() {
         document.querySelectorAll(".product-grid").forEach(grid => {
@@ -592,7 +634,7 @@
             if (ranges.length <= 1) return;
 
             const bar = document.createElement("div");
-            bar.className = "filter-buttons";
+            bar.className = "filter-buttons price-filter";
             bar.innerHTML = ranges.map((r, i) =>
                 '<button type="button" data-range="' + i + '" class="' + (i === 0 ? "active" : "") + '">' + r.label + '</button>'
             ).join("");
@@ -604,7 +646,13 @@
                     bar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
                     btn.classList.add("active");
                     const range = ranges[i];
-                    cards.forEach((card, ci) => card.classList.toggle("hide", !range.test(prices[ci])));
+                    cards.forEach((card, ci) => {
+                        // only touch cards that survive the current category filter
+                        const catBar = grid.parentElement.querySelector(".category-filter .active");
+                        const activeCat = catBar ? catBar.dataset.cat : "all";
+                        const catOk = activeCat === "all" || card.dataset.category === activeCat;
+                        card.classList.toggle("hide", !catOk || !range.test(prices[ci]));
+                    });
                 });
             });
         });
@@ -702,6 +750,7 @@
         injectSizeSelectors();
         injectWishlistButtons();
         injectQuickViewButtons();
+        injectCategoryFilters();
         injectPriceFilters();
         lazyLoadImages();
         markActiveNav();
