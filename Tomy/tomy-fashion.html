@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>document.documentElement.classList.add('js');</script>
     <meta charset="UTF-8">
     <title>Tomi Fashion</title>
     
-    <link rel="icon" type="image/png" href="../Pictures/tomy_icon.jpg">
+    <meta name="description" content="Tomi Fashion — streetwear hoodies, sneakers, tracksuits, shirts and hats from Addis Ababa. Shop the full collection online.">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Pictures/Icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../Pictures/Icons/favicon-192.png">
+    <link rel="apple-touch-icon" href="../Pictures/Icons/apple-touch-icon.png">
     <link rel="stylesheet" href="tomy-fashion.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -30,21 +34,30 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+        </div>
     </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero">
     <div class="hero-content">
+        <span class="hero-eyebrow">Streetwear · Addis Ababa</span>
         <h1>Elevate Your Style</h1>
-        <p>Modern streetwear for everyday confidence.</p>
-        <a href="#shop" class="btn">Shop Collection</a>
+        <p class="lede">Modern streetwear for everyday confidence — hoodies, sneakers and tracksuits picked for the street, not the runway.</p>
+        <div class="hero-actions">
+            <a href="#shop" class="btn">Shop Collection</a>
+            <a href="#about" class="btn-ghost">Visit Our Stores</a>
+        </div>
     </div>
 </section>
 
 
 <!-- CATEGORIES -->
-<section class="categories">
+<section class="categories reveal">
+    <span class="section-eyebrow">Six Ways In</span>
     <h2>Shop By Category</h2>
 <div class="category-grid">
 
@@ -95,7 +108,7 @@
 
 
 <!-- STORE BACKGROUND SECTION -->
-<section class="store-bg" style="--bg-image: url('../Pictures/Bg/bg1.jpg');">
+<section class="store-bg reveal" style="--bg-image: url('../Pictures/Bg/bg1.jpg');">
     <div class="store-overlay">
         <h2>Experience Tomi Fashion In Store</h2>
         <p>Visit us in Addis Ababa</p>
@@ -104,26 +117,27 @@
 
 
 <!-- PRODUCTS -->
-<section id="shop" class="products">
+<section id="shop" class="products reveal">
+    <span class="section-eyebrow">Fresh In</span>
     <h2>Featured Products</h2>
     <div class="product-grid">
 
         <div class="product-card">
-            <img src="../Pictures/Hoodie/hoodie1.jpg" alt="Hoodie">
+            <img src="../Pictures/Hoodie/hoodie1.jpg" alt="Hoodie" width="960" height="1280">
             <h3>Classic Black Hoodie</h3>
-            <p>4.900 Birr</p>
+            <p>4,900 Birr</p>
             <!-- <button>Add to Cart</button> -->
         </div>
 
         <div class="product-card">
-            <img src="../Pictures/Shoes/sh6.jpg" alt="Shoes">
+            <img src="../Pictures/Shoes/sh6.jpg" alt="Shoes" width="719" height="927">
             <h3>Urban Sneakers</h3>
             <p>5,900 Birr</p>
             <!-- <button>Add to Cart</button> -->
         </div>
 
         <div class="product-card">
-            <img src="../Pictures/Hoodie/hoodie1.jpg" alt="Jacket">
+            <img src="../Pictures/Hoodie/hoodie1.jpg" alt="Jacket" width="960" height="1280">
             <h3>Minimal Hoodie</h3>
             <p>9,900 Birr</p>
             <!-- <button>Add to Cart</button> -->
@@ -134,7 +148,7 @@
         <img class="main-image"
              src="../Pictures/Shirts/s13.jpg"
              data-default="../Pictures/Shirts/s13.jpg"
-             alt="OFFBEAT SHIRTS">
+             alt="OFFBEAT SHIRTS" width="506" height="1068">
 
         <div class="color-options">
             <span class="color active"
@@ -161,31 +175,39 @@
 </section>
 
 <!-- PROMO -->
-<section class="promo">
-    <h2>Winter Sale 30% Off</h2>
+<section class="promo reveal">
+    <h2>Winter Sale — 30% Off</h2>
     <p>Limited time offer on selected items.</p>
 </section>
 
 
 <!-- ABOUT -->
-<section id="about" class="about">
-    <h2>About Tomi Fashion</h2>
-    <p>
-        &nbsp;
-    </p>
-    <p>
-        Tomi Fashion is built on simplicity, confidence and bold minimalism.
-        We design timeless pieces that blend comfort with street identity.
-    </p>
+<section id="about" class="about reveal">
+    <div class="about-copy">
+        <span class="section-eyebrow">Our Story</span>
+        <h2>About Tomi Fashion</h2>
+        <p>
+            Tomi Fashion is built on simplicity, confidence and bold minimalism.
+            We design timeless pieces that blend comfort with street identity.
+        </p>
+        <p>
+            Find us at two Addis Ababa locations — Town Square Mall and Bisrate Gebriel —
+            open daily from 9AM to 9PM.
+        </p>
+    </div>
+    <div class="about-visual"></div>
 </section>
 
 
 <!-- NEWSLETTER -->
-<section class="newsletter">
+<section class="newsletter reveal">
     <h2>Join Our Community</h2>
     <p>Subscribe for exclusive drops & offers.</p>
-    <input type="email" placeholder="Enter your email">
-    <button>Subscribe</button>
+    <form id="newsletterForm">
+        <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <p id="newsletterStatus" class="newsletter-status" role="status"></p>
 </section>
 
 <!-- FOOTER -->
@@ -213,6 +235,8 @@
 </footer>
 
 <script src="tomy-fashion.js"></script>
+<script src="../pages/search.js"></script>
+<script src="cart.js"></script>
 
 </body>
 </html>
