@@ -1,500 +1,150 @@
-/* =========================================================
-   TOMI FASHION — Admin dashboard
-   Reuses design tokens from tomy-fashion.css
-   Light, modern, high-contrast. Signal pink reserved for
-   primary actions + focus only.
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tomi Fashion — Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Pictures/Icons/favicon-32.png">
+    <link rel="stylesheet" href="tomy-fashion.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
 
-.hidden{ display:none !important; }
+<!-- LOGIN SCREEN -->
+<section id="loginScreen" class="admin-login">
+    <form id="loginForm" class="admin-login-card">
+        <span class="section-eyebrow">Tomi Fashion</span>
+        <h1>Admin Login</h1>
+        <label for="passwordInput">Password</label>
+        <input type="password" id="passwordInput" placeholder="Admin password" required autocomplete="current-password">
+        <button type="submit" class="btn">Log In</button>
+        <p id="loginError" class="admin-error" role="alert"></p>
+        <p class="admin-hint">Not configured yet? See <code>Tomy/admin-backend/README.md</code>.</p>
+    </form>
+</section>
 
-*{ box-sizing:border-box; }
+<!-- ADMIN DASHBOARD -->
+<section id="adminScreen" class="admin-dashboard hidden">
+    <header class="admin-header">
+        <h2 class="logo">Tomi Fashion <span>Admin</span></h2>
+        <div class="admin-header-actions">
+            <a href="tomy-fashion.html" class="btn-ghost" target="_blank" rel="noopener">View Site ↗</a>
+            <button id="logoutBtn" class="btn-ghost">Log Out</button>
+        </div>
+    </header>
 
-.admin-body{
-    background: var(--panel);
-    min-height:100vh;
-    color: var(--ink);
-}
+    <div class="admin-toolbar">
+        <div class="admin-filters">
+            <select id="categoryFilter">
+                <option value="">All categories</option>
+                <option value="hoodies">Hoodies</option>
+                <option value="shirts">Shirts</option>
+                <option value="pants">Pants</option>
+                <option value="shoes">Shoes</option>
+                <option value="tracksuits">Tracksuits</option>
+                <option value="hats">Hats</option>
+            </select>
+            <input type="text" id="tableSearch" placeholder="Search by name...">
+        </div>
+        <button id="newProductBtn" class="btn">+ Add Product</button>
+    </div>
 
-/* ---------- Login ---------- */
-.admin-login{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding: var(--gutter);
-    background:
-        radial-gradient(circle at 15% 15%, rgba(255,45,106,0.10), transparent 45%),
-        var(--jet);
-}
-.admin-login-card{
-    width:100%;
-    max-width:380px;
-    background: var(--paper);
-    border-radius: var(--radius);
-    padding:44px 36px 36px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-    box-shadow: 0 30px 70px rgba(0,0,0,0.5);
-    border:1px solid rgba(255,255,255,0.06);
-}
-.admin-login-card .section-eyebrow{
-    margin-bottom:-4px;
-}
-.admin-login-card h1{
-    font-family: var(--font-display);
-    font-weight:400;
-    font-size:28px;
-    margin:0 0 10px;
-    letter-spacing:-0.01em;
-}
-.admin-login-card label{
-    font-family: var(--font-mono);
-    font-size:11px;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color: var(--slate);
-    margin-top:4px;
-}
-.admin-login-card input{
-    padding:13px 14px;
-    border:1px solid var(--line);
-    border-radius: var(--radius-sm);
-    font-family: var(--font-body);
-    font-size:15px;
-    background:#fff;
-    color: var(--ink);
-    transition: border-color .15s ease, box-shadow .15s ease;
-}
-.admin-login-card input:focus{
-    outline:none;
-    border-color: var(--signal);
-    box-shadow: 0 0 0 3px rgba(255,45,106,0.15);
-}
-.admin-login-card .btn{
-    margin-top:8px;
-    border:none;
-    cursor:pointer;
-    width:100%;
-    text-align:center;
-}
-.admin-hint{
-    font-family: var(--font-mono);
-    font-size:11px;
-    color: var(--slate);
-    line-height:1.5;
-}
-.admin-hint code{
-    background: var(--panel);
-    padding:1px 5px;
-    border-radius:4px;
-}
-.admin-error{
-    font-family: var(--font-mono);
-    font-size:12px;
-    color:#d81b4a;
-    min-height:14px;
-}
+    <p id="adminStatus" class="admin-status" role="status"></p>
 
-/* ---------- Dashboard shell ---------- */
-.admin-dashboard{
-    max-width: var(--container);
-    margin:0 auto;
-    padding: 0 var(--gutter) 80px;
-    color: var(--ink);
-}
-.admin-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:22px 0;
-    margin-bottom:28px;
-    position:sticky;
-    top:0;
-    background: var(--panel);
-    z-index:10;
-}
-.admin-header .logo{
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-weight:400;
-    font-size:20px;
-    letter-spacing:-0.01em;
-}
-.admin-header .logo span{
-    color: var(--signal);
-}
-.admin-header-actions{
-    display:flex;
-    gap:10px;
-}
-.admin-header-actions .btn-ghost{
-    display:inline-flex;
-    align-items:center;
-    font-family: var(--font-mono);
-    font-size:12px;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    padding:10px 18px;
-    border-radius:999px;
-    border:1px solid var(--line);
-    background:#fff;
-    color: var(--ink);
-    text-decoration:none;
-    cursor:pointer;
-    transition: border-color .15s ease, color .15s ease, background .15s ease;
-}
-.admin-header-actions .btn-ghost:hover{
-    border-color: var(--signal);
-    color: var(--signal);
-}
-#logoutBtn{
-    background:#fff;
-    border:1px solid var(--line);
-    color: var(--slate);
-}
-#logoutBtn:hover{
-    border-color:#d81b4a;
-    color:#d81b4a;
-}
+    <div class="admin-table-wrap">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Featured</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="productsTableBody">
+                <tr><td colspan="6" class="admin-loading">Loading products…</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 
-/* ---------- Toolbar ---------- */
-.admin-toolbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:18px;
-}
-.admin-filters{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    flex:1;
-    min-width:260px;
-}
-.admin-filters select,
-.admin-filters input{
-    background:#fff;
-    border:1px solid var(--line);
-    color: var(--ink);
-    padding:11px 14px;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-body);
-    font-size:14px;
-    transition: border-color .15s ease, box-shadow .15s ease;
-}
-.admin-filters select{
-    min-width:170px;
-    cursor:pointer;
-}
-.admin-filters input{
-    flex:1;
-    min-width:180px;
-}
-.admin-filters select:focus,
-.admin-filters input:focus{
-    outline:none;
-    border-color: var(--signal);
-    box-shadow: 0 0 0 3px rgba(255,45,106,0.12);
-}
-.admin-filters input::placeholder{
-    color: var(--slate);
-}
-.admin-toolbar .btn{
-    border:none;
-    cursor:pointer;
-    white-space:nowrap;
-}
+<!-- PRODUCT EDITOR MODAL -->
+<div id="editorOverlay" class="admin-overlay hidden">
+    <form id="productForm" class="admin-modal">
+        <div class="admin-modal-header">
+            <h3 id="editorTitle">Add Product</h3>
+            <button type="button" id="closeEditorBtn" class="admin-modal-close" aria-label="Close">&times;</button>
+        </div>
 
-.admin-status{
-    font-family: var(--font-mono);
-    font-size:12px;
-    color: var(--signal);
-    min-height:16px;
-    margin:-4px 0 14px;
-}
+        <input type="hidden" id="productId">
 
-/* ---------- Table ---------- */
-.admin-table-wrap{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius: var(--radius);
-    overflow:hidden;
-    box-shadow: 0 1px 2px rgba(16,16,20,0.03);
-}
-.admin-table{
-    width:100%;
-    border-collapse:collapse;
-}
-.admin-table th{
-    text-align:left;
-    font-family: var(--font-mono);
-    font-size:11px;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color: var(--slate);
-    padding:15px 18px;
-    border-bottom:1px solid var(--line);
-    background: var(--panel);
-}
-.admin-table td{
-    padding:14px 18px;
-    border-bottom:1px solid var(--line);
-    font-size:14px;
-    vertical-align:middle;
-    color: var(--ink);
-}
-.admin-table tbody tr:last-child td{
-    border-bottom:none;
-}
-.admin-table tbody tr:hover{
-    background: rgba(255,45,106,0.03);
-}
-.admin-thumb{
-    width:42px;
-    height:52px;
-    object-fit:cover;
-    border-radius:6px;
-    display:block;
-    background: var(--panel);
-    border:1px solid var(--line);
-}
-.admin-cat-pill{
-    font-family: var(--font-mono);
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:0.03em;
-    background: var(--panel);
-    color: var(--ink);
-    border:1px solid var(--line);
-    padding:4px 10px;
-    border-radius:20px;
-    white-space:nowrap;
-}
-.admin-featured-dot{
-    color: var(--signal);
-    font-size:14px;
-}
-.admin-row-actions{
-    display:flex;
-    gap:8px;
-    justify-content:flex-end;
-}
-.admin-row-actions button{
-    background:#fff;
-    border:1px solid var(--line);
-    color: var(--ink);
-    padding:7px 14px;
-    border-radius:6px;
-    font-size:12px;
-    cursor:pointer;
-    font-family: var(--font-mono);
-    transition: border-color .15s ease, color .15s ease;
-}
-.admin-row-actions button:hover{
-    border-color: var(--signal);
-    color: var(--signal);
-}
-.admin-row-actions button[data-action="delete"]:hover{
-    border-color:#d81b4a;
-    color:#d81b4a;
-}
-.admin-loading, .admin-empty{
-    text-align:center;
-    padding:56px 0;
-    font-family: var(--font-mono);
-    font-size:13px;
-    color: var(--slate);
-}
+        <label for="fieldName">Name</label>
+        <input type="text" id="fieldName" required placeholder="e.g. Classic Black Hoodie">
 
-/* ---------- Modal ---------- */
-.admin-overlay{
-    position:fixed;
-    inset:0;
-    background: rgba(10,10,11,0.55);
-    backdrop-filter: blur(2px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-    z-index:100;
-}
-.admin-modal{
-    width:100%;
-    max-width:560px;
-    max-height:90vh;
-    overflow-y:auto;
-    background: #fff;
-    color: var(--ink);
-    border-radius: var(--radius);
-    padding:30px;
-    display:flex;
-    flex-direction:column;
-    gap:13px;
-    box-shadow: 0 30px 70px rgba(0,0,0,0.35);
-}
-.admin-modal-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:4px;
-    padding-bottom:14px;
-    border-bottom:1px solid var(--line);
-}
-.admin-modal-header h3{
-    font-family: var(--font-display);
-    font-weight:400;
-    font-size:20px;
-}
-.admin-modal-close{
-    background:none;
-    border:none;
-    font-size:22px;
-    line-height:1;
-    cursor:pointer;
-    color: var(--slate);
-    padding:4px;
-}
-.admin-modal-close:hover{ color: var(--ink); }
-.admin-modal label{
-    font-family: var(--font-mono);
-    font-size:11px;
-    letter-spacing:0.04em;
-    text-transform:uppercase;
-    color: var(--slate);
-    display:block;
-    margin-bottom:5px;
-}
-.admin-modal input[type="text"],
-.admin-modal input[type="number"],
-.admin-modal select{
-    width:100%;
-    padding:11px 12px;
-    border:1px solid var(--line);
-    border-radius: var(--radius-sm);
-    font-family: var(--font-body);
-    font-size:14px;
-    background:#fff;
-    color: var(--ink);
-    transition: border-color .15s ease, box-shadow .15s ease;
-}
-.admin-modal input:focus,
-.admin-modal select:focus{
-    outline:none;
-    border-color: var(--signal);
-    box-shadow: 0 0 0 3px rgba(255,45,106,0.12);
-}
-.admin-field-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-}
-.admin-checkbox{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-family: var(--font-body) !important;
-    font-size:14px !important;
-    color: var(--ink) !important;
-    text-transform:none !important;
-}
-.admin-checkbox input{
-    width:auto;
-    accent-color: var(--signal);
-}
-.admin-images-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-top:8px;
-}
-.admin-images-header label{ margin:0; }
-.btn-small{
-    padding:7px 14px !important;
-    font-size:11px !important;
-    background:#fff !important;
-    border:1px solid var(--line) !important;
-    color: var(--ink) !important;
-}
-.btn-small:hover{
-    border-color: var(--signal) !important;
-    color: var(--signal) !important;
-}
-.admin-images-list{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-.admin-image-row{
-    display:grid;
-    grid-template-columns:1fr 140px auto;
-    gap:8px;
-    align-items:center;
-}
-.admin-image-row input{
-    padding:9px 11px;
-    border:1px solid var(--line);
-    border-radius: var(--radius-sm);
-    font-size:13px;
-}
-.admin-image-remove{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:6px;
-    color: var(--slate);
-    cursor:pointer;
-    padding:7px 12px;
-    font-size:12px;
-    font-family: var(--font-mono);
-    white-space:nowrap;
-}
-.admin-image-remove:hover{
-    border-color:#d81b4a;
-    color:#d81b4a;
-}
-.admin-modal-footer{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:8px;
-    padding-top:16px;
-    border-top:1px solid var(--line);
-}
-.admin-modal-footer-right{
-    display:flex;
-    gap:10px;
-}
-.admin-modal .btn{
-    border:none;
-    cursor:pointer;
-}
-.btn-danger{
-    background:none;
-    border:1px solid #d81b4a;
-    color:#d81b4a;
-    padding:10px 18px;
-    border-radius: 999px;
-    font-family: var(--font-mono);
-    font-size:12px;
-    cursor:pointer;
-    transition: background .15s ease, color .15s ease;
-}
-.btn-danger:hover{
-    background:#d81b4a;
-    color:#fff;
-}
+        <div class="admin-field-row">
+            <div>
+                <label for="fieldCategory">Category</label>
+                <select id="fieldCategory" required>
+                    <option value="hoodies">Hoodies</option>
+                    <option value="shirts">Shirts</option>
+                    <option value="pants">Pants</option>
+                    <option value="shoes">Shoes</option>
+                    <option value="tracksuits">Tracksuits</option>
+                    <option value="hats">Hats</option>
+                </select>
+            </div>
+            <div>
+                <label for="fieldType">Card style</label>
+                <select id="fieldType">
+                    <option value="simple">Single image</option>
+                    <option value="swatch">Color swatches</option>
+                    <option value="slider">Image slider</option>
+                </select>
+            </div>
+        </div>
 
-@media (max-width: 900px){
-    .admin-table th:nth-child(3), .admin-table td:nth-child(3){ display:none; }
-}
-@media (max-width: 640px){
-    .admin-header{ flex-wrap:wrap; gap:12px; padding:16px 0; }
-    .admin-toolbar{ flex-direction:column; align-items:stretch; }
-    .admin-filters{ min-width:0; }
-    .admin-field-row{ grid-template-columns:1fr; }
-    .admin-image-row{ grid-template-columns:1fr; }
-    .admin-table th:nth-child(1), .admin-table td:nth-child(1){ display:none; }
-    .admin-table th:nth-child(4), .admin-table td:nth-child(4){ display:none; }
-}
+        <div class="admin-field-row">
+            <div>
+                <label for="fieldPrice">Price (Birr)</label>
+                <input type="number" id="fieldPrice" min="0" step="1" required placeholder="4900">
+            </div>
+            <div>
+                <label for="fieldOldPrice">Old price (optional, for a discount badge)</label>
+                <input type="number" id="fieldOldPrice" min="0" step="1" placeholder="e.g. 7900">
+            </div>
+        </div>
+
+        <label class="admin-checkbox">
+            <input type="checkbox" id="fieldFeatured">
+            Show on homepage "Featured Products"
+        </label>
+
+        <div class="admin-images-header">
+            <label>Images</label>
+            <button type="button" id="addImageBtn" class="btn-ghost btn-small">+ Add image</button>
+        </div>
+        <p class="admin-hint">
+            Use a path into <code>../Pictures/...</code> (existing product photos) or a full image URL.
+            Add a color only for "Color swatches" style — it's the swatch's hex code or a CSS gradient.
+        </p>
+        <div id="imagesList" class="admin-images-list"></div>
+
+        <p id="formError" class="admin-error" role="alert"></p>
+
+        <div class="admin-modal-footer">
+            <button type="button" id="deleteProductBtn" class="btn-danger hidden">Delete</button>
+            <div class="admin-modal-footer-right">
+                <button type="button" id="cancelEditorBtn" class="btn-ghost">Cancel</button>
+                <button type="submit" class="btn" id="saveProductBtn">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="products-api.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
