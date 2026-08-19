@@ -12,9 +12,9 @@
     --panel:      #f1efea;   /* alt section / card background */
     --line:       #e4e1da;   /* hairline borders */
     --slate:      #6c6c72;   /* secondary text */
-    --signal:     #ff2d6a;   /* signal pink — the one accent */
+    --signal:     #8b5cf6;   /* signal purple — the one accent */
     --signal-ink: #ffffff;   /* text on signal */
-    --signal-tint:#ffe3ec;   /* pale pink tint */
+    --signal-tint:#ece3fd;   /* pale purple tint */
 
     /* type */
     --font-display: 'Archivo Black', 'Arial Black', sans-serif;
@@ -89,72 +89,111 @@ h1,h2,h3{ font-family: var(--font-display); font-weight:400; line-height:1.05; l
    HEADER / NAV
    ========================================================= */
 header{
-    background: var(--jet);
-    padding: 18px var(--gutter);
+    background: rgba(10,10,11,0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px var(--gutter);
     position: sticky;
     top: 0;
     z-index: 50;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: padding 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+header.is-scrolled{
+    padding: 12px var(--gutter);
+    background: rgba(10,10,11,0.97);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 
 .navbar{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:20px;
+    gap:24px;
     max-width: var(--container);
     margin:0 auto;
     flex-wrap: wrap;
 }
 
+/* ---------- LOGO ---------- */
 .logo{
-    color:#fff;
-    font-family: var(--font-display);
-    font-size:22px;
-    letter-spacing:0.02em;
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:10px;
+    text-decoration:none;
+    color:#fff;
 }
-.logo::before{
-    content:"";
-    width:10px; height:10px;
-    background: var(--signal);
-    border-radius:50%;
-    display:inline-block;
+.logo-mark{
+    flex-shrink:0;
+    display:block;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+}
+.logo:hover .logo-mark{ transform: rotate(-8deg) scale(1.05); }
+.logo-badge{ fill: var(--signal); }
+
+.logo-word{
+    font-family: var(--font-display);
+    font-size:19px;
+    line-height:1;
+    letter-spacing:0.01em;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+}
+.logo-word b{
+    font-weight:normal;
+    color:#fff;
+}
+.logo-word span{
+    font-family: var(--font-mono);
+    font-size:9px;
+    letter-spacing:0.28em;
+    color: var(--signal);
+    text-transform:uppercase;
 }
 
+/* ---------- NAV LINKS ---------- */
 .nav-links{
     list-style:none;
     display:flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 4px;
 }
 
-.nav-links li{ margin-left: 6px; }
+.nav-links li{ margin-left: 4px; }
 
 .nav-links a{
+    position:relative;
     text-decoration:none;
-    color:#e9e9ea;
+    color:#c7c7cc;
     font-family: var(--font-mono);
     font-size:12px;
-    letter-spacing:0.06em;
+    letter-spacing:0.08em;
     text-transform:uppercase;
-    padding: 8px 12px;
-    border-radius: 999px;
-    transition: color 0.25s ease, background 0.25s ease;
+    padding: 8px 4px;
+    margin: 0 8px;
+    transition: color 0.25s ease;
 }
 
-.nav-links a:hover{
-    color:#fff;
-    background: rgba(255,255,255,0.08);
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:50%; right:50%;
+    bottom:2px;
+    height:2px;
+    background: var(--signal);
+    transition: left 0.28s cubic-bezier(.2,.8,.2,1), right 0.28s cubic-bezier(.2,.8,.2,1);
 }
+
+.nav-links a:hover{ color:#fff; }
+.nav-links a:hover::after{ left:0; right:0; }
 
 /* SEARCH */
 .search-box{ margin-left: 10px; }
 
 .search-box input{
-    background: rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.14);
     color:#fff;
     padding:9px 16px;
     border-radius:999px;
@@ -165,7 +204,7 @@ header{
     transition: all 0.3s ease;
 }
 
-.search-box input::placeholder{ color: rgba(255,255,255,0.45); }
+.search-box input::placeholder{ color: rgba(255,255,255,0.4); }
 
 .search-box input:focus{
     width:220px;
@@ -225,8 +264,8 @@ header{
     letter-spacing:0.14em;
     text-transform:uppercase;
     color: var(--signal);
-    background: rgba(255,45,106,0.14);
-    border: 1px solid rgba(255,45,106,0.45);
+    background: rgba(139,92,246,0.14);
+    border: 1px solid rgba(139,92,246,0.45);
     padding: 7px 14px;
     border-radius: 999px;
     margin-bottom: 22px;
@@ -263,10 +302,10 @@ header{
     text-transform:uppercase;
     border-radius:999px;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 10px 26px rgba(255,45,106,0.28);
+    box-shadow: 0 10px 26px rgba(139,92,246,0.28);
 }
 
-.btn:hover{ transform: translateY(-3px); box-shadow: 0 14px 32px rgba(255,45,106,0.4); }
+.btn:hover{ transform: translateY(-3px); box-shadow: 0 14px 32px rgba(139,92,246,0.4); }
 
 .btn-ghost{
     display:inline-block;
@@ -652,7 +691,7 @@ header{
     inset:0;
     background: repeating-linear-gradient(135deg,
         transparent 0px, transparent 46px,
-        rgba(255,45,106,0.12) 46px, rgba(255,45,106,0.12) 48px);
+        rgba(139,92,246,0.12) 46px, rgba(139,92,246,0.12) 48px);
     pointer-events:none;
 }
 
@@ -1339,8 +1378,8 @@ footer p{
 /* ---------- nav active-page indicator ---------- */
 .nav-links a.active{
     color:#fff;
-    background: rgba(255,45,106,0.18);
 }
+.nav-links a.active::after{ left:0; right:0; }
 
 /* =========================================================
    PRODUCT GRID — loading / empty / error states (products-api.js)
@@ -1356,7 +1395,7 @@ footer p{
     padding:40px 0;
 }
 .products-error{
-    color:#ff2d6a;
+    color:#8b5cf6;
 }
 
 /* =========================================================
@@ -1423,6 +1462,29 @@ footer p{
 .product-card .size-select.size-required, #tomiQVModal .size-select.size-required{ animation: sizeShake 0.35s ease; }
 .product-card .size-select.size-required .size-label, #tomiQVModal .size-select.size-required .size-label{ color: var(--signal); }
 .product-card .size-select.size-required button.size-pill, #tomiQVModal .size-select.size-required button.size-pill{ border-color: var(--signal); }
+
+.product-card .size-select button.size-pill.out-of-stock, #tomiQVModal .size-select button.size-pill.out-of-stock{
+    background: var(--panel);
+    color: var(--slate);
+    border-color: var(--line);
+    text-decoration: line-through;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.product-card .size-select button.size-pill.out-of-stock:hover, #tomiQVModal .size-select button.size-pill.out-of-stock:hover{ border-color: var(--line); }
+
+.product-card .size-select .stock-note, #tomiQVModal .size-select .stock-note{
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+    min-height: 14px;
+}
+.stock-note.ok{ color: #2a9d5c; }
+.stock-note.low{ color: #d18f1c; }
+.stock-note.out{ color: var(--signal); }
+
 @keyframes sizeShake{
     0%, 100%{ transform: translateX(0); }
     25%{ transform: translateX(-4px); }

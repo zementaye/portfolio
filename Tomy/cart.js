@@ -100,13 +100,49 @@
         return wrap;
     }
 
-    /* ---------- size options (per product, not per page — a page can mix categories) ---------- */
-    function sizeOptionsForCard(name, path) {
+    /* ---------- size options (per product) ----------
+       Real data first: products-api.js embeds each product's sizes/stock
+       as data-sizes="[{...}]" on the card (from the admin-managed catalog).
+       Falls back to a guess only if a card somehow has no size data. */
+    function sizesFromCard(card) {
+        const raw = card && card.dataset ? card.dataset.sizes : null;
+        if (!raw) return null;
+        try {
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : null;
+        } catch (e) { return null; }
+    }
+
+    function sizeOptionsForCard(name, path, card) {
+        const fromData = card ? sizesFromCard(card) : null;
+        if (fromData !== null) return fromData.length ? fromData : null; // [] = one-size accessory
+
         const n = (name || "").toLowerCase();
         const p = (path || "").toLowerCase();
-        if (p.includes("shoe") || /sneaker|shoe|boot|sandal/.test(n)) return ["40", "41", "42", "43", "44"];
-        if (p.includes("hat") || /\bhat\b|\bcap\b|beanie/.test(n)) return null; // one-size accessory
-        return ["S", "M", "L", "XL"];
+        let labels = null;
+        if (p.includes("shoe") || /sneaker|shoe|boot|sandal/.test(n)) labels = ["40", "41", "42", "43", "44"];
+        else if (p.includes("hat") || /\bhat\b|\bcap\b|beanie/.test(n)) labels = null;
+        else labels = ["S", "M", "L", "XL"];
+        return labels ? labels.map(s => ({ size: s, stock: null })) : null;
+    }
+
+    /* ---------- size pill rendering + stock note ---------- */
+    function sizePillHTML(s, isActive) {
+        const soldOut = s.stock === 0;
+        const cls = "size-pill" + (isActive ? " active" : "") + (soldOut ? " out-of-stock" : "");
+        const stockAttr = (s.stock === null || s.stock === undefined) ? "" : ' data-stock="' + s.stock + '"';
+        return '<button type="button" class="' + cls + '" data-size="' + s.size + '"' + stockAttr + (soldOut ? " disabled" : "") + '>' + s.size + '</button>';
+    }
+
+    function updateStockNote(wrap, btn) {
+        const note = wrap.querySelector(".stock-note");
+        if (!note) return;
+        const stockAttr = btn.getAttribute("data-stock");
+        if (stockAttr === null) { note.textContent = ""; note.className = "stock-note"; return; }
+        const stock = parseInt(stockAttr, 10);
+        if (stock <= 0) { note.textContent = "Out of stock"; note.className = "stock-note out"; }
+        else if (stock <= 3) { note.textContent = "Only " + stock + " left"; note.className = "stock-note low"; }
+        else { note.textContent = "In stock"; note.className = "stock-note ok"; }
     }
 
     /* ---------- cart ---------- */
@@ -450,6 +486,10 @@
                 document.getElementById("tomiQVSizes").classList.add("size-required");
                 return;
             }
+            if (qv.sizes && qv.selectedSize) {
+                const sizeObj = qv.sizes.find(s => s.size === qv.selectedSize);
+                if (sizeObj && sizeObj.stock === 0) return;
+            }
             addItem({
                 id: qv.meta.id + (qv.selectedSize ? "|" + qv.selectedSize : ""),
                 name: qv.meta.name,
@@ -473,7 +513,7 @@
             meta: meta,
             images: cardImages(card),
             activeIndex: 0,
-            sizes: sizeOptionsForCard(meta.name, window.location.pathname),
+            sizes: sizeOptionsForCard(meta.name, window.location.pathname, card),
             selectedSize: null,
             qty: 1
         };
@@ -514,14 +554,19 @@
         const sizeWrap = document.getElementById("tomiQVSizes");
         if (qv.sizes) {
             sizeWrap.style.display = "flex";
-            sizeWrap.innerHTML = '<span class="size-label">Size</span>' + qv.sizes.map(s =>
-                '<button type="button" class="size-pill' + (qv.selectedSize === s ? ' active' : '') + '" data-size="' + s + '">' + s + '</button>'
-            ).join("");
+            sizeWrap.innerHTML = '<span class="size-label">Size</span>' +
+                qv.sizes.map(s => sizePillHTML(s, qv.selectedSize === s.size)).join("") +
+                '<span class="stock-note"></span>';
             sizeWrap.querySelectorAll(".size-pill").forEach(b => b.addEventListener("click", () => {
+                if (b.classList.contains("out-of-stock")) return;
                 qv.selectedSize = b.dataset.size;
                 sizeWrap.classList.remove("size-required");
                 renderQuickView();
             }));
+            if (qv.selectedSize) {
+                const activeBtn = sizeWrap.querySelector('.size-pill[data-size="' + qv.selectedSize + '"]');
+                if (activeBtn) updateStockNote(sizeWrap, activeBtn);
+            }
         } else {
             sizeWrap.style.display = "none";
             sizeWrap.innerHTML = "";
@@ -676,6 +721,17 @@
         });
     }
 
+    /* ---------- nav scroll-compact state ---------- */
+    let navScrollBound = false;
+    function initNavScroll() {
+        const header = document.querySelector("header");
+        if (!header || navScrollBound) return;
+        navScrollBound = true;
+        const apply = () => header.classList.toggle("is-scrolled", window.scrollY > 24);
+        apply();
+        window.addEventListener("scroll", apply, { passive: true });
+    }
+
     /* ---------- nav current-page indicator ---------- */
     function markActiveNav() {
         document.querySelectorAll(".nav-links a").forEach(link => {
@@ -709,6 +765,8 @@
                         sizeWrap.scrollIntoView({ behavior: "smooth", block: "nearest" });
                         return;
                     }
+                    const activePill = sizeWrap.querySelector('.size-pill[data-size="' + size + '"]');
+                    if (activePill && activePill.classList.contains("out-of-stock")) return;
                 }
                 const activeImg = card.querySelector(".main-image") || card.querySelector(".slide.active") || card.querySelector("img");
                 addItem({
@@ -730,21 +788,24 @@
             if (!addBtn) return;
             const h3 = card.querySelector("h3");
             const name = h3 ? h3.textContent.trim() : "";
-            const sizes = sizeOptionsForCard(name, window.location.pathname);
+            const sizes = sizeOptionsForCard(name, window.location.pathname, card);
             if (!sizes) return;
 
             const wrap = document.createElement("div");
             wrap.className = "size-select";
             wrap.innerHTML = '<span class="size-label">Size</span>' +
-                sizes.map(s => '<button type="button" class="size-pill" data-size="' + s + '">' + s + '</button>').join("");
+                sizes.map(s => sizePillHTML(s, false)).join("") +
+                '<span class="stock-note"></span>';
             card.insertBefore(wrap, addBtn);
 
             wrap.querySelectorAll(".size-pill").forEach(btn => {
                 btn.addEventListener("click", () => {
+                    if (btn.classList.contains("out-of-stock")) return;
                     wrap.querySelectorAll(".size-pill").forEach(b => b.classList.remove("active"));
                     btn.classList.add("active");
                     wrap.dataset.selected = btn.dataset.size;
                     wrap.classList.remove("size-required");
+                    updateStockNote(wrap, btn);
                 });
             });
         });
@@ -764,6 +825,7 @@
         injectPriceFilters();
         lazyLoadImages();
         markActiveNav();
+        initNavScroll();
         updateBadge();
         updateWishlistBadge();
     }

@@ -59,8 +59,10 @@ function productCardHTML(p) {
       </div>`;
   }
 
+  const sizesAttr = JSON.stringify(p.sizes || []).replace(/"/g, "&quot;");
+
   return `
-    <div class="product-card" data-category="${p.category}" data-product-id="${p.id}">
+    <div class="product-card" data-category="${p.category}" data-product-id="${p.id}" data-sizes="${sizesAttr}">
       ${mediaHTML}
       <h3>${p.name}</h3>
       ${priceHTML}

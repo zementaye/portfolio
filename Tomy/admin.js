@@ -32,6 +32,8 @@ const deleteProductBtn = document.getElementById("deleteProductBtn");
 const formError = document.getElementById("formError");
 const imagesList = document.getElementById("imagesList");
 const addImageBtn = document.getElementById("addImageBtn");
+const sizesList = document.getElementById("sizesList");
+const addSizeBtn = document.getElementById("addSizeBtn");
 
 // ---------- Auth helpers ----------
 function getToken() {
@@ -190,11 +192,36 @@ function collectImages() {
     .filter((img) => img.url);
 }
 
+// ---------- Size/stock rows in the editor ----------
+function addSizeRow(size = "", stock = "") {
+  const row = document.createElement("div");
+  row.className = "admin-size-row";
+  row.innerHTML = `
+    <input type="text" class="size-label-input" placeholder="e.g. M or 42" value="${escapeHTML(size)}">
+    <input type="number" class="size-stock-input" min="0" step="1" placeholder="Stock" value="${escapeHTML(String(stock))}">
+    <button type="button" class="admin-image-remove">Remove</button>
+  `;
+  row.querySelector(".admin-image-remove").addEventListener("click", () => row.remove());
+  sizesList.appendChild(row);
+}
+
+addSizeBtn.addEventListener("click", () => addSizeRow());
+
+function collectSizes() {
+  return [...sizesList.querySelectorAll(".admin-size-row")]
+    .map((row) => ({
+      size: row.querySelector(".size-label-input").value.trim(),
+      stock: Number(row.querySelector(".size-stock-input").value) || 0,
+    }))
+    .filter((s) => s.size);
+}
+
 // ---------- Editor open/close ----------
 function openEditor(product) {
   formError.textContent = "";
   productForm.reset();
   imagesList.innerHTML = "";
+  sizesList.innerHTML = "";
 
   if (product) {
     editingId = product.id;
@@ -207,6 +234,7 @@ function openEditor(product) {
     document.getElementById("fieldOldPrice").value = product.oldPrice || "";
     document.getElementById("fieldFeatured").checked = !!product.featured;
     (product.images || []).forEach((img) => addImageRow(img.url, img.color));
+    (product.sizes || []).forEach((s) => addSizeRow(s.size, s.stock));
   } else {
     editingId = null;
     editorTitle.textContent = "Add Product";
@@ -244,6 +272,7 @@ productForm.addEventListener("submit", async (e) => {
       : null,
     featured: document.getElementById("fieldFeatured").checked,
     images: collectImages(),
+    sizes: collectSizes(),
   };
 
   if (!payload.images.length) {

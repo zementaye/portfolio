@@ -148,6 +148,31 @@ def validate_product_payload(data, partial=False):
             })
         cleaned["images"] = clean_images
 
+    if "sizes" in data or not partial:
+        sizes = data.get("sizes")
+        if sizes in (None, ""):
+            cleaned["sizes"] = []
+        elif not isinstance(sizes, list):
+            return None, "Sizes must be a list"
+        else:
+            clean_sizes = []
+            seen = set()
+            for row in sizes:
+                label = (row.get("size") or "").strip() if isinstance(row, dict) else ""
+                if not label:
+                    continue
+                if label.lower() in seen:
+                    return None, f"Duplicate size: {label}"
+                seen.add(label.lower())
+                try:
+                    stock = int(row.get("stock", 0))
+                    if stock < 0:
+                        raise ValueError
+                except (TypeError, ValueError):
+                    return None, f"Stock for size '{label}' must be a non-negative whole number"
+                clean_sizes.append({"size": label, "stock": stock})
+            cleaned["sizes"] = clean_sizes
+
     return cleaned, None
 
 
@@ -228,6 +253,7 @@ def create_product():
 
     cleaned.setdefault("oldPrice", None)
     cleaned.setdefault("featured", False)
+    cleaned.setdefault("sizes", [])
     cleaned["createdAt"] = datetime.now(timezone.utc)
 
     result = products_col.insert_one(cleaned)

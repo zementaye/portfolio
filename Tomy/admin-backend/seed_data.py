@@ -26,23 +26,34 @@ def img(url, color=None):
     return {"url": url, "color": color}
 
 
+def apparel_sizes(s=10, m=14, l=9, xl=5):
+    return [{"size": "S", "stock": s}, {"size": "M", "stock": m},
+            {"size": "L", "stock": l}, {"size": "XL", "stock": xl}]
+
+
+def shoe_sizes(s40=4, s41=6, s42=8, s43=5, s44=0):
+    return [{"size": "40", "stock": s40}, {"size": "41", "stock": s41},
+            {"size": "42", "stock": s42}, {"size": "43", "stock": s43},
+            {"size": "44", "stock": s44}]
+
+
 PRODUCTS = [
     # ---- Hoodies ----
-    {"name": "Classic Black Hoodie", "category": "hoodies", "price": 4900,
+    {"name": "Classic Black Hoodie", "category": "hoodies", "sizes": apparel_sizes(), "price": 4900,
      "oldPrice": None, "featured": True, "type": "simple",
      "images": [img("../Pictures/Hoodie/hoodie1.jpg")]},
-    {"name": "Oversized Grey Hoodie", "category": "hoodies", "price": 5900,
+    {"name": "Oversized Grey Hoodie", "category": "hoodies", "sizes": apparel_sizes(), "price": 5900,
      "oldPrice": None, "featured": False, "type": "simple",
      "images": [img("../Pictures/Hoodie/hoodie2.jpg")]},
-    {"name": "Minimal White Hoodie", "category": "hoodies", "price": 5400,
+    {"name": "Minimal White Hoodie", "category": "hoodies", "sizes": apparel_sizes(), "price": 5400,
      "oldPrice": None, "featured": False, "type": "simple",
      "images": [img("../Pictures/Hoodie/hoodie3.jpg")]},
-    {"name": "Minimal Hoodie", "category": "hoodies", "price": 9900,
+    {"name": "Minimal Hoodie", "category": "hoodies", "sizes": apparel_sizes(), "price": 9900,
      "oldPrice": None, "featured": True, "type": "simple",
      "images": [img("../Pictures/Hoodie/hoodie1.jpg")]},
 
     # ---- Shirts ----
-    {"name": "Polo Shirts", "category": "shirts", "price": 5000,
+    {"name": "Polo Shirts", "category": "shirts", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shirts/s1.jpg", "linear-gradient(135deg, #4b2e2b 50%, #7a7d3a 50%)"),
@@ -51,35 +62,35 @@ PRODUCTS = [
          img("../Pictures/Shirts/s5.jpg", "#a0aab7"),
          img("../Pictures/Shirts/s6.jpg", "#98858c"),
      ]},
-    {"name": "BLACK OFF", "category": "shirts", "price": 5000,
+    {"name": "BLACK OFF", "category": "shirts", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shirts/s7.jpg", "#ffffff"),
          img("../Pictures/Shirts/s8.jpg", "#a6aaab"),
          img("../Pictures/Shirts/s9.jpg", "#000000"),
      ]},
-    {"name": "USA Shirts", "category": "shirts", "price": 5000,
+    {"name": "USA Shirts", "category": "shirts", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shirts/s10.jpg", "#c49e85"),
          img("../Pictures/Shirts/s11.jpg", "#ffffff"),
          img("../Pictures/Shirts/s12.jpg", "#000000"),
      ]},
-    {"name": "OFFBEAT", "category": "shirts", "price": 5000,
+    {"name": "OFFBEAT", "category": "shirts", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shirts/s16.jpg", "#474d57"),
          img("../Pictures/Shirts/s17.jpg", "#ffffff"),
          img("../Pictures/Shirts/s18.jpg", "#000000"),
      ]},
-    {"name": "OFFBEAT Shirt", "category": "shirts", "price": 2900,
+    {"name": "OFFBEAT Shirt", "category": "shirts", "sizes": apparel_sizes(), "price": 2900,
      "oldPrice": None, "featured": True, "type": "swatch",
      "images": [
          img("../Pictures/Shirts/s13.jpg", "#474d57"),
          img("../Pictures/Shirts/s14.jpg", "#ffffff"),
          img("../Pictures/Shirts/s15.jpg", "#6ab2c0"),
      ]},
-    {"name": "OFF-WHITE", "category": "shirts", "price": 5000,
+    {"name": "OFF-WHITE", "category": "shirts", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shirts/s19.jpg", "#b5c088"),
@@ -88,10 +99,10 @@ PRODUCTS = [
      ]},
 
     # ---- Pants ----
-    {"name": "Amiri & Purple Jeans", "category": "pants", "price": 5000,
+    {"name": "Amiri & Purple Jeans", "category": "pants", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "simple",
      "images": [img("../Pictures/Pants/Pants1.jpg")]},
-    {"name": "Baggy Jeans Collection 1", "category": "pants", "price": 5000,
+    {"name": "Baggy Jeans Collection 1", "category": "pants", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Pants/pants2_7.jpg", "#3c4656"),
@@ -101,7 +112,7 @@ PRODUCTS = [
          img("../Pictures/Pants/pants2_11.jpg", "#949f9d"),
          img("../Pictures/Pants/pants2_13.jpg", "#000000"),
      ]},
-    {"name": "Baggy Jeans Collection 2", "category": "pants", "price": 5000,
+    {"name": "Baggy Jeans Collection 2", "category": "pants", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Pants/pants2_1.jpg", "#a0aab7"),
@@ -111,7 +122,7 @@ PRODUCTS = [
          img("../Pictures/Pants/pants2_5.jpg", "#b0a89d"),
          img("../Pictures/Pants/pants2_6.jpg", "#b0a89d"),
      ]},
-    {"name": "Ripped Baggy Jeans", "category": "pants", "price": 5000,
+    {"name": "Ripped Baggy Jeans", "category": "pants", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Pants/pants2_14.jpg", "#90aec4"),
@@ -123,22 +134,22 @@ PRODUCTS = [
      ]},
 
     # ---- Shoes ----
-    {"name": "Urban Sneakers", "category": "shoes", "price": 5900,
+    {"name": "Urban Sneakers", "category": "shoes", "sizes": shoe_sizes(s40=2, s41=0, s42=6, s43=3, s44=1), "price": 5900,
      "oldPrice": 7900, "featured": True, "type": "simple",
      "images": [img("../Pictures/Shoes/sh6.jpg")]},
-    {"name": "Balenciaga Track Sneakers", "category": "shoes", "price": 13000,
+    {"name": "Balenciaga Track Sneakers", "category": "shoes", "sizes": shoe_sizes(), "price": 13000,
      "oldPrice": None, "featured": False, "type": "slider",
      "images": [img("../Pictures/Shoes/sh1.jpg"), img("../Pictures/Shoes/sh2.jpg")]},
-    {"name": "Classic Sneakers", "category": "shoes", "price": 15000,
+    {"name": "Classic Sneakers", "category": "shoes", "sizes": shoe_sizes(), "price": 15000,
      "oldPrice": None, "featured": False, "type": "slider",
      "images": [img("../Pictures/Shoes/sh3.jpg"), img("../Pictures/Shoes/sh4.jpg")]},
-    {"name": "Dr. Martens", "category": "shoes", "price": 10000,
+    {"name": "Dr. Martens", "category": "shoes", "sizes": shoe_sizes(), "price": 10000,
      "oldPrice": None, "featured": False, "type": "slider",
      "images": [img("../Pictures/Shoes/sh36.jpg"), img("../Pictures/Shoes/sh37.jpg")]},
-    {"name": "Osiris D3", "category": "shoes", "price": 10000,
+    {"name": "Osiris D3", "category": "shoes", "sizes": shoe_sizes(), "price": 10000,
      "oldPrice": None, "featured": False, "type": "slider",
      "images": [img("../Pictures/Shoes/sh5.jpg"), img("../Pictures/Shoes/sh6.jpg"), img("../Pictures/Shoes/sh7.jpg")]},
-    {"name": "New Asics", "category": "shoes", "price": 7000,
+    {"name": "New Asics", "category": "shoes", "sizes": shoe_sizes(), "price": 7000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shoes/sh8.jpg", "#ffffff"),
@@ -148,13 +159,13 @@ PRODUCTS = [
          img("../Pictures/Shoes/sh12.jpg", "#000000"),
          img("../Pictures/Shoes/sh13.jpg", "#ffffff"),
      ]},
-    {"name": "Jordan 4 Bricks", "category": "shoes", "price": 7000,
+    {"name": "Jordan 4 Bricks", "category": "shoes", "sizes": shoe_sizes(), "price": 7000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shoes/sh14.jpg", "#2100dc"),
          img("../Pictures/Shoes/sh15.jpg", "#ff0000"),
      ]},
-    {"name": "Jordan 4", "category": "shoes", "price": 7000,
+    {"name": "Jordan 4", "category": "shoes", "sizes": shoe_sizes(), "price": 7000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shoes/sh16.jpg", "#a9adaa"),
@@ -162,7 +173,7 @@ PRODUCTS = [
          img("../Pictures/Shoes/sh17.jpg", "#232121"),
          img("../Pictures/Shoes/sh19.jpg", "#f2ff00"),
      ]},
-    {"name": "Nike Air", "category": "shoes", "price": 6000,
+    {"name": "Nike Air", "category": "shoes", "sizes": shoe_sizes(), "price": 6000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shoes/sh20.jpg", "#ffffff"),
@@ -170,13 +181,13 @@ PRODUCTS = [
          img("../Pictures/Shoes/sh22.jpg", "#000000"),
          img("../Pictures/Shoes/sh23.jpg", "#262823"),
      ]},
-    {"name": "Nike AirForce", "category": "shoes", "price": 4000,
+    {"name": "Nike AirForce", "category": "shoes", "sizes": shoe_sizes(), "price": 4000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shoes/sh26.jpg", "#ffffff"),
          img("../Pictures/Shoes/sh25.jpg", "#ff0000"),
      ]},
-    {"name": "Jordan 4's", "category": "shoes", "price": 7000,
+    {"name": "Jordan 4's", "category": "shoes", "sizes": shoe_sizes(), "price": 7000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shoes/sh27.jpg", "#009b2f"),
@@ -184,7 +195,7 @@ PRODUCTS = [
          img("../Pictures/Shoes/sh29.jpg", "#ffffff"),
          img("../Pictures/Shoes/sh30.jpg", "#000000"),
      ]},
-    {"name": "Vans", "category": "shoes", "price": 5000,
+    {"name": "Vans", "category": "shoes", "sizes": shoe_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Shoes/sh31.jpg", "#ffffff"),
@@ -194,16 +205,16 @@ PRODUCTS = [
      ]},
 
     # ---- Tracksuits ----
-    {"name": "Hellstar Tracksuit — Red", "category": "tracksuits", "price": 5000,
+    {"name": "Hellstar Tracksuit — Red", "category": "tracksuits", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Track/track1.jpg", "#c65143"),
          img("../Pictures/Track/track2.jpg", "#000000"),
      ]},
-    {"name": "Hellstar Tracksuit — Black", "category": "tracksuits", "price": 5000,
+    {"name": "Hellstar Tracksuit — Black", "category": "tracksuits", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [img("../Pictures/Track/track3.jpg", "#000000")]},
-    {"name": "Red Leather Spiderweb Set", "category": "tracksuits", "price": 5000,
+    {"name": "Red Leather Spiderweb Set", "category": "tracksuits", "sizes": apparel_sizes(), "price": 5000,
      "oldPrice": None, "featured": False, "type": "swatch",
      "images": [
          img("../Pictures/Track/track4.jpg", "#c65143"),
@@ -211,16 +222,16 @@ PRODUCTS = [
      ]},
 
     # ---- Hats ----
-    {"name": "Winter Hats", "category": "hats", "price": 500,
+    {"name": "Winter Hats", "category": "hats", "sizes": [], "price": 500,
      "oldPrice": None, "featured": False, "type": "simple",
      "images": [img("../Pictures/Hats/hat1.jpg")]},
-    {"name": "Fashion Hats", "category": "hats", "price": 500,
+    {"name": "Fashion Hats", "category": "hats", "sizes": [], "price": 500,
      "oldPrice": None, "featured": False, "type": "simple",
      "images": [img("../Pictures/Hats/hat2.jpg")]},
-    {"name": "Sweater Hats", "category": "hats", "price": 300,
+    {"name": "Sweater Hats", "category": "hats", "sizes": [], "price": 300,
      "oldPrice": None, "featured": False, "type": "simple",
      "images": [img("../Pictures/Hats/hat3.jpg")]},
-    {"name": "Sweater Hats (Grey)", "category": "hats", "price": 300,
+    {"name": "Sweater Hats (Grey)", "category": "hats", "sizes": [], "price": 300,
      "oldPrice": None, "featured": False, "type": "simple",
      "images": [img("../Pictures/Hats/hat4.jpg")]},
 ]
