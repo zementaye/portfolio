@@ -32,13 +32,38 @@ const deleteProductBtn = document.getElementById("deleteProductBtn");
 const formError = document.getElementById("formError");
 const imagesList = document.getElementById("imagesList");
 const addImageBtn = document.getElementById("addImageBtn");
+const imageFileInput = document.getElementById("imageFileInput");
 const sizesList = document.getElementById("sizesList");
 const addSizeBtn = document.getElementById("addSizeBtn");
+const sizesSection = document.getElementById("sizesSection");
+const noSizesHint = document.getElementById("noSizesHint");
+const fieldCategory = document.getElementById("fieldCategory");
+const fieldType = document.getElementById("fieldType");
 
 const fieldPrice = document.getElementById("fieldPrice");
 const fieldOldPrice = document.getElementById("fieldOldPrice");
 const fieldDiscountPercent = document.getElementById("fieldDiscountPercent");
 const discountPercentRow = document.getElementById("discountPercentRow");
+
+// ---------- Size presets per category ----------
+// "letter"/"number" categories get one dropdown of fixed options.
+// "shoe" categories get an EU/US toggle that swaps the size dropdown.
+// "none" means one-size (e.g. hats) — the whole sizes section is hidden.
+const SIZE_PRESETS = {
+  hoodies: { kind: "letter", options: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"] },
+  shirts: { kind: "letter", options: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"] },
+  tracksuits: { kind: "letter", options: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"] },
+  pants: { kind: "number", options: ["28", "30", "32", "34", "36", "38", "40", "42"] },
+  shoes: {
+    kind: "shoe",
+    eu: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46"],
+    us: ["5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", "11", "11.5", "12", "13"],
+  },
+  hats: { kind: "none" },
+};
+function currentSizePreset() {
+  return SIZE_PRESETS[fieldCategory.value] || { kind: "letter", options: [] };
+}
 
 // ---------- Auth helpers ----------
 function getToken() {
@@ -174,39 +199,177 @@ tableBody.addEventListener("click", (e) => {
 });
 
 // ---------- Image rows in the editor ----------
+function updateImageColorPickersVisibility() {
+  const isSwatch = fieldType.value === "swatch";
+  imagesList.querySelectorAll(".img-color-picker").forEach((el) => {
+    el.classList.toggle("hidden", !isSwatch);
+  });
+}
+fieldType.addEventListener("change", updateImageColorPickersVisibility);
+
+// Existing image already saved on the product (used when opening the editor).
 function addImageRow(url = "", color = "") {
   const row = document.createElement("div");
   row.className = "admin-image-row";
+  row.dataset.url = url;
+  const filename = url ? url.split("/").pop() : "";
   row.innerHTML = `
-    <input type="text" class="img-url" placeholder="../Pictures/Hoodie/hoodie1.jpg" value="${escapeHTML(url)}">
-    <input type="text" class="img-color" placeholder="#000000 (swatch only)" value="${escapeHTML(color || "")}">
+    <img class="admin-image-thumb" src="${url}" alt="">
+    <span class="admin-image-name">${escapeHTML(filename)}</span>
+    <input type="color" class="img-color-picker hidden" value="${color || "#000000"}">
     <button type="button" class="admin-image-remove">Remove</button>
   `;
   row.querySelector(".admin-image-remove").addEventListener("click", () => row.remove());
   imagesList.appendChild(row);
+  updateImageColorPickersVisibility();
 }
 
-addImageBtn.addEventListener("click", () => addImageRow());
+async function uploadImageFile(file) {
+  const token = getToken();
+  const formData = new FormData();
+  formData.append("image", file);
+  const res = await fetch(`${API_BASE_URL}/upload`, {
+    method: "POST",
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    body: formData,
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `Upload failed (${res.status})`);
+  return data;
+}
+
+// Samples the photo itself to guess the garment's color, so the admin
+// doesn't have to type a hex code. Skips near-white/near-black pixels
+// first (typical studio backdrop), falling back to a plain average if
+// that leaves nothing to sample.
+function getAverageColorHex(img) {
+  const canvas = document.createElement("canvas");
+  const w = (canvas.width = 40);
+  const h = (canvas.height = 40);
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0, w, h);
+
+  let data;
+  try {
+    data = ctx.getImageData(0, 0, w, h).data;
+  } catch (e) {
+    return null;
+  }
+
+  const toHex = (r, g, b) => "#" + [r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("");
+
+  let r = 0, g = 0, b = 0, count = 0;
+  let rAll = 0, gAll = 0, bAll = 0, countAll = 0;
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i + 3] < 200) continue; // skip transparent pixels
+    const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
+    rAll += data[i]; gAll += data[i + 1]; bAll += data[i + 2]; countAll++;
+    if (brightness > 235 || brightness < 15) continue; // likely a plain backdrop
+    r += data[i]; g += data[i + 1]; b += data[i + 2]; count++;
+  }
+  if (count > 0) return toHex(Math.round(r / count), Math.round(g / count), Math.round(b / count));
+  if (countAll > 0) return toHex(Math.round(rAll / countAll), Math.round(gAll / countAll), Math.round(bAll / countAll));
+  return null;
+}
+
+// A file the admin just picked from their computer.
+async function addImageFromFile(file) {
+  const localUrl = URL.createObjectURL(file);
+  const row = document.createElement("div");
+  row.className = "admin-image-row uploading";
+  row.dataset.url = "";
+  row.innerHTML = `
+    <img class="admin-image-thumb" src="${localUrl}" alt="">
+    <span class="admin-image-name">${escapeHTML(file.name)} — uploading…</span>
+    <input type="color" class="img-color-picker hidden" value="#000000">
+    <button type="button" class="admin-image-remove">Remove</button>
+  `;
+  row.querySelector(".admin-image-remove").addEventListener("click", () => row.remove());
+  imagesList.appendChild(row);
+  updateImageColorPickersVisibility();
+
+  const previewImg = new Image();
+  previewImg.onload = () => {
+    const detected = getAverageColorHex(previewImg);
+    if (detected) {
+      row.dataset.detectedColor = detected;
+      row.querySelector(".img-color-picker").value = detected;
+    }
+  };
+  previewImg.src = localUrl;
+
+  try {
+    const { url } = await uploadImageFile(file);
+    row.dataset.url = url;
+    row.querySelector(".admin-image-name").textContent = file.name;
+    row.classList.remove("uploading");
+  } catch (err) {
+    row.querySelector(".admin-image-name").textContent = `Upload failed: ${err.message}`;
+    row.classList.remove("uploading");
+    row.classList.add("upload-error");
+  }
+}
+
+addImageBtn.addEventListener("click", () => imageFileInput.click());
+imageFileInput.addEventListener("change", () => {
+  const file = imageFileInput.files[0];
+  imageFileInput.value = ""; // so picking the same file again still fires "change"
+  if (file) addImageFromFile(file);
+});
 
 function collectImages() {
   return [...imagesList.querySelectorAll(".admin-image-row")]
-    .map((row) => ({
-      url: row.querySelector(".img-url").value.trim(),
-      color: row.querySelector(".img-color").value.trim() || null,
-    }))
+    .map((row) => {
+      const picker = row.querySelector(".img-color-picker");
+      const usingPicker = picker && !picker.classList.contains("hidden");
+      return {
+        url: row.dataset.url || "",
+        color: usingPicker ? picker.value : row.dataset.detectedColor || null,
+      };
+    })
     .filter((img) => img.url);
 }
 
 // ---------- Size/stock rows in the editor ----------
-function addSizeRow(size = "", stock = "") {
+function buildSizeOptionsHTML(preset, system, selected) {
+  const list = preset.kind === "shoe" ? preset[system] || preset.eu : preset.options || [];
+  let optionsHTML = list.map((v) => `<option value="${v}"${v === selected ? " selected" : ""}>${v}</option>`).join("");
+  if (selected && !list.includes(selected)) {
+    optionsHTML += `<option value="${escapeHTML(selected)}" selected>${escapeHTML(selected)} (existing)</option>`;
+  }
+  return optionsHTML;
+}
+
+function addSizeRow(size = "", stock = "", shoeSystem = "eu") {
+  const preset = currentSizePreset();
   const row = document.createElement("div");
   row.className = "admin-size-row";
+  row.dataset.system = shoeSystem;
+
+  const systemPickerHTML =
+    preset.kind === "shoe"
+      ? `<select class="size-system-select">
+           <option value="eu"${shoeSystem === "eu" ? " selected" : ""}>EU</option>
+           <option value="us"${shoeSystem === "us" ? " selected" : ""}>US</option>
+         </select>`
+      : "";
+
   row.innerHTML = `
-    <input type="text" class="size-label-input" placeholder="e.g. M or 42" value="${escapeHTML(size)}">
+    ${systemPickerHTML}
+    <select class="size-label-select">${buildSizeOptionsHTML(preset, shoeSystem, size)}</select>
     <input type="number" class="size-stock-input" min="0" step="1" placeholder="Stock" value="${escapeHTML(String(stock))}">
     <button type="button" class="admin-image-remove">Remove</button>
   `;
   row.querySelector(".admin-image-remove").addEventListener("click", () => row.remove());
+
+  const systemSelect = row.querySelector(".size-system-select");
+  if (systemSelect) {
+    systemSelect.addEventListener("change", () => {
+      row.dataset.system = systemSelect.value;
+      row.querySelector(".size-label-select").innerHTML = buildSizeOptionsHTML(preset, systemSelect.value, "");
+    });
+  }
+
   sizesList.appendChild(row);
 }
 
@@ -215,11 +378,50 @@ addSizeBtn.addEventListener("click", () => addSizeRow());
 function collectSizes() {
   return [...sizesList.querySelectorAll(".admin-size-row")]
     .map((row) => ({
-      size: row.querySelector(".size-label-input").value.trim(),
+      size: row.querySelector(".size-label-select").value.trim(),
       stock: Number(row.querySelector(".size-stock-input").value) || 0,
     }))
     .filter((s) => s.size);
 }
+
+// Re-syncs the sizes section whenever the category changes: hides it
+// entirely for one-size categories (hats), and regenerates each existing
+// row's dropdown options to match the new category's size preset.
+function refreshSizesForCategory() {
+  const preset = currentSizePreset();
+  if (preset.kind === "none") {
+    sizesSection.classList.add("hidden");
+    noSizesHint.style.display = "";
+    sizesList.innerHTML = "";
+    return;
+  }
+  sizesSection.classList.remove("hidden");
+  noSizesHint.style.display = "none";
+
+  [...sizesList.querySelectorAll(".admin-size-row")].forEach((row) => {
+    const labelSelect = row.querySelector(".size-label-select");
+    const currentValue = labelSelect.value;
+    let systemSelect = row.querySelector(".size-system-select");
+
+    if (preset.kind === "shoe" && !systemSelect) {
+      systemSelect = document.createElement("select");
+      systemSelect.className = "size-system-select";
+      systemSelect.innerHTML = `<option value="eu">EU</option><option value="us">US</option>`;
+      row.insertBefore(systemSelect, row.firstChild);
+      systemSelect.addEventListener("change", () => {
+        row.dataset.system = systemSelect.value;
+        labelSelect.innerHTML = buildSizeOptionsHTML(preset, systemSelect.value, "");
+      });
+    } else if (preset.kind !== "shoe" && systemSelect) {
+      systemSelect.remove();
+      systemSelect = null;
+    }
+
+    const system = row.dataset.system || "eu";
+    labelSelect.innerHTML = buildSizeOptionsHTML(preset, system, currentValue);
+  });
+}
+fieldCategory.addEventListener("change", refreshSizesForCategory);
 
 // ---------- Editor open/close ----------
 function openEditor(product) {
@@ -245,9 +447,10 @@ function openEditor(product) {
     editingId = null;
     editorTitle.textContent = "Add Product";
     deleteProductBtn.classList.add("hidden");
-    addImageRow();
   }
 
+  refreshSizesForCategory();
+  updateImageColorPickersVisibility();
   updateDiscountPercentVisibility();
   editorOverlay.classList.remove("hidden");
 }
@@ -282,6 +485,11 @@ editorOverlay.addEventListener("click", (e) => {
 productForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   formError.textContent = "";
+
+  if (imagesList.querySelector(".admin-image-row.uploading")) {
+    formError.textContent = "Please wait for the image upload to finish.";
+    return;
+  }
 
   const payload = {
     name: document.getElementById("fieldName").value.trim(),

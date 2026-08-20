@@ -147,20 +147,24 @@
             <button type="button" id="addImageBtn" class="btn-ghost btn-small">+ Add image</button>
         </div>
         <p class="admin-hint">
-            Use a path into <code>../Pictures/...</code> (existing product photos) or a full image URL.
-            Add a color only for "Color swatches" style — it's the swatch's hex code or a CSS gradient.
+            Upload photos from your computer. For "Color swatches" style, pick each photo's swatch color
+            yourself — otherwise we'll pick it up from the photo automatically.
         </p>
+        <input type="file" id="imageFileInput" accept="image/png,image/jpeg,image/webp,image/gif" class="hidden">
         <div id="imagesList" class="admin-images-list"></div>
 
-        <div class="admin-images-header">
-            <label>Sizes &amp; stock</label>
-            <button type="button" id="addSizeBtn" class="btn-ghost btn-small">+ Add size</button>
+        <div id="sizesSection">
+            <div class="admin-images-header">
+                <label>Sizes &amp; stock</label>
+                <button type="button" id="addSizeBtn" class="btn-ghost btn-small">+ Add size</button>
+            </div>
+            <p class="admin-hint">
+                Add a row per size you carry with how many are in stock. Customers see this count when they tap
+                that size. The size options change automatically to match the category above.
+            </p>
+            <div id="sizesList" class="admin-sizes-list"></div>
         </div>
-        <p class="admin-hint">
-            Add a row per size you carry with how many are in stock. Customers see this count when they tap that size.
-            Leave empty for one-size items (hats, accessories) — no size picker will show.
-        </p>
-        <div id="sizesList" class="admin-sizes-list"></div>
+        <p class="admin-hint" id="noSizesHint">This category is one-size — no size picker will show on the storefront.</p>
 
         <p id="formError" class="admin-error" role="alert"></p>
 
