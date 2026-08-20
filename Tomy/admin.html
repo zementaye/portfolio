@@ -125,6 +125,18 @@
             </div>
         </div>
 
+        <div id="discountPercentRow" class="admin-field-row hidden">
+            <div>
+                <label for="fieldDiscountPercent">Discount badge % to show customers</label>
+                <input type="number" id="fieldDiscountPercent" min="1" max="99" step="1" placeholder="e.g. 20">
+                <p class="admin-field-hint">
+                    The price didn't go down, so there's no real % off to calculate. Set one here if you
+                    still want a "-X% OFF" badge on the storefront — it's just for display and won't
+                    change what the customer pays.
+                </p>
+            </div>
+        </div>
+
         <label class="admin-checkbox">
             <input type="checkbox" id="fieldFeatured">
             Show on homepage "Featured Products"

@@ -21,8 +21,11 @@ All product-writing endpoints require the admin token returned by /api/login.
 """
 
 import os
+import time
+from collections import defaultdict, deque
 from datetime import datetime, timezone
 
+import requests
 from bson import ObjectId
 from bson.errors import InvalidId
 from flask import Flask, request, jsonify
@@ -42,13 +45,33 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-change-me")
 FRONTEND_ORIGIN = os.environ.get("FRONTEND_ORIGIN", "*")  # tighten in production
 TOKEN_MAX_AGE_SECONDS = 60 * 60 * 12  # 12 hour admin session
 
+# Customer-support chat (Gemini). Use a NEW key here, separate from any other
+# project's Gemini key — keeps quota/billing isolated per project.
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-flash-latest")
+GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
+
 if not MONGODB_URI:
     print("WARNING: MONGODB_URI is not set. Set it before going live.")
 if not ADMIN_PASSWORD:
     print("WARNING: ADMIN_PASSWORD is not set. /api/login will reject everyone.")
+if not GEMINI_API_KEY:
+    print("WARNING: GEMINI_API_KEY is not set. /api/chat will return a friendly error until it is.")
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": FRONTEND_ORIGIN}})
+
+
+@app.after_request
+def add_no_cache_headers(response):
+    # This is a pure JSON API that should always reflect what's in Mongo
+    # right now — e.g. an admin price edit should show up on the storefront
+    # on the very next load. Some browsers/proxies will opportunistically
+    # cache a GET with no explicit cache header, which is exactly the kind
+    # of "I changed it but the site still shows the old value" bug this
+    # heads off.
+    response.headers["Cache-Control"] = "no-store, must-revalidate"
+    return response
 
 signer = URLSafeTimedSerializer(SECRET_KEY, salt="tomy-admin")
 
@@ -124,6 +147,22 @@ def validate_product_payload(data, partial=False):
             except (TypeError, ValueError):
                 return None, "Old price must be a positive number"
 
+    if "discountPercent" in data:
+        # Manual/"fake" discount badge for when the price didn't actually go
+        # down (see build note on the /api/products response) — display-only,
+        # never affects the real price the customer pays.
+        discount_percent = data.get("discountPercent")
+        if discount_percent in ("", None):
+            cleaned["discountPercent"] = None
+        else:
+            try:
+                discount_percent = float(discount_percent)
+                if not (0 < discount_percent < 100):
+                    raise ValueError
+                cleaned["discountPercent"] = discount_percent
+            except (TypeError, ValueError):
+                return None, "Discount % must be a number between 1 and 99"
+
     if "featured" in data:
         cleaned["featured"] = bool(data.get("featured"))
 
@@ -181,8 +220,129 @@ def db_ready():
 
 
 # ---------------------------------------------------------------------------
-# Routes
+# Customer-support chat (Gemini, grounded in the live product catalog)
 # ---------------------------------------------------------------------------
+
+STORE_INFO = """
+Tomi Fashion — streetwear boutique, Addis Ababa.
+Locations: 22 Town Square Mall 310, Addis Ababa · Bisrate Gebriel Adot ground 21, Addis Ababa
+Hours: Open 9AM-9PM daily
+WhatsApp / phone orders: +251 9 12 47 22 55
+""".strip()
+
+CHAT_SYSTEM_PROMPT_TEMPLATE = """You are the customer support assistant for Tomi Fashion, a streetwear boutique in Addis Ababa, chatting with a shopper on the website.
+
+Store info:
+{store_info}
+
+Current catalog (name — category — price — sizes & stock; "one size" means it isn't size-tracked; a size showing "0 in stock" is sold out):
+{catalog}
+
+Rules:
+- Only talk about products that are actually in the catalog above. Never invent products, prices, or stock numbers.
+- If asked whether something is in stock, or in a specific size, answer exactly from the catalog. A size with 0 in stock is sold out — say so plainly. A size not listed for that item isn't offered.
+- You cannot place an order yourself. To buy, tell the shopper to add the item to their bag on the site and check out through the WhatsApp order button.
+- If you don't know something this data doesn't cover (exact delivery times, returns policy, etc.), say so honestly and point them to WhatsApp: +251 9 12 47 22 55.
+- Keep replies short (1-4 sentences) and conversational, like a helpful shop assistant texting back — no headers, no bullet-point walls of text.
+"""
+
+_chat_rate_limit = defaultdict(deque)
+CHAT_RATE_LIMIT_MAX = 20
+CHAT_RATE_LIMIT_WINDOW_SECONDS = 600  # 20 messages per 10 minutes per IP
+
+
+def check_rate_limit(key):
+    now = time.time()
+    bucket = _chat_rate_limit[key]
+    while bucket and now - bucket[0] > CHAT_RATE_LIMIT_WINDOW_SECONDS:
+        bucket.popleft()
+    if len(bucket) >= CHAT_RATE_LIMIT_MAX:
+        return False
+    bucket.append(now)
+    return True
+
+
+def build_catalog_context(limit=150):
+    if not db_ready():
+        return "(catalog unavailable right now)"
+    try:
+        docs = list(
+            products_col.find({}, {"name": 1, "category": 1, "price": 1, "sizes": 1}).limit(limit)
+        )
+    except PyMongoError:
+        return "(catalog unavailable right now)"
+
+    lines = []
+    for d in docs:
+        name = d.get("name", "Unknown")
+        category = d.get("category", "")
+        price = d.get("price")
+        price_str = f"{int(price):,} Birr" if isinstance(price, (int, float)) else "price n/a"
+        sizes = d.get("sizes") or []
+        if sizes:
+            size_str = ", ".join(f"{s.get('size')}: {s.get('stock', 0)} in stock" for s in sizes)
+        else:
+            size_str = "one size"
+        lines.append(f"- {name} ({category}) — {price_str} — {size_str}")
+    return "\n".join(lines) if lines else "(no products in the catalog yet)"
+
+
+@app.route("/api/chat", methods=["POST"])
+def chat():
+    if not GEMINI_API_KEY:
+        return jsonify({"error": "Chat isn't set up yet — ask the store to configure it."}), 503
+
+    client_ip = request.headers.get("X-Forwarded-For", request.remote_addr or "unknown").split(",")[0].strip()
+    if not check_rate_limit(client_ip):
+        return jsonify({"error": "You're sending messages a little fast — give it a moment and try again."}), 429
+
+    data = request.get_json(silent=True) or {}
+    message = (data.get("message") or "").strip()
+    history = data.get("history") or []
+
+    if not message:
+        return jsonify({"error": "Message is required"}), 400
+    if len(message) > 1000:
+        return jsonify({"error": "That message is a bit long — try shortening it."}), 400
+    if not isinstance(history, list) or len(history) > 30:
+        return jsonify({"error": "Invalid conversation history"}), 400
+
+    system_prompt = CHAT_SYSTEM_PROMPT_TEMPLATE.format(
+        store_info=STORE_INFO, catalog=build_catalog_context()
+    )
+
+    contents = []
+    for turn in history[-12:]:
+        role = turn.get("role") if isinstance(turn, dict) else None
+        text = (turn.get("text") or "").strip() if isinstance(turn, dict) else ""
+        if role not in ("user", "model") or not text:
+            continue
+        contents.append({"role": role, "parts": [{"text": text[:1000]}]})
+    contents.append({"role": "user", "parts": [{"text": message}]})
+
+    payload = {
+        "system_instruction": {"parts": [{"text": system_prompt}]},
+        "contents": contents,
+        "generationConfig": {"temperature": 0.4, "maxOutputTokens": 300},
+    }
+
+    try:
+        resp = requests.post(GEMINI_URL, params={"key": GEMINI_API_KEY}, json=payload, timeout=20)
+        resp.raise_for_status()
+        result = resp.json()
+    except requests.exceptions.RequestException:
+        return jsonify({"error": "The assistant is temporarily unavailable — please try again shortly."}), 502
+
+    candidates = result.get("candidates") or []
+    if not candidates:
+        return jsonify({"error": "The assistant didn't return a response — please try again."}), 502
+    parts = candidates[0].get("content", {}).get("parts", [])
+    reply = "".join(p.get("text", "") for p in parts).strip()
+    if not reply:
+        return jsonify({"error": "The assistant didn't return a response — please try again."}), 502
+
+    return jsonify({"reply": reply})
+
 
 @app.route("/api/health", methods=["GET"])
 def health():
@@ -252,6 +412,7 @@ def create_product():
         return jsonify({"error": err}), 400
 
     cleaned.setdefault("oldPrice", None)
+    cleaned.setdefault("discountPercent", None)
     cleaned.setdefault("featured", False)
     cleaned.setdefault("sizes", [])
     cleaned["createdAt"] = datetime.now(timezone.utc)

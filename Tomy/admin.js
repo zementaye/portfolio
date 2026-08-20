@@ -35,6 +35,11 @@ const addImageBtn = document.getElementById("addImageBtn");
 const sizesList = document.getElementById("sizesList");
 const addSizeBtn = document.getElementById("addSizeBtn");
 
+const fieldPrice = document.getElementById("fieldPrice");
+const fieldOldPrice = document.getElementById("fieldOldPrice");
+const fieldDiscountPercent = document.getElementById("fieldDiscountPercent");
+const discountPercentRow = document.getElementById("discountPercentRow");
+
 // ---------- Auth helpers ----------
 function getToken() {
   return localStorage.getItem(TOKEN_KEY);
@@ -232,6 +237,7 @@ function openEditor(product) {
     document.getElementById("fieldType").value = product.type || "simple";
     document.getElementById("fieldPrice").value = product.price;
     document.getElementById("fieldOldPrice").value = product.oldPrice || "";
+    fieldDiscountPercent.value = product.discountPercent || "";
     document.getElementById("fieldFeatured").checked = !!product.featured;
     (product.images || []).forEach((img) => addImageRow(img.url, img.color));
     (product.sizes || []).forEach((s) => addSizeRow(s.size, s.stock));
@@ -242,8 +248,23 @@ function openEditor(product) {
     addImageRow();
   }
 
+  updateDiscountPercentVisibility();
   editorOverlay.classList.remove("hidden");
 }
+
+// The manual "% off" badge only makes sense once the real price-vs-oldPrice
+// math *can't* produce a genuine discount — otherwise the real math wins
+// (see productCardHTML in products-api.js), so hide the field rather than
+// let the admin fill in something that'll be silently ignored.
+function updateDiscountPercentVisibility() {
+  const price = Number(fieldPrice.value);
+  const oldPrice = fieldOldPrice.value ? Number(fieldOldPrice.value) : null;
+  const hasRealDiscount = !!(oldPrice && price > 0 && oldPrice > price);
+  discountPercentRow.classList.toggle("hidden", hasRealDiscount);
+  if (hasRealDiscount) fieldDiscountPercent.value = "";
+}
+fieldPrice.addEventListener("input", updateDiscountPercentVisibility);
+fieldOldPrice.addEventListener("input", updateDiscountPercentVisibility);
 
 function closeEditor() {
   editorOverlay.classList.add("hidden");
@@ -270,6 +291,10 @@ productForm.addEventListener("submit", async (e) => {
     oldPrice: document.getElementById("fieldOldPrice").value
       ? Number(document.getElementById("fieldOldPrice").value)
       : null,
+    discountPercent:
+      !discountPercentRow.classList.contains("hidden") && fieldDiscountPercent.value
+        ? Number(fieldDiscountPercent.value)
+        : null,
     featured: document.getElementById("fieldFeatured").checked,
     images: collectImages(),
     sizes: collectSizes(),

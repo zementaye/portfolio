@@ -49,13 +49,27 @@ function productCardHTML(p) {
   }
 
   let priceHTML = `<p>${formatBirr(p.price)}</p>`;
-  if (p.oldPrice && p.oldPrice > p.price) {
+  if (p.oldPrice && p.price > 0 && p.oldPrice > p.price) {
+    // Real discount — the price actually went down, so the math speaks for itself.
     const discount = Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100);
     priceHTML = `
       <div class="price-row">
         <span class="price-now">${formatBirr(p.price)}</span>
         <span class="price-was">${formatBirr(p.oldPrice)}</span>
         <span class="discount-badge">-${discount}%</span>
+      </div>`;
+  } else if (p.discountPercent && p.discountPercent > 0 && p.discountPercent < 100) {
+    // Price didn't go down (or there's no oldPrice at all) — admin chose a
+    // display-only % instead. Back-calculate a "was" price from that % so
+    // the strikethrough price and the badge stay consistent with each
+    // other — showing the real (higher) oldPrice here would read as a bug,
+    // e.g. "was 5,000, now 6,000, -15% off".
+    const fakeWasPrice = p.price / (1 - p.discountPercent / 100);
+    priceHTML = `
+      <div class="price-row">
+        <span class="price-now">${formatBirr(p.price)}</span>
+        <span class="price-was">${formatBirr(Math.round(fakeWasPrice))}</span>
+        <span class="discount-badge">-${Math.round(p.discountPercent)}%</span>
       </div>`;
   }
 
@@ -75,13 +89,18 @@ function wireUpCard(card) {
   const colors = card.querySelectorAll(".color");
   colors.forEach((color) => {
     color.addEventListener("click", () => {
+      if (color.classList.contains("active")) return; // already showing this one
       mainImage.style.opacity = "0";
+      // 300ms matches .product-image img's `opacity 0.3s` transition in
+      // tomy-fashion.css — swap the photo AND the active swatch ring at the
+      // exact same moment (once fully faded out), instead of flipping the
+      // ring instantly while the photo is still catching up.
       setTimeout(() => {
         mainImage.src = color.dataset.image;
         mainImage.style.opacity = "1";
-      }, 150);
-      colors.forEach((c) => c.classList.remove("active"));
-      color.classList.add("active");
+        colors.forEach((c) => c.classList.remove("active"));
+        color.classList.add("active");
+      }, 300);
     });
   });
 
