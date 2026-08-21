@@ -2,28 +2,30 @@
    TOMI FASHION — Streetwear boutique, Addis Ababa
    Design tokens
    ========================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root{
-    /* color */
-    --jet:        #0a0a0b;   /* near-black — nav, footer, dark sections */
-    --ink:        #16161a;   /* body text */
-    --paper:      #faf9f7;   /* page background */
-    --panel:      #f1efea;   /* alt section / card background */
-    --line:       #e4e1da;   /* hairline borders */
-    --slate:      #6c6c72;   /* secondary text */
-    --signal:     #8b5cf6;   /* signal purple — the one accent */
+    /* color — warm, editorial: ivory paper, espresso ink, terracotta accent */
+    --jet:        #2b241f;   /* warm espresso — nav, footer, dark sections */
+    --ink:        #2a231f;   /* body text */
+    --paper:      #f8f1e6;   /* page background */
+    --panel:      #efe3d0;   /* alt section / card background */
+    --line:       #ddceb6;   /* hairline borders */
+    --slate:      #7a6f60;   /* secondary text */
+    --signal:     #b5603d;   /* signal terracotta — the one accent */
+    --signal-rgb: 181,96,61; /* same accent, as r,g,b for rgba() use */
     --signal-ink: #ffffff;   /* text on signal */
-    --signal-tint:#ece3fd;   /* pale purple tint */
+    --signal-tint:#f3e2d5;   /* pale terracotta tint */
+    --jet-rgb:    43,36,31;  /* --jet as r,g,b for rgba() overlays */
 
-    /* type */
-    --font-display: 'Archivo Black', 'Arial Black', sans-serif;
+    /* type — serif display for an editorial/boutique feel, clean sans body */
+    --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
     --font-body: 'Inter', Arial, sans-serif;
-    --font-mono: 'Space Mono', 'Courier New', monospace;
+    --font-mono: 'Inter', Arial, sans-serif;
 
     /* layout */
-    --radius: 14px;
-    --radius-sm: 8px;
+    --radius: 16px;
+    --radius-sm: 9px;
     --container: 1240px;
     --gutter: clamp(20px, 5vw, 64px);
 }
@@ -43,7 +45,7 @@ body{
 img{ display:block; max-width:100%; }
 a{ color:inherit; }
 
-h1,h2,h3{ font-family: var(--font-display); font-weight:400; line-height:1.05; letter-spacing:-0.01em; }
+h1,h2,h3{ font-family: var(--font-display); font-weight:600; line-height:1.08; letter-spacing:-0.01em; }
 
 ::selection{ background: var(--signal); color:#fff; }
 
@@ -61,7 +63,7 @@ h1,h2,h3{ font-family: var(--font-display); font-weight:400; line-height:1.05; l
     background:
         repeating-linear-gradient(135deg,
             var(--jet) 0px, var(--jet) 22px,
-            #1c1c1f 22px, #1c1c1f 24px);
+            #453a2e 22px, #453a2e 24px);
     color:#fff;
     overflow:hidden;
     white-space:nowrap;
@@ -89,7 +91,7 @@ h1,h2,h3{ font-family: var(--font-display); font-weight:400; line-height:1.05; l
    HEADER / NAV
    ========================================================= */
 header{
-    background: rgba(10,10,11,0.88);
+    background: rgba(var(--jet-rgb),0.88);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 20px var(--gutter);
@@ -101,7 +103,7 @@ header{
 }
 header.is-scrolled{
     padding: 12px var(--gutter);
-    background: rgba(10,10,11,0.97);
+    background: rgba(var(--jet-rgb),0.97);
     box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 
@@ -165,7 +167,7 @@ header.is-scrolled{
 .nav-links a{
     position:relative;
     text-decoration:none;
-    color:#c7c7cc;
+    color:#cabfae;
     font-family: var(--font-mono);
     font-size:12px;
     letter-spacing:0.08em;
@@ -230,7 +232,7 @@ header.is-scrolled{
     content:"";
     position:absolute;
     inset:0;
-    background: linear-gradient(100deg, rgba(6,6,7,0.92) 0%, rgba(10,10,11,0.55) 48%, rgba(10,10,11,0.25) 100%);
+    background: linear-gradient(100deg, rgba(var(--jet-rgb),0.92) 0%, rgba(var(--jet-rgb),0.55) 48%, rgba(var(--jet-rgb),0.25) 100%);
 }
 
 .hero::after{
@@ -264,8 +266,8 @@ header.is-scrolled{
     letter-spacing:0.14em;
     text-transform:uppercase;
     color: var(--signal);
-    background: rgba(139,92,246,0.14);
-    border: 1px solid rgba(139,92,246,0.45);
+    background: rgba(var(--signal-rgb),0.14);
+    border: 1px solid rgba(var(--signal-rgb),0.45);
     padding: 7px 14px;
     border-radius: 999px;
     margin-bottom: 22px;
@@ -279,7 +281,7 @@ header.is-scrolled{
 .hero-content .lede{
     margin-top:18px;
     font-size: 17px;
-    color: #d8d8da;
+    color: #d9cbb4;
     max-width: 460px;
 }
 
@@ -302,10 +304,10 @@ header.is-scrolled{
     text-transform:uppercase;
     border-radius:999px;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 10px 26px rgba(139,92,246,0.28);
+    box-shadow: 0 10px 26px rgba(var(--signal-rgb),0.28);
 }
 
-.btn:hover{ transform: translateY(-3px); box-shadow: 0 14px 32px rgba(139,92,246,0.4); }
+.btn:hover{ transform: translateY(-3px); box-shadow: 0 14px 32px rgba(var(--signal-rgb),0.4); }
 
 .btn-ghost{
     display:inline-block;
@@ -339,7 +341,7 @@ header.is-scrolled{
    CATEGORIES
    ========================================================= */
 .categories{
-    padding: 90px var(--gutter);
+    padding: 112px var(--gutter);
     text-align:center;
     background: var(--paper);
 }
@@ -350,7 +352,7 @@ header.is-scrolled{
 }
 
 .category-grid{
-    margin-top:46px;
+    margin-top:52px;
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap:22px;
@@ -376,12 +378,12 @@ header.is-scrolled{
     content:"";
     position:absolute;
     inset:0;
-    background: linear-gradient(180deg, rgba(10,10,11,0.05) 40%, rgba(10,10,11,0.82) 100%);
+    background: linear-gradient(180deg, rgba(var(--jet-rgb),0.05) 40%, rgba(var(--jet-rgb),0.82) 100%);
     transition: 0.4s ease;
 }
 
 .category-card:hover{ transform: scale(1.035); }
-.category-card:hover::before{ background: linear-gradient(180deg, rgba(10,10,11,0.15) 30%, rgba(10,10,11,0.9) 100%); }
+.category-card:hover::before{ background: linear-gradient(180deg, rgba(var(--jet-rgb),0.15) 30%, rgba(var(--jet-rgb),0.9) 100%); }
 
 .category-overlay{
     position:relative;
@@ -406,7 +408,7 @@ header.is-scrolled{
     font-family: var(--font-mono);
     font-size:12px;
     margin-top:6px;
-    color: #d8d8da;
+    color: #d9cbb4;
 }
 
 .category-card::after{
@@ -467,7 +469,7 @@ header.is-scrolled{
     margin-top:12px;
     font-family: var(--font-mono);
     font-size:13px;
-    color:#e6e6e7;
+    color:#e6dcc8;
     letter-spacing:0.03em;
 }
 
@@ -475,7 +477,7 @@ header.is-scrolled{
    PRODUCTS
    ========================================================= */
 .products{
-    padding: 90px var(--gutter);
+    padding: 112px var(--gutter);
     text-align:center;
     background: var(--panel);
 }
@@ -533,7 +535,7 @@ header.is-scrolled{
 
 .product-card:hover{
     transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(10,10,11,0.1);
+    box-shadow: 0 20px 40px rgba(var(--jet-rgb),0.1);
 }
 
 .product-card img{
@@ -605,30 +607,33 @@ header.is-scrolled{
 
 .color-options{
     position:absolute;
-    bottom:14px;
+    bottom:12px;
     left:50%;
     transform: translateX(-50%);
     display:flex;
-    gap:10px;
-    opacity:0;
-    transition: opacity 0.3s ease;
+    gap:8px;
+    padding:6px 8px;
+    background: rgba(255,255,255,0.88);
+    border-radius:999px;
+    box-shadow: 0 4px 14px rgba(var(--jet-rgb),0.12);
 }
-
-.product-card:hover .color-options{ opacity:1; }
 
 .color{
     border:2px solid #fff;
-    box-shadow: 0 0 0 1px var(--jet);
-    width:18px;
-    height:18px;
+    box-shadow: 0 0 0 1px var(--line);
+    width:20px;
+    height:20px;
     border-radius:50%;
     cursor:pointer;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.color:hover{ transform: scale(1.2); }
+.color:hover{ transform: scale(1.15); }
 
-.color.active{ box-shadow: 0 0 0 2px var(--signal); }
+.color.active{
+    box-shadow: 0 0 0 2px var(--signal);
+    transform: scale(1.1);
+}
 
 .color-brown-olive{
     background: linear-gradient(135deg, #4b2e2b 48%, #e5e5e5 49%, #e5e5e5 51%, #7a7d3a 52%);
@@ -653,25 +658,37 @@ header.is-scrolled{
 }
 .slide.active{ left:0; }
 
-.arrow{
+/* Same specificity trap documented above for .wishlist-btn/.quickview-btn:
+   a bare `.arrow` class (0,1,0) loses to `.product-card button` (0,1,1),
+   which is why this used to render as a full-width Add-to-Cart-style bar
+   instead of a small round nav button. Scoping under `.product-card` fixes it. */
+.product-card .arrow{
     position:absolute;
     top:50%;
+    left:auto;
     transform: translateY(-50%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0;
     background:#fff;
     color: var(--jet);
     border:none;
     width:34px; height:34px;
+    padding:0;
     border-radius:50%;
     cursor:pointer;
     font-size:16px;
+    text-transform:none;
+    letter-spacing:normal;
     opacity:0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition:0.3s ease;
+    box-shadow: 0 4px 12px rgba(var(--jet-rgb),0.15);
+    transition: background 0.2s ease, color 0.2s ease, opacity 0.3s ease;
 }
-.slider:hover .arrow{ opacity:1; }
-.arrow.left{ left:10px; }
-.arrow.right{ right:10px; }
-.arrow:hover{ background: var(--signal); color:#fff; }
+.product-card .slider:hover .arrow{ opacity:1; }
+.product-card .arrow.left{ left:10px; right:auto; }
+.product-card .arrow.right{ right:10px; }
+.product-card .arrow:hover{ background: var(--signal); color:#fff; }
 
 /* =========================================================
    PROMO — diagonal stripe banner (signature reuse)
@@ -691,7 +708,7 @@ header.is-scrolled{
     inset:0;
     background: repeating-linear-gradient(135deg,
         transparent 0px, transparent 46px,
-        rgba(139,92,246,0.12) 46px, rgba(139,92,246,0.12) 48px);
+        rgba(var(--signal-rgb),0.12) 46px, rgba(var(--signal-rgb),0.12) 48px);
     pointer-events:none;
 }
 
@@ -708,7 +725,7 @@ header.is-scrolled{
     font-family: var(--font-mono);
     font-size:13px;
     letter-spacing:0.04em;
-    color:#d8d8da;
+    color:#d9cbb4;
 }
 
 .btn-dark{
@@ -729,7 +746,7 @@ header.is-scrolled{
    ABOUT
    ========================================================= */
 .about{
-    padding: 90px var(--gutter);
+    padding: 112px var(--gutter);
     max-width: var(--container);
     margin: 0 auto;
     display:grid;
@@ -774,7 +791,7 @@ header.is-scrolled{
    ========================================================= */
 .newsletter{
     text-align:center;
-    padding: 80px 20px;
+    padding: 100px 24px;
     background: var(--panel);
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
@@ -860,7 +877,7 @@ footer{
 
 footer p{
     margin-top:8px;
-    color:#c9c9cb;
+    color:#d3c6ae;
     font-size:14px;
 }
 
@@ -868,7 +885,7 @@ footer p{
     text-align:center;
     font-family: var(--font-mono);
     font-size:12px;
-    color:#8a8a8d;
+    color:#a3937d;
     padding-top:22px;
     border-top:1px solid rgba(255,255,255,0.1);
     max-width: var(--container);
@@ -919,7 +936,7 @@ footer p{
    toast (cart.js). Cart and wishlist share the same visual
    system via .tomi-overlay / .tomi-drawer.
    ========================================================= */
-#tomiCartFab, #tomiWishFab{
+#tomiCartFab, #tomiWishFab, #tomiChatFab{
     position: fixed;
     right: 22px;
     z-index: 200;
@@ -934,13 +951,24 @@ footer p{
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    box-shadow: 0 12px 28px rgba(10,10,11,0.35);
-    transition: transform 0.2s ease;
+    box-shadow: 0 12px 28px rgba(var(--jet-rgb),0.35);
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 #tomiCartFab{ bottom: 22px; }
 #tomiWishFab{ bottom: 92px; }
-#tomiCartFab:hover, #tomiWishFab:hover{ transform: translateY(-3px); }
-#tomiCartFab.pulse, #tomiWishFab.pulse{ animation: tomiFabPulse 0.5s ease; }
+#tomiChatFab{ bottom: 162px; background: var(--signal); }
+#tomiCartFab:hover, #tomiWishFab:hover, #tomiChatFab:hover{ transform: translateY(-3px); }
+#tomiCartFab.pulse, #tomiWishFab.pulse, #tomiChatFab.pulse{ animation: tomiFabPulse 0.5s ease; }
+/* Any drawer (cart / wishlist / chat) covers the same right-hand slot the
+   FABs sit in — hide them while a panel is open so they can't float on top
+   of and intercept clicks meant for the panel underneath. */
+body.tomi-panel-open #tomiCartFab,
+body.tomi-panel-open #tomiWishFab,
+body.tomi-panel-open #tomiChatFab{
+    opacity:0;
+    pointer-events:none;
+    transform: translateY(8px);
+}
 @keyframes tomiFabPulse{
     0%{ transform: scale(1); }
     40%{ transform: scale(1.18); }
@@ -967,7 +995,7 @@ footer p{
 .tomi-overlay{
     position:fixed;
     inset:0;
-    background: rgba(10,10,11,0.5);
+    background: rgba(var(--jet-rgb),0.5);
     opacity:0;
     pointer-events:none;
     transition: opacity 0.3s ease;
@@ -985,7 +1013,7 @@ footer p{
     display:flex;
     flex-direction:column;
     transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
-    box-shadow: -20px 0 50px rgba(10,10,11,0.25);
+    box-shadow: -20px 0 50px rgba(var(--jet-rgb),0.25);
 }
 .tomi-drawer-right{ right:0; transform: translateX(100%); }
 .tomi-drawer-right.open{ transform: translateX(0); }
@@ -1059,6 +1087,7 @@ footer p{
     line-height:1;
 }
 .tomi-qty span{ font-family: var(--font-mono); font-size:13px; min-width:14px; text-align:center; }
+.tomi-qty button:disabled{ opacity:0.35; cursor:not-allowed; }
 
 .tomi-cart-remove{
     background:none;
@@ -1130,18 +1159,17 @@ footer p{
     border:none;
     background: rgba(255,255,255,0.9);
     color: var(--ink);
-    font-size:24px;
-    line-height:1;
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
     z-index:3;
-    box-shadow: 0 4px 10px rgba(10,10,11,0.15);
+    box-shadow: 0 4px 10px rgba(var(--jet-rgb),0.15);
     transition: color 0.2s ease, transform 0.2s ease;
 }
 .product-card .wishlist-btn:hover{ transform: scale(1.08); }
-/* default = hollow heart (♡), active = filled heart (♥) in red — icon glyph is swapped in JS */
+/* same heart shape in both states (see heartIcon() in cart.js) — only the
+   fill and color change between saved / not saved */
 .product-card .wishlist-btn.active{ color: #e0272d; }
 
 .product-card .quickview-btn{
@@ -1160,7 +1188,7 @@ footer p{
     justify-content:center;
     cursor:pointer;
     z-index:3;
-    box-shadow: 0 4px 10px rgba(10,10,11,0.15);
+    box-shadow: 0 4px 10px rgba(var(--jet-rgb),0.15);
     transition: transform 0.2s ease;
 }
 .product-card .quickview-btn:hover{ transform: scale(1.08); }
@@ -1208,6 +1236,10 @@ footer p{
     position:static;
     width:auto;
     height:auto;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
     border-radius:999px;
     background:#fff;
     border:1px solid var(--line);
@@ -1238,7 +1270,7 @@ footer p{
     opacity:0;
     pointer-events:none;
     transition: opacity 0.25s ease, transform 0.25s ease;
-    box-shadow: 0 30px 80px rgba(10,10,11,0.35);
+    box-shadow: 0 30px 80px rgba(var(--jet-rgb),0.35);
 }
 #tomiQVModal.open{ opacity:1; pointer-events:auto; transform: translate(-50%, -50%) scale(1); }
 
@@ -1311,6 +1343,14 @@ footer p{
     cursor:pointer;
 }
 .tomi-qv-qty span{ font-family: var(--font-mono); min-width:16px; text-align:center; }
+.tomi-qv-qty button:disabled{ opacity:0.35; cursor:not-allowed; }
+.tomi-qv-qty-note{
+    width:100%;
+    font-family: var(--font-mono);
+    font-size:11px;
+    color: var(--slate);
+    margin-top:6px;
+}
 
 .btn-dark-full{
     display:block;
@@ -1327,6 +1367,108 @@ footer p{
     .tomi-qv-details{ padding:26px 22px 30px; }
 }
 
+/* ---------- AI support chat (support-chat.js) ---------- */
+.tomi-chat-messages{
+    flex:1;
+    overflow-y:auto;
+    padding: 18px 22px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+.tomi-chat-msg{
+    max-width: 82%;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.tomi-chat-msg.assistant{
+    align-self:flex-start;
+    background: var(--panel);
+    color: var(--ink);
+    border-bottom-left-radius:4px;
+}
+.tomi-chat-msg.user{
+    align-self:flex-end;
+    background: var(--signal);
+    color: var(--signal-ink);
+    border-bottom-right-radius:4px;
+}
+.tomi-chat-msg.typing{
+    display:flex;
+    gap:4px;
+    align-items:center;
+    padding:12px 16px;
+}
+.tomi-chat-msg.typing span{
+    width:6px; height:6px;
+    border-radius:50%;
+    background: var(--slate);
+    display:inline-block;
+    animation: tomiTypingDot 1.2s infinite ease-in-out;
+}
+.tomi-chat-msg.typing span:nth-child(2){ animation-delay:0.2s; }
+.tomi-chat-msg.typing span:nth-child(3){ animation-delay:0.4s; }
+@keyframes tomiTypingDot{
+    0%, 60%, 100%{ transform: translateY(0); opacity:0.4; }
+    30%{ transform: translateY(-4px); opacity:1; }
+}
+.tomi-chat-suggestions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding: 0 22px 14px;
+}
+.tomi-chat-chip{
+    background:#fff;
+    border:1px solid var(--line);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size:12px;
+    padding:7px 13px;
+    border-radius:999px;
+    cursor:pointer;
+    transition: border-color 0.2s ease;
+}
+.tomi-chat-chip:hover{ border-color: var(--signal); }
+.tomi-chat-form{
+    display:flex;
+    gap:10px;
+    padding: 14px 22px 20px;
+    border-top:1px solid var(--line);
+}
+.tomi-chat-form input{
+    flex:1;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:11px 16px;
+    font-family: var(--font-body);
+    font-size:13.5px;
+    outline:none;
+    background:#fff;
+    color: var(--ink);
+}
+.tomi-chat-form input:focus{ border-color: var(--signal); }
+.tomi-chat-form button{
+    width:42px; height:42px;
+    border-radius:50%;
+    border:none;
+    background: var(--signal);
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition: transform 0.15s ease;
+}
+.tomi-chat-form button:hover{ transform: scale(1.05); }
+.tomi-chat-form button:disabled{ opacity:0.5; cursor:not-allowed; transform:none; }
+
 /* ---------- toast ---------- */
 #tomiToast{
     position:fixed;
@@ -1336,7 +1478,7 @@ footer p{
     background:#fff;
     border:1px solid var(--line);
     border-radius: var(--radius-sm);
-    box-shadow: 0 16px 36px rgba(10,10,11,0.2);
+    box-shadow: 0 16px 36px rgba(var(--jet-rgb),0.2);
     padding:12px;
     display:flex;
     align-items:center;
@@ -1395,7 +1537,7 @@ footer p{
     padding:40px 0;
 }
 .products-error{
-    color:#8b5cf6;
+    color: var(--signal);
 }
 
 /* =========================================================
@@ -1464,14 +1606,68 @@ footer p{
 .product-card .size-select.size-required button.size-pill, #tomiQVModal .size-select.size-required button.size-pill{ border-color: var(--signal); }
 
 .product-card .size-select button.size-pill.out-of-stock, #tomiQVModal .size-select button.size-pill.out-of-stock{
+    position: relative;
     background: var(--panel);
     color: var(--slate);
     border-color: var(--line);
     text-decoration: line-through;
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: 0.55;
 }
 .product-card .size-select button.size-pill.out-of-stock:hover, #tomiQVModal .size-select button.size-pill.out-of-stock:hover{ border-color: var(--line); }
+
+/* Tooltip on hover/focus for out-of-stock sizes — replaces the old
+   "just looks broken" strikethrough-with-no-explanation state. */
+.product-card .size-select button.size-pill.out-of-stock::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock::after{
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--jet);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    padding: 5px 9px;
+    border-radius: 6px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    z-index: 6;
+}
+.product-card .size-select button.size-pill.out-of-stock::before,
+#tomiQVModal .size-select button.size-pill.out-of-stock::before{
+    content: "";
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: var(--jet);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease;
+    z-index: 6;
+}
+.product-card .size-select button.size-pill.out-of-stock:hover::after,
+.product-card .size-select button.size-pill.out-of-stock:focus-visible::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:hover::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:focus-visible::after{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+.product-card .size-select button.size-pill.out-of-stock:hover::before,
+.product-card .size-select button.size-pill.out-of-stock:focus-visible::before,
+#tomiQVModal .size-select button.size-pill.out-of-stock:hover::before,
+#tomiQVModal .size-select button.size-pill.out-of-stock:focus-visible::before{
+    opacity: 1;
+    visibility: visible;
+}
 
 .product-card .size-select .stock-note, #tomiQVModal .size-select .stock-note{
     width: 100%;

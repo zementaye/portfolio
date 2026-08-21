@@ -30,7 +30,16 @@
     }
     function money(n) { return n.toLocaleString("en-US") + " Birr"; }
     /* hollow heart when not saved, filled red heart when saved (see .wishlist-btn.active in css) */
-    function heartIcon(active) { return active ? "\u2665" : "\u2661"; }
+    /* Same heart outline for both states — only the fill toggles — so
+       "saved" doesn't jump to a visually different glyph (which is what
+       happened when this swapped between the ♡/♥ Unicode characters,
+       since those are two unrelated glyphs, not a stroke/fill pair). */
+    function heartIcon(active) {
+        return '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">' +
+            '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" ' +
+            'fill="' + (active ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>' +
+            "</svg>";
+    }
 
     /* ---------- focus management for drawers/modal (a11y) ---------- */
     let lastFocusedEl = null;
@@ -131,7 +140,13 @@
         const soldOut = s.stock === 0;
         const cls = "size-pill" + (isActive ? " active" : "") + (soldOut ? " out-of-stock" : "");
         const stockAttr = (s.stock === null || s.stock === undefined) ? "" : ' data-stock="' + s.stock + '"';
-        return '<button type="button" class="' + cls + '" data-size="' + s.size + '"' + stockAttr + (soldOut ? " disabled" : "") + '>' + s.size + '</button>';
+        // Note: aria-disabled (not the disabled attribute) on purpose — a truly
+        // disabled button can't receive hover/focus reliably in every browser,
+        // which is exactly what we need for the "Out of Stock" tooltip below.
+        // The click handlers already no-op on .out-of-stock regardless.
+        return '<button type="button" class="' + cls + '" data-size="' + s.size + '"' + stockAttr +
+            (soldOut ? ' aria-disabled="true" data-tooltip="Out of Stock"' : "") +
+            '>' + s.size + '</button>';
     }
 
     function updateStockNote(wrap, btn) {
@@ -146,21 +161,51 @@
     }
 
     /* ---------- cart ---------- */
+    /* How many more of this exact variant (id already encodes size) can go
+       in the bag, given what's already there. Untracked stock (null/undefined)
+       — accessories, hats, anything the admin catalog doesn't count — is
+       treated as unlimited. */
+    function maxAddable(item) {
+        if (item.stock === null || item.stock === undefined) return Infinity;
+        const existing = getCart().find(i => i.id === item.id);
+        const already = existing ? existing.qty : 0;
+        return Math.max(0, item.stock - already);
+    }
+
     function addItem(item, qty) {
         qty = qty || 1;
+        const cap = maxAddable(item);
+        if (cap <= 0) {
+            showMessageToast("That size is already at the most we have in stock.");
+            return;
+        }
+        const actualQty = Math.min(qty, cap);
         const cart = getCart();
         const existing = cart.find(i => i.id === item.id);
-        if (existing) { existing.qty += qty; } else { cart.push(Object.assign({ qty: qty }, item)); }
+        if (existing) {
+            existing.qty += actualQty;
+            if (item.stock !== null && item.stock !== undefined) existing.stock = item.stock;
+        } else {
+            cart.push(Object.assign({ qty: actualQty }, item));
+        }
         saveCart(cart);
         renderDrawer();
-        showToast(item);
         pulseFab("tomiCartFab");
+        if (actualQty < qty) {
+            showMessageToast("Only " + actualQty + " added — that's all we have of that size in stock.");
+        } else {
+            showToast(item);
+        }
     }
 
     function changeQty(id, delta) {
         let cart = getCart();
         const item = cart.find(i => i.id === id);
         if (!item) return;
+        if (delta > 0 && item.stock !== null && item.stock !== undefined && item.qty >= item.stock) {
+            showMessageToast("Only " + item.stock + " in stock for this item.");
+            return;
+        }
         item.qty += delta;
         if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
         saveCart(cart);
@@ -225,20 +270,39 @@
         document.getElementById("tomiCartClose").addEventListener("click", closeDrawer);
     }
 
+    function syncPanelBodyClass() {
+        const anyOpen = ["tomiCartDrawer", "tomiWishDrawer", "tomiChatPanel"].some(function (id) {
+            const el = document.getElementById(id);
+            return el && el.classList.contains("open");
+        });
+        document.body.classList.toggle("tomi-panel-open", anyOpen);
+    }
+
     function openDrawer() {
         document.getElementById("tomiCartDrawer").classList.add("open");
         document.getElementById("tomiCartOverlay").classList.add("open");
         focusIntoPanel(document.getElementById("tomiCartDrawer"));
+        syncPanelBodyClass();
     }
     function closeDrawer() {
         const wasOpen = document.getElementById("tomiCartDrawer").classList.contains("open");
         document.getElementById("tomiCartDrawer").classList.remove("open");
         document.getElementById("tomiCartOverlay").classList.remove("open");
         if (wasOpen) returnFocus();
+        syncPanelBodyClass();
     }
     function toggleDrawer() {
         const open = document.getElementById("tomiCartDrawer").classList.contains("open");
-        if (open) closeDrawer(); else { closeWishDrawer(); renderDrawer(); openDrawer(); }
+        if (open) closeDrawer(); else { closeWishDrawer(); closeChatPanelIfOpen(); renderDrawer(); openDrawer(); }
+    }
+
+    // Chat lives in support-chat.js (a separate script) — reach across via
+    // DOM state only, no function coupling, so either file can load first.
+    function closeChatPanelIfOpen() {
+        const panel = document.getElementById("tomiChatPanel");
+        const overlay = document.getElementById("tomiChatOverlay");
+        if (panel) panel.classList.remove("open");
+        if (overlay) overlay.classList.remove("open");
     }
 
     function pulseFab(id) {
@@ -341,16 +405,18 @@
         document.getElementById("tomiWishDrawer").classList.add("open");
         document.getElementById("tomiWishOverlay").classList.add("open");
         focusIntoPanel(document.getElementById("tomiWishDrawer"));
+        syncPanelBodyClass();
     }
     function closeWishDrawer() {
         const wasOpen = document.getElementById("tomiWishDrawer").classList.contains("open");
         document.getElementById("tomiWishDrawer").classList.remove("open");
         document.getElementById("tomiWishOverlay").classList.remove("open");
         if (wasOpen) returnFocus();
+        syncPanelBodyClass();
     }
     function toggleWishDrawer() {
         const open = document.getElementById("tomiWishDrawer").classList.contains("open");
-        if (open) closeWishDrawer(); else { closeDrawer(); renderWishlistDrawer(); openWishDrawer(); }
+        if (open) closeWishDrawer(); else { closeDrawer(); closeChatPanelIfOpen(); renderWishlistDrawer(); openWishDrawer(); }
     }
 
     function updateWishlistBadge() {
@@ -465,9 +531,10 @@
                     '<button type="button" id="tomiQVQtyMinus" aria-label="Decrease quantity">&minus;</button>' +
                     '<span id="tomiQVQty">1</span>' +
                     '<button type="button" id="tomiQVQtyPlus" aria-label="Increase quantity">+</button>' +
+                    '<span id="tomiQVQtyNote" class="tomi-qv-qty-note"></span>' +
                 '</div>' +
                 '<button type="button" id="tomiQVAdd" class="btn btn-dark-full">Add to Cart</button>' +
-                '<button type="button" id="tomiQVWishlistBtn" class="wishlist-btn qv">♥ Save for later</button>' +
+                '<button type="button" id="tomiQVWishlistBtn" class="wishlist-btn qv"></button>' +
             '</div>';
         document.body.appendChild(modal);
 
@@ -476,24 +543,34 @@
         document.getElementById("tomiQVQtyMinus").addEventListener("click", () => {
             qv.qty = Math.max(1, qv.qty - 1);
             document.getElementById("tomiQVQty").textContent = qv.qty;
+            updateQVQtyState();
         });
         document.getElementById("tomiQVQtyPlus").addEventListener("click", () => {
+            const max = qvMaxQty();
+            if (qv.qty >= max) {
+                showMessageToast(max <= 0 ? "That size is out of stock." : "Only " + max + " in stock for this size.");
+                return;
+            }
             qv.qty += 1;
             document.getElementById("tomiQVQty").textContent = qv.qty;
+            updateQVQtyState();
         });
         document.getElementById("tomiQVAdd").addEventListener("click", () => {
             if (qv.sizes && !qv.selectedSize) {
                 document.getElementById("tomiQVSizes").classList.add("size-required");
                 return;
             }
+            let stock = null;
             if (qv.sizes && qv.selectedSize) {
                 const sizeObj = qv.sizes.find(s => s.size === qv.selectedSize);
                 if (sizeObj && sizeObj.stock === 0) return;
+                if (sizeObj) stock = sizeObj.stock;
             }
             addItem({
                 id: qv.meta.id + (qv.selectedSize ? "|" + qv.selectedSize : ""),
                 name: qv.meta.name,
                 size: qv.selectedSize,
+                stock: stock,
                 price: qv.meta.price,
                 image: qv.images[qv.activeIndex] || qv.meta.image
             }, qv.qty);
@@ -525,6 +602,24 @@
         lastFocusedEl = opener;
         const target = modal.querySelector(FOCUSABLE);
         if (target) target.focus();
+    }
+
+    /* How many of the currently-selected size/variant are left. Infinity
+       when stock isn't tracked for this product (accessories, hats...). */
+    function qvMaxQty() {
+        if (!qv.sizes) return Infinity;
+        if (!qv.selectedSize) return Infinity;
+        const sizeObj = qv.sizes.find(s => s.size === qv.selectedSize);
+        if (!sizeObj || sizeObj.stock === null || sizeObj.stock === undefined) return Infinity;
+        return sizeObj.stock;
+    }
+
+    function updateQVQtyState() {
+        const max = qvMaxQty();
+        const plusBtn = document.getElementById("tomiQVQtyPlus");
+        const note = document.getElementById("tomiQVQtyNote");
+        if (plusBtn) plusBtn.disabled = qv.qty >= max;
+        if (note) note.textContent = Number.isFinite(max) ? "Only " + max + " available" : "";
     }
 
     function closeQuickView() {
@@ -561,6 +656,13 @@
                 if (b.classList.contains("out-of-stock")) return;
                 qv.selectedSize = b.dataset.size;
                 sizeWrap.classList.remove("size-required");
+                // switching to a size with less stock than the qty already
+                // dialed in — pull the qty back down so it can't exceed it
+                const max = (function () {
+                    const sizeObj = qv.sizes.find(s => s.size === qv.selectedSize);
+                    return (sizeObj && (sizeObj.stock === null || sizeObj.stock === undefined)) ? Infinity : (sizeObj ? sizeObj.stock : Infinity);
+                })();
+                if (qv.qty > max) qv.qty = Math.max(1, max);
                 renderQuickView();
             }));
             if (qv.selectedSize) {
@@ -573,11 +675,12 @@
         }
 
         document.getElementById("tomiQVQty").textContent = qv.qty;
+        updateQVQtyState();
 
         const heartBtn = document.getElementById("tomiQVWishlistBtn");
         const saved = isWishlisted(qv.meta.id);
         heartBtn.classList.toggle("active", saved);
-        heartBtn.innerHTML = saved ? "♥ Saved" : "♥ Save for later";
+        heartBtn.innerHTML = heartIcon(saved) + (saved ? " Saved" : " Save for later");
     }
 
     function injectQuickViewButtons() {
@@ -623,7 +726,22 @@
         if (toast) toast.classList.remove("show");
     }
 
-    function closeAllPanels() { closeDrawer(); closeWishDrawer(); closeQuickView(); }
+    /* Plain one-line notice (stock limits, etc.) — same toast slot as
+       "Added to bag", just without the product image / View Bag button. */
+    function showMessageToast(text) {
+        let toast = document.getElementById("tomiToast");
+        if (!toast) {
+            toast = document.createElement("div");
+            toast.id = "tomiToast";
+            document.body.appendChild(toast);
+        }
+        toast.innerHTML = '<div class="tomi-toast-info"><strong>' + text + '</strong></div>';
+        toast.classList.add("show");
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(hideToast, 2800);
+    }
+
+    function closeAllPanels() { closeDrawer(); closeWishDrawer(); closeChatPanelIfOpen(); closeQuickView(); syncPanelBodyClass(); }
 
     /* ---------- category filters (only appears where cards carry data-category) ---------- */
     function injectCategoryFilters() {
@@ -758,6 +876,7 @@
                 e.preventDefault();
                 const sizeWrap = card.querySelector(".size-select");
                 let size = null;
+                let stock = null;
                 if (sizeWrap) {
                     size = sizeWrap.dataset.selected;
                     if (!size) {
@@ -767,12 +886,14 @@
                     }
                     const activePill = sizeWrap.querySelector('.size-pill[data-size="' + size + '"]');
                     if (activePill && activePill.classList.contains("out-of-stock")) return;
+                    if (activePill && activePill.hasAttribute("data-stock")) stock = parseInt(activePill.getAttribute("data-stock"), 10);
                 }
                 const activeImg = card.querySelector(".main-image") || card.querySelector(".slide.active") || card.querySelector("img");
                 addItem({
                     id: meta.id + (size ? "|" + size : ""),
                     name: meta.name,
                     size: size,
+                    stock: stock,
                     price: meta.price,
                     image: activeImg ? activeImg.getAttribute("src") : meta.image
                 });

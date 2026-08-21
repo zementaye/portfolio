@@ -22,7 +22,6 @@ All product-writing endpoints require the admin token returned by /api/login.
 
 import os
 import time
-import uuid
 from collections import defaultdict, deque
 from datetime import datetime, timezone
 
@@ -34,7 +33,6 @@ from flask_cors import CORS
 from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
-from werkzeug.utils import secure_filename
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -60,22 +58,7 @@ if not ADMIN_PASSWORD:
 if not GEMINI_API_KEY:
     print("WARNING: GEMINI_API_KEY is not set. /api/chat will return a friendly error until it is.")
 
-# Product photo uploads. Saved onto disk right next to the storefront's
-# existing ../Pictures folder, so a freshly-uploaded photo is reachable at
-# the exact same kind of relative path ("../Pictures/Uploads/xyz.jpg") the
-# admin form already used for the pre-existing product photos.
-#
-# CAVEAT: if this server is deployed somewhere with an ephemeral filesystem
-# (e.g. Render's free tier), anything saved here is wiped on every redeploy
-# or restart — fine for local use, but for a permanent production setup
-# you'd want a persistent disk (Render paid) or an external file host
-# (S3, Cloudinary, etc.) instead of local disk.
-UPLOAD_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "Pictures", "Uploads")
-ALLOWED_IMAGE_EXTENSIONS = {"png", "jpg", "jpeg", "webp", "gif"}
-MAX_UPLOAD_BYTES = 6 * 1024 * 1024  # 6 MB
-
 app = Flask(__name__)
-app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES + (256 * 1024)  # a little headroom for multipart overhead
 CORS(app, resources={r"/api/*": {"origins": FRONTEND_ORIGIN}})
 
 
@@ -380,43 +363,6 @@ def login():
         return jsonify({"error": "Incorrect password"}), 401
     token = signer.dumps({"role": "admin"})
     return jsonify({"token": token, "expiresInSeconds": TOKEN_MAX_AGE_SECONDS})
-
-
-@app.route("/api/upload", methods=["POST"])
-def upload_image():
-    """Admin picks a photo from their computer; we save it and hand back the
-    relative path to store on the product (same shape as the existing
-    ../Pictures/... paths, so nothing downstream needs to change)."""
-    auth_error = require_admin()
-    if auth_error:
-        return auth_error
-
-    file = request.files.get("image")
-    if not file or not file.filename:
-        return jsonify({"error": "No image file was sent"}), 400
-
-    ext = secure_filename(file.filename).rsplit(".", 1)[-1].lower() if "." in file.filename else ""
-    if ext not in ALLOWED_IMAGE_EXTENSIONS:
-        return jsonify({"error": f"Image type must be one of: {', '.join(sorted(ALLOWED_IMAGE_EXTENSIONS))}"}), 400
-
-    try:
-        os.makedirs(UPLOAD_DIR, exist_ok=True)
-    except OSError:
-        return jsonify({"error": "Server couldn't prepare the uploads folder"}), 500
-
-    filename = f"{uuid.uuid4().hex}.{ext}"
-    dest_path = os.path.join(UPLOAD_DIR, filename)
-
-    try:
-        file.save(dest_path)
-    except OSError:
-        return jsonify({"error": "Failed to save the image"}), 500
-
-    if os.path.getsize(dest_path) > MAX_UPLOAD_BYTES:
-        os.remove(dest_path)
-        return jsonify({"error": "Image is too large (6 MB max)"}), 400
-
-    return jsonify({"url": f"../Pictures/Uploads/{filename}"}), 201
 
 
 @app.route("/api/products", methods=["GET"])

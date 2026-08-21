@@ -16,6 +16,42 @@ function formatBirr(amount) {
   return Number(amount).toLocaleString("en-US") + " Birr";
 }
 
+/*
+ * Shared by productCardHTML below AND admin.js's live "what customers will
+ * see" preview — one place decides the price/badge logic so the admin
+ * preview can never drift out of sync with the real storefront rendering.
+ * Takes the same shape admin.js's form payload already builds:
+ * { price, oldPrice, discountPercent }.
+ */
+function priceDisplayHTML(p) {
+  if (!p.price && p.price !== 0) return "";
+  if (p.oldPrice && p.price > 0 && p.oldPrice > p.price) {
+    // Real discount — the price actually went down, so the math speaks for itself.
+    const discount = Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100);
+    return `
+      <div class="price-row">
+        <span class="price-now">${formatBirr(p.price)}</span>
+        <span class="price-was">${formatBirr(p.oldPrice)}</span>
+        <span class="discount-badge">-${discount}%</span>
+      </div>`;
+  }
+  if (p.discountPercent && p.discountPercent > 0 && p.discountPercent < 100) {
+    // Price didn't go down (or there's no oldPrice at all) — admin chose a
+    // display-only % instead. Back-calculate a "was" price from that % so
+    // the strikethrough price and the badge stay consistent with each
+    // other — showing the real (higher) oldPrice here would read as a bug,
+    // e.g. "was 5,000, now 6,000, -15% off".
+    const fakeWasPrice = p.price / (1 - p.discountPercent / 100);
+    return `
+      <div class="price-row">
+        <span class="price-now">${formatBirr(p.price)}</span>
+        <span class="price-was">${formatBirr(Math.round(fakeWasPrice))}</span>
+        <span class="discount-badge">-${Math.round(p.discountPercent)}%</span>
+      </div>`;
+  }
+  return `<p>${formatBirr(p.price)}</p>`;
+}
+
 function productCardHTML(p) {
   const images = p.images || [];
   const first = images[0] || { url: "", color: null };
@@ -48,30 +84,7 @@ function productCardHTML(p) {
     mediaHTML = `<img src="${first.url}" alt="${p.name}">`;
   }
 
-  let priceHTML = `<p>${formatBirr(p.price)}</p>`;
-  if (p.oldPrice && p.price > 0 && p.oldPrice > p.price) {
-    // Real discount — the price actually went down, so the math speaks for itself.
-    const discount = Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100);
-    priceHTML = `
-      <div class="price-row">
-        <span class="price-now">${formatBirr(p.price)}</span>
-        <span class="price-was">${formatBirr(p.oldPrice)}</span>
-        <span class="discount-badge">-${discount}%</span>
-      </div>`;
-  } else if (p.discountPercent && p.discountPercent > 0 && p.discountPercent < 100) {
-    // Price didn't go down (or there's no oldPrice at all) — admin chose a
-    // display-only % instead. Back-calculate a "was" price from that % so
-    // the strikethrough price and the badge stay consistent with each
-    // other — showing the real (higher) oldPrice here would read as a bug,
-    // e.g. "was 5,000, now 6,000, -15% off".
-    const fakeWasPrice = p.price / (1 - p.discountPercent / 100);
-    priceHTML = `
-      <div class="price-row">
-        <span class="price-now">${formatBirr(p.price)}</span>
-        <span class="price-was">${formatBirr(Math.round(fakeWasPrice))}</span>
-        <span class="discount-badge">-${Math.round(p.discountPercent)}%</span>
-      </div>`;
-  }
+  const priceHTML = priceDisplayHTML(p);
 
   const sizesAttr = JSON.stringify(p.sizes || []).replace(/"/g, "&quot;");
 
