@@ -423,6 +423,31 @@
     line-height:1.5;
     margin:6px 0 0;
 }
+/* Old price field once it's locked to the pre-edit price (see admin.js
+   openEditor) — greyed out and unfocusable-looking so it reads as "not
+   yours to type into", not just an input that happens to be full. */
+.admin-modal input[readonly]{
+    background: var(--panel);
+    color: var(--slate);
+    cursor:not-allowed;
+}
+.admin-modal input[readonly]:focus{
+    box-shadow:none;
+    border-color: var(--line);
+}
+.admin-inline-link{
+    display:inline;
+    margin-left:4px;
+    border:none;
+    background:none;
+    padding:0;
+    font-family: var(--font-body);
+    font-size:12px;
+    color: var(--signal);
+    text-decoration:underline;
+    cursor:pointer;
+}
+.admin-inline-link:hover{ color: var(--ink); }
 .admin-price-preview{
     background: var(--panel);
     border:1px dashed var(--line);

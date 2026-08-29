@@ -37,6 +37,8 @@ const addSizeBtn = document.getElementById("addSizeBtn");
 
 const fieldPrice = document.getElementById("fieldPrice");
 const fieldOldPrice = document.getElementById("fieldOldPrice");
+const oldPriceLockedHint = document.getElementById("oldPriceLockedHint");
+const clearOldPriceBtn = document.getElementById("clearOldPriceBtn");
 const fieldDiscountPercent = document.getElementById("fieldDiscountPercent");
 const discountPercentRow = document.getElementById("discountPercentRow");
 const pricePreview = document.getElementById("pricePreview");
@@ -237,22 +239,49 @@ function openEditor(product) {
     document.getElementById("fieldCategory").value = product.category;
     document.getElementById("fieldType").value = product.type || "simple";
     document.getElementById("fieldPrice").value = product.price;
-    document.getElementById("fieldOldPrice").value = product.oldPrice || "";
     fieldDiscountPercent.value = product.discountPercent || "";
     document.getElementById("fieldFeatured").checked = !!product.featured;
     (product.images || []).forEach((img) => addImageRow(img.url, img.color));
     (product.sizes || []).forEach((s) => addSizeRow(s.size, s.stock));
+
+    // Old price is the product's regular/original price — once it exists
+    // it shouldn't be hand-edited (that's how a real "was 300, now 289"
+    // badge quietly turns into a typo). If the product doesn't have one
+    // yet, lock it in now to whatever it's currently selling at, so the
+    // admin only ever has to touch the "Price" field to create a discount.
+    lockOldPrice(product.oldPrice || product.price);
   } else {
     editingId = null;
     editorTitle.textContent = "Add Product";
     deleteProductBtn.classList.add("hidden");
     addImageRow();
+    // Nothing to lock yet for a brand-new product — let the admin set an
+    // original price too, in case it should launch already marked down.
+    unlockOldPrice();
   }
 
   updateDiscountPercentVisibility();
   updatePricePreview();
   editorOverlay.classList.remove("hidden");
 }
+
+// ---------- Old price lock ----------
+function lockOldPrice(value) {
+  fieldOldPrice.value = value || "";
+  fieldOldPrice.readOnly = true;
+  oldPriceLockedHint.classList.toggle("hidden", !value);
+}
+function unlockOldPrice() {
+  fieldOldPrice.value = "";
+  fieldOldPrice.readOnly = false;
+  oldPriceLockedHint.classList.add("hidden");
+}
+clearOldPriceBtn.addEventListener("click", () => {
+  fieldOldPrice.value = "";
+  oldPriceLockedHint.classList.add("hidden");
+  updateDiscountPercentVisibility();
+  updatePricePreview();
+});
 
 // The manual "% off" badge only makes sense once the real price-vs-oldPrice
 // math *can't* produce a genuine discount — otherwise the real math wins
@@ -303,14 +332,21 @@ productForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   formError.textContent = "";
 
+  const priceValue = Number(document.getElementById("fieldPrice").value);
+  const oldPriceValue = document.getElementById("fieldOldPrice").value
+    ? Number(document.getElementById("fieldOldPrice").value)
+    : null;
+
   const payload = {
     name: document.getElementById("fieldName").value.trim(),
     category: document.getElementById("fieldCategory").value,
     type: document.getElementById("fieldType").value,
-    price: Number(document.getElementById("fieldPrice").value),
-    oldPrice: document.getElementById("fieldOldPrice").value
-      ? Number(document.getElementById("fieldOldPrice").value)
-      : null,
+    price: priceValue,
+    // Only worth saving as a "was" price if it's actually higher than what
+    // we're charging now — otherwise it's just the locked field echoing the
+    // unchanged price back, and saving it would draw a pointless strikethrough
+    // price identical to the real one in the products table and storefront.
+    oldPrice: oldPriceValue && oldPriceValue > priceValue ? oldPriceValue : null,
     discountPercent:
       !discountPercentRow.classList.contains("hidden") && fieldDiscountPercent.value
         ? Number(fieldDiscountPercent.value)

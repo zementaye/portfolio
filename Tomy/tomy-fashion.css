@@ -531,6 +531,18 @@ header.is-scrolled{
     padding:18px 18px 22px;
     text-align:left;
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    /* Cards in the same row don't all have the same content height — a
+       discount badge can wrap the price onto two lines, and some products
+       have a size picker and others don't. .product-grid's grid rows
+       stretch every card to match the tallest one in that row (default
+       grid align-items:stretch), so turning the card into a column flex
+       box and letting the button's margin-top:auto soak up the leftover
+       space keeps "Add to Cart" pinned to the same bottom edge on every
+       card, instead of trailing right after whatever content happens to
+       be above it. */
+    display:flex;
+    flex-direction:column;
+    gap:8px;
 }
 
 .product-card:hover{
@@ -547,7 +559,9 @@ header.is-scrolled{
 }
 
 .product-card h3{
-    margin-top:16px;
+    /* was 16px; the flex container's own 8px `gap` now adds the rest so
+       the visual spacing above the name is unchanged */
+    margin-top:8px;
     font-family: var(--font-body);
     font-weight:700;
     font-size:15px;
@@ -557,7 +571,8 @@ header.is-scrolled{
 
 .product-card p{
     display:inline-block;
-    margin-top:8px;
+    /* was 8px; the flex container's own 8px `gap` now covers this spacing */
+    margin-top:0;
     font-family: var(--font-mono);
     font-size:13px;
     background: var(--jet);
@@ -568,7 +583,11 @@ header.is-scrolled{
 
 .product-card button{
     display:block;
-    margin-top:14px;
+    /* auto pushes the button to the bottom of the (now flex, stretched)
+       card — see the .product-card comment above. The container's own
+       `gap` still guarantees a minimum breathing-room above it even when
+       there's no extra row height to soak up. */
+    margin-top:auto;
     padding:11px;
     width:100%;
     border:none;
