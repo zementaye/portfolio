@@ -2,6 +2,8 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-08-29** Lock old price field to pre-edit price; fix add-to-cart button alignment (8443fa2)
+- **2026-08-29** Add CLAUDE.md working rules and commit history script (14eb5b4)
 - **2026-08-21** Full session update: theme, AI support chat, price preview, and UI fixes (8a83cb4)
 - **2026-08-20** Add missing requests dependency (used by /api/chat) (2803bfa)
 - **2026-08-20** Admin UX: real image upload, auto color detect, category-based size dropdowns (290c49a)
