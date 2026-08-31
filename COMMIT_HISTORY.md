@@ -2,6 +2,8 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-08-31** Fix color-swatch timing lag and redesign swatch UI on Tomy product cards (bc97fc5)
+- **2026-08-29** Update commit history (a32b52f)
 - **2026-08-29** Update commit history (bdba26b)
 - **2026-08-29** Lock old price field to pre-edit price; fix add-to-cart button alignment (8443fa2)
 - **2026-08-29** Add CLAUDE.md working rules and commit history script (14eb5b4)
