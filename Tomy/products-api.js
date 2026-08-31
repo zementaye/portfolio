@@ -62,14 +62,15 @@ function productCardHTML(p) {
       .map((img, i) => {
         const activeClass = i === 0 ? " active" : "";
         const style = img.color ? ` style="background:${img.color};"` : "";
-        return `<span class="color${activeClass}" data-image="${img.url}"${style}></span>`;
+        const label = img.color ? `Color: ${img.color}` : `Color option ${i + 1}`;
+        return `<button type="button" class="color${activeClass}" data-image="${img.url}"${style} aria-label="${label}" aria-pressed="${i === 0}" title="${label}"></button>`;
       })
       .join("\n");
     mediaHTML = `
       <div class="product-image">
         <img class="main-image" src="${first.url}" data-default="${first.url}" alt="${p.name}">
-        <div class="color-options">${swatches}</div>
-      </div>`;
+      </div>
+      <div class="color-options">${swatches}</div>`;
   } else if (p.type === "slider" && images.length > 1) {
     const slides = images
       .map((img, i) => `<img src="${img.url}" class="slide${i === 0 ? " active" : ""}" alt="${p.name} — view ${i + 1}">`)
@@ -100,19 +101,51 @@ function wireUpCard(card) {
   // Color swatches
   const mainImage = card.querySelector(".main-image");
   const colors = card.querySelectorAll(".color");
+
+  // Preload every swatch's photo the moment the card renders. Without this,
+  // clicking a swatch swaps the active ring on schedule but the new <img>
+  // still has to finish downloading over the network before it actually
+  // shows up — which is exactly the "ring changes, photo lags behind" flash.
+  // Preloading means the browser almost always already has the bytes by the
+  // time someone clicks, so the swap below can be effectively instant.
+  const preloaded = new Map();
+  colors.forEach((color) => {
+    const src = color.dataset.image;
+    if (!src || preloaded.has(src)) return;
+    const img = new Image();
+    img.src = src;
+    preloaded.set(src, img);
+  });
+
   colors.forEach((color) => {
     color.addEventListener("click", () => {
       if (color.classList.contains("active")) return; // already showing this one
+      const nextSrc = color.dataset.image;
+
       mainImage.style.opacity = "0";
       // 300ms matches .product-image img's `opacity 0.3s` transition in
-      // tomy-fashion.css — swap the photo AND the active swatch ring at the
-      // exact same moment (once fully faded out), instead of flipping the
-      // ring instantly while the photo is still catching up.
+      // tomy-fashion.css. Once fully faded out, wait for the new photo to
+      // actually be ready (almost always instant thanks to the preload
+      // above) before swapping the src AND the active swatch ring together
+      // — so the ring never changes ahead of the photo.
       setTimeout(() => {
-        mainImage.src = color.dataset.image;
-        mainImage.style.opacity = "1";
-        colors.forEach((c) => c.classList.remove("active"));
-        color.classList.add("active");
+        const swap = () => {
+          mainImage.src = nextSrc;
+          mainImage.style.opacity = "1";
+          colors.forEach((c) => {
+            c.classList.remove("active");
+            c.setAttribute("aria-pressed", "false");
+          });
+          color.classList.add("active");
+          color.setAttribute("aria-pressed", "true");
+        };
+        const pre = preloaded.get(nextSrc);
+        if (!pre || pre.complete) {
+          swap();
+        } else {
+          pre.addEventListener("load", swap, { once: true });
+          pre.addEventListener("error", swap, { once: true }); // don't get stuck faded-out if the image 404s
+        }
       }, 300);
     });
   });

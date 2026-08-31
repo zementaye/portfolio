@@ -624,34 +624,55 @@ header.is-scrolled{
 
 .product-card:hover .main-image{ transform: scale(1.04); }
 
+/* Swatches now sit in their own row under the photo instead of floating
+   on top of it — nothing to obscure the product shot, and a bigger,
+   consistent hit target instead of tiny dots. */
 .color-options{
-    position:absolute;
-    bottom:12px;
-    left:50%;
-    transform: translateX(-50%);
     display:flex;
-    gap:8px;
-    padding:6px 8px;
-    background: rgba(255,255,255,0.88);
-    border-radius:999px;
-    box-shadow: 0 4px 14px rgba(var(--jet-rgb),0.12);
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:10px;
+    padding-top:2px;
 }
 
 .color{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:28px;
+    height:28px;
+    padding:0;
     border:2px solid #fff;
     box-shadow: 0 0 0 1px var(--line);
-    width:20px;
-    height:20px;
     border-radius:50%;
     cursor:pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance:none;
+    appearance:none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.color:hover{ transform: scale(1.15); }
+.color:hover{ transform: scale(1.12); box-shadow: 0 0 0 1px var(--jet); }
+.color:focus-visible{ outline: 2px solid var(--signal); outline-offset: 2px; }
 
 .color.active{
     box-shadow: 0 0 0 2px var(--signal);
-    transform: scale(1.1);
+}
+
+/* checkmark on the active swatch so the current selection reads clearly
+   even on very light or very dark colors, not just via the ring */
+.color.active::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    margin:auto;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.9);
 }
 
 .color-brown-olive{
