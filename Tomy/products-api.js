@@ -62,8 +62,11 @@ function productCardHTML(p) {
       .map((img, i) => {
         const activeClass = i === 0 ? " active" : "";
         const style = img.color ? ` style="background:${img.color};"` : "";
+        // aria-label (screen readers only) carries the hex so the option is
+        // still identifiable without sight; no `title` attribute, so there's
+        // no visible browser tooltip showing raw hex codes to sighted users.
         const label = img.color ? `Color: ${img.color}` : `Color option ${i + 1}`;
-        return `<button type="button" class="color${activeClass}" data-image="${img.url}"${style} aria-label="${label}" aria-pressed="${i === 0}" title="${label}"></button>`;
+        return `<button type="button" class="color${activeClass}" data-image="${img.url}"${style} aria-label="${label}" aria-pressed="${i === 0}"></button>`;
       })
       .join("\n");
     mediaHTML = `

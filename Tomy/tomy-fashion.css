@@ -625,7 +625,12 @@ header.is-scrolled{
 .product-card:hover .main-image{ transform: scale(1.04); }
 
 /* Compact swatch row — small dots, tight spacing, minimal added height
-   under the photo instead of a full extra block. */
+   under the photo instead of a full extra block.
+   NOTE: swatches are real <button> elements (for accessibility), so every
+   rule here is scoped as `.color-options .color` — two classes beats the
+   site-wide `.product-card button` rule (class+type) that otherwise makes
+   any bare <button> inside a card stretch full-width like "Add to Cart".
+   Every property that rule sets is explicitly reset below. */
 .color-options{
     display:flex;
     align-items:center;
@@ -635,33 +640,37 @@ header.is-scrolled{
     margin-top:6px;
 }
 
-.color{
-    position:relative;
+.color-options .color{
+    box-sizing:border-box;
     display:inline-flex;
+    position:relative;
     align-items:center;
     justify-content:center;
     width:16px;
     height:16px;
+    margin-top:0;
     padding:0;
     border:1.5px solid #fff;
-    box-shadow: 0 0 0 1px var(--line);
     border-radius:50%;
-    cursor:pointer;
+    box-shadow: 0 0 0 1px var(--line);
+    background-clip:padding-box;
+    font-size:0;
     -webkit-appearance:none;
     appearance:none;
+    cursor:pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.color:hover{ transform: scale(1.15); box-shadow: 0 0 0 1px var(--jet); }
-.color:focus-visible{ outline: 2px solid var(--signal); outline-offset: 2px; }
+.color-options .color:hover{ transform: scale(1.15); box-shadow: 0 0 0 1px var(--jet); }
+.color-options .color:focus-visible{ outline: 2px solid var(--signal); outline-offset: 2px; }
 
-.color.active{
+.color-options .color.active{
     box-shadow: 0 0 0 2px var(--signal);
 }
 
 /* checkmark on the active swatch so the current selection reads clearly
    even on very light or very dark colors, not just via the ring */
-.color.active::after{
+.color-options .color.active::after{
     content:"";
     position:absolute;
     inset:0;
