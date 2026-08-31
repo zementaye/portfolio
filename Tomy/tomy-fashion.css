@@ -638,6 +638,10 @@ header.is-scrolled{
     flex-wrap:wrap;
     gap:6px;
     margin-top:6px;
+    /* Reserved even when empty (see products-api.js) — 16px dot + 1.5px
+       border each side — so every card's title/price starts at the same
+       y-position whether or not that product has color swatches. */
+    min-height:19px;
 }
 
 .color-options .color{

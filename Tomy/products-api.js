@@ -83,9 +83,16 @@ function productCardHTML(p) {
         ${slides}
         <button class="arrow left">&#10094;</button>
         <button class="arrow right">&#10095;</button>
-      </div>`;
+      </div>
+      <div class="color-options"></div>`;
   } else {
-    mediaHTML = `<img src="${first.url}" alt="${p.name}">`;
+    // Empty (but present) `.color-options` row even for plain products —
+    // it reserves the exact same height as a populated one (see the
+    // min-height rule in tomy-fashion.css), so the title/price/size block
+    // starts at the same y-position on every card in a grid row, whether
+    // or not that particular product has color swatches.
+    mediaHTML = `<img src="${first.url}" alt="${p.name}">
+      <div class="color-options"></div>`;
   }
 
   const priceHTML = priceDisplayHTML(p);
