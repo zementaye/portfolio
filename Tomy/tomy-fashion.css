@@ -624,17 +624,15 @@ header.is-scrolled{
 
 .product-card:hover .main-image{ transform: scale(1.04); }
 
-/* Swatches now sit in their own row under the photo instead of floating
-   on top of it — nothing to obscure the product shot, and a bigger,
-   consistent hit target instead of tiny dots. */
+/* Compact swatch row — small dots, tight spacing, minimal added height
+   under the photo instead of a full extra block. */
 .color-options{
     display:flex;
     align-items:center;
     justify-content:center;
     flex-wrap:wrap;
-    gap:10px;
-    margin-top:10px;
-    padding-top:2px;
+    gap:6px;
+    margin-top:6px;
 }
 
 .color{
@@ -642,10 +640,10 @@ header.is-scrolled{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    width:28px;
-    height:28px;
+    width:16px;
+    height:16px;
     padding:0;
-    border:2px solid #fff;
+    border:1.5px solid #fff;
     box-shadow: 0 0 0 1px var(--line);
     border-radius:50%;
     cursor:pointer;
@@ -654,7 +652,7 @@ header.is-scrolled{
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.color:hover{ transform: scale(1.12); box-shadow: 0 0 0 1px var(--jet); }
+.color:hover{ transform: scale(1.15); box-shadow: 0 0 0 1px var(--jet); }
 .color:focus-visible{ outline: 2px solid var(--signal); outline-offset: 2px; }
 
 .color.active{
@@ -668,11 +666,11 @@ header.is-scrolled{
     position:absolute;
     inset:0;
     margin:auto;
-    width:9px;
-    height:9px;
+    width:5px;
+    height:5px;
     border-radius:50%;
     background: var(--signal);
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.9);
+    box-shadow: 0 0 0 1.5px rgba(255,255,255,0.9);
 }
 
 .color-brown-olive{
