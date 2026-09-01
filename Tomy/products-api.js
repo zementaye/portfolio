@@ -78,11 +78,16 @@ function productCardHTML(p) {
     const slides = images
       .map((img, i) => `<img src="${img.url}" class="slide${i === 0 ? " active" : ""}" alt="${p.name} — view ${i + 1}">`)
       .join("\n");
+    // Real SVG chevrons instead of the ❮❯ Unicode characters — those render
+    // with inconsistent weight/size/vertical alignment across fonts and
+    // OSes, which is why they looked off inside the round nav button.
+    const chevronLeft = `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    const chevronRight = `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     mediaHTML = `
       <div class="product-image slider">
         ${slides}
-        <button class="arrow left">&#10094;</button>
-        <button class="arrow right">&#10095;</button>
+        <button type="button" class="arrow left" aria-label="Previous photo">${chevronLeft}</button>
+        <button type="button" class="arrow right" aria-label="Next photo">${chevronRight}</button>
       </div>
       <div class="color-options"></div>`;
   } else {

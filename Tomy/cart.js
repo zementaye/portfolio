@@ -30,14 +30,20 @@
     }
     function money(n) { return n.toLocaleString("en-US") + " Birr"; }
     /* hollow heart when not saved, filled red heart when saved (see .wishlist-btn.active in css) */
-    /* Same heart outline for both states — only the fill toggles — so
+    /* Same heart outline path for both states — only the fill toggles — so
        "saved" doesn't jump to a visually different glyph (which is what
        happened when this swapped between the ♡/♥ Unicode characters,
-       since those are two unrelated glyphs, not a stroke/fill pair). */
+       since those are two unrelated glyphs, not a stroke/fill pair).
+       When filled, drop the stroke entirely — a stroke drawn on top of a
+       solid fill adds visible bulk around the edges at this size, making
+       the filled heart read as a thicker/different shape instead of the
+       same outline just filled in. */
     function heartIcon(active) {
         return '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">' +
             '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" ' +
-            'fill="' + (active ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>' +
+            (active
+                ? 'fill="currentColor" stroke="none"/>'
+                : 'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>') +
             "</svg>";
     }
 
