@@ -1681,6 +1681,7 @@ body.tomi-panel-open #tomiChatFab{
     font-family: var(--font-mono);
     font-size: 10.5px;
     letter-spacing: 0.03em;
+    text-transform: none;
     white-space: nowrap;
     padding: 5px 9px;
     border-radius: 6px;
@@ -1718,6 +1719,48 @@ body.tomi-panel-open #tomiChatFab{
 #tomiQVModal .size-select button.size-pill.out-of-stock:focus-visible::before{
     opacity: 1;
     visibility: visible;
+}
+
+/* The tooltip above is centered on its button by default, which is fine
+   for pills in the middle of the row — but for the last size in the row
+   (very commonly the out-of-stock one, e.g. biggest shoe size), centering
+   pushes half the tooltip past the card's right edge, where it gets
+   clipped/overlapped by whatever sits next to the card. Anchor the last
+   and first pill's tooltips to that inner edge instead of centering them. */
+.product-card .size-select button.size-pill.out-of-stock:last-of-type::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:last-of-type::after{
+    left: auto;
+    right: 0;
+    transform: translateY(4px);
+}
+.product-card .size-select button.size-pill.out-of-stock:last-of-type:hover::after,
+.product-card .size-select button.size-pill.out-of-stock:last-of-type:focus-visible::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:last-of-type:hover::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:last-of-type:focus-visible::after{
+    transform: translateY(0);
+}
+.product-card .size-select button.size-pill.out-of-stock:last-of-type::before,
+#tomiQVModal .size-select button.size-pill.out-of-stock:last-of-type::before{
+    left: auto;
+    right: 12px;
+    transform: none;
+}
+
+.product-card .size-select button.size-pill.out-of-stock:first-of-type::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:first-of-type::after{
+    left: 0;
+    transform: translateY(4px);
+}
+.product-card .size-select button.size-pill.out-of-stock:first-of-type:hover::after,
+.product-card .size-select button.size-pill.out-of-stock:first-of-type:focus-visible::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:first-of-type:hover::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:first-of-type:focus-visible::after{
+    transform: translateY(0);
+}
+.product-card .size-select button.size-pill.out-of-stock:first-of-type::before,
+#tomiQVModal .size-select button.size-pill.out-of-stock:first-of-type::before{
+    left: 12px;
+    transform: none;
 }
 
 .product-card .size-select .stock-note, #tomiQVModal .size-select .stock-note{
