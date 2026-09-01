@@ -4,8 +4,8 @@
  * Drop this one file into any page:
  *   <script src="istore-chat-widget.js" data-api-url="https://YOUR-BACKEND-URL/api/chat"></script>
  *
- * It renders a floating gold "Ask Sophi" button in the bottom-right corner.
- * Clicking it opens a chat panel styled to match the store's black + gold look.
+ * It renders a floating "Ask Sophi" button in the bottom-right corner.
+ * Clicking it opens a chat panel styled to match the store's ink + signal-blue look.
  * Every message the visitor sends is POSTed to your backend (server.py),
  * which asks the AI model and returns a reply.
  *
@@ -21,12 +21,12 @@
   const style = document.createElement("style");
   style.textContent = `
     :root {
-      --istore-black: #0a0a0a;
-      --istore-black-soft: #161513;
-      --istore-gold: #c9a961;
-      --istore-gold-bright: #e4c780;
-      --istore-cream: #f2ede3;
-      --istore-line: rgba(201, 169, 97, 0.25);
+      --istore-ink: #14161C;
+      --istore-ink-soft: #1E212B;
+      --istore-accent: #3450E0;
+      --istore-accent-light: #7288F0;
+      --istore-paper: #F5F6F8;
+      --istore-line: rgba(114, 136, 240, 0.28);
     }
 
     #istore-chat-launcher {
@@ -37,24 +37,22 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, var(--istore-gold) 0%, #a9853f 100%);
-      color: var(--istore-black);
+      background: var(--istore-accent);
+      color: #fff;
       border: none;
-      border-radius: 999px;
-      padding: 14px 20px 14px 16px;
-      font-family: "Georgia", "Times New Roman", serif;
+      padding: 14px 22px;
+      font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
       font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      font-weight: 500;
       cursor: pointer;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.45), 0 0 0 1px var(--istore-line);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 24px rgba(20,22,28,0.28);
+      transition: transform 0.2s ease, background 0.2s ease;
     }
     #istore-chat-launcher:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.55), 0 0 0 1px var(--istore-gold-bright);
+      background: var(--istore-ink);
     }
-    #istore-chat-launcher svg { width: 20px; height: 20px; flex-shrink: 0; }
+    #istore-chat-launcher svg { width: 18px; height: 18px; flex-shrink: 0; }
 
     #istore-chat-panel {
       position: fixed;
@@ -65,45 +63,44 @@
       max-width: calc(100vw - 32px);
       height: 520px;
       max-height: calc(100vh - 48px);
-      background: var(--istore-black);
+      background: var(--istore-paper);
       border: 1px solid var(--istore-line);
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      box-shadow: 0 20px 60px rgba(20,22,28,0.28);
       display: none;
       flex-direction: column;
       overflow: hidden;
-      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
     }
     #istore-chat-panel.open { display: flex; }
 
     #istore-chat-header {
-      background: var(--istore-black-soft);
-      border-bottom: 1px solid var(--istore-line);
+      background: var(--istore-ink);
       padding: 16px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
     #istore-chat-header .title {
-      font-family: "Georgia", "Times New Roman", serif;
-      color: var(--istore-gold-bright);
+      font-family: "Space Grotesk", sans-serif;
+      color: #fff;
       font-size: 15px;
-      letter-spacing: 0.05em;
+      font-weight: 600;
     }
     #istore-chat-header .subtitle {
-      color: rgba(242,237,227,0.5);
+      color: rgba(245,246,248,0.6);
       font-size: 11px;
       margin-top: 2px;
     }
     #istore-chat-close {
       background: none;
       border: none;
-      color: var(--istore-gold);
+      color: rgba(245,246,248,0.7);
       font-size: 20px;
       cursor: pointer;
       line-height: 1;
       padding: 4px;
     }
+    #istore-chat-close:hover { color: #fff; }
 
     #istore-chat-messages {
       flex: 1;
@@ -112,58 +109,55 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      background: #fff;
     }
     .istore-msg {
       max-width: 82%;
       padding: 10px 13px;
-      border-radius: 12px;
       font-size: 13.5px;
       line-height: 1.45;
     }
     .istore-msg.bot {
-      background: var(--istore-black-soft);
-      color: var(--istore-cream);
-      border: 1px solid var(--istore-line);
+      background: var(--istore-paper);
+      color: var(--istore-ink);
+      border: 1px solid #E6E9EE;
       align-self: flex-start;
-      border-bottom-left-radius: 3px;
     }
     .istore-msg.user {
-      background: var(--istore-gold);
-      color: var(--istore-black);
+      background: var(--istore-accent);
+      color: #fff;
       align-self: flex-end;
-      border-bottom-right-radius: 3px;
       font-weight: 500;
     }
     .istore-msg.typing { opacity: 0.6; font-style: italic; }
 
     #istore-chat-input-row {
-      border-top: 1px solid var(--istore-line);
+      border-top: 1px solid #E6E9EE;
       padding: 12px;
       display: flex;
       gap: 8px;
-      background: var(--istore-black-soft);
+      background: var(--istore-paper);
     }
     #istore-chat-input {
       flex: 1;
-      background: var(--istore-black);
-      border: 1px solid var(--istore-line);
-      border-radius: 10px;
+      background: #fff;
+      border: 1px solid #D9DCE4;
       padding: 10px 12px;
-      color: var(--istore-cream);
+      color: var(--istore-ink);
       font-size: 13.5px;
       outline: none;
     }
-    #istore-chat-input:focus { border-color: var(--istore-gold); }
+    #istore-chat-input:focus { border-color: var(--istore-accent); }
     #istore-chat-send {
-      background: var(--istore-gold);
-      color: var(--istore-black);
+      background: var(--istore-ink);
+      color: #fff;
       border: none;
-      border-radius: 10px;
       padding: 0 16px;
-      font-weight: 700;
+      font-weight: 500;
       cursor: pointer;
       font-size: 13px;
     }
+    #istore-chat-send:hover { background: var(--istore-accent); }
     #istore-chat-send:disabled { opacity: 0.5; cursor: default; }
   `;
   document.head.appendChild(style);

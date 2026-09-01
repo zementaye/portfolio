@@ -6,7 +6,8 @@ repo. Read this first in any new session before making changes.
 ## Project basics
 
 - GitHub repo: https://github.com/zementaye/portfolio (branch: `main`)
-- Local folder: TBD — not yet confirmed on this machine
+- Local folder: `C:\Users\HP\portfolio`
+- Downloads folder (where delivered zips land, not the Windows default): `D:\Chrome_Downloads` — use this instead of `$env:USERPROFILE\Downloads` in all commands below.
 - This repo is a portfolio monorepo: Tomy Fashion (`Tomy/`, Flask +
   MongoDB Atlas admin backend, deployed on Render at
   `tomy-k4ad.onrender.com`), plus other sub-projects (`IStore/`, `pages/`
@@ -24,7 +25,9 @@ bash/cmd/WSL syntax. That covers things like:
 - `Expand-Archive` (not `unzip`)
 - `Copy-Item` (not `cp`)
 - `Remove-Item` (not `rm`)
-- `$env:USERPROFILE\Downloads\...` style paths (not `~/Downloads/...`)
+- `D:\Chrome_Downloads\...` style paths for downloaded zips (this machine's
+  Chrome saves to a custom location, not the Windows default
+  `$env:USERPROFILE\Downloads`)
 
 ## The end-to-end push workflow
 
@@ -34,13 +37,13 @@ containing only the changed files (preserving their folder structure, e.g.
 real repo is:
 
 ```powershell
-cd <path to local portfolio folder>
+cd C:\Users\HP\portfolio
 
 # 1. Unzip the delivered file (adjust the filename to match what was downloaded)
-Expand-Archive -Path "$env:USERPROFILE\Downloads\<name>.zip" -DestinationPath "$env:USERPROFILE\Downloads\<name>" -Force
+Expand-Archive -Path "D:\Chrome_Downloads\<name>.zip" -DestinationPath "D:\Chrome_Downloads\<name>" -Force
 
 # 2. Copy only the changed files over (one Copy-Item per file, matching folders)
-Copy-Item "$env:USERPROFILE\Downloads\<name>\<path\to\file>" -Destination .\<path\to\> -Force
+Copy-Item "D:\Chrome_Downloads\<name>\<path\to\file>" -Destination .\<path\to\> -Force
 
 # 3. Review before committing
 git status

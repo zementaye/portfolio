@@ -5,12 +5,12 @@
 <link rel="icon" type="image/png" href="images/istore.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact Us — iStore by Sophi</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 /* ACTIVE NAV LINK */
 .nav-links a.active {
-  color: var(--gold);
+  color: var(--accent);
   opacity: 1;
 }
 
@@ -18,25 +18,25 @@
   transform: scaleX(1);
 }
   :root {
-    --gold: #B8924A;
-    --gold-light: #D4B07A;
-    --gold-pale: #F5ECD8;
-    --gold-dark: #8A6A30;
-    --black: #1C1A16;
-    --off-white: #FDFAF5;
-    --warm-50: #FAF7F2;
-    --warm-100: #F0EBE0;
-    --warm-200: #E0D8C8;
-    --text-dark: #1C1A16;
-    --text-mid: #4A4540;
-    --text-muted: #8A8278;
+    --accent: #3450E0;
+    --accent-light: #7288F0;
+    --accent-pale: #E9EDFC;
+    --accent-dark: #1E32AE;
+    --ink-strong: #14161C;
+    --paper: #F5F6F8;
+    --mist-50: #EFF1F4;
+    --mist-100: #E6E9EE;
+    --line: #D9DCE4;
+    --ink: #14161C;
+    --ink-mid: #4A4F5C;
+    --ink-soft: #878D9C;
   }
 
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--off-white);
-    color: var(--text-dark);
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
     overflow-x: hidden;
   }
 
@@ -45,77 +45,54 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.2rem 3rem;
-    background: rgba(253,250,245,0.95);
+    background: rgba(245,246,248,0.95);
     backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--warm-200);
+    border-bottom: 1px solid var(--line);
   }
   .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; color: var(--text-dark);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem; color: var(--ink);
     letter-spacing: 0.04em; text-decoration: none;
   }
-  .nav-logo span { color: var(--gold); font-style: italic; font-size: 0.85em; }
+  .nav-logo span { color: var(--accent); font-size: 0.85em; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
-    text-decoration: none; color: var(--text-mid);
-    font-size: 0.875rem; font-weight: 400;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    opacity: 0.75; transition: opacity 0.2s, color 0.2s;
+    text-decoration: none; color: var(--ink-mid);
+    font-size: 0.9rem; font-weight: 500;
+    opacity: 0.85; transition: opacity 0.2s, color 0.2s;
     position: relative;
   }
   .nav-links a::after {
     content: ''; position: absolute;
     bottom: -4px; left: 0; right: 0; height: 1px;
-    background: var(--gold); transform: scaleX(0);
+    background: var(--accent); transform: scaleX(0);
     transition: transform 0.25s ease; transform-origin: left;
   }
-  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .nav-links a:hover { opacity: 1; color: var(--accent); }
   .nav-links a:hover::after { transform: scaleX(1); }
-  .nav-links a.active { opacity: 1; color: var(--gold); }
+  .nav-links a.active { opacity: 1; color: var(--accent); }
   .nav-links a.active::after { transform: scaleX(1); }
 
   /* ── PAGE HEADER ── */
   .page-header {
-    padding: 10rem 3rem 5rem;
-    background: var(--warm-50);
-    border-bottom: 1px solid var(--warm-200);
-    position: relative; overflow: hidden;
-  }
-  .page-header-bg {
-    position: absolute; inset: 0; pointer-events: none;
-    background:
-      radial-gradient(ellipse 65% 80% at 80% 50%, rgba(184,146,74,0.10) 0%, transparent 65%),
-      radial-gradient(ellipse 40% 50% at 10% 80%, rgba(184,146,74,0.05) 0%, transparent 60%);
-  }
-  .page-header-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(var(--warm-200) 1px, transparent 1px),
-      linear-gradient(90deg, var(--warm-200) 1px, transparent 1px);
-    background-size: 60px 60px; opacity: 0.45;
-    mask-image: radial-gradient(ellipse at 85% 50%, black 20%, transparent 68%);
+    padding: 9rem 3rem 3.5rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    position: relative;
   }
   .page-header-inner {
     position: relative; max-width: 1200px; margin: 0 auto;
   }
-  .page-eyebrow {
-    font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.2rem;
-    display: inline-flex; align-items: center; gap: 0.6rem;
+  .page-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 600; line-height: 1.05; letter-spacing: -0.01em; color: var(--ink);
     opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
   }
-  .page-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); opacity: 0.5; }
-  .page-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    font-weight: 700; line-height: 1.0; color: var(--text-dark);
-    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
-  }
-  .page-title .accent { color: var(--gold); font-style: italic; }
   .page-sub {
-    margin-top: 1.25rem; font-size: 1.05rem; font-weight: 300;
-    color: var(--text-muted); max-width: 440px; line-height: 1.75;
-    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+    margin-top: 1.1rem; font-size: 1.05rem; font-weight: 400;
+    color: var(--ink-mid); max-width: 440px; line-height: 1.65;
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
   }
 
   /* ── MAIN LAYOUT ── */
@@ -133,14 +110,13 @@
 
   .info-section { margin-bottom: 3rem; }
   .info-label {
-    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.5rem;
-    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--accent); margin-bottom: 1.1rem;
+    font-weight: 500;
   }
-  .info-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); opacity: 0.5; }
 
   /* Contact cards */
-  .contact-cards { display: flex; flex-direction: column; gap: 1px; background: var(--warm-200); }
+  .contact-cards { display: flex; flex-direction: column; gap: 1px; background: var(--line); }
   .contact-card {
     background: #fff; padding: 1.5rem 1.75rem;
     display: flex; align-items: center; gap: 1.25rem;
@@ -150,64 +126,64 @@
   .contact-card::after {
     content: ''; position: absolute;
     left: 0; top: 0; bottom: 0; width: 3px;
-    background: var(--gold); transform: scaleY(0);
+    background: var(--accent); transform: scaleY(0);
     transition: transform 0.25s ease; transform-origin: bottom;
   }
-  .contact-card:hover { background: var(--warm-50); }
+  .contact-card:hover { background: var(--mist-50); }
   .contact-card:hover::after { transform: scaleY(1); }
-  .contact-card:hover .card-arrow { transform: translate(3px,-3px); color: var(--gold); }
+  .contact-card:hover .card-arrow { transform: translate(3px,-3px); color: var(--accent); }
 
   .contact-icon {
     width: 46px; height: 46px; min-width: 46px;
-    background: var(--warm-100); border: 1px solid var(--warm-200);
+    background: var(--mist-100); border: 1px solid var(--line);
     display: flex; align-items: center; justify-content: center;
     font-size: 1.15rem; transition: background 0.25s;
   }
-  .contact-card:hover .contact-icon { background: var(--gold-pale); border-color: var(--gold-light); }
+  .contact-card:hover .contact-icon { background: var(--accent-pale); border-color: var(--accent-light); }
 
   .contact-info { flex: 1; }
   .contact-info-label {
     font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--text-muted); margin-bottom: 0.25rem;
+    color: var(--ink-soft); margin-bottom: 0.25rem;
   }
   .contact-info-val {
-    font-size: 0.975rem; font-weight: 500; color: var(--text-dark); line-height: 1.4;
+    font-size: 0.975rem; font-weight: 500; color: var(--ink); line-height: 1.4;
   }
-  .contact-info-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.15rem; }
+  .contact-info-sub { font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.15rem; }
   .card-arrow {
-    font-size: 1rem; color: var(--text-muted);
+    font-size: 1rem; color: var(--ink-soft);
     transition: transform 0.25s, color 0.25s;
   }
 
   /* Hours */
-  .hours-grid { display: flex; flex-direction: column; gap: 1px; background: var(--warm-200); }
+  .hours-grid { display: flex; flex-direction: column; gap: 1px; background: var(--line); }
   .hours-row {
     background: #fff; padding: 0.9rem 1.5rem;
     display: flex; align-items: center; justify-content: space-between;
     transition: background 0.2s;
   }
-  .hours-row:hover { background: var(--warm-50); }
-  .hours-row.today { background: var(--gold-pale); }
-  .hours-day { font-size: 0.85rem; color: var(--text-mid); font-weight: 400; }
-  .hours-row.today .hours-day { color: var(--gold-dark); font-weight: 500; }
-  .hours-time { font-size: 0.85rem; color: var(--text-dark); font-weight: 500; }
-  .hours-row.today .hours-time { color: var(--gold-dark); }
+  .hours-row:hover { background: var(--mist-50); }
+  .hours-row.today { background: var(--accent-pale); }
+  .hours-day { font-size: 0.85rem; color: var(--ink-mid); font-weight: 400; }
+  .hours-row.today .hours-day { color: var(--accent-dark); font-weight: 500; }
+  .hours-time { font-size: 0.85rem; color: var(--ink); font-weight: 500; }
+  .hours-row.today .hours-time { color: var(--accent-dark); }
   .today-pill {
     font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
-    background: var(--gold); color: #fff;
+    background: var(--accent); color: #fff;
     padding: 0.2rem 0.55rem; margin-left: 0.6rem;
   }
 
   /* Social */
-  .social-row { display: flex; gap: 1px; background: var(--warm-200); }
+  .social-row { display: flex; gap: 1px; background: var(--line); }
   .social-btn {
     flex: 1; background: #fff;
     padding: 1.25rem 1rem; border: none; cursor: pointer;
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
     text-decoration: none; transition: background 0.25s, color 0.25s;
-    color: var(--text-mid);
+    color: var(--ink-mid);
   }
-  .social-btn:hover { background: var(--warm-50); color: var(--gold); }
+  .social-btn:hover { background: var(--mist-50); color: var(--accent); }
   .social-icon { font-size: 1.4rem; }
   .social-name { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; }
 
@@ -216,9 +192,9 @@
 
   .map-wrap {
     width: 100%; aspect-ratio: 4/3;
-    border: 1px solid var(--warm-200);
+    border: 1px solid var(--line);
     overflow: hidden; position: relative;
-    background: var(--warm-100);
+    background: var(--mist-100);
     margin-bottom: 1px;
   }
   .map-wrap iframe {
@@ -229,107 +205,107 @@
   .map-wrap:hover iframe { filter: sepia(0) saturate(1) brightness(1); }
 
   .map-pin-bar {
-    background: var(--text-dark); padding: 1.1rem 1.75rem;
+    background: var(--ink); padding: 1.1rem 1.75rem;
     display: flex; align-items: center; gap: 1rem;
     margin-bottom: 3rem;
   }
-  .map-pin-icon { font-size: 1.1rem; color: var(--gold); }
+  .map-pin-icon { font-size: 1.1rem; color: var(--accent); }
   .map-pin-text { flex: 1; }
-  .map-pin-name { font-size: 0.85rem; font-weight: 500; color: var(--off-white); }
-  .map-pin-addr { font-size: 0.75rem; color: rgba(253,250,245,0.5); margin-top: 0.1rem; }
+  .map-pin-name { font-size: 0.85rem; font-weight: 500; color: var(--paper); }
+  .map-pin-addr { font-size: 0.75rem; color: rgba(245,246,248,0.5); margin-top: 0.1rem; }
   .map-directions {
     font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--gold-light); text-decoration: none; white-space: nowrap;
+    color: var(--accent-light); text-decoration: none; white-space: nowrap;
     transition: color 0.2s;
   }
-  .map-directions:hover { color: var(--gold); }
+  .map-directions:hover { color: var(--accent); }
 
   /* ── QUICK MESSAGE FORM ── */
   .form-section {}
   .form-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem; font-weight: 700; color: var(--text-dark);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem; font-weight: 700; color: var(--ink);
     margin-bottom: 0.5rem;
   }
-  .form-sub { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6; }
+  .form-sub { font-size: 0.875rem; color: var(--ink-soft); margin-bottom: 2rem; line-height: 1.6; }
 
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--warm-200); margin-bottom: 1px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); margin-bottom: 1px; }
   .form-field { background: #fff; padding: 1.2rem 1.5rem; }
   .form-field.full { grid-column: 1/-1; }
   .form-field label {
     display: block; font-size: 0.65rem; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem;
+    text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.6rem;
   }
   .form-field input,
   .form-field textarea,
   .form-field select {
     width: 100%; background: transparent; border: none; outline: none;
-    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-    color: var(--text-dark); resize: none;
+    font-family: 'IBM Plex Sans', sans-serif; font-size: 0.9rem;
+    color: var(--ink); resize: none;
     transition: color 0.2s;
   }
   .form-field input::placeholder,
-  .form-field textarea::placeholder { color: var(--text-muted); opacity: 0.6; }
-  .form-field:focus-within { background: var(--warm-50); }
-  .form-field:focus-within label { color: var(--gold); }
+  .form-field textarea::placeholder { color: var(--ink-soft); opacity: 0.6; }
+  .form-field:focus-within { background: var(--mist-50); }
+  .form-field:focus-within label { color: var(--accent); }
   .form-field textarea { min-height: 100px; }
 
   .form-submit {
     width: 100%; padding: 1.1rem;
-    background: var(--text-dark); color: var(--off-white);
-    border: none; font-family: 'DM Sans', sans-serif;
+    background: var(--ink); color: var(--paper);
+    border: none; font-family: 'IBM Plex Sans', sans-serif;
     font-size: 0.875rem; font-weight: 500;
     letter-spacing: 0.1em; text-transform: uppercase;
     cursor: pointer; transition: background 0.2s;
     display: flex; align-items: center; justify-content: center; gap: 0.75rem;
   }
-  .form-submit:hover { background: var(--gold); }
+  .form-submit:hover { background: var(--accent); }
   .form-submit svg { transition: transform 0.25s; }
   .form-submit:hover svg { transform: translate(3px, -3px); }
 
   .form-sent {
-    display: none; padding: 1.5rem; background: #EAF3EC;
-    border: 1px solid #C3DCCA; text-align: center;
-    font-size: 0.9rem; color: #2E6645;
+    display: none; padding: 1.5rem; background: #E7F3EC;
+    border: 1px solid #BFDFC9; text-align: center;
+    font-size: 0.9rem; color: #276145;
   }
   .form-sent.visible { display: block; }
 
   /* ── BOTTOM STRIP ── */
   .bottom-strip {
-    background: var(--text-dark);
+    background: var(--ink);
     padding: 2.5rem 3rem;
     display: flex; align-items: center; justify-content: space-between;
     gap: 2rem; flex-wrap: wrap;
   }
   .strip-left {}
   .strip-label {
-    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(184,146,74,0.7); margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--accent-light); margin-bottom: 0.4rem;
   }
   .strip-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; font-weight: 700; color: var(--off-white);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem; font-weight: 600; color: var(--paper);
   }
-  .strip-sub { font-size: 0.8rem; color: rgba(253,250,245,0.4); margin-top: 0.25rem; }
+  .strip-sub { font-size: 0.85rem; color: rgba(245,246,248,0.55); margin-top: 0.35rem; }
   .strip-links { display: flex; gap: 1rem; flex-wrap: wrap; }
   .strip-link {
-    padding: 0.7rem 1.4rem; border: 1px solid rgba(184,146,74,0.35);
-    color: var(--gold-light); text-decoration: none;
-    font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em;
-    text-transform: uppercase; transition: background 0.2s, border-color 0.2s, color 0.2s;
+    padding: 0.7rem 1.4rem; border: 1px solid rgba(114,136,240,0.4);
+    color: var(--accent-light); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
   }
-  .strip-link:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
+  .strip-link:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 
   /* ── FOOTER ── */
   footer {
-    background: var(--warm-50); padding: 2.5rem 3rem;
+    background: var(--mist-50); padding: 2.5rem 3rem;
     display: flex; align-items: center; justify-content: space-between;
-    border-top: 1px solid var(--warm-200); flex-wrap: wrap; gap: 1rem;
+    border-top: 1px solid var(--line); flex-wrap: wrap; gap: 1rem;
   }
-  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--text-dark); }
-  .footer-logo span { color: var(--gold); font-style: italic; font-size: 0.85em; }
-  .footer-loc { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }
-  .footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+  .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; color: var(--ink); }
+  .footer-logo span { color: var(--accent); font-size: 0.85em; }
+  .footer-loc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.2rem; }
+  .footer-copy { font-size: 0.75rem; color: var(--ink-soft); }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
@@ -362,12 +338,9 @@
 
 <!-- PAGE HEADER -->
 <div class="page-header">
-  <div class="page-header-bg"></div>
-  <div class="page-header-grid"></div>
   <div class="page-header-inner">
-    <div class="page-eyebrow">iStore by Sophi</div>
-    <h1 class="page-title">Get in <span class="accent">Touch</span></h1>
-    <p class="page-sub">Visit us in Bole, call, WhatsApp, or drop us a message — we're always happy to help you find the right Apple product.</p>
+    <h1 class="page-title">Get in touch</h1>
+    <p class="page-sub">Visit us in Bole, call, WhatsApp, or send a message — we're happy to help you find the right Apple product.</p>
   </div>
 </div>
 
@@ -389,7 +362,7 @@
             <div class="contact-info-val">+251 911 234 567</div>
             <div class="contact-info-sub">Call us during store hours</div>
           </div>
-          <span class="card-arrow">↗</span>
+          <span class="card-arrow">›</span>
         </a>
 
         <a class="contact-card" href="https://wa.me/251911234567" target="_blank">
@@ -399,7 +372,7 @@
             <div class="contact-info-val">+251 911 234 567</div>
             <div class="contact-info-sub">Fastest way to reach Sophi</div>
           </div>
-          <span class="card-arrow">↗</span>
+          <span class="card-arrow">›</span>
         </a>
 
         <a class="contact-card" href="mailto:hello@istoresophi.com">
@@ -409,7 +382,7 @@
             <div class="contact-info-val">hello@istoresophi.com</div>
             <div class="contact-info-sub">We reply within 24 hours</div>
           </div>
-          <span class="card-arrow">↗</span>
+          <span class="card-arrow">›</span>
         </a>
 
         <a class="contact-card" href="https://maps.google.com/?q=Bole+Road+Addis+Ababa+Ethiopia" target="_blank">
@@ -419,7 +392,7 @@
             <div class="contact-info-val">Bole Road, Near Edna Mall</div>
             <div class="contact-info-sub">Addis Ababa, Ethiopia</div>
           </div>
-          <span class="card-arrow">↗</span>
+          <span class="card-arrow">›</span>
         </a>
 
       </div>
@@ -471,12 +444,12 @@
         </iframe>
       </div>
       <div class="map-pin-bar">
-        <span class="map-pin-icon">✦</span>
+        <span class="map-pin-icon">●</span>
         <div class="map-pin-text">
           <div class="map-pin-name">iStore by Sophi</div>
-          <div class="map-pin-addr">Bole Road, Near Edna Mall · Addis Ababa, Ethiopia</div>
+          <div class="map-pin-addr">Bole Road, Near Edna Mall, Addis Ababa</div>
         </div>
-        <a class="map-directions" href="https://maps.google.com/?q=Bole+Road+Addis+Ababa+Ethiopia" target="_blank">Get Directions ↗</a>
+        <a class="map-directions" href="https://maps.google.com/?q=Bole+Road+Addis+Ababa+Ethiopia" target="_blank">Get directions</a>
       </div>
     </div>
 
@@ -523,7 +496,7 @@
       </div>
 
       <div class="form-sent" id="form-sent">
-        ✦ &nbsp; Thank you! Your message has been sent. We'll be in touch shortly.
+        ✓ &nbsp; Thank you! Your message has been sent. We'll be in touch shortly.
       </div>
 
     </div>
@@ -534,9 +507,9 @@
 <!-- BOTTOM STRIP -->
 <div class="bottom-strip">
   <div class="strip-left">
-    <div class="strip-label">Ready to explore?</div>
-    <div class="strip-text">Visit Us In-Store Today</div>
-    <div class="strip-sub">Bole Road · Mon–Sun · 9:00 AM – 8:00 PM</div>
+    <div class="strip-label">Have a question first?</div>
+    <div class="strip-text">Come by the store</div>
+    <div class="strip-sub">Bole Road, open every day from 9am to 8pm.</div>
   </div>
   <div class="strip-links">
     <a class="strip-link" href="products.html">Browse Products</a>
