@@ -7,8 +7,7 @@ repo. Read this first in any new session before making changes.
 
 - GitHub repo: https://github.com/zementaye/portfolio (branch: `main`)
 - Local folder: `C:\Users\HP\portfolio`
-- Downloads folder on this machine: `D:\Chrome_Downloads` (not the default
-  `$env:USERPROFILE\Downloads` — browser is configured to save there)
+- Downloads folder (where delivered zips land, not the Windows default): `D:\Chrome_Downloads` — use this instead of `$env:USERPROFILE\Downloads` in all commands below.
 - This repo is a portfolio monorepo: Tomy Fashion (`Tomy/`, Flask +
   MongoDB Atlas admin backend, deployed on Render at
   `tomy-k4ad.onrender.com`), plus other sub-projects (`IStore/`, `pages/`
@@ -16,12 +15,6 @@ repo. Read this first in any new session before making changes.
 - Tomy's admin backend (`Tomy/admin-backend/`) auto-deploys on Render from
   `main` if auto-deploy is enabled — otherwise trigger a manual deploy from
   the Render dashboard after pushing.
-
-## PowerShell commands go in one block
-
-All PowerShell commands for a given step (or the whole workflow) are given
-in a single combined code block — never split across multiple separate
-code blocks — so they can be copy-pasted and run in one go.
 
 ## The shell is always PowerShell
 
@@ -32,9 +25,9 @@ bash/cmd/WSL syntax. That covers things like:
 - `Expand-Archive` (not `unzip`)
 - `Copy-Item` (not `cp`)
 - `Remove-Item` (not `rm`)
-- `D:\Chrome_Downloads\...` style paths (not `~/Downloads/...` and not
-  `$env:USERPROFILE\Downloads\...` — that's not where this machine's
-  browser saves files)
+- `D:\Chrome_Downloads\...` style paths for downloaded zips (this machine's
+  Chrome saves to a custom location, not the Windows default
+  `$env:USERPROFILE\Downloads`)
 
 ## The end-to-end push workflow
 

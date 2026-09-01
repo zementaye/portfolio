@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="images/istore.png">
+<link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us — iStore by Sophi</title>
+<title>Contact iStore by Sophi — Bole Road, Addis Ababa</title>
+<meta name="description" content="Get in touch with iStore by Sophi on Bole Road, Addis Ababa. Call, WhatsApp, email, or visit in person — open every day from 9am to 8pm.">
+<meta property="og:title" content="Contact iStore by Sophi">
+<meta property="og:description" content="Call, WhatsApp, email, or visit us on Bole Road, Addis Ababa. Open every day, 9am–8pm.">
+<meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +39,7 @@
     --ink-soft: #878D9C;
   }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
   body {
     font-family: 'IBM Plex Sans', sans-serif;
     background: var(--paper);
@@ -72,6 +79,37 @@
   .nav-links a:hover::after { transform: scaleX(1); }
   .nav-links a.active { opacity: 1; color: var(--accent); }
   .nav-links a.active::after { transform: scaleX(1); }
+
+  /* MOBILE NAV TOGGLE */
+  .nav-toggle {
+    display: none;
+    width: 44px; height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  .nav-toggle-bars { position: relative; width: 22px; height: 16px; }
+  .nav-toggle-bars span {
+    position: absolute; left: 0; right: 0; height: 2px;
+    background: var(--ink);
+    transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+  }
+  .nav-toggle-bars span:nth-child(1) { top: 0; }
+  .nav-toggle-bars span:nth-child(2) { top: 7px; }
+  .nav-toggle-bars span:nth-child(3) { top: 14px; }
+  .nav-toggle.open .nav-toggle-bars span:nth-child(1) { top: 7px; transform: rotate(45deg); }
+  .nav-toggle.open .nav-toggle-bars span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open .nav-toggle-bars span:nth-child(3) { top: 7px; transform: rotate(-45deg); }
+
+  .nav-scrim {
+    display: none; position: fixed; inset: 0;
+    background: rgba(20,22,28,0.35); z-index: 98;
+    opacity: 0; transition: opacity 0.25s ease;
+  }
+  .nav-scrim.open { display: block; opacity: 1; }
 
   /* ── PAGE HEADER ── */
   .page-header {
@@ -250,6 +288,15 @@
   .form-field:focus-within label { color: var(--accent); }
   .form-field textarea { min-height: 100px; }
 
+  .form-field.has-error { box-shadow: inset 0 0 0 1px #D64545; }
+  .field-error {
+    display: none;
+    font-size: 0.75rem;
+    color: #D64545;
+    margin-top: 0.5rem;
+  }
+  .form-field.has-error .field-error { display: block; }
+
   .form-submit {
     width: 100%; padding: 1.1rem;
     background: var(--ink); color: var(--paper);
@@ -298,13 +345,18 @@
 
   /* ── FOOTER ── */
   footer {
-    background: var(--mist-50); padding: 2.5rem 3rem;
-    display: flex; align-items: center; justify-content: space-between;
-    border-top: 1px solid var(--line); flex-wrap: wrap; gap: 1rem;
+    background: var(--mist-50); padding: 3.5rem 3rem 2rem;
+    border-top: 1px solid var(--line);
   }
-  .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; color: var(--ink); }
+  .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2.5rem; padding-bottom: 2.5rem; }
+  .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; color: var(--ink); text-decoration: none; display: inline-block; }
   .footer-logo span { color: var(--accent); font-size: 0.85em; }
-  .footer-loc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.2rem; }
+  .footer-loc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.5rem; max-width: 220px; line-height: 1.5; }
+  .footer-cols { display: flex; gap: 3.5rem; flex-wrap: wrap; }
+  .footer-col-title { font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.9rem; }
+  .footer-col a { display: block; color: var(--ink-mid); text-decoration: none; font-size: 0.9rem; margin-bottom: 0.6rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
   .footer-copy { font-size: 0.75rem; color: var(--ink-soft); }
 
   /* ── ANIMATIONS ── */
@@ -315,12 +367,38 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 960px) {
     nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      width: min(280px, 80vw);
+      background: var(--paper);
+      border-left: 1px solid var(--line);
+      flex-direction: column;
+      gap: 0;
+      padding: 5.5rem 2rem 2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 99;
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+      display: block;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 1rem;
+    }
     .page-header { padding: 8rem 1.5rem 3.5rem; }
     .contact-main { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem 4rem; }
     .form-grid { grid-template-columns: 1fr; }
     .bottom-strip { padding: 2rem 1.5rem; }
-    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+    footer { padding: 2.5rem 1.5rem 1.5rem; }
+    .footer-top { flex-direction: column; text-align: center; }
+    .footer-cols { flex-direction: column; gap: 1.75rem; align-items: center; }
+    .footer-loc { max-width: none; }
+    .footer-bottom { justify-content: center; text-align: center; }
   }
 </style>
 </head>
@@ -329,12 +407,17 @@
 <!-- NAV -->
 <nav>
   <a href="istore.html" class="nav-logo">iStore <span>by Sophi</span></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="istore.html">Home</a></li>
     <li><a href="products.html">Products</a></li>
+    <li><a href="istore.html#about">About</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleMobileNav()">
+    <span class="nav-toggle-bars"><span></span><span></span><span></span></span>
+  </button>
 </nav>
+<div class="nav-scrim" id="nav-scrim" onclick="closeMobileNav()"></div>
 
 <!-- PAGE HEADER -->
 <div class="page-header">
@@ -460,19 +543,22 @@
 
       <div id="contact-form">
         <div class="form-grid">
-          <div class="form-field">
-            <label>Your Name</label>
+          <div class="form-field" id="field-name">
+            <label>Your Name *</label>
             <input type="text" id="f-name" placeholder="e.g. Sara Alemu">
+            <div class="field-error" id="err-name">Please enter your name.</div>
           </div>
-          <div class="form-field">
+          <div class="form-field" id="field-phone">
             <label>Phone / WhatsApp</label>
             <input type="tel" id="f-phone" placeholder="+251 9__ ___ ___">
+            <div class="field-error" id="err-phone">Please enter a valid phone number.</div>
           </div>
-          <div class="form-field">
+          <div class="form-field" id="field-email">
             <label>Email Address</label>
             <input type="email" id="f-email" placeholder="you@example.com">
+            <div class="field-error" id="err-email">Please enter a valid email address.</div>
           </div>
-          <div class="form-field">
+          <div class="form-field" id="field-subject">
             <label>Subject</label>
             <select id="f-subject" style="cursor:pointer;appearance:none;padding-right:1rem">
               <option value="">Select a topic…</option>
@@ -484,9 +570,10 @@
               <option>Other</option>
             </select>
           </div>
-          <div class="form-field full">
-            <label>Message</label>
+          <div class="form-field full" id="field-msg">
+            <label>Message *</label>
             <textarea id="f-msg" placeholder="Tell us what you're looking for or ask anything…"></textarea>
+            <div class="field-error" id="err-msg">Please enter a message.</div>
           </div>
         </div>
         <button class="form-submit" onclick="submitForm()">
@@ -495,7 +582,7 @@
         </button>
       </div>
 
-      <div class="form-sent" id="form-sent">
+      <div class="form-sent" id="form-sent" role="status">
         ✓ &nbsp; Thank you! Your message has been sent. We'll be in touch shortly.
       </div>
 
@@ -519,12 +606,32 @@
 
 <!-- FOOTER -->
 <footer>
-  <div>
-    <div class="footer-logo">iStore <span>by Sophi</span></div>
-    <div class="footer-loc">Bole Road, Addis Ababa, Ethiopia</div>
+  <div class="footer-top">
+    <div>
+      <a href="istore.html" class="footer-logo">iStore <span>by Sophi</span></a>
+      <div class="footer-loc">Bole Road, Near Edna Mall<br>Addis Ababa, Ethiopia</div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Site</div>
+        <a href="istore.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="istore.html#about">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Get in touch</div>
+        <a href="tel:+251911234567">+251 91 123 4567</a>
+        <a href="mailto:hello@istoresophi.com">hello@istoresophi.com</a>
+        <a href="https://wa.me/251911234567" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
   </div>
-  <div class="footer-copy">© 2025 iStore by Sophi. All rights reserved.</div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© <span id="footer-year"></span> iStore by Sophi. All rights reserved.</div>
+  </div>
 </footer>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 
 <script>
 // ── HOURS ─────────────────────────────────────────────────────────────────────
@@ -551,16 +658,42 @@ document.getElementById('hours-grid').innerHTML = HOURS.map((h, i) => `
 `).join('');
 
 // ── FORM SUBMIT ───────────────────────────────────────────────────────────────
+function setFieldError(fieldId, hasError) {
+  document.getElementById(fieldId).classList.toggle('has-error', hasError);
+}
+
 function submitForm() {
-  const name = document.getElementById('f-name').value.trim();
-  const msg  = document.getElementById('f-msg').value.trim();
-  if (!name || !msg) {
-    alert('Please enter at least your name and a message.');
+  const name  = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const msg   = document.getElementById('f-msg').value.trim();
+
+  const emailOk = email === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const phoneOk = phone === '' || /^[+\d][\d\s-]{6,}$/.test(phone);
+
+  let hasError = false;
+  setFieldError('field-name', !name);
+  setFieldError('field-msg', !msg);
+  setFieldError('field-email', !emailOk);
+  setFieldError('field-phone', !phoneOk);
+
+  if (!name || !msg || !emailOk || !phoneOk) {
+    const firstError = document.querySelector('.form-field.has-error');
+    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
+
   document.getElementById('contact-form').style.display = 'none';
   document.getElementById('form-sent').classList.add('visible');
+  document.getElementById('form-sent').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
+
+// clear a field's error as soon as the person starts fixing it
+['f-name', 'f-msg', 'f-email', 'f-phone'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    document.getElementById(id).closest('.form-field').classList.remove('has-error');
+  });
+});
 
 // ── SCROLL REVEAL ─────────────────────────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
@@ -571,6 +704,26 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── MOBILE NAV ────────────────────────────────────────────────────────────────
+function toggleMobileNav() {
+  const links = document.getElementById('nav-links');
+  const toggle = document.getElementById('nav-toggle');
+  const scrim = document.getElementById('nav-scrim');
+  const isOpen = links.classList.toggle('open');
+  toggle.classList.toggle('open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  scrim.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeMobileNav() {
+  document.getElementById('nav-links').classList.remove('open');
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+  document.getElementById('nav-scrim').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('#nav-links a').forEach(a => a.addEventListener('click', closeMobileNav));
 </script>
 <script src="istore-chat-widget.js" data-api-url="https://portfolio-f92c.onrender.com/api/chat" defer></script>
 </body>

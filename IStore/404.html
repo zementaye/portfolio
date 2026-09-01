@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — iStore by Sophi</title>
+<meta name="description" content="The page you're looking for doesn't exist. Head back to iStore by Sophi to keep browsing genuine Apple products in Addis Ababa.">
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #3450E0;
+    --accent-light: #7288F0;
+    --accent-pale: #E9EDFC;
+    --accent-dark: #1E32AE;
+    --ink-strong: #14161C;
+    --paper: #F5F6F8;
+    --mist-50: #EFF1F4;
+    --mist-100: #E6E9EE;
+    --line: #D9DCE4;
+    --ink: #14161C;
+    --ink-mid: #4A4F5C;
+    --ink-soft: #878D9C;
+  }
+
+  html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(245,246,248,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); font-weight: 500; font-size: 0.85em; }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 1.5rem 4rem;
+  }
+
+  .error-content {
+    text-align: center;
+    max-width: 480px;
+  }
+
+  .error-code {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .error-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 1rem;
+  }
+
+  .error-desc {
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    margin-top: 0.75rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.85rem 1.75rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    padding: 0.85rem 1.75rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--line);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.5rem; }
+    footer { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="istore.html" class="nav-logo">iStore <span>by Sophi</span></a>
+</nav>
+
+<main>
+  <div class="error-content">
+    <div class="error-code">404</div>
+    <h1 class="error-title">This page doesn't exist</h1>
+    <p class="error-desc">The link may be broken, or the page may have moved. Let's get you back to browsing genuine Apple products.</p>
+    <div class="error-actions">
+      <a href="istore.html" class="btn-primary">Back to homepage</a>
+      <a href="products.html" class="btn-outline">Shop products</a>
+    </div>
+  </div>
+</main>
+
+<footer>© <span id="footer-year"></span> iStore by Sophi. All rights reserved.</footer>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

@@ -3,10 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Products — iStore by Sophi</title>
-  <!-- Website Logo/Favicon -->
-    <link rel="icon" type="image/png" href="images/istore.png
-    ">
+<title>Shop iPhone, Mac & iPad — iStore by Sophi, Addis Ababa</title>
+<meta name="description" content="Browse the full lineup at iStore by Sophi: iPhone, MacBook, iPad, Apple Watch, AirPods and accessories, all genuine and in stock in Addis Ababa. Prices in Ethiopian Birr.">
+<meta property="og:title" content="Shop the Full Apple Lineup — iStore by Sophi">
+<meta property="og:description" content="Every iPhone, Mac, iPad, Watch and accessory we carry, with live pricing in Ethiopian Birr.">
+<meta property="og:type" content="website">
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +37,7 @@
     --ink-soft: #878D9C;
   }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
 
   body {
     font-family: 'IBM Plex Sans', sans-serif;
@@ -87,6 +93,37 @@
   .nav-links a:hover::after { transform: scaleX(1); }
   .nav-links a.active { opacity: 1; color: var(--accent); }
   .nav-links a.active::after { transform: scaleX(1); }
+
+  /* MOBILE NAV TOGGLE */
+  .nav-toggle {
+    display: none;
+    width: 44px; height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  .nav-toggle-bars { position: relative; width: 22px; height: 16px; }
+  .nav-toggle-bars span {
+    position: absolute; left: 0; right: 0; height: 2px;
+    background: var(--ink);
+    transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+  }
+  .nav-toggle-bars span:nth-child(1) { top: 0; }
+  .nav-toggle-bars span:nth-child(2) { top: 7px; }
+  .nav-toggle-bars span:nth-child(3) { top: 14px; }
+  .nav-toggle.open .nav-toggle-bars span:nth-child(1) { top: 7px; transform: rotate(45deg); }
+  .nav-toggle.open .nav-toggle-bars span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open .nav-toggle-bars span:nth-child(3) { top: 7px; transform: rotate(-45deg); }
+
+  .nav-scrim {
+    display: none; position: fixed; inset: 0;
+    background: rgba(20,22,28,0.35); z-index: 98;
+    opacity: 0; transition: opacity 0.25s ease;
+  }
+  .nav-scrim.open { display: block; opacity: 1; }
 
   .nav-cart-btn {
     position: relative;
@@ -285,7 +322,7 @@
   /* PRODUCT CARDS GRID */
   .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
     gap: 1px;
     background: var(--line);
   }
@@ -462,7 +499,7 @@
     color: var(--ink);
   }
   .cart-close {
-    width: 40px; height: 40px;
+    width: 44px; height: 44px;
     border: 1px solid var(--line);
     background: transparent;
     cursor: pointer;
@@ -558,7 +595,7 @@
     background: #fff;
   }
   .qty-btn {
-    width: 28px; height: 28px;
+    width: 36px; height: 36px;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -586,7 +623,8 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     transition: color 0.2s;
-    padding: 0;
+    padding: 0.6rem 0;
+    min-height: 32px;
   }
   .remove-btn:hover { color: #D64545; }
 
@@ -664,16 +702,19 @@
   /* FOOTER */
   footer {
     background: var(--mist-50);
-    padding: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 3.5rem 3rem 2rem;
     border-top: 1px solid var(--line);
     margin-top: 4rem;
   }
-  .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; color: var(--ink); }
+  .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2.5rem; padding-bottom: 2.5rem; }
+  .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; color: var(--ink); text-decoration: none; display: inline-block; }
   .footer-logo span { color: var(--accent); font-size: 0.85em; }
-  .footer-loc { font-size: 0.8rem; color: var(--ink-soft); letter-spacing: 0.05em; margin-top: 0.25rem; }
+  .footer-loc { font-size: 0.8rem; color: var(--ink-soft); letter-spacing: 0.05em; margin-top: 0.5rem; max-width: 220px; line-height: 1.5; }
+  .footer-cols { display: flex; gap: 3.5rem; flex-wrap: wrap; }
+  .footer-col-title { font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.9rem; }
+  .footer-col a { display: block; color: var(--ink-mid); text-decoration: none; font-size: 0.9rem; margin-bottom: 0.6rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
   .footer-copy { font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.05em; }
 
   /* ANIMATIONS */
@@ -684,12 +725,41 @@
   /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      width: min(280px, 80vw);
+      background: var(--paper);
+      border-left: 1px solid var(--line);
+      flex-direction: column;
+      gap: 0;
+      padding: 5.5rem 2rem 2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 99;
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+      display: block;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 1rem;
+    }
     .page-header { padding: 8rem 1.5rem 3rem; }
     .toolbar { padding: 1rem 1.5rem; top: 60px; }
     .products-layout { padding: 2rem 1.5rem; }
+    .filter-btn { padding: 0.65rem 1.1rem; }
+    .sort-select { min-height: 44px; }
+    .search-wrap input { min-height: 44px; }
     .sort-select { margin-left: 0; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    footer { padding: 2.5rem 1.5rem 1.5rem; }
+    .footer-top { flex-direction: column; text-align: center; }
+    .footer-cols { flex-direction: column; gap: 1.75rem; align-items: center; }
+    .footer-loc { max-width: none; }
+    .footer-bottom { justify-content: center; text-align: center; }
   }
 
   /* ACTIVE NAV LINK */
@@ -708,9 +778,10 @@
 <!-- NAV -->
 <nav>
   <a href="istore.html" class="nav-logo">iStore <span>by Sophi</span></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="istore.html">Home</a></li>
     <li><a href="products.html" class="active">Products</a></li>
+    <li><a href="istore.html#about">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <button class="nav-cart-btn" onclick="toggleCart()">
@@ -718,7 +789,11 @@
     Cart
     <span class="cart-count" id="cart-count">0</span>
   </button>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleMobileNav()">
+    <span class="nav-toggle-bars"><span></span><span></span><span></span></span>
+  </button>
 </nav>
+<div class="nav-scrim" id="nav-scrim" onclick="closeMobileNav()"></div>
 
 <!-- PAGE HEADER -->
 <div class="page-header">
@@ -765,12 +840,32 @@
 
 <!-- FOOTER -->
 <footer>
-  <div>
-    <div class="footer-logo">iStore <span>by Sophi</span></div>
-    <div class="footer-loc">Bole Road, Addis Ababa, Ethiopia</div>
+  <div class="footer-top">
+    <div>
+      <a href="istore.html" class="footer-logo">iStore <span>by Sophi</span></a>
+      <div class="footer-loc">Bole Road, Near Edna Mall<br>Addis Ababa, Ethiopia</div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Site</div>
+        <a href="istore.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="istore.html#about">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Get in touch</div>
+        <a href="tel:+251911234567">+251 91 123 4567</a>
+        <a href="mailto:hello@istoresophi.com">hello@istoresophi.com</a>
+        <a href="https://wa.me/251911234567" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
   </div>
-  <div class="footer-copy">© 2025 iStore by Sophi. All rights reserved.</div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© <span id="footer-year"></span> iStore by Sophi. All rights reserved.</div>
+  </div>
 </footer>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 
 <!-- CART OVERLAY -->
 <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
@@ -791,7 +886,7 @@
       <span class="cart-summary-val" id="cart-total">ETB 0</span>
     </div>
     <p class="cart-summary-sub">Prices in Ethiopian Birr · Taxes may apply</p>
-    <button class="checkout-btn" onclick="checkout()">Proceed to checkout</button>
+    <button class="checkout-btn" onclick="checkout()">Order via WhatsApp</button>
     <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
   </div>
 </div>
@@ -806,60 +901,60 @@
 // ─── PRODUCT DATA ───────────────────────────────────────────────────────────
 const products = [
   // IPHONE
-  { id:1,  cat:'iphone',      image:'images/iPhone_17_Pro_and_iPhone_17_Pro_Max-removebg-preview (1).png',   badge:'New',   badgeType:'New',     name:'iPhone 17 Pro Max',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
-  { id:18,  cat:'iphone',      image:'images/Apple_iPhone_17_256GB_-_Sage-removebg-preview.png',   badge:'New',   badgeType:'New',     name:'iPhone 17',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
-  { id:17,  cat:'iphone',      image:'images/Apple_iPhone_16_Pro_Max.png',   badge:'New',   badgeType:'Popular',     name:'iPhone 16 Pro Max',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
-  { id:2,  cat:'iphone',      image:'images/AppleiPhone16Pro-removebg-preview.png',   badge:'New',   badgeType:'Popular',     name:'iPhone 16 Pro',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
-  { id:3,  cat:'iphone',      image:'images/AppleiPhone16-removebg-preview.png', tag:'Popular',       badge:'Hot',   badgeType:'gold', name:'iPhone 16',           variant:'128GB / 256GB',                  desc:'A18 chip, new camera button, and all-day battery. The essential iPhone upgrade.',                        price: 89000  },
-  { id:4,  cat:'iphone',      image:'images/iphone 16 plus.png', tag:'Popular',       badge:'',      badgeType:'',     name:'iPhone 16 Plus',      variant:'128GB / 256GB',                  desc:'A18 chip with a massive 6.7-inch display. Superb battery life in a familiar design.',                    price: 95000  },
-  { id:7,  cat:'iphone',      image:'images/15promax.png',   badge:'',      badgeType:'',     name:'iPhone 15 Pro Max',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
-  { id:5,  cat:'iphone',      image:'images/Apple_iPhone_15_Plus_bleu_128Go_avec_Forfait_5G-removebg-preview.png',   badge:'Deal',  badgeType:'green',name:'iPhone 15 Plus',           variant:'128GB / 256GB',                  desc:'A16 Bionic, Dynamic Island, and USB-C. An excellent value flagship.',                                   price: 72000  },
-  { id:6,  cat:'iphone',      image:'images/iPhone 15 Pro.png',   badge:'',      badgeType:'',     name:'iPhone 15 Pro',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
-  { id:8,  cat:'iphone',      image:'images/iPhone_15___Mobile_Phones_Direct___MobilePhonesDirect-removebg-preview (1).png',   badge:'',      badgeType:'',     name:'iPhone 15',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
-{ id:9,  cat:'iphone',      image:'images/14 pro max.png',   badge:'',      badgeType:'',     name:'iPhone 14 Pro Max',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
-  { id:10,  cat:'iphone',      image:'images/14 plus.png',   badge:'Deal',  badgeType:'green',name:'iPhone 14 Plus',           variant:'128GB / 256GB',                  desc:'A16 Bionic, Dynamic Island, and USB-C. An excellent value flagship.',                                   price: 72000  },
-  { id:11,  cat:'iphone',      image:'images/Restored_Apple_iPhone_14_Pro_256gb_Silver__Verizon__Mq0x3ll_a_Used_Excellent_Condition-removebg-preview.png',   badge:'',      badgeType:'',     name:'iPhone 14 Pro',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
-  { id:12,  cat:'iphone',      image:'images/14.png',   badge:'',      badgeType:'',     name:'iPhone 14',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
-{ id:13,  cat:'iphone',      image:'images/13promax.png',   badge:'',      badgeType:'',     name:'iPhone 13 Pro Max',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
-  { id:14,  cat:'iphone',      image:'images/13.png',   badge:'Deal',  badgeType:'green',name:'iPhone 13 Plus',           variant:'128GB / 256GB',                  desc:'A16 Bionic, Dynamic Island, and USB-C. An excellent value flagship.',                                   price: 72000  },
-  { id:15,  cat:'iphone',      image:'images/13 pro.png',   badge:'',      badgeType:'',     name:'iPhone 13 Pro',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
-  { id:16,  cat:'iphone',      image:'images/13.png',   badge:'',      badgeType:'',     name:'iPhone 13',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:1,  cat:'iphone',      image:'images/iPhone_17_Pro_and_iPhone_17_Pro_Max-removebg-preview (1).webp',   badge:'New',   badgeType:'New',     name:'iPhone 17 Pro Max',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
+  { id:18,  cat:'iphone',      image:'images/Apple_iPhone_17_256GB_-_Sage-removebg-preview.webp',   badge:'New',   badgeType:'New',     name:'iPhone 17',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
+  { id:17,  cat:'iphone',      image:'images/Apple_iPhone_16_Pro_Max.webp',   badge:'New',   badgeType:'Popular',     name:'iPhone 16 Pro Max',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
+  { id:2,  cat:'iphone',      image:'images/AppleiPhone16Pro-removebg-preview.webp',   badge:'New',   badgeType:'Popular',     name:'iPhone 16 Pro',       variant:'128GB / 256GB / 512GB',          desc:'A18 Pro chip, ProMotion display, and pro camera controls. Power in a compact form.',                     price: 99000  },
+  { id:3,  cat:'iphone',      image:'images/AppleiPhone16-removebg-preview.webp', tag:'Popular',       badge:'Hot',   badgeType:'gold', name:'iPhone 16',           variant:'128GB / 256GB',                  desc:'A18 chip, new camera button, and all-day battery. The essential iPhone upgrade.',                        price: 89000  },
+  { id:4,  cat:'iphone',      image:'images/iphone 16 plus.webp', tag:'Popular',       badge:'',      badgeType:'',     name:'iPhone 16 Plus',      variant:'128GB / 256GB',                  desc:'A18 chip with a massive 6.7-inch display. Superb battery life in a familiar design.',                    price: 95000  },
+  { id:7,  cat:'iphone',      image:'images/15promax.webp',   badge:'',      badgeType:'',     name:'iPhone 15 Pro Max',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:5,  cat:'iphone',      image:'images/Apple_iPhone_15_Plus_bleu_128Go_avec_Forfait_5G-removebg-preview.webp',   badge:'Deal',  badgeType:'green',name:'iPhone 15 Plus',           variant:'128GB / 256GB',                  desc:'A16 Bionic, Dynamic Island, and USB-C. An excellent value flagship.',                                   price: 72000  },
+  { id:6,  cat:'iphone',      image:'images/iPhone 15 Pro.webp',   badge:'',      badgeType:'',     name:'iPhone 15 Pro',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:8,  cat:'iphone',      image:'images/iPhone_15___Mobile_Phones_Direct___MobilePhonesDirect-removebg-preview (1).webp',   badge:'',      badgeType:'',     name:'iPhone 15',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+{ id:9,  cat:'iphone',      image:'images/14 pro max.webp',   badge:'',      badgeType:'',     name:'iPhone 14 Pro Max',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:10,  cat:'iphone',      image:'images/14 plus.webp',   badge:'Deal',  badgeType:'green',name:'iPhone 14 Plus',           variant:'128GB / 256GB',                  desc:'A16 Bionic, Dynamic Island, and USB-C. An excellent value flagship.',                                   price: 72000  },
+  { id:11,  cat:'iphone',      image:'images/Restored_Apple_iPhone_14_Pro_256gb_Silver__Verizon__Mq0x3ll_a_Used_Excellent_Condition-removebg-preview.webp',   badge:'',      badgeType:'',     name:'iPhone 14 Pro',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:12,  cat:'iphone',      image:'images/14.webp',   badge:'',      badgeType:'',     name:'iPhone 14',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+{ id:13,  cat:'iphone',      image:'images/13promax.webp',   badge:'',      badgeType:'',     name:'iPhone 13 Pro Max',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:14,  cat:'iphone',      image:'images/13.webp',   badge:'Deal',  badgeType:'green',name:'iPhone 13 Plus',           variant:'128GB / 256GB',                  desc:'A16 Bionic, Dynamic Island, and USB-C. An excellent value flagship.',                                   price: 72000  },
+  { id:15,  cat:'iphone',      image:'images/13 pro.webp',   badge:'',      badgeType:'',     name:'iPhone 13 Pro',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
+  { id:16,  cat:'iphone',      image:'images/13.webp',   badge:'',      badgeType:'',     name:'iPhone 13',       variant:'128GB / 256GB',                  desc:'A17 Pro chip, titanium frame, and ProRes video. Still one of the best.',                                price: 88000  },
 
   // MAC
-  { id:7,  cat:'mac',         image:'images/mac14.png', tag:'Best Seller',   badge:'Top',   badgeType:'gold', name:'MacBook Pro 14"',     variant:'M3 Pro · 18GB / 36GB RAM',       desc:'M3 Pro chip, Liquid Retina XDR display, and up to 22hr battery. Built for creators.',                   price: 185000 },
-  { id:8,  cat:'mac',         image:'images/mac16.png', tag:'Pro Pick',      badge:'',      badgeType:'',     name:'MacBook Pro 16"',     variant:'M3 Max · 36GB / 128GB RAM',      desc:'M3 Max chip, the largest Liquid Retina XDR. Unmatched performance for professionals.',                  price: 265000 },
-  { id:9,  cat:'mac',         image:'images/macAir13.png', tag:'New',           badge:'New',   badgeType:'',     name:'MacBook Air 13"',     variant:'M3 · 8GB / 16GB RAM',            desc:'Featherweight at 1.24kg, M3 chip, and up to 18hr battery. The ultimate everyday laptop.',               price: 135000 },
-  { id:10, cat:'mac',         image:'images/macAir 15.png', tag:'New',           badge:'New',   badgeType:'',     name:'MacBook Air 15"',     variant:'M3 · 8GB / 16GB RAM',            desc:'All the power of MacBook Air in a larger 15.3-inch Liquid Retina display.',                            price: 155000 },
-  { id:11, cat:'mac',         image:'images/Apple_iMac_24.png', tag:'Desktop',       badge:'',      badgeType:'',     name:'iMac 24"',            variant:'M3 · 8GB / 24GB RAM',            desc:'All-in-one brilliance. Stunning 4.5K Retina display and M3 in a sleek, colourful design.',              price: 178000 },
-  { id:12, cat:'mac',         image:'images/Mac Mini.png', tag:'Pro Desktop',   badge:'',      badgeType:'',     name:'Mac Studio',          variant:'M3 Max / Ultra',                 desc:'Compact. Powerful. M3 Max or Ultra. The most capable Mac for the studio.',                             price: 310000 },
-  { id:13, cat:'mac',         image:'images/Mac Pro.png', tag:'Ultimate',      badge:'',      badgeType:'',     name:'Mac Pro',             variant:'M2 Ultra',                       desc:'The most expandable Mac ever. M2 Ultra with up to 192GB memory.',                                       price: 780000 },
+  { id:7,  cat:'mac',         image:'images/mac14.webp', tag:'Best Seller',   badge:'Top',   badgeType:'gold', name:'MacBook Pro 14"',     variant:'M3 Pro · 18GB / 36GB RAM',       desc:'M3 Pro chip, Liquid Retina XDR display, and up to 22hr battery. Built for creators.',                   price: 185000 },
+  { id:8,  cat:'mac',         image:'images/mac16.webp', tag:'Pro Pick',      badge:'',      badgeType:'',     name:'MacBook Pro 16"',     variant:'M3 Max · 36GB / 128GB RAM',      desc:'M3 Max chip, the largest Liquid Retina XDR. Unmatched performance for professionals.',                  price: 265000 },
+  { id:9,  cat:'mac',         image:'images/macAir13.webp', tag:'New',           badge:'New',   badgeType:'',     name:'MacBook Air 13"',     variant:'M3 · 8GB / 16GB RAM',            desc:'Featherweight at 1.24kg, M3 chip, and up to 18hr battery. The ultimate everyday laptop.',               price: 135000 },
+  { id:10, cat:'mac',         image:'images/macAir 15.webp', tag:'New',           badge:'New',   badgeType:'',     name:'MacBook Air 15"',     variant:'M3 · 8GB / 16GB RAM',            desc:'All the power of MacBook Air in a larger 15.3-inch Liquid Retina display.',                            price: 155000 },
+  { id:11, cat:'mac',         image:'images/Apple_iMac_24.webp', tag:'Desktop',       badge:'',      badgeType:'',     name:'iMac 24"',            variant:'M3 · 8GB / 24GB RAM',            desc:'All-in-one brilliance. Stunning 4.5K Retina display and M3 in a sleek, colourful design.',              price: 178000 },
+  { id:12, cat:'mac',         image:'images/Mac Mini.webp', tag:'Pro Desktop',   badge:'',      badgeType:'',     name:'Mac Studio',          variant:'M3 Max / Ultra',                 desc:'Compact. Powerful. M3 Max or Ultra. The most capable Mac for the studio.',                             price: 310000 },
+  { id:13, cat:'mac',         image:'images/Mac Pro.webp', tag:'Ultimate',      badge:'',      badgeType:'',     name:'Mac Pro',             variant:'M2 Ultra',                       desc:'The most expandable Mac ever. M2 Ultra with up to 192GB memory.',                                       price: 780000 },
 
   // IPAD
-  { id:14, cat:'ipad',        image:'images/Ipad Pro 13.png', tag:'New',           badge:'New',   badgeType:'',     name:'iPad Pro 13"',        variant:'M4 · Wi-Fi / Wi-Fi + Cellular',  desc:'Ultra-thin, M4 chip, and OLED Tandem display. The most advanced iPad ever made.',                      price: 145000 },
-  { id:15, cat:'ipad',        image:'images/ipad pro 11.png', tag:'New',           badge:'New',   badgeType:'',     name:'iPad Pro 11"',        variant:'M4 · Wi-Fi / Wi-Fi + Cellular',  desc:'Same M4 power in a compact, portable form. Brilliant OLED display.',                                   price: 115000 },
-  { id:16, cat:'ipad',        image:'images/Ipad Air 13.png', tag:'Popular',       badge:'Hot',   badgeType:'gold', name:'iPad Air 13"',        variant:'M2 · Wi-Fi / Cellular',          desc:'Powerful M2 chip in a larger canvas. Perfect for creative work and productivity.',                      price: 88000  },
-  { id:17, cat:'ipad',        image:'images/Ipad Air 11.png', tag:'Popular',       badge:'',      badgeType:'',     name:'iPad Air 11"',        variant:'M2 · Wi-Fi / Cellular',          desc:'Versatile M2 chip, all-day battery, and a brilliant Liquid Retina display.',                           price: 72000  },
-  { id:18, cat:'ipad',        image:'images/Ipad 10 Gen.png', tag:'Great Value',   badge:'Deal',  badgeType:'green',name:'iPad (10th Gen)',      variant:'A14 · Wi-Fi / Cellular',         desc:'The essential iPad. All-screen design, USB-C, and 12MP camera. Perfect for everyone.',                 price: 48000  },
-  { id:19, cat:'ipad',        image:'images/iPad 7th.png', tag:'For Learning',  badge:'',      badgeType:'',     name:'iPad mini (7th Gen)', variant:'A17 Pro · Wi-Fi / Cellular',     desc:'Ultra-portable with a 8.3-inch display. A17 Pro chip in the palm of your hand.',                       price: 62000  },
+  { id:14, cat:'ipad',        image:'images/Ipad Pro 13.webp', tag:'New',           badge:'New',   badgeType:'',     name:'iPad Pro 13"',        variant:'M4 · Wi-Fi / Wi-Fi + Cellular',  desc:'Ultra-thin, M4 chip, and OLED Tandem display. The most advanced iPad ever made.',                      price: 145000 },
+  { id:15, cat:'ipad',        image:'images/ipad pro 11.webp', tag:'New',           badge:'New',   badgeType:'',     name:'iPad Pro 11"',        variant:'M4 · Wi-Fi / Wi-Fi + Cellular',  desc:'Same M4 power in a compact, portable form. Brilliant OLED display.',                                   price: 115000 },
+  { id:16, cat:'ipad',        image:'images/Ipad Air 13.webp', tag:'Popular',       badge:'Hot',   badgeType:'gold', name:'iPad Air 13"',        variant:'M2 · Wi-Fi / Cellular',          desc:'Powerful M2 chip in a larger canvas. Perfect for creative work and productivity.',                      price: 88000  },
+  { id:17, cat:'ipad',        image:'images/Ipad Air 11.webp', tag:'Popular',       badge:'',      badgeType:'',     name:'iPad Air 11"',        variant:'M2 · Wi-Fi / Cellular',          desc:'Versatile M2 chip, all-day battery, and a brilliant Liquid Retina display.',                           price: 72000  },
+  { id:18, cat:'ipad',        image:'images/Ipad 10 Gen.webp', tag:'Great Value',   badge:'Deal',  badgeType:'green',name:'iPad (10th Gen)',      variant:'A14 · Wi-Fi / Cellular',         desc:'The essential iPad. All-screen design, USB-C, and 12MP camera. Perfect for everyone.',                 price: 48000  },
+  { id:19, cat:'ipad',        image:'images/iPad 7th.webp', tag:'For Learning',  badge:'',      badgeType:'',     name:'iPad mini (7th Gen)', variant:'A17 Pro · Wi-Fi / Cellular',     desc:'Ultra-portable with a 8.3-inch display. A17 Pro chip in the palm of your hand.',                       price: 62000  },
 
   // APPLE WATCH
-  { id:20, cat:'watch',       image:'images/Apple Watch Series 10.png', tag:'New',           badge:'New',   badgeType:'',     name:'Apple Watch Series 10',variant:'GPS / GPS + Cellular',           desc:'Thinner than ever, larger display, faster charging. The most capable Apple Watch yet.',                price: 42000  },
-  { id:21, cat:'watch',       image:'images/Apple Watch Ultra 2.png', tag:'Adventure',     badge:'',      badgeType:'',     name:'Apple Watch Ultra 2', variant:'Titanium · GPS + Cellular',       desc:'Built for endurance athletes. 60-hour battery, precision dual-frequency GPS.',                          price: 88000  },
-  { id:22, cat:'watch',       image:'images/Apple Watch SE (2nd Gen).png', tag:'Great Value',   badge:'Deal',  badgeType:'green',name:'Apple Watch SE (2nd Gen)', variant:'GPS · Aluminium',            desc:'The essentials of Apple Watch at an accessible price. Perfect first Apple Watch.',                      price: 24000  },
+  { id:20, cat:'watch',       image:'images/Apple Watch Series 10.webp', tag:'New',           badge:'New',   badgeType:'',     name:'Apple Watch Series 10',variant:'GPS / GPS + Cellular',           desc:'Thinner than ever, larger display, faster charging. The most capable Apple Watch yet.',                price: 42000  },
+  { id:21, cat:'watch',       image:'images/Apple Watch Ultra 2.webp', tag:'Adventure',     badge:'',      badgeType:'',     name:'Apple Watch Ultra 2', variant:'Titanium · GPS + Cellular',       desc:'Built for endurance athletes. 60-hour battery, precision dual-frequency GPS.',                          price: 88000  },
+  { id:22, cat:'watch',       image:'images/Apple Watch SE (2nd Gen).webp', tag:'Great Value',   badge:'Deal',  badgeType:'green',name:'Apple Watch SE (2nd Gen)', variant:'GPS · Aluminium',            desc:'The essentials of Apple Watch at an accessible price. Perfect first Apple Watch.',                      price: 24000  },
 
   // AUDIO
-  { id:23, cat:'audio',       image:'images/AirPods Pro (2nd Gen).png', tag:'Featured',      badge:'Hot',   badgeType:'gold', name:'AirPods Pro (2nd Gen)', variant:'USB-C / Lightning',             desc:'Adaptive Audio, Personalised Spatial Audio, and Hearing Health features.',                             price: 18500  },
-  { id:24, cat:'audio',       image:'images/AirPods (4th Gen).png', tag:'Popular',       badge:'',      badgeType:'',     name:'AirPods (4th Gen)',    variant:'ANC / Standard',                 desc:'Completely redesigned with a new smaller case, USB-C, and improved sound quality.',                    price: 12500  },
-  { id:25, cat:'audio',       image:'images/AirPods Max.png', tag:'Over-Ear',      badge:'',      badgeType:'',     name:'AirPods Max',         variant:'USB-C · 6 colours',              desc:'High-fidelity audio, Active Noise Cancellation, and Adaptive Transparency in a premium headphone.',   price: 54000  },
-  { id:26, cat:'audio',       image:'images/HomePod (2nd Gen).png', tag:'Smart Home',    badge:'',      badgeType:'',     name:'HomePod (2nd Gen)',    variant:'Midnight / White',               desc:'Room-sensing Spatial Audio, ultra-wideband chip, and smart home hub.',                                 price: 38000  },
-  { id:27, cat:'audio',       image:'images/HomePod mini.png', tag:'Compact',       badge:'',      badgeType:'',     name:'HomePod mini',        variant:'5 colours',                      desc:'Surprisingly full sound in a compact design. A brilliant smart home speaker.',                          price: 14000  },
+  { id:23, cat:'audio',       image:'images/AirPods Pro (2nd Gen).webp', tag:'Featured',      badge:'Hot',   badgeType:'gold', name:'AirPods Pro (2nd Gen)', variant:'USB-C / Lightning',             desc:'Adaptive Audio, Personalised Spatial Audio, and Hearing Health features.',                             price: 18500  },
+  { id:24, cat:'audio',       image:'images/AirPods (4th Gen).webp', tag:'Popular',       badge:'',      badgeType:'',     name:'AirPods (4th Gen)',    variant:'ANC / Standard',                 desc:'Completely redesigned with a new smaller case, USB-C, and improved sound quality.',                    price: 12500  },
+  { id:25, cat:'audio',       image:'images/AirPods Max.webp', tag:'Over-Ear',      badge:'',      badgeType:'',     name:'AirPods Max',         variant:'USB-C · 6 colours',              desc:'High-fidelity audio, Active Noise Cancellation, and Adaptive Transparency in a premium headphone.',   price: 54000  },
+  { id:26, cat:'audio',       image:'images/HomePod (2nd Gen).webp', tag:'Smart Home',    badge:'',      badgeType:'',     name:'HomePod (2nd Gen)',    variant:'Midnight / White',               desc:'Room-sensing Spatial Audio, ultra-wideband chip, and smart home hub.',                                 price: 38000  },
+  { id:27, cat:'audio',       image:'images/HomePod mini.webp', tag:'Compact',       badge:'',      badgeType:'',     name:'HomePod mini',        variant:'5 colours',                      desc:'Surprisingly full sound in a compact design. A brilliant smart home speaker.',                          price: 14000  },
 
   // ACCESSORIES
-  { id:28, cat:'accessories', image:'images/MagSafe Charger.png', tag:'Charging',      badge:'',      badgeType:'',     name:'MagSafe Charger',     variant:'1m / 2m Cable',                  desc:'The fastest wireless charging for iPhone 12 and later. Clicks on magnetically.',                        price: 2800   },
-  { id:29, cat:'accessories', image:'images/Magic Keyboard.png', tag:'Keyboard',      badge:'',      badgeType:'',     name:'Magic Keyboard',      variant:'Touch ID / Touch ID + Num Pad',  desc:'Wireless, rechargeable, with Touch ID for fast, secure authentication.',                               price: 9500   },
-  { id:30, cat:'accessories', image:'images/Magic Mouse.png', tag:'Input',         badge:'',      badgeType:'',     name:'Magic Mouse',         variant:'Space Grey / Silver / Black',    desc:'Multi-Touch surface for gestures. Wireless and rechargeable.',                                          price: 7500   },
-  { id:31, cat:'accessories', image:'images/Apple Pencil Pro.png', tag:'For iPad',      badge:'',      badgeType:'',     name:'Apple Pencil Pro',    variant:'Compatible: iPad Pro / Air M2+', desc:'Find My, double-tap, squeeze, and barrel roll. The most capable Apple Pencil.',                         price: 12000  },
-  { id:32, cat:'accessories', image:'images/Apple Pencil (USB-C).png', tag:'For iPad',      badge:'',      badgeType:'',     name:'Apple Pencil (USB-C)', variant:'Compatible: Most iPads',         desc:'Pixel-perfect precision for all the ways you use iPad. Simple USB-C pairing.',                         price: 6500   },
+  { id:28, cat:'accessories', image:'images/MagSafe Charger.webp', tag:'Charging',      badge:'',      badgeType:'',     name:'MagSafe Charger',     variant:'1m / 2m Cable',                  desc:'The fastest wireless charging for iPhone 12 and later. Clicks on magnetically.',                        price: 2800   },
+  { id:29, cat:'accessories', image:'images/Magic Keyboard.webp', tag:'Keyboard',      badge:'',      badgeType:'',     name:'Magic Keyboard',      variant:'Touch ID / Touch ID + Num Pad',  desc:'Wireless, rechargeable, with Touch ID for fast, secure authentication.',                               price: 9500   },
+  { id:30, cat:'accessories', image:'images/Magic Mouse.webp', tag:'Input',         badge:'',      badgeType:'',     name:'Magic Mouse',         variant:'Space Grey / Silver / Black',    desc:'Multi-Touch surface for gestures. Wireless and rechargeable.',                                          price: 7500   },
+  { id:31, cat:'accessories', image:'images/Apple Pencil Pro.webp', tag:'For iPad',      badge:'',      badgeType:'',     name:'Apple Pencil Pro',    variant:'Compatible: iPad Pro / Air M2+', desc:'Find My, double-tap, squeeze, and barrel roll. The most capable Apple Pencil.',                         price: 12000  },
+  { id:32, cat:'accessories', image:'images/Apple Pencil (USB-C).webp', tag:'For iPad',      badge:'',      badgeType:'',     name:'Apple Pencil (USB-C)', variant:'Compatible: Most iPads',         desc:'Pixel-perfect precision for all the ways you use iPad. Simple USB-C pairing.',                         price: 6500   },
 ];
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
@@ -1071,7 +1166,21 @@ function toggleCart() {
 }
 
 function checkout() {
-  showToast('Checkout coming soon — contact us to order!');
+  if (cart.length === 0) {
+    showToast('Your cart is empty.');
+    return;
+  }
+  const lines = cart.map(item =>
+    `• ${item.name}${item.variant ? ' (' + item.variant + ')' : ''} × ${item.qty} — ${formatPrice(item.price * item.qty)}`
+  );
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const message =
+    "Hi iStore by Sophi, I'd like to order:\n\n" +
+    lines.join('\n') +
+    `\n\nTotal: ${formatPrice(total)}`;
+
+  window.open(`https://wa.me/251911234567?text=${encodeURIComponent(message)}`, '_blank');
+  showToast('Order sent to WhatsApp — we\'ll confirm shortly!');
   toggleCart();
 }
 
@@ -1112,6 +1221,26 @@ document.getElementById('sort-select').addEventListener('change', e => {
 // ─── INIT ────────────────────────────────────────────────────────────────────
 renderProducts();
 updateCartUI();
+
+// ─── MOBILE NAV ──────────────────────────────────────────────────────────────
+function toggleMobileNav() {
+  const links = document.getElementById('nav-links');
+  const toggle = document.getElementById('nav-toggle');
+  const scrim = document.getElementById('nav-scrim');
+  const isOpen = links.classList.toggle('open');
+  toggle.classList.toggle('open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  scrim.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeMobileNav() {
+  document.getElementById('nav-links').classList.remove('open');
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+  document.getElementById('nav-scrim').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('#nav-links a').forEach(a => a.addEventListener('click', closeMobileNav));
 </script>
 <script src="istore-chat-widget.js" data-api-url="https://portfolio-f92c.onrender.com/api/chat" defer></script>
 </body>
