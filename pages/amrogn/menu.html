@@ -1,244 +1,262 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Amrogn Chicken</title>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amrogn Chicken — Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="amrogn.css">
     <link rel="stylesheet" href="menu.css">
-    <link rel="icon" type="image/png" href="../amrogn/Pictures/amrogn logo.png">
+    <link rel="icon" type="image/png" href="Pictures/amrogn logo.png">
 </head>
 <body>
 
-     <header class="navbar1">
-    <div class="nav-container1">
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="amrogn.html" class="logo">
+                <img src="Pictures/amrogn logo.png" alt="Amrogn Logo">
+                <span class="logo-text">Amrogn <span>Chicken</span></span>
+            </a>
 
-         <div class="logo">
-        <img src="../amrogn/Pictures/amrogn logo.png" alt="Amrogn Logo">
-        <h2 class="logo1">Amrogn Chicken</h2>
-         </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
 
-        <nav class="nav-links1">
-               <a href="amrogn.html" >Home</a>
-            <a href="menu.html"class="active">Menu</a>
-            <a href="branches.html" >Branches</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-
-    </div>
-</header>
-
-  <section class="menu-header">
-    <h1>OUR MENU</h1>
-    <p>Fresh • Affordable • Delicious</p>
-</section>
-
-<div class="branch-selector">
-    <span class="order-label">Order from:</span>
-
-    <button class="branch-btn active"
-        onclick="selectBranch('Bole','0911000000', this)">Bole</button>
-
-    <button class="branch-btn"
-        onclick="selectBranch('Piassa','0912000000', this)">Piassa</button>
-
-    <button class="branch-btn"
-        onclick="selectBranch('Sarbet','0913000000', this)">Sarbet</button>
-</div>
-
-<div class="selected-branch">
-    Call <span id="branchName">Bole</span>:
-    <a id="branchPhone" href="tel:0911000000">0911 000 000</a>
-</div>
-
-
-<!-- FRIED & GRILLED -->
-<section class="menu-block red-bg">
-    <h2>Fried & Grilled Chicken</h2>
-
-    <div class="menu-row">
-        <span>Fried Chicken (4 Pieces)</span>
-        <span class="price">ETB 1,463.00</span>
-    </div>
-
-    <div class="menu-row">
-        <span>Fried Chicken (3 Pieces)</span>
-        <span class="price">ETB 1,078.00</span>
-    </div>
-
-    <div class="menu-row">
-        <span>Fried Chicken (2 Pieces)</span>
-        <span class="price">ETB 814.00</span>
-    </div>
-
-    <div class="menu-row">
-        <span>Half Roasted Chicken</span>
-        <span class="price">ETB 1,529.00</span>
-    </div>
-
-    <div class="menu-row">
-        <span>Full Roasted Chicken</span>
-        <span class="price">ETB 2,827.00</span>
-    </div>
-
-    <div class="menu-row">
-        <span>Half Grilled Chicken (Quarter Leg)</span>
-        <span class="price">ETB 1,364.00</span>
-    </div>
-
-    <div class="menu-row">
-        <span>Full Grilled Chicken</span>
-        <span class="price">ETB 2,563.00</span>
-    </div>
-
-    <div class="menu-row">
-        <span>Double Quarter Leg</span>
-        <span class="price">ETB 2,750.00</span>
-    </div>
-</section>
-
-<!-- SHAWARMA & SPECIALS -->
-<section class="menu-block brown-bg">
-    <h2>Shawarma, Wraps & Specials</h2>
-
-    <div class="menu-row highlight">
-        <span>Special Shawarma <small>POPULAR</small></span>
-        <span class="price">ETB 748.00</span>
-    </div>
-
-    <div class="menu-row">
-        <span>Chicken Shawarma</span>
-        <span class="price">ETB 594.00</span>
-    </div>
-
-    <div class="menu-row unavailable">
-        <div class="item-left">
-            <span class="item-name">Shawarma Plate</span>
-            <span class="status">Not Available</span>
+            <nav class="nav-links" id="navLinks">
+                <a href="amrogn.html">Home</a>
+                <a href="menu.html" class="active">Menu</a>
+                <a href="branches.html">Branches</a>
+                <a href="contact.html">Contact</a>
+            </nav>
         </div>
-        <span class="price">ETB 1,463.00</span>
+    </header>
+
+    <section class="page-header">
+        <h1>OUR MENU</h1>
+        <p>Fresh • Affordable • Delicious</p>
+    </section>
+
+    <div class="branch-selector">
+        <span class="order-label">Order from:</span>
+
+        <button class="branch-btn active"
+            onclick="selectBranch('Bole','0911000111', this)">Bole</button>
+
+        <button class="branch-btn"
+            onclick="selectBranch('Megenagna','0911000222', this)">Megenagna</button>
+
+        <button class="branch-btn"
+            onclick="selectBranch('CMC','0911000555', this)">CMC</button>
+
+        <button class="branch-btn"
+            onclick="selectBranch('4 Kilo','0911000666', this)">4 Kilo</button>
+
+        <button class="branch-btn"
+            onclick="selectBranch('Mekanisa','0911000777', this)">Mekanisa</button>
+
+        <button class="branch-btn"
+            onclick="selectBranch('Hawassa','0911000333', this)">Hawassa</button>
+
+        <button class="branch-btn"
+            onclick="selectBranch('Adama','0911000444', this)">Adama</button>
     </div>
 
-    <div class="menu-row">
-        <span>Chicken Burger</span>
-        <span class="price">ETB 770.00</span>
+    <div class="selected-branch">
+        Call <span id="branchName">Bole</span>:
+        <a id="branchPhone" href="tel:0911000111">0911 000 111</a>
     </div>
 
-    <div class="menu-row">
-        <span>Chicken Fajita</span>
-        <span class="price">ETB 1,023.00</span>
-    </div>
+    <nav class="category-nav">
+        <a href="#fried-grilled">Fried & Grilled</a>
+        <a href="#shawarma">Shawarma & Specials</a>
+        <a href="#drinks">Drinks</a>
+    </nav>
 
-    <div class="menu-row">
-        <span>Chicken Kabsa</span>
-        <span class="price">ETB 1,441.00</span>
-    </div>
+    <!-- FRIED & GRILLED -->
+    <section class="menu-block red-bg" id="fried-grilled">
+        <h2>Fried & Grilled Chicken</h2>
 
-    <div class="menu-row">
-        <span>Chicken Mofu (Full)</span>
-        <span class="price">ETB 2,750.00</span>
-    </div>
+        <div class="menu-row">
+            <span>Fried Chicken (4 Pieces)</span>
+            <span class="price">ETB 1,463.00</span>
+        </div>
 
-    <div class="menu-row">
-        <span>Chicken Mofu (Half)</span>
-        <span class="price">ETB 1,430.00</span>
-    </div>
-</section>
+        <div class="menu-row">
+            <span>Fried Chicken (3 Pieces)</span>
+            <span class="price">ETB 1,078.00</span>
+        </div>
 
-<!-- DRINKS -->
-<section class="menu-block yellow-bg">
-    <h2>Drinks</h2>
+        <div class="menu-row">
+            <span>Fried Chicken (2 Pieces)</span>
+            <span class="price">ETB 814.00</span>
+        </div>
 
-    <div class="menu-row">
-        <span>Water (500ml)</span>
-        <span class="price">ETB 66.00</span>
-    </div>
+        <div class="menu-row">
+            <span>Half Roasted Chicken</span>
+            <span class="price">ETB 1,529.00</span>
+        </div>
 
-    <div class="menu-row">
-        <span>Coca-Cola (350ml)</span>
-        <span class="price">ETB 143.00</span>
-    </div>
+        <div class="menu-row">
+            <span>Full Roasted Chicken</span>
+            <span class="price">ETB 2,827.00</span>
+        </div>
 
-    <div class="menu-row">
-        <span>Sprite (350ml)</span>
-        <span class="price">ETB 143.00</span>
-    </div>
+        <div class="menu-row">
+            <span>Half Grilled Chicken (Quarter Leg)</span>
+            <span class="price">ETB 1,364.00</span>
+        </div>
 
-    <div class="menu-row">
-        <span>Fanta Orange (350ml)</span>
-        <span class="price">ETB 143.00</span>
-    </div>
+        <div class="menu-row">
+            <span>Full Grilled Chicken</span>
+            <span class="price">ETB 2,563.00</span>
+        </div>
 
-    <div class="menu-row">
-        <span>Fanta Pineapple (350ml)</span>
-        <span class="price">ETB 143.00</span>
-    </div>
-</section>
+        <div class="menu-row">
+            <span>Double Quarter Leg</span>
+            <span class="price">ETB 2,750.00</span>
+        </div>
+    </section>
 
+    <!-- SHAWARMA & SPECIALS -->
+    <section class="menu-block brown-bg" id="shawarma">
+        <h2>Shawarma, Wraps & Specials</h2>
 
-<footer class="footer">
+        <div class="menu-row highlight">
+            <span>Special Shawarma <small>POPULAR</small></span>
+            <span class="price">ETB 748.00</span>
+        </div>
 
-<div class="footer-container">
+        <div class="menu-row">
+            <span>Chicken Shawarma</span>
+            <span class="price">ETB 594.00</span>
+        </div>
 
-<div class="footer-brand">
-        <img src="../amrogn/Pictures/amrogn logo.png" alt="Amrogn Logo">
-<h3>Amrogn Chicken</h3>
-<p>
-Fresh chicken served daily across Ethiopia.  
-Visit one of our branches and enjoy the taste everyone loves.
-</p>
-</div>
+        <div class="menu-row unavailable">
+            <div class="item-left">
+                <span class="item-name">Shawarma Plate</span>
+                <span class="status">Not Available</span>
+            </div>
+            <span class="price">ETB 1,463.00</span>
+        </div>
 
-<div class="footer-links">
-<h4>Quick Links</h4>
-<ul>
-<li><a href="amrogn.html">Home</a></li>
-<li><a href="menu.html">Menu</a></li>
-<li><a href="branches.html">Branches</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
-</div>
+        <div class="menu-row">
+            <span>Chicken Burger</span>
+            <span class="price">ETB 770.00</span>
+        </div>
 
-<div class="footer-contact">
-<h4>Contact</h4>
-<p>📍 Addis Ababa, Ethiopia</p>
-<p>📞 <a href="tel:+251911000000">+251 911 000 000</a></p>
-<p>📧 amrognchicken@gmail.com</p>
-<p>🕒 Open Daily: 10 AM – 10 PM</p>
-</div>
+        <div class="menu-row">
+            <span>Chicken Fajita</span>
+            <span class="price">ETB 1,023.00</span>
+        </div>
 
-<div class="footer-social">
-<h4>Follow Us</h4>
-<div class="social-icons">
-<a href="#">🌐</a>
-<a href="#">📸</a>
-<a href="#">🐦</a>
-<a href="#">📘</a>
-</div>
-</div>
+        <div class="menu-row">
+            <span>Chicken Kabsa</span>
+            <span class="price">ETB 1,441.00</span>
+        </div>
 
-</div>
+        <div class="menu-row">
+            <span>Chicken Mofu (Full)</span>
+            <span class="price">ETB 2,750.00</span>
+        </div>
 
-<div class="footer-bottom">
-<p>© 2026 Amrogn Chicken. All Rights Reserved.</p>
-</div>
+        <div class="menu-row">
+            <span>Chicken Mofu (Half)</span>
+            <span class="price">ETB 1,430.00</span>
+        </div>
+    </section>
 
-</footer>
+    <!-- DRINKS -->
+    <section class="menu-block yellow-bg" id="drinks">
+        <h2>Drinks</h2>
 
-<script>
-function selectBranch(name, phone, element) {
+        <div class="menu-row">
+            <span>Water (500ml)</span>
+            <span class="price">ETB 66.00</span>
+        </div>
 
-    document.getElementById("branchName").innerText = name;
-    document.getElementById("branchPhone").innerText = phone;
-    document.getElementById("branchPhone").href = "tel:" + phone;
+        <div class="menu-row">
+            <span>Coca-Cola (350ml)</span>
+            <span class="price">ETB 143.00</span>
+        </div>
 
-    document.querySelectorAll(".branch-btn").forEach(btn => {
-        btn.classList.remove("active");
-    });
+        <div class="menu-row">
+            <span>Sprite (350ml)</span>
+            <span class="price">ETB 143.00</span>
+        </div>
 
-    element.classList.add("active");
-}
-</script>
+        <div class="menu-row">
+            <span>Fanta Orange (350ml)</span>
+            <span class="price">ETB 143.00</span>
+        </div>
 
+        <div class="menu-row">
+            <span>Fanta Pineapple (350ml)</span>
+            <span class="price">ETB 143.00</span>
+        </div>
+    </section>
 
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <img src="Pictures/amrogn logo.png" alt="Amrogn Logo">
+                <h3>Amrogn Chicken</h3>
+                <p>
+                    Fresh chicken served daily across Ethiopia.
+                    Visit one of our branches and enjoy the taste everyone loves.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="amrogn.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="branches.html">Branches</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>Addis Ababa, Ethiopia</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><a href="tel:+251911000000">+251 911 000 000</a></p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>amrognchicken@gmail.com</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>Open Daily: 10 AM – 10 PM</p>
+            </div>
+
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Website"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span></a>
+                    <a href="#" aria-label="Instagram"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span></a>
+                    <a href="#" aria-label="Twitter"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></span></a>
+                    <a href="#" aria-label="Facebook"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Amrogn Chicken. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function selectBranch(name, phone, element) {
+            document.getElementById("branchName").innerText = name;
+            document.getElementById("branchPhone").innerText = phone;
+            document.getElementById("branchPhone").href = "tel:" + phone;
+
+            document.querySelectorAll(".branch-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            element.classList.add("active");
+        }
+    </script>
+    <script src="amrogn.js"></script>
 </body>
 </html>

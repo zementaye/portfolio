@@ -1,191 +1,178 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Amrogn Chicken</title>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amrogn Chicken — Branches</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="amrogn.css">
     <link rel="stylesheet" href="menu.css">
-    <link rel="icon" type="image/png" href="../amrogn/Pictures/amrogn logo.png">
+    <link rel="icon" type="image/png" href="Pictures/amrogn logo.png">
 </head>
 <body>
 
-     <header class="navbar1">
-    <div class="nav-container1">
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="amrogn.html" class="logo">
+                <img src="Pictures/amrogn logo.png" alt="Amrogn Logo">
+                <span class="logo-text">Amrogn <span>Chicken</span></span>
+            </a>
 
-         <div class="logo">
-        <img src="../amrogn/Pictures/amrogn logo.png" alt="Amrogn Logo">
-        <h2 class="logo1">Amrogn Chicken</h2>
-         </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
 
-      
-        <nav class="nav-links1">
-               <a href="amrogn.html" >Home</a>
-            <a href="menu.html">Menu</a>
-            <a href="branches.html" class="active">Branches</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </div>
-</header>
-    
+            <nav class="nav-links" id="navLinks">
+                <a href="amrogn.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="branches.html" class="active">Branches</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-   <section class="branches-section">
+    <section class="page-header">
+        <h1>Find a Branch Near You</h1>
+        <p>Fresh chicken served daily across Ethiopia</p>
+    </section>
 
-<h2>Find an Amrogn Chicken Near You</h2>
-<p class="branch-subtitle">Fresh chicken served daily across Ethiopia</p>
+    <section class="branches-section">
 
-<div class="city-filter">
-<button onclick="filterCity('all')">All</button>
-<button onclick="filterCity('addis')">Addis Ababa</button>
-<button onclick="filterCity('hawassa')">Hawassa</button>
-<button onclick="filterCity('adama')">Adama</button>
-</div>
+        <div class="city-filter">
+            <button class="active" onclick="filterCity('all', this)">All</button>
+            <button onclick="filterCity('addis', this)">Addis Ababa</button>
+            <button onclick="filterCity('hawassa', this)">Hawassa</button>
+            <button onclick="filterCity('adama', this)">Adama</button>
+        </div>
 
-<div class="branches-grid">
+        <div class="branches-grid">
 
-<div class="branch-card" data-city="addis">
-<h3>📍 Bole Branch</h3>
-<p>Bole Road, Addis Ababa</p>
-<p>📞 +251 911 000 111</p>
+            <div class="branch-card" data-city="addis">
+                <h3><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>Bole Branch</h3>
+                <p>Bole Road, Addis Ababa</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>+251 911 000 111</p>
+                <iframe src="https://www.google.com/maps?q=bole+addis+ababa&output=embed"></iframe>
+            </div>
 
-<iframe 
-src="https://www.google.com/maps?q=bole+addis+ababa&output=embed">
-</iframe>
-</div>
+            <div class="branch-card" data-city="addis">
+                <h3><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>Megenagna Branch</h3>
+                <p>Megenagna Square</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>+251 911 000 222</p>
+                <iframe src="https://www.google.com/maps?q=megenagna+addis+ababa&output=embed"></iframe>
+            </div>
 
-<div class="branch-card" data-city="addis">
-<h3>📍 Megenagna Branch</h3>
-<p>Megenagna Square</p>
-<p>📞 +251 911 000 222</p>
+            <div class="branch-card" data-city="addis">
+                <h3><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>CMC</h3>
+                <p>CMC Square</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>+251 911 000 555</p>
+                <iframe src="https://www.google.com/maps?q=cmc+addis+ababa&output=embed"></iframe>
+            </div>
 
-<iframe 
-src="https://www.google.com/maps?q=megenagna+addis+ababa&output=embed">
-</iframe>
-</div>
+            <div class="branch-card" data-city="addis">
+                <h3><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>4 Kilo Branch</h3>
+                <p>4 kilo, New to Ambassador Building</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>+251 911 000 666</p>
+                <iframe src="https://www.google.com/maps?q=4+kilo+addis+ababa&output=embed"></iframe>
+            </div>
 
-<div class="branch-card" data-city="addis">
-<h3>📍 CMC </h3>
-<p>CMC Square</p>
-<p>📞 +251 911 000 222</p>
+            <div class="branch-card" data-city="addis">
+                <h3><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>Mekanisa Branch</h3>
+                <p>Mekanisa, Infront of Silk-Road Hospital</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>+251 911 000 777</p>
+                <iframe src="https://www.google.com/maps?q=mekanisa+addis+ababa&output=embed"></iframe>
+            </div>
 
-<iframe 
-src="https://www.google.com/maps?q=megenagna+addis+ababa&output=embed">
-</iframe>
-</div>
+            <div class="branch-card" data-city="hawassa">
+                <h3><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>Hawassa Branch</h3>
+                <p>Lake Road, Hawassa</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>+251 911 000 333</p>
+                <iframe src="https://www.google.com/maps?q=hawassa+ethiopia&output=embed"></iframe>
+            </div>
 
-<div class="branch-card" data-city="addis">
-<h3>📍 4 Kilo Branch</h3>
-<p>4 kilo, New to Ambassador Building</p>
-<p>📞 +251 911 000 222</p>
+            <div class="branch-card" data-city="adama">
+                <h3><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>Adama Branch</h3>
+                <p>Main Street, Adama</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>+251 911 000 444</p>
+                <iframe src="https://www.google.com/maps?q=adama+ethiopia&output=embed"></iframe>
+            </div>
 
-<iframe 
-src="https://www.google.com/maps?q=megenagna+addis+ababa&output=embed">
-</iframe>
-</div>
+        </div>
+    </section>
 
-<div class="branch-card" data-city="addis">
-<h3>📍 Mekanisa Branch</h3>
-<p>Mekanisa, Infront of Silk-Road Hospital</p>
-<p>📞 +251 911 000 222</p>
+    <footer class="footer">
+        <div class="footer-container">
 
-<iframe 
-src="https://www.google.com/maps?q=megenagna+addis+ababa&output=embed">
-</iframe>
-</div>
+            <div class="footer-brand">
+                <img src="Pictures/amrogn logo.png" alt="Amrogn Logo">
+                <h3>Amrogn Chicken</h3>
+                <p>
+                    Fresh chicken served daily across Ethiopia.
+                    Visit one of our branches and enjoy the taste everyone loves.
+                </p>
+            </div>
 
-<div class="branch-card" data-city="hawassa">
-<h3>📍 Hawassa Branch</h3>
-<p>Lake Road, Hawassa</p>
-<p>📞 +251 911 000 333</p>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="amrogn.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="branches.html">Branches</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
 
-<iframe 
-src="https://www.google.com/maps?q=hawassa+ethiopia&output=embed">
-</iframe>
-</div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>Addis Ababa, Ethiopia</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><a href="tel:+251911000000">+251 911 000 000</a></p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>amrognchicken@gmail.com</p>
+                <p><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>Open Daily: 10 AM – 10 PM</p>
+            </div>
 
-<div class="branch-card" data-city="adama">
-<h3>📍 Adama Branch</h3>
-<p>Main Street, Adama</p>
-<p>📞 +251 911 000 444</p>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Website"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span></a>
+                    <a href="#" aria-label="Instagram"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span></a>
+                    <a href="#" aria-label="Twitter"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></span></a>
+                    <a href="#" aria-label="Facebook"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span></a>
+                </div>
+            </div>
 
-<iframe 
-src="https://www.google.com/maps?q=adama+ethiopia&output=embed">
-</iframe>
-</div>
+        </div>
 
-</div>
-</section>
-<script>
-function filterCity(city){
+        <div class="footer-bottom">
+            <p>© 2026 Amrogn Chicken. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-let branches = document.querySelectorAll(".branch-card");
+    <a href="menu.html" class="floating-order">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+        Order Now
+    </a>
 
-branches.forEach(branch => {
+    <script>
+        function filterCity(city, button) {
+            let branches = document.querySelectorAll(".branch-card");
 
-if(city === "all"){
-branch.style.display="block";
-}
+            branches.forEach(branch => {
+                if (city === "all") {
+                    branch.style.display = "block";
+                } else if (branch.dataset.city === city) {
+                    branch.style.display = "block";
+                } else {
+                    branch.style.display = "none";
+                }
+            });
 
-else if(branch.dataset.city === city){
-branch.style.display="block";
-}
-
-else{
-branch.style.display="none";
-}
-
-});
-
-}
-</script>
-
-<footer class="footer">
-
-<div class="footer-container">
-
-<div class="footer-brand">
-        <img src="../amrogn/Pictures/amrogn logo.png" alt="Amrogn Logo">
-<h3>Amrogn Chicken</h3>
-<p>
-Fresh chicken served daily across Ethiopia.  
-Visit one of our branches and enjoy the taste everyone loves.
-</p>
-</div>
-
-<div class="footer-links">
-<h4>Quick Links</h4>
-<ul>
-<li><a href="amrogn.html">Home</a></li>
-<li><a href="menu.html">Menu</a></li>
-<li><a href="branches.html">Branches</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
-</div>
-
-<div class="footer-contact">
-<h4>Contact</h4>
-<p>📍 Addis Ababa, Ethiopia</p>
-<p>📞 <a href="tel:+251911000000">+251 911 000 000</a></p>
-<p>📧 amrognchicken@gmail.com</p>
-<p>🕒 Open Daily: 10 AM – 10 PM</p>
-</div>
-
-<div class="footer-social">
-<h4>Follow Us</h4>
-<div class="social-icons">
-<a href="#">🌐</a>
-<a href="#">📸</a>
-<a href="#">🐦</a>
-<a href="#">📘</a>
-</div>
-</div>
-
-</div>
-
-<div class="footer-bottom">
-<p>© 2026 Amrogn Chicken. All Rights Reserved.</p>
-</div>
-
-</footer>
-
+            document.querySelectorAll(".city-filter button").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            button.classList.add("active");
+        }
+    </script>
+    <script src="amrogn.js"></script>
 </body>
 </html>
