@@ -4,112 +4,123 @@
   <meta charset="UTF-8">
   <title>Zemen | Frontend Developer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zemen Taye — frontend developer building responsive, interactive web interfaces.">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header>
+<div class="progress-bar"></div>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<header id="navbar">
   <nav>
     <h2 class="logo">Zemen.</h2>
     <ul>
       <li><a href="#projects">Projects</a></li>
-
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button id="theme-toggle">🌙</button>
+    <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
   </nav>
 </header>
 
 <section class="hero">
-  <div class="hero-content">
-    <h1>Frontend Developer</h1>
-    <h2>I build modern, responsive, and interactive web interfaces.</h2>
-    <a href="#projects" class="btn">View My Work</a>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <p class="eyebrow">Frontend developer, Addis Ababa</p>
+      <h1>I build interfaces people actually enjoy using.</h1>
+      <p class="typing-line">Right now that means <span id="typing"></span></p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn">See my work</a>
+        <a href="#contact" class="btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+    </div>
   </div>
 </section>
 
-<section id="about" class="section glass">
-  <h2>About Me</h2>
-
-  <p>
-    I am a frontend developer with a strong foundation in computer science.
-    During college, I studied programming fundamentals, data structures,
-    algorithms, and software engineering principles.
-  </p>
-
-  <br>
-
-  <p>
-    I developed a strong passion for web technologies and user interface development.
-    I enjoy transforming ideas into interactive, responsive, and performant web experiences.
-  </p>
-
-  <br>
-
-  <p><strong>My strengths include:</strong></p>
-
-  <ul class="about-list">
-    <li>✔ Clean and structured HTML</li>
-    <li>✔ Modern CSS (Flexbox & Grid)</li>
-    <li>✔ Interactive JavaScript</li>
-    <li>✔ Performance optimization</li>
-    <li>✔ Responsive design principles</li>
-    <li>✔ Database Management</li>
-  </ul>
+<section id="about" class="section">
+  <h2>About me</h2>
+  <div class="about-grid">
+    <div>
+      <p>
+        I'm a frontend developer with a foundation in computer science —
+        programming fundamentals, data structures, algorithms, and software
+        engineering principles from college, put to work building real
+        interfaces since.
+      </p>
+      <p>
+        I care about turning ideas into web experiences that are fast,
+        responsive, and don't feel like a template — from ecommerce
+        storefronts to restaurant sites to admin dashboards.
+      </p>
+    </div>
+    <ul class="about-list">
+      <li><span class="check">✔</span> Clean, structured HTML</li>
+      <li><span class="check">✔</span> Modern CSS — Flexbox & Grid</li>
+      <li><span class="check">✔</span> Interactive JavaScript</li>
+      <li><span class="check">✔</span> Performance optimization</li>
+      <li><span class="check">✔</span> Responsive design</li>
+      <li><span class="check">✔</span> Database management</li>
+    </ul>
+  </div>
 </section>
 
-<section id="projects" class="section glass">
-  <h2>Selected Projects</h2>
+<section id="projects" class="section">
+  <h2>Selected projects</h2>
 
   <div class="projects">
-  <a href="Tomy/tomy-fashion.html" class="project-card">
-    <h3>Ecommerce Landing Page</h3>
-    <p>
-      Responsive ecommerce interface focused on clean layout,
-      performance, and mobile optimization.
-    </p>
-  </a>
+    <a href="Tomy/tomy-fashion.html" class="project-card">
+      <div class="project-cover"><span>T</span></div>
+      <div class="project-body">
+        <h3>Tomy Fashion</h3>
+        <p>Ecommerce storefront with a live admin backend — product catalog, pricing, and cart, built for clean layout and mobile performance.</p>
+        <div class="tags"><span>Flask</span><span>MongoDB</span><span>Ecommerce</span></div>
+        <span class="project-link">View project</span>
+      </div>
+    </a>
 
-  <a href="pages/amrogn/amrogn.html" class="project-card">
-    <h3>Restaurant Website</h3>
-    <p>
-     Browse Amrogn Chicken’s menu, explore branch locations across Ethiopia, and enjoy a modern dining experience online.
-    </p>
-  </a>
+    <a href="pages/amrogn/amrogn.html" class="project-card">
+      <div class="project-cover"><span>A</span></div>
+      <div class="project-body">
+        <h3>Amrogn Chicken</h3>
+        <p>Restaurant site for browsing the menu, exploring branch locations across Ethiopia, and a modern ordering-adjacent dining experience.</p>
+        <div class="tags"><span>JavaScript</span><span>Restaurant</span></div>
+        <span class="project-link">View project</span>
+      </div>
+    </a>
 
-  <a href="IStore/istore.html" class="project-card">
-    <h3>Apple Store by Sophi</h3>
-    <p>
-  Discover premium Apple devices and accessories, view detailed product information, and shop through a modern, elegant storefront experience.
-</p>
-  </a>
-</div>
-
+    <a href="IStore/istore.html" class="project-card">
+      <div class="project-cover"><span>I</span></div>
+      <div class="project-body">
+        <h3>Apple Store by Sophi</h3>
+        <p>Premium storefront for Apple devices and accessories — detailed product pages and a modern, elegant shopping experience.</p>
+        <div class="tags"><span>JavaScript</span><span>Storefront</span></div>
+        <span class="project-link">View project</span>
+      </div>
+    </a>
   </div>
 </section>
 
-
-<section id="contact" class="section glass">
-  <h2>Let's Work Together</h2>
-  <a href="mailto:zemexasma@email.com?subject=Portfolio Inquiry" class="btn">
-    Contact Me 
-  </a>
+<section id="contact" class="section contact-section">
+  <h2>Let's work together</h2>
+  <p>Have a project in mind, or just want to talk through an idea? I'm happy to hear about it.</p>
+  <a href="mailto:zemexasma@email.com?subject=Portfolio Inquiry" class="btn">Contact me</a>
 </section>
 
 <footer>
-  <p>© 2026 Zemen Taye  |  +251-923-447-817  |  @zementaye </p>
+  <p>© 2026 Zemen Taye · +251-923-447-817 · @zementaye</p>
 </footer>
 
-<script>
-  const toggle = document.getElementById("theme-toggle");
-  toggle.addEventListener("click", () => {
-    document.body.classList.toggle("light-mode");
-    toggle.textContent =
-      document.body.classList.contains("light-mode") ? "🌞" : "🌙";
-  });
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>

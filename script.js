@@ -1,71 +1,72 @@
-// Scroll Progress Bar
+// Scroll progress bar + navbar background
 window.addEventListener("scroll", () => {
   const scrollTop = document.documentElement.scrollTop;
   const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const progress = (scrollTop / scrollHeight) * 100;
-  
-  document.querySelector(".progress-bar").style.width = progress + "%";
+  const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+  const bar = document.querySelector(".progress-bar");
+  if (bar) bar.style.width = progress + "%";
 
   const navbar = document.getElementById("navbar");
-  if (scrollTop > 50) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
-  }
+  if (navbar) navbar.classList.toggle("scrolled", scrollTop > 50);
 });
 
-// Custom Cursor
+// Custom cursor (only meaningful on fine-pointer devices; CSS hides it elsewhere)
 const cursor = document.querySelector(".cursor");
 const follower = document.querySelector(".cursor-follower");
 
-document.addEventListener("mousemove", (e) => {
-  cursor.style.top = e.clientY + "px";
-  cursor.style.left = e.clientX + "px";
+if (cursor && follower && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.top = e.clientY + "px";
+    cursor.style.left = e.clientX + "px";
+    follower.style.top = e.clientY + "px";
+    follower.style.left = e.clientX + "px";
+  });
+}
 
-  follower.style.top = e.clientY - 15 + "px";
-  follower.style.left = e.clientX - 15 + "px";
-});
-
-// Scroll Reveal
+// Scroll reveal for sections
 const sections = document.querySelectorAll(".section");
 
-window.addEventListener("scroll", () => {
-  sections.forEach(section => {
+function revealSections() {
+  sections.forEach((section) => {
     const top = section.getBoundingClientRect().top;
     if (top < window.innerHeight - 100) {
       section.classList.add("show");
     }
   });
-});
+}
 
-// Theme Toggle
+window.addEventListener("scroll", revealSections);
+revealSections();
+
+// Theme toggle
 const toggle = document.getElementById("theme-toggle");
 
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("light-mode");
-  toggle.textContent = document.body.classList.contains("light-mode") ? "🌞" : "🌙";
-});
+if (toggle) {
+  toggle.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+    toggle.textContent = document.body.classList.contains("light-mode") ? "🌞" : "🌙";
+  });
+}
 
-// Typing Effect
-const words = ["fast websites.", "interactive experiences.", "modern UI."];
+// Typing effect in the hero subline
+const words = ["fast ecommerce storefronts.", "interactive dashboards.", "modern UI."];
 let wordIndex = 0;
 let letterIndex = 0;
-let currentWord = "";
 let isDeleting = false;
 
 function typeEffect() {
   const typingElement = document.getElementById("typing");
   if (!typingElement) return;
 
-  if (wordIndex >= words.length) wordIndex = 0;
-  currentWord = words[wordIndex];
+  const currentWord = words[wordIndex % words.length];
 
   if (!isDeleting) {
     typingElement.textContent = currentWord.substring(0, letterIndex + 1);
     letterIndex++;
     if (letterIndex === currentWord.length) {
       isDeleting = true;
-      setTimeout(typeEffect, 1000);
+      setTimeout(typeEffect, 1400);
       return;
     }
   } else {
@@ -77,7 +78,12 @@ function typeEffect() {
     }
   }
 
-  setTimeout(typeEffect, isDeleting ? 50 : 100);
+  setTimeout(typeEffect, isDeleting ? 40 : 90);
 }
 
-typeEffect();
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  typeEffect();
+} else {
+  const typingElement = document.getElementById("typing");
+  if (typingElement) typingElement.textContent = words[0];
+}
