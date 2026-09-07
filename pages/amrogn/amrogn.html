@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amrogn Chicken</title>
+    <meta name="description" content="Amrogn Chicken — fresh fried and grilled chicken, shawarma and more, served daily at branches across Addis Ababa, Hawassa and Adama.">
+    <meta property="og:title" content="Amrogn Chicken">
+    <meta property="og:description" content="Fresh chicken served daily across Ethiopia. Big taste, small price.">
+    <meta property="og:image" content="Pictures/amrogn_head.png">
+    <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,12 +26,12 @@
                 <span class="logo-text">Amrogn <span>Chicken</span></span>
             </a>
 
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
 
             <nav class="nav-links" id="navLinks">
-                <a href="amrogn.html" class="active">Home</a>
+                <a href="amrogn.html" class="active" aria-current="page">Home</a>
                 <a href="menu.html">Menu</a>
                 <a href="branches.html">Branches</a>
                 <a href="contact.html">Contact</a>
@@ -50,7 +55,7 @@
             </div>
         </div>
         <div class="hero-image">
-            <img src="Pictures/amrogn_head.png" alt="Chicken">
+            <img src="Pictures/amrogn_head.png" alt="Amrogn fried chicken">
         </div>
     </section>
 
