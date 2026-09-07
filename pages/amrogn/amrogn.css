@@ -164,7 +164,7 @@ a {
         gap: 8px;
         position: fixed;
         right: 18px;
-        bottom: 18px;
+        bottom: 86px;
         z-index: 900;
         background: var(--color-red);
         color: var(--color-white);
@@ -178,6 +178,102 @@ a {
     .floating-order:hover {
         background: var(--color-red-dark);
     }
+}
+
+/* -------- WHATSAPP FLOATING BUTTON (all pages, all sizes) -------- */
+.whatsapp-float {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 950;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-strong);
+    transition: transform var(--transition);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.08);
+}
+
+.whatsapp-float svg {
+    width: 28px;
+    height: 28px;
+    fill: #ffffff;
+    stroke: none;
+}
+
+/* -------- POPULAR PICKS (Home) -------- */
+.popular-picks {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.popular-picks h2 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.popular-picks .section-subtitle {
+    color: #6b5a4a;
+    margin-bottom: 34px;
+}
+
+.picks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    text-align: left;
+    margin-bottom: 34px;
+}
+
+.pick-card {
+    background: var(--color-white);
+    padding: 24px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+}
+
+.pick-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-strong);
+}
+
+.pick-card h3 {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pick-tag {
+    background: var(--color-gold);
+    color: var(--color-brown);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 4px;
+    letter-spacing: 0.4px;
+}
+
+.pick-price {
+    font-weight: 700;
+    color: var(--color-red);
+    margin: 8px 0;
+}
+
+.pick-card p:last-child {
+    color: #4a4038;
+    margin: 0;
 }
 
 /* -------- NAVBAR (shared across every page) -------- */
