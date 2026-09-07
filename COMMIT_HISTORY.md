@@ -2,6 +2,21 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-09-07** Redesign UI: wire up scroll/typing/cursor effects, give each project card its own color identity (da9b268)
+- **2026-09-07** Fix navbar height consistency and add breathing room to hero (26e9962)
+- **2026-09-07** Add PWA support (manifest, service worker, offline fallback), Twitter cards, skip-to-content link, focus-visible styles, broken-image fallback (2a40025)
+- **2026-09-07** Add WhatsApp button, structured data, back-to-top, menu search, FAQ, popular picks, print styles (c6771b5)
+- **2026-09-07** Fix a11y and SEO gaps: iframe titles, form labels, meta/OG tags (6811a78)
+- **2026-09-02** Fix filled wishlist heart shape and replace slider arrows with SVG chevrons (d10fe30)
+- **2026-09-02** Sync branch lists, add sticky sub-nav, SVG icons, active filter state (33e95d4)
+- **2026-09-02** 20-point site audit: fix mobile nav, favicon, SEO metadata, dead checkout button, form validation, image compression (WebP), dynamic footer year, custom 404 (07433f6)
+- **2026-09-01** Anchor out-of-stock size tooltip inward for edge pills so it doesn't clip past the card (58dfc28)
+- **2026-09-01** Record local folder and Downloads path; combine PowerShell blocks (8aa3bd1)
+- **2026-09-01** Redesign iStore UI: replace cream/gold/serif look with ink/signal-blue system; record local repo path and Downloads location in CLAUDE.md (a34787d)
+- **2026-08-31** Reserve consistent swatch-row height so title/price align across cards regardless of color options (f8e270a)
+- **2026-08-31** Fix swatch buttons inheriting Add-to-Cart button styling; remove hex tooltip (1035a13)
+- **2026-08-31** Make color swatches more compact (9bac510)
+- **2026-08-31** Update commit history (78c42c3)
 - **2026-08-31** Fix color-swatch timing lag and redesign swatch UI on Tomy product cards (bc97fc5)
 - **2026-08-29** Update commit history (a32b52f)
 - **2026-08-29** Update commit history (bdba26b)
