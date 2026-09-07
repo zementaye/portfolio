@@ -6,6 +6,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#3450E0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="iStore Sophi">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>iStore by Sophi — Genuine Apple iPhone, Mac & iPad in Addis Ababa</title>
 <meta name="description" content="Shop genuine Apple products in Addis Ababa: iPhone, MacBook, iPad, Apple Watch and AirPods with full warranty, expert setup, and a trade-in program. Visit us on Bole Road.">
@@ -13,6 +18,12 @@
 <meta property="og:description" content="Genuine Apple iPhone, Mac, iPad, Watch and AirPods — expert setup, full warranty, trade-in program. Bole Road, Addis Ababa.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="images/istore.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="iStore by Sophi — Genuine Apple Products in Addis Ababa">
+<meta name="twitter:description" content="Genuine Apple iPhone, Mac, iPad, Watch and AirPods — expert setup, full warranty, trade-in program. Bole Road, Addis Ababa.">
+<meta name="twitter:image" content="images/istore.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,10 +50,36 @@
     --line: #D9DCE4;
     --ink: #14161C;
     --ink-mid: #4A4F5C;
-    --ink-soft: #878D9C;
+    --ink-soft: #666C7A; /* darkened from #878D9C for WCAG AA contrast (was 3.32:1, now 5.26:1) */
   }
 
   html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 1000;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  .img-fallback { object-fit: contain !important; padding: 15% !important; opacity: 0.6; background: var(--mist-100); }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 
   body {
     font-family: 'IBM Plex Sans', sans-serif;
@@ -829,8 +866,39 @@
     .products-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
   }
 </style>
+<link rel="canonical" href="https://istoresophi.com/istore.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ElectronicsStore",
+  "name": "iStore by Sophi",
+  "image": "https://istoresophi.com/images/istore.png",
+  "url": "https://istoresophi.com/istore.html",
+  "telephone": "+251911234567",
+  "email": "hello@istoresophi.com",
+  "priceRange": "ETB",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Bole Road, Near Edna Mall",
+    "addressLocality": "Addis Ababa",
+    "addressCountry": "ET"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "09:00",
+    "closes": "20:00"
+  },
+  "sameAs": [
+    "https://facebook.com/istoresophi",
+    "https://instagram.com/istoresophi",
+    "https://tiktok.com/@istoresophi"
+  ]
+}
+</script>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <!-- NAV -->
 <nav>
@@ -848,7 +916,7 @@
 <div class="nav-scrim" id="nav-scrim" onclick="closeMobileNav()"></div>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="main">
   <div class="hero-content">
     <div class="hero-kicker"><span class="hero-kicker-dot"></span>Bole Road, Addis Ababa</div>
     <h1 class="hero-title">Genuine Apple, set up right, backed by people you can call.</h1>
@@ -862,7 +930,7 @@
   </div>
   <div class="hero-visual">
     <div class="hero-visual-tag">In stock now — <strong>iPhone 17 Pro Max</strong></div>
-    <img src="images/iPhone_17_Pro_and_iPhone_17_Pro_Max-removebg-preview (1).webp" alt="iPhone 17 Pro Max">
+    <img src="images/iPhone_17_Pro_and_iPhone_17_Pro_Max-removebg-preview (1).webp" alt="iPhone 17 Pro Max" fetchpriority="high" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23E6E9EE%22/%3E%3Cpath d=%22M55 135l32-42 26 30 18-22 28 34H55z%22 fill=%22%23B7BCC7%22/%3E%3Ccircle cx=%2278%22 cy=%2278%22 r=%2213%22 fill=%22%23B7BCC7%22/%3E%3C/svg%3E';this.classList.add('img-fallback')">
     <div class="hero-visual-plate"></div>
   </div>
 </section>
@@ -901,28 +969,28 @@
 
   <div class="products-grid">
     <div class="product-card reveal">
-      <div class="product-photo"><img src="images/AppleiPhone16-removebg-preview.webp" alt="iPhone 16"></div>
+      <div class="product-photo"><img src="images/AppleiPhone16-removebg-preview.webp" alt="iPhone 16" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23E6E9EE%22/%3E%3Cpath d=%22M55 135l32-42 26 30 18-22 28 34H55z%22 fill=%22%23B7BCC7%22/%3E%3Ccircle cx=%2278%22 cy=%2278%22 r=%2213%22 fill=%22%23B7BCC7%22/%3E%3C/svg%3E';this.classList.add('img-fallback')"></div>
       <div class="product-tag">New arrival</div>
       <div class="product-name">iPhone 16</div>
       <p class="product-desc">A18 chip, a new camera button, and all-day battery life.</p>
       <div class="product-price">From ETB 89,000</div>
     </div>
     <div class="product-card reveal">
-      <div class="product-photo"><img src="images/mac14.webp" alt="MacBook Pro 14-inch"></div>
+      <div class="product-photo"><img src="images/mac14.webp" alt="MacBook Pro 14-inch" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23E6E9EE%22/%3E%3Cpath d=%22M55 135l32-42 26 30 18-22 28 34H55z%22 fill=%22%23B7BCC7%22/%3E%3Ccircle cx=%2278%22 cy=%2278%22 r=%2213%22 fill=%22%23B7BCC7%22/%3E%3C/svg%3E';this.classList.add('img-fallback')"></div>
       <div class="product-tag">Best seller</div>
       <div class="product-name">MacBook Pro 14"</div>
       <p class="product-desc">M3 Pro chip and a Liquid Retina XDR display, built for creators.</p>
       <div class="product-price">From ETB 185,000</div>
     </div>
     <div class="product-card reveal">
-      <div class="product-photo"><img src="images/AirPods Pro (2nd Gen).webp" alt="AirPods Pro"></div>
+      <div class="product-photo"><img src="images/AirPods Pro (2nd Gen).webp" alt="AirPods Pro" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23E6E9EE%22/%3E%3Cpath d=%22M55 135l32-42 26 30 18-22 28 34H55z%22 fill=%22%23B7BCC7%22/%3E%3Ccircle cx=%2278%22 cy=%2278%22 r=%2213%22 fill=%22%23B7BCC7%22/%3E%3C/svg%3E';this.classList.add('img-fallback')"></div>
       <div class="product-tag">Most requested</div>
       <div class="product-name">AirPods Pro</div>
       <p class="product-desc">Adaptive Audio and Personalized Spatial Audio in a compact case.</p>
       <div class="product-price">From ETB 18,500</div>
     </div>
     <div class="product-card reveal">
-      <div class="product-photo"><img src="images/Apple Watch Series 10.webp" alt="Apple Watch Series 10"></div>
+      <div class="product-photo"><img src="images/Apple Watch Series 10.webp" alt="Apple Watch Series 10" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23E6E9EE%22/%3E%3Cpath d=%22M55 135l32-42 26 30 18-22 28 34H55z%22 fill=%22%23B7BCC7%22/%3E%3Ccircle cx=%2278%22 cy=%2278%22 r=%2213%22 fill=%22%23B7BCC7%22/%3E%3C/svg%3E';this.classList.add('img-fallback')"></div>
       <div class="product-tag">Just landed</div>
       <div class="product-name">Apple Watch Series 10</div>
       <p class="product-desc">Thinner design, a larger display, and faster charging.</p>
@@ -964,7 +1032,7 @@
     </div>
     <div class="why-visual reveal">
   <div class="why-visual-inner">
-    <img src="images/Sophi.webp" alt="iStore by Sophi" class="why-visual-img">
+    <img src="images/Sophi.webp" alt="iStore by Sophi" class="why-visual-img" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23E6E9EE%22/%3E%3Cpath d=%22M55 135l32-42 26 30 18-22 28 34H55z%22 fill=%22%23B7BCC7%22/%3E%3Ccircle cx=%2278%22 cy=%2278%22 r=%2213%22 fill=%22%23B7BCC7%22/%3E%3C/svg%3E';this.classList.add('img-fallback')">
     <div class="why-badge">Since 2018</div>
   </div>
 </div>
@@ -1055,7 +1123,7 @@
         <div class="footer-col-title">Get in touch</div>
         <a href="tel:+251911234567">+251 91 123 4567</a>
         <a href="mailto:hello@istoresophi.com">hello@istoresophi.com</a>
-        <a href="https://wa.me/251911234567" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://wa.me/251911234567" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
     </div>
   </div>
@@ -1087,6 +1155,10 @@
   }
   document.querySelectorAll('#nav-links a').forEach(a => a.addEventListener('click', closeMobileNav));
 
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMobileNav();
+  });
+
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
@@ -1097,6 +1169,13 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
 </script>
 <script src="istore-chat-widget.js" data-api-url="https://portfolio-f92c.onrender.com/api/chat" defer></script>
 </body>

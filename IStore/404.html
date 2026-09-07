@@ -6,10 +6,17 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#3450E0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="iStore Sophi">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page Not Found — iStore by Sophi</title>
 <meta name="description" content="The page you're looking for doesn't exist. Head back to iStore by Sophi to keep browsing genuine Apple products in Addis Ababa.">
 <meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,10 +33,34 @@
     --line: #D9DCE4;
     --ink: #14161C;
     --ink-mid: #4A4F5C;
-    --ink-soft: #878D9C;
+    --ink-soft: #666C7A; /* darkened from #878D9C for WCAG AA contrast (was 3.32:1, now 5.26:1) */
   }
 
   html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 1000;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 
   body {
     font-family: 'IBM Plex Sans', sans-serif;
@@ -146,12 +177,13 @@
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <nav>
   <a href="istore.html" class="nav-logo">iStore <span>by Sophi</span></a>
 </nav>
 
-<main>
+<main id="main">
   <div class="error-content">
     <div class="error-code">404</div>
     <h1 class="error-title">This page doesn't exist</h1>
@@ -165,6 +197,13 @@
 
 <footer>© <span id="footer-year"></span> iStore by Sophi. All rights reserved.</footer>
 <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+</script>
 
 </body>
 </html>

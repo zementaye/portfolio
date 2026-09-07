@@ -8,11 +8,23 @@
 <meta property="og:title" content="Shop the Full Apple Lineup — iStore by Sophi">
 <meta property="og:description" content="Every iPhone, Mac, iPad, Watch and accessory we carry, with live pricing in Ethiopian Birr.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="images/istore.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shop the Full Apple Lineup — iStore by Sophi">
+<meta name="twitter:description" content="Every iPhone, Mac, iPad, Watch and accessory we carry, with live pricing in Ethiopian Birr.">
+<meta name="twitter:image" content="images/istore.png">
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#3450E0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="iStore Sophi">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,10 +46,36 @@
     --line: #D9DCE4;
     --ink: #14161C;
     --ink-mid: #4A4F5C;
-    --ink-soft: #878D9C;
+    --ink-soft: #666C7A; /* darkened from #878D9C for WCAG AA contrast (was 3.32:1, now 5.26:1) */
   }
 
   html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 1000;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  .img-fallback { object-fit: contain !important; padding: 15% !important; opacity: 0.6; background: var(--mist-100); }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 
   body {
     font-family: 'IBM Plex Sans', sans-serif;
@@ -772,8 +810,10 @@
   transform: scaleX(1);
 }
 </style>
+<link rel="canonical" href="https://istoresophi.com/products.html">
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <!-- NAV -->
 <nav>
@@ -796,7 +836,7 @@
 <div class="nav-scrim" id="nav-scrim" onclick="closeMobileNav()"></div>
 
 <!-- PAGE HEADER -->
-<div class="page-header">
+<div class="page-header" id="main">
   <div class="page-header-inner">
     <div>
       <h1 class="page-title">Everything we carry</h1>
@@ -857,7 +897,7 @@
         <div class="footer-col-title">Get in touch</div>
         <a href="tel:+251911234567">+251 91 123 4567</a>
         <a href="mailto:hello@istoresophi.com">hello@istoresophi.com</a>
-        <a href="https://wa.me/251911234567" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://wa.me/251911234567" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
     </div>
   </div>
@@ -877,7 +917,7 @@
       <div class="cart-title-label">Your Selection</div>
       <div class="cart-title">Shopping Cart</div>
     </div>
-    <button class="cart-close" onclick="toggleCart()">✕</button>
+    <button class="cart-close" onclick="toggleCart()" aria-label="Close cart">✕</button>
   </div>
   <div class="cart-items" id="cart-items-list"></div>
   <div class="cart-footer" id="cart-footer" style="display:none;">
@@ -988,6 +1028,23 @@ function getFiltered() {
   return list;
 }
 
+// ─── IMAGE FALLBACK ──────────────────────────────────────────────────────────
+// If a product photo fails to load, swap in a simple inline placeholder
+// instead of leaving a broken-image icon. No extra network request, so it
+// works offline too.
+const IMG_FALLBACK = 'data:image/svg+xml,' + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">' +
+  '<rect width="200" height="200" fill="#E6E9EE"/>' +
+  '<path d="M55 135l32-42 26 30 18-22 28 34H55z" fill="#B7BCC7"/>' +
+  '<circle cx="78" cy="78" r="13" fill="#B7BCC7"/>' +
+  '</svg>'
+);
+function handleImgError(img) {
+  img.onerror = null;
+  img.src = IMG_FALLBACK;
+  img.classList.add('img-fallback');
+}
+
 function formatPrice(n) {
   return 'ETB ' + n.toLocaleString('en-ET');
 }
@@ -1043,7 +1100,7 @@ function renderCard(p) {
     <div class="product-card" data-id="${p.id}">
       ${p.badge ? `<div class="card-badge ${p.badgeType}">${p.badge}</div>` : ''}
       <div class="card-img-wrap">
-  <img src="${p.image}" alt="${p.name}" class="card-img">
+  <img src="${p.image}" alt="${p.name}" class="card-img" loading="lazy" onerror="handleImgError(this)">
     </div>
       <div class="card-body">
         <div class="card-tag">${p.tag}</div>
@@ -1138,7 +1195,7 @@ function updateCartUI() {
   list.innerHTML = cart.map(item => `
     <div class="cart-item">
       <div class="cart-item-img">
-  <img src="${item.image}" alt="${item.name}" class="cart-product-img">
+  <img src="${item.image}" alt="${item.name}" class="cart-product-img" onerror="handleImgError(this)">
 </div>
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
@@ -1147,9 +1204,9 @@ function updateCartUI() {
       </div>
       <div class="cart-item-controls">
         <div class="qty-wrap">
-          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+          <button class="qty-btn" onclick="changeQty(${item.id}, -1)" aria-label="Decrease quantity">−</button>
           <span class="qty-num">${item.qty}</span>
-          <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+          <button class="qty-btn" onclick="changeQty(${item.id}, 1)" aria-label="Increase quantity">+</button>
         </div>
         <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
       </div>
@@ -1241,6 +1298,22 @@ function closeMobileNav() {
   document.body.style.overflow = '';
 }
 document.querySelectorAll('#nav-links a').forEach(a => a.addEventListener('click', closeMobileNav));
+
+// ─── KEYBOARD ACCESSIBILITY ──────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const drawer = document.getElementById('cart-drawer');
+  if (drawer && drawer.classList.contains('open')) { toggleCart(); return; }
+  const navLinks = document.getElementById('nav-links');
+  if (navLinks && navLinks.classList.contains('open')) { closeMobileNav(); }
+});
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
 </script>
 <script src="istore-chat-widget.js" data-api-url="https://portfolio-f92c.onrender.com/api/chat" defer></script>
 </body>
