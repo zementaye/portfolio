@@ -105,6 +105,26 @@
     display: block;
 }
 
+/* Photo layers: each ingredient is a positioned PNG (.part) */
+.part {
+    position: absolute;
+    display: block;
+    height: auto;
+    max-width: none;
+    user-select: none;
+    will-change: transform, opacity;
+}
+
+.layer-plate .part  { filter: drop-shadow(0 26px 22px rgba(0, 0, 0, 0.55)); }
+.layer-rice .part   { filter: drop-shadow(0 10px 9px rgba(0, 0, 0, 0.35)); }
+.layer-chicken .part { filter: drop-shadow(0 12px 9px rgba(0, 0, 0, 0.5)); }
+.layer-sauce .part  {
+    transform-origin: 0 50%;
+    /* the source splash is cropped flat at the sides: feather those edges */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 82%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 82%, transparent 100%);
+}
+
 /* Reduced motion: no pinning, finished dish shown */
 .build.is-static {
     height: auto !important;

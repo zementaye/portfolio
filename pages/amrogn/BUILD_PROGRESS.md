@@ -24,3 +24,9 @@ Home page (`amrogn.html`) has a pinned scroll section `#build`. Ingredients drop
 
 ## ALL BATCHES DONE
 Animation complete: plate, rice, chicken, veggies, sauces. Ideas if wanted later: swap SVG layers for real PNG cut-outs, add a subtle steam/glow at the end.
+
+## PHOTO VERSION (current)
+- Layers are now real transparent PNGs in `Pictures/build/` (plate, rice, chicken-1, chicken-2, sauces), animated as `.part` images (data-delay / data-rot / data-flip / data-anim="wipe") by build.js.
+- Order now: plate -> rice -> chicken (2 drumsticks, staggered drop) -> sauces (wipe left to right, edges feathered by mask in build.css).
+- VEGGIES are NOT in the photo version yet (the drawn SVG ones looked cartoonish next to photos). TODO: get a veggies PNG (carrot sticks / cucumber / lettuce / tomato, 3/4 view, transparent), save as `Pictures/build/veggies.png`, add a layer between chicken and sauces using `<img class="part" ...>` positioned on the rice top/right. Positions are % of the dish (520x400 box).
+- To adjust a photo's position: edit its inline style left/top/width (percent of the dish) in amrogn.html.
