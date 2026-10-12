@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="amrogn.css">
     <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="build.css">
     <link rel="icon" type="image/png" href="Pictures/amrogn logo.png">
 </head>
 <body>
@@ -56,6 +57,1315 @@
         </div>
         <div class="hero-image">
             <img src="Pictures/amrogn_head.png" alt="Amrogn fried chicken">
+        </div>
+    </section>
+
+    <!-- BUILD YOUR PLATE (scroll animation) -->
+    <section class="build" id="build" aria-label="How we build your plate">
+        <div class="build-stage">
+            <div class="build-copy">
+                <span class="build-eyebrow">Made fresh daily</span>
+                <h2>Built just for you.</h2>
+                <div class="build-step" aria-live="polite">
+                    <p class="build-step-title">The plate</p>
+                    <p class="build-step-text">Scroll to watch your plate come together.</p>
+                </div>
+                <div class="build-dots" aria-hidden="true"></div>
+            </div>
+
+            <div class="dish" role="img" aria-label="A plate of rice, grilled chicken, vegetables and sauces">
+                <!-- Layers are drawn bottom to top, in scroll order. -->
+
+                <!-- 1. PLATE -->
+                <div class="layer layer-plate" data-title="The plate" data-text="A clean plate, ready for the good stuff.">
+                    <svg viewBox="0 0 520 400" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="plateTop" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#ffffff"/>
+                                <stop offset="1" stop-color="#e6ebf1"/>
+                            </linearGradient>
+                            <linearGradient id="plateWell" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#e9edf2"/>
+                                <stop offset="0.55" stop-color="#f7f9fb"/>
+                                <stop offset="1" stop-color="#ffffff"/>
+                            </linearGradient>
+                            <filter id="plateBlur" x="-20%" y="-50%" width="140%" height="200%">
+                                <feGaussianBlur stdDeviation="9"/>
+                            </filter>
+                        </defs>
+                        <!-- soft contact shadow -->
+                        <ellipse cx="260" cy="330" rx="225" ry="36" fill="#000" opacity="0.4" filter="url(#plateBlur)"/>
+                        <!-- plate edge (thickness) -->
+                        <ellipse cx="260" cy="232" rx="240" ry="150" fill="#c3cad3"/>
+                        <!-- plate top surface -->
+                        <ellipse cx="260" cy="218" rx="240" ry="150" fill="url(#plateTop)"/>
+                        <ellipse cx="260" cy="218" rx="228" ry="140" fill="none" stroke="#dde3ea" stroke-width="2"/>
+                        <!-- inner well -->
+                        <ellipse cx="260" cy="222" rx="184" ry="110" fill="url(#plateWell)" stroke="#d7dde4" stroke-width="2"/>
+                        <!-- rim highlight -->
+                        <path d="M60 178 Q 120 96 260 76" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+                    </svg>
+                </div>
+
+
+                <!-- 2. RICE -->
+                <div class="layer layer-rice" data-title="Fluffy rice" data-text="A generous mound of fragrant, golden rice.">
+                    <svg viewBox="0 0 520 400" aria-hidden="true">
+                        <defs>
+                            <radialGradient id="riceBase" cx="0.5" cy="0.35" r="0.7">
+                                <stop offset="0" stop-color="#f3ead0"/>
+                                <stop offset="1" stop-color="#cdbb7a"/>
+                            </radialGradient>
+                            <g id="graina"><ellipse rx="8" ry="2.6" fill="#fffbe8" stroke="#e3d49a" stroke-width="0.6"/></g>
+                            <g id="grainb"><ellipse rx="8" ry="2.6" fill="#f4e7b0" stroke="#d9c681" stroke-width="0.6"/></g>
+                            <g id="grainc"><ellipse rx="8" ry="2.6" fill="#ffffff" stroke="#e8dcae" stroke-width="0.6"/></g>
+                            <filter id="riceShadow" x="-20%" y="-30%" width="140%" height="170%"><feGaussianBlur stdDeviation="6"/></filter>
+                        </defs>
+                        <ellipse cx="262" cy="236" rx="152" ry="46" fill="#000" opacity="0.28" filter="url(#riceShadow)"/>
+                        <!-- mound body -->
+                        <path d="M112 214 C112 150 190 108 262 108 C336 108 412 150 412 214 C412 252 340 268 262 268 C184 268 112 252 112 214 Z" fill="url(#riceBase)"/>
+                        <use href="#grainc" transform="translate(271 120) rotate(-8) scale(1.14)"/>
+                        <use href="#graina" transform="translate(237 120) rotate(-27) scale(1.05)"/>
+                        <use href="#grainc" transform="translate(287 120) rotate(-55) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(266 120) rotate(-54) scale(0.88)"/>
+                        <use href="#graina" transform="translate(242 121) rotate(-4) scale(0.96)"/>
+                        <use href="#graina" transform="translate(263 121) rotate(-53) scale(1.06)"/>
+                        <use href="#graina" transform="translate(290 121) rotate(3) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(258 121) rotate(-35) scale(0.94)"/>
+                        <use href="#grainc" transform="translate(291 121) rotate(-63) scale(1.02)"/>
+                        <use href="#graina" transform="translate(229 122) rotate(-47) scale(1.14)"/>
+                        <use href="#grainb" transform="translate(273 122) rotate(66) scale(0.85)"/>
+                        <use href="#grainc" transform="translate(291 122) rotate(-28) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(275 122) rotate(19) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(234 122) rotate(-19) scale(1.04)"/>
+                        <use href="#graina" transform="translate(219 122) rotate(35) scale(1.13)"/>
+                        <use href="#graina" transform="translate(235 122) rotate(-50) scale(1.03)"/>
+                        <use href="#grainb" transform="translate(249 123) rotate(-39) scale(1.03)"/>
+                        <use href="#grainb" transform="translate(295 123) rotate(-14) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(293 123) rotate(69) scale(0.95)"/>
+                        <use href="#graina" transform="translate(310 123) rotate(-42) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(239 123) rotate(42) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(254 123) rotate(-49) scale(0.96)"/>
+                        <use href="#graina" transform="translate(306 123) rotate(65) scale(0.98)"/>
+                        <use href="#graina" transform="translate(307 124) rotate(-47) scale(1.01)"/>
+                        <use href="#graina" transform="translate(316 124) rotate(49) scale(1.10)"/>
+                        <use href="#graina" transform="translate(293 124) rotate(38) scale(1.02)"/>
+                        <use href="#grainc" transform="translate(263 124) rotate(-42) scale(0.87)"/>
+                        <use href="#grainb" transform="translate(224 125) rotate(22) scale(0.94)"/>
+                        <use href="#grainc" transform="translate(243 125) rotate(-64) scale(1.12)"/>
+                        <use href="#graina" transform="translate(303 125) rotate(2) scale(1.10)"/>
+                        <use href="#graina" transform="translate(220 125) rotate(69) scale(0.96)"/>
+                        <use href="#graina" transform="translate(276 125) rotate(-50) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(207 125) rotate(37) scale(1.07)"/>
+                        <use href="#grainc" transform="translate(206 125) rotate(69) scale(1.02)"/>
+                        <use href="#graina" transform="translate(322 126) rotate(-34) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(275 126) rotate(-4) scale(0.99)"/>
+                        <use href="#graina" transform="translate(230 126) rotate(-37) scale(0.85)"/>
+                        <use href="#graina" transform="translate(243 126) rotate(-21) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(236 126) rotate(-35) scale(0.99)"/>
+                        <use href="#graina" transform="translate(299 126) rotate(56) scale(1.05)"/>
+                        <use href="#grainb" transform="translate(269 126) rotate(-19) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(286 126) rotate(2) scale(1.08)"/>
+                        <use href="#grainb" transform="translate(319 127) rotate(-31) scale(1.15)"/>
+                        <use href="#graina" transform="translate(305 127) rotate(-19) scale(0.99)"/>
+                        <use href="#grainb" transform="translate(223 127) rotate(-53) scale(1.08)"/>
+                        <use href="#grainc" transform="translate(307 127) rotate(-24) scale(0.94)"/>
+                        <use href="#graina" transform="translate(204 127) rotate(-51) scale(1.05)"/>
+                        <use href="#grainb" transform="translate(329 127) rotate(22) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(290 127) rotate(25) scale(1.09)"/>
+                        <use href="#graina" transform="translate(234 127) rotate(1) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(285 127) rotate(36) scale(1.14)"/>
+                        <use href="#graina" transform="translate(198 128) rotate(57) scale(1.10)"/>
+                        <use href="#graina" transform="translate(290 128) rotate(26) scale(0.88)"/>
+                        <use href="#graina" transform="translate(308 128) rotate(25) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(329 128) rotate(57) scale(0.99)"/>
+                        <use href="#graina" transform="translate(304 128) rotate(69) scale(0.85)"/>
+                        <use href="#graina" transform="translate(327 128) rotate(45) scale(1.05)"/>
+                        <use href="#grainc" transform="translate(281 128) rotate(9) scale(1.04)"/>
+                        <use href="#grainb" transform="translate(229 128) rotate(50) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(221 128) rotate(21) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(298 128) rotate(-6) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(327 128) rotate(32) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(329 128) rotate(39) scale(1.02)"/>
+                        <use href="#grainc" transform="translate(236 128) rotate(-45) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(217 128) rotate(6) scale(0.95)"/>
+                        <use href="#grainc" transform="translate(290 128) rotate(29) scale(1.01)"/>
+                        <use href="#grainc" transform="translate(287 128) rotate(-33) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(291 129) rotate(-55) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(256 129) rotate(52) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(198 129) rotate(-7) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(330 129) rotate(-33) scale(0.99)"/>
+                        <use href="#grainb" transform="translate(288 130) rotate(-0) scale(1.12)"/>
+                        <use href="#graina" transform="translate(313 130) rotate(53) scale(1.04)"/>
+                        <use href="#grainb" transform="translate(259 130) rotate(20) scale(0.91)"/>
+                        <use href="#graina" transform="translate(284 130) rotate(-42) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(216 130) rotate(-7) scale(0.87)"/>
+                        <use href="#grainb" transform="translate(228 130) rotate(68) scale(1.14)"/>
+                        <use href="#grainb" transform="translate(286 130) rotate(46) scale(1.09)"/>
+                        <use href="#grainb" transform="translate(205 130) rotate(25) scale(1.06)"/>
+                        <use href="#grainb" transform="translate(237 130) rotate(-58) scale(1.07)"/>
+                        <use href="#grainb" transform="translate(329 131) rotate(-48) scale(0.91)"/>
+                        <use href="#graina" transform="translate(305 131) rotate(15) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(341 131) rotate(62) scale(1.08)"/>
+                        <use href="#grainc" transform="translate(283 131) rotate(-66) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(213 131) rotate(4) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(243 131) rotate(44) scale(0.89)"/>
+                        <use href="#graina" transform="translate(266 132) rotate(-41) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(326 132) rotate(-66) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(182 132) rotate(37) scale(0.93)"/>
+                        <use href="#graina" transform="translate(311 132) rotate(-46) scale(1.14)"/>
+                        <use href="#grainb" transform="translate(238 132) rotate(-48) scale(1.07)"/>
+                        <use href="#grainb" transform="translate(303 132) rotate(-45) scale(0.96)"/>
+                        <use href="#grainc" transform="translate(307 132) rotate(33) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(266 132) rotate(-67) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(322 132) rotate(35) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(250 132) rotate(18) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(181 132) rotate(-6) scale(1.09)"/>
+                        <use href="#graina" transform="translate(341 133) rotate(-67) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(248 133) rotate(27) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(301 133) rotate(30) scale(1.08)"/>
+                        <use href="#grainb" transform="translate(218 133) rotate(43) scale(0.96)"/>
+                        <use href="#grainc" transform="translate(315 133) rotate(14) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(243 133) rotate(-46) scale(1.04)"/>
+                        <use href="#graina" transform="translate(216 133) rotate(-4) scale(1.01)"/>
+                        <use href="#graina" transform="translate(342 133) rotate(12) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(211 133) rotate(28) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(341 133) rotate(-56) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(221 133) rotate(30) scale(0.95)"/>
+                        <use href="#grainc" transform="translate(186 133) rotate(14) scale(1.07)"/>
+                        <use href="#grainb" transform="translate(235 134) rotate(9) scale(1.08)"/>
+                        <use href="#grainb" transform="translate(340 134) rotate(26) scale(0.95)"/>
+                        <use href="#graina" transform="translate(225 134) rotate(35) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(184 134) rotate(25) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(222 134) rotate(-26) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(329 134) rotate(21) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(277 134) rotate(-49) scale(0.99)"/>
+                        <use href="#grainc" transform="translate(301 134) rotate(-18) scale(0.94)"/>
+                        <use href="#graina" transform="translate(326 134) rotate(-29) scale(1.15)"/>
+                        <use href="#graina" transform="translate(225 134) rotate(37) scale(1.07)"/>
+                        <use href="#graina" transform="translate(243 135) rotate(-54) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(200 135) rotate(-1) scale(1.02)"/>
+                        <use href="#graina" transform="translate(338 135) rotate(24) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(211 135) rotate(55) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(341 135) rotate(-10) scale(0.87)"/>
+                        <use href="#graina" transform="translate(352 135) rotate(-61) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(334 135) rotate(20) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(260 135) rotate(-49) scale(1.11)"/>
+                        <use href="#grainc" transform="translate(353 135) rotate(-32) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(169 135) rotate(12) scale(1.12)"/>
+                        <use href="#graina" transform="translate(173 135) rotate(29) scale(0.93)"/>
+                        <use href="#grainb" transform="translate(179 136) rotate(-46) scale(0.87)"/>
+                        <use href="#grainc" transform="translate(175 136) rotate(-54) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(330 136) rotate(-66) scale(0.86)"/>
+                        <use href="#grainb" transform="translate(326 136) rotate(-31) scale(1.03)"/>
+                        <use href="#graina" transform="translate(185 136) rotate(44) scale(0.96)"/>
+                        <use href="#grainb" transform="translate(186 136) rotate(1) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(177 136) rotate(44) scale(1.15)"/>
+                        <use href="#graina" transform="translate(172 137) rotate(36) scale(1.10)"/>
+                        <use href="#grainb" transform="translate(174 137) rotate(-42) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(357 137) rotate(65) scale(0.87)"/>
+                        <use href="#grainb" transform="translate(215 137) rotate(18) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(292 137) rotate(14) scale(1.07)"/>
+                        <use href="#graina" transform="translate(278 137) rotate(58) scale(0.90)"/>
+                        <use href="#grainc" transform="translate(226 137) rotate(18) scale(1.05)"/>
+                        <use href="#graina" transform="translate(211 138) rotate(3) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(212 138) rotate(-15) scale(1.13)"/>
+                        <use href="#graina" transform="translate(237 138) rotate(-19) scale(0.96)"/>
+                        <use href="#graina" transform="translate(178 138) rotate(-65) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(269 138) rotate(-16) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(258 138) rotate(-49) scale(1.05)"/>
+                        <use href="#grainc" transform="translate(218 138) rotate(-48) scale(0.89)"/>
+                        <use href="#graina" transform="translate(357 139) rotate(2) scale(1.02)"/>
+                        <use href="#graina" transform="translate(196 139) rotate(-43) scale(0.99)"/>
+                        <use href="#graina" transform="translate(336 139) rotate(6) scale(0.91)"/>
+                        <use href="#grainb" transform="translate(290 139) rotate(22) scale(0.98)"/>
+                        <use href="#graina" transform="translate(217 139) rotate(3) scale(0.97)"/>
+                        <use href="#graina" transform="translate(253 139) rotate(-69) scale(0.98)"/>
+                        <use href="#graina" transform="translate(192 139) rotate(-35) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(253 139) rotate(-26) scale(0.86)"/>
+                        <use href="#grainc" transform="translate(179 139) rotate(23) scale(0.99)"/>
+                        <use href="#grainb" transform="translate(160 139) rotate(31) scale(1.06)"/>
+                        <use href="#graina" transform="translate(351 140) rotate(15) scale(0.90)"/>
+                        <use href="#graina" transform="translate(218 140) rotate(-51) scale(0.98)"/>
+                        <use href="#graina" transform="translate(332 140) rotate(19) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(159 140) rotate(-22) scale(1.07)"/>
+                        <use href="#graina" transform="translate(175 140) rotate(44) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(170 140) rotate(-5) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(200 140) rotate(1) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(329 140) rotate(-68) scale(0.89)"/>
+                        <use href="#grainc" transform="translate(177 140) rotate(13) scale(0.87)"/>
+                        <use href="#grainb" transform="translate(167 140) rotate(-30) scale(1.03)"/>
+                        <use href="#grainc" transform="translate(195 140) rotate(-17) scale(1.10)"/>
+                        <use href="#graina" transform="translate(225 140) rotate(66) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(215 140) rotate(-2) scale(1.04)"/>
+                        <use href="#grainb" transform="translate(270 141) rotate(39) scale(1.09)"/>
+                        <use href="#graina" transform="translate(299 141) rotate(-44) scale(0.94)"/>
+                        <use href="#graina" transform="translate(167 141) rotate(-70) scale(0.87)"/>
+                        <use href="#grainb" transform="translate(218 141) rotate(8) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(225 141) rotate(9) scale(0.86)"/>
+                        <use href="#grainc" transform="translate(282 141) rotate(20) scale(1.06)"/>
+                        <use href="#graina" transform="translate(245 141) rotate(-45) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(265 141) rotate(33) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(328 141) rotate(8) scale(0.90)"/>
+                        <use href="#graina" transform="translate(341 142) rotate(27) scale(1.05)"/>
+                        <use href="#grainc" transform="translate(312 142) rotate(-46) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(277 142) rotate(55) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(156 142) rotate(49) scale(0.96)"/>
+                        <use href="#graina" transform="translate(330 142) rotate(63) scale(1.11)"/>
+                        <use href="#grainb" transform="translate(298 142) rotate(-66) scale(1.00)"/>
+                        <use href="#graina" transform="translate(368 142) rotate(-65) scale(0.91)"/>
+                        <use href="#graina" transform="translate(244 142) rotate(24) scale(1.09)"/>
+                        <use href="#grainb" transform="translate(370 142) rotate(-9) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(287 143) rotate(11) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(351 143) rotate(-7) scale(1.03)"/>
+                        <use href="#grainb" transform="translate(306 143) rotate(-17) scale(1.14)"/>
+                        <use href="#graina" transform="translate(203 143) rotate(-55) scale(0.94)"/>
+                        <use href="#graina" transform="translate(279 143) rotate(47) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(251 143) rotate(-68) scale(0.88)"/>
+                        <use href="#graina" transform="translate(283 143) rotate(2) scale(1.00)"/>
+                        <use href="#graina" transform="translate(198 143) rotate(67) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(303 143) rotate(12) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(230 143) rotate(-0) scale(1.02)"/>
+                        <use href="#graina" transform="translate(281 143) rotate(58) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(338 143) rotate(-25) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(268 144) rotate(-35) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(361 144) rotate(22) scale(0.99)"/>
+                        <use href="#grainb" transform="translate(174 144) rotate(-35) scale(0.97)"/>
+                        <use href="#graina" transform="translate(227 144) rotate(-49) scale(1.09)"/>
+                        <use href="#grainb" transform="translate(151 144) rotate(60) scale(0.88)"/>
+                        <use href="#graina" transform="translate(289 144) rotate(-9) scale(0.85)"/>
+                        <use href="#graina" transform="translate(256 144) rotate(35) scale(1.14)"/>
+                        <use href="#grainb" transform="translate(156 145) rotate(-15) scale(0.95)"/>
+                        <use href="#graina" transform="translate(337 145) rotate(-37) scale(0.86)"/>
+                        <use href="#grainb" transform="translate(338 145) rotate(-58) scale(1.09)"/>
+                        <use href="#grainb" transform="translate(338 145) rotate(-49) scale(0.90)"/>
+                        <use href="#graina" transform="translate(198 145) rotate(1) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(246 145) rotate(-16) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(243 145) rotate(20) scale(0.94)"/>
+                        <use href="#grainc" transform="translate(153 145) rotate(-34) scale(1.07)"/>
+                        <use href="#graina" transform="translate(270 146) rotate(-31) scale(1.03)"/>
+                        <use href="#graina" transform="translate(365 146) rotate(70) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(305 146) rotate(53) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(229 146) rotate(32) scale(0.89)"/>
+                        <use href="#grainc" transform="translate(286 146) rotate(58) scale(1.10)"/>
+                        <use href="#graina" transform="translate(251 146) rotate(4) scale(0.96)"/>
+                        <use href="#grainc" transform="translate(357 147) rotate(-56) scale(1.10)"/>
+                        <use href="#graina" transform="translate(353 147) rotate(-10) scale(1.06)"/>
+                        <use href="#graina" transform="translate(157 147) rotate(-32) scale(1.12)"/>
+                        <use href="#graina" transform="translate(257 147) rotate(67) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(366 147) rotate(-66) scale(1.09)"/>
+                        <use href="#graina" transform="translate(148 147) rotate(-1) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(303 147) rotate(51) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(254 147) rotate(-30) scale(0.97)"/>
+                        <use href="#graina" transform="translate(175 148) rotate(-32) scale(1.04)"/>
+                        <use href="#grainb" transform="translate(288 148) rotate(36) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(152 148) rotate(-17) scale(0.99)"/>
+                        <use href="#grainb" transform="translate(175 148) rotate(18) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(342 148) rotate(61) scale(0.96)"/>
+                        <use href="#grainb" transform="translate(334 149) rotate(20) scale(1.14)"/>
+                        <use href="#grainb" transform="translate(157 149) rotate(31) scale(0.89)"/>
+                        <use href="#graina" transform="translate(182 149) rotate(37) scale(0.88)"/>
+                        <use href="#graina" transform="translate(296 149) rotate(-31) scale(0.96)"/>
+                        <use href="#graina" transform="translate(153 150) rotate(-31) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(204 150) rotate(-37) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(273 150) rotate(-57) scale(0.99)"/>
+                        <use href="#grainb" transform="translate(206 150) rotate(-24) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(340 150) rotate(-27) scale(1.00)"/>
+                        <use href="#graina" transform="translate(146 150) rotate(-62) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(274 150) rotate(43) scale(1.01)"/>
+                        <use href="#grainc" transform="translate(325 150) rotate(-55) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(250 150) rotate(46) scale(0.88)"/>
+                        <use href="#graina" transform="translate(185 150) rotate(8) scale(0.87)"/>
+                        <use href="#grainc" transform="translate(300 150) rotate(-27) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(235 150) rotate(-1) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(268 150) rotate(-37) scale(0.86)"/>
+                        <use href="#grainb" transform="translate(142 151) rotate(30) scale(1.12)"/>
+                        <use href="#grainc" transform="translate(365 151) rotate(62) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(326 151) rotate(-18) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(275 151) rotate(-68) scale(0.95)"/>
+                        <use href="#grainc" transform="translate(143 151) rotate(2) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(374 151) rotate(8) scale(1.02)"/>
+                        <use href="#grainc" transform="translate(283 151) rotate(32) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(224 151) rotate(-2) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(369 151) rotate(-58) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(279 152) rotate(6) scale(0.94)"/>
+                        <use href="#graina" transform="translate(272 152) rotate(-53) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(303 152) rotate(9) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(372 152) rotate(-62) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(364 152) rotate(-7) scale(0.90)"/>
+                        <use href="#graina" transform="translate(283 152) rotate(-58) scale(1.01)"/>
+                        <use href="#grainc" transform="translate(201 152) rotate(-17) scale(1.14)"/>
+                        <use href="#grainb" transform="translate(237 152) rotate(0) scale(1.02)"/>
+                        <use href="#grainc" transform="translate(140 153) rotate(20) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(294 153) rotate(14) scale(1.10)"/>
+                        <use href="#grainb" transform="translate(353 153) rotate(-21) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(227 153) rotate(-6) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(251 153) rotate(-44) scale(0.98)"/>
+                        <use href="#graina" transform="translate(255 153) rotate(-64) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(352 153) rotate(4) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(259 153) rotate(-0) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(183 153) rotate(-39) scale(0.85)"/>
+                        <use href="#grainb" transform="translate(290 153) rotate(60) scale(1.11)"/>
+                        <use href="#graina" transform="translate(262 153) rotate(-24) scale(0.85)"/>
+                        <use href="#graina" transform="translate(203 153) rotate(51) scale(1.09)"/>
+                        <use href="#graina" transform="translate(277 154) rotate(-10) scale(1.02)"/>
+                        <use href="#grainc" transform="translate(143 154) rotate(26) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(224 154) rotate(-13) scale(0.90)"/>
+                        <use href="#grainc" transform="translate(380 154) rotate(-46) scale(1.10)"/>
+                        <use href="#graina" transform="translate(272 154) rotate(-56) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(326 154) rotate(-33) scale(0.88)"/>
+                        <use href="#graina" transform="translate(312 154) rotate(37) scale(0.92)"/>
+                        <use href="#graina" transform="translate(241 154) rotate(55) scale(1.08)"/>
+                        <use href="#grainb" transform="translate(358 155) rotate(42) scale(0.92)"/>
+                        <use href="#graina" transform="translate(181 155) rotate(67) scale(1.02)"/>
+                        <use href="#graina" transform="translate(296 155) rotate(16) scale(1.07)"/>
+                        <use href="#graina" transform="translate(244 155) rotate(-53) scale(0.88)"/>
+                        <use href="#graina" transform="translate(295 155) rotate(1) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(316 155) rotate(58) scale(0.88)"/>
+                        <use href="#grainc" transform="translate(297 155) rotate(4) scale(1.07)"/>
+                        <use href="#grainb" transform="translate(233 155) rotate(-41) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(383 155) rotate(52) scale(1.03)"/>
+                        <use href="#grainc" transform="translate(272 155) rotate(-56) scale(1.07)"/>
+                        <use href="#graina" transform="translate(343 155) rotate(-67) scale(0.99)"/>
+                        <use href="#graina" transform="translate(380 156) rotate(-25) scale(0.93)"/>
+                        <use href="#graina" transform="translate(381 156) rotate(-24) scale(1.12)"/>
+                        <use href="#grainc" transform="translate(321 156) rotate(-24) scale(0.86)"/>
+                        <use href="#graina" transform="translate(275 156) rotate(46) scale(0.88)"/>
+                        <use href="#graina" transform="translate(302 156) rotate(-35) scale(0.90)"/>
+                        <use href="#grainc" transform="translate(139 156) rotate(-0) scale(0.86)"/>
+                        <use href="#grainc" transform="translate(229 156) rotate(43) scale(0.95)"/>
+                        <use href="#grainc" transform="translate(200 156) rotate(17) scale(0.99)"/>
+                        <use href="#graina" transform="translate(257 156) rotate(52) scale(0.90)"/>
+                        <use href="#graina" transform="translate(216 156) rotate(-12) scale(0.98)"/>
+                        <use href="#graina" transform="translate(202 156) rotate(36) scale(1.12)"/>
+                        <use href="#grainc" transform="translate(135 156) rotate(-64) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(368 157) rotate(51) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(144 157) rotate(41) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(201 157) rotate(47) scale(1.05)"/>
+                        <use href="#graina" transform="translate(251 157) rotate(-18) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(238 157) rotate(-62) scale(0.96)"/>
+                        <use href="#grainc" transform="translate(324 157) rotate(24) scale(1.04)"/>
+                        <use href="#grainb" transform="translate(309 157) rotate(-48) scale(0.94)"/>
+                        <use href="#grainc" transform="translate(321 157) rotate(-65) scale(1.02)"/>
+                        <use href="#graina" transform="translate(181 157) rotate(33) scale(0.98)"/>
+                        <use href="#graina" transform="translate(367 158) rotate(4) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(165 158) rotate(-32) scale(1.15)"/>
+                        <use href="#grainb" transform="translate(300 158) rotate(60) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(332 158) rotate(-44) scale(1.00)"/>
+                        <use href="#graina" transform="translate(328 158) rotate(-49) scale(0.87)"/>
+                        <use href="#grainc" transform="translate(357 158) rotate(66) scale(0.90)"/>
+                        <use href="#graina" transform="translate(342 158) rotate(49) scale(0.93)"/>
+                        <use href="#grainb" transform="translate(384 159) rotate(-26) scale(0.94)"/>
+                        <use href="#grainc" transform="translate(155 159) rotate(64) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(147 159) rotate(-19) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(221 159) rotate(-0) scale(1.01)"/>
+                        <use href="#graina" transform="translate(170 159) rotate(10) scale(1.15)"/>
+                        <use href="#graina" transform="translate(369 159) rotate(43) scale(0.86)"/>
+                        <use href="#grainb" transform="translate(360 160) rotate(-29) scale(0.86)"/>
+                        <use href="#grainc" transform="translate(331 160) rotate(44) scale(1.09)"/>
+                        <use href="#graina" transform="translate(373 160) rotate(55) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(249 160) rotate(-51) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(230 160) rotate(-45) scale(1.01)"/>
+                        <use href="#grainc" transform="translate(138 160) rotate(-59) scale(1.03)"/>
+                        <use href="#grainc" transform="translate(258 160) rotate(-13) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(175 161) rotate(10) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(145 161) rotate(-65) scale(0.89)"/>
+                        <use href="#graina" transform="translate(361 161) rotate(-36) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(380 161) rotate(-1) scale(1.02)"/>
+                        <use href="#grainb" transform="translate(151 161) rotate(35) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(132 161) rotate(18) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(225 161) rotate(-39) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(220 161) rotate(62) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(370 162) rotate(-54) scale(0.95)"/>
+                        <use href="#graina" transform="translate(259 162) rotate(-27) scale(1.03)"/>
+                        <use href="#grainb" transform="translate(132 162) rotate(28) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(373 162) rotate(-63) scale(0.96)"/>
+                        <use href="#graina" transform="translate(143 162) rotate(61) scale(1.01)"/>
+                        <use href="#grainc" transform="translate(357 162) rotate(-53) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(386 162) rotate(24) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(350 162) rotate(-2) scale(1.10)"/>
+                        <use href="#graina" transform="translate(186 163) rotate(46) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(176 163) rotate(45) scale(1.11)"/>
+                        <use href="#grainc" transform="translate(291 163) rotate(35) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(239 163) rotate(59) scale(1.09)"/>
+                        <use href="#graina" transform="translate(309 163) rotate(59) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(305 163) rotate(51) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(249 163) rotate(37) scale(0.86)"/>
+                        <use href="#graina" transform="translate(352 163) rotate(49) scale(1.03)"/>
+                        <use href="#graina" transform="translate(349 163) rotate(53) scale(1.11)"/>
+                        <use href="#grainc" transform="translate(315 163) rotate(59) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(284 163) rotate(-34) scale(0.94)"/>
+                        <use href="#grainc" transform="translate(194 164) rotate(-0) scale(0.89)"/>
+                        <use href="#grainc" transform="translate(138 164) rotate(0) scale(1.03)"/>
+                        <use href="#graina" transform="translate(142 164) rotate(13) scale(0.95)"/>
+                        <use href="#grainc" transform="translate(388 164) rotate(58) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(170 164) rotate(-35) scale(1.15)"/>
+                        <use href="#grainb" transform="translate(356 164) rotate(61) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(145 164) rotate(66) scale(1.07)"/>
+                        <use href="#graina" transform="translate(343 164) rotate(68) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(305 164) rotate(-68) scale(0.88)"/>
+                        <use href="#grainc" transform="translate(298 164) rotate(-69) scale(0.87)"/>
+                        <use href="#grainc" transform="translate(398 165) rotate(-10) scale(1.06)"/>
+                        <use href="#graina" transform="translate(389 165) rotate(21) scale(0.95)"/>
+                        <use href="#graina" transform="translate(168 166) rotate(1) scale(0.86)"/>
+                        <use href="#grainc" transform="translate(126 166) rotate(57) scale(1.11)"/>
+                        <use href="#graina" transform="translate(296 166) rotate(-17) scale(1.03)"/>
+                        <use href="#grainb" transform="translate(241 166) rotate(-50) scale(1.08)"/>
+                        <use href="#grainc" transform="translate(396 166) rotate(-58) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(254 166) rotate(42) scale(1.13)"/>
+                        <use href="#graina" transform="translate(264 166) rotate(-49) scale(1.13)"/>
+                        <use href="#graina" transform="translate(217 167) rotate(21) scale(0.97)"/>
+                        <use href="#graina" transform="translate(306 167) rotate(-5) scale(1.06)"/>
+                        <use href="#graina" transform="translate(206 167) rotate(60) scale(0.99)"/>
+                        <use href="#grainc" transform="translate(137 167) rotate(-54) scale(1.04)"/>
+                        <use href="#graina" transform="translate(298 168) rotate(-66) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(212 168) rotate(26) scale(1.14)"/>
+                        <use href="#graina" transform="translate(384 168) rotate(54) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(368 168) rotate(67) scale(1.13)"/>
+                        <use href="#graina" transform="translate(244 168) rotate(-49) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(235 168) rotate(33) scale(1.07)"/>
+                        <use href="#grainc" transform="translate(233 168) rotate(24) scale(1.02)"/>
+                        <use href="#graina" transform="translate(203 168) rotate(42) scale(0.91)"/>
+                        <use href="#grainb" transform="translate(263 168) rotate(-5) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(128 168) rotate(-61) scale(0.87)"/>
+                        <use href="#grainb" transform="translate(263 168) rotate(51) scale(0.88)"/>
+                        <use href="#grainb" transform="translate(172 168) rotate(62) scale(0.95)"/>
+                        <use href="#graina" transform="translate(281 169) rotate(1) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(376 169) rotate(13) scale(0.87)"/>
+                        <use href="#grainb" transform="translate(387 169) rotate(-27) scale(1.01)"/>
+                        <use href="#graina" transform="translate(297 169) rotate(-11) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(294 169) rotate(-7) scale(0.93)"/>
+                        <use href="#graina" transform="translate(183 169) rotate(11) scale(1.02)"/>
+                        <use href="#graina" transform="translate(362 169) rotate(35) scale(1.05)"/>
+                        <use href="#grainc" transform="translate(392 169) rotate(-48) scale(1.09)"/>
+                        <use href="#graina" transform="translate(247 170) rotate(61) scale(0.88)"/>
+                        <use href="#grainb" transform="translate(323 170) rotate(13) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(225 170) rotate(20) scale(0.94)"/>
+                        <use href="#grainc" transform="translate(324 170) rotate(-29) scale(1.09)"/>
+                        <use href="#graina" transform="translate(201 170) rotate(-21) scale(1.15)"/>
+                        <use href="#grainc" transform="translate(305 170) rotate(-34) scale(1.11)"/>
+                        <use href="#grainc" transform="translate(261 170) rotate(36) scale(1.13)"/>
+                        <use href="#graina" transform="translate(193 171) rotate(-7) scale(1.13)"/>
+                        <use href="#graina" transform="translate(143 171) rotate(20) scale(1.02)"/>
+                        <use href="#grainc" transform="translate(242 171) rotate(19) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(401 171) rotate(36) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(203 171) rotate(-14) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(147 171) rotate(5) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(172 171) rotate(-22) scale(0.90)"/>
+                        <use href="#graina" transform="translate(201 171) rotate(-53) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(257 171) rotate(-42) scale(0.94)"/>
+                        <use href="#graina" transform="translate(323 171) rotate(27) scale(0.90)"/>
+                        <use href="#grainc" transform="translate(184 171) rotate(28) scale(0.96)"/>
+                        <use href="#graina" transform="translate(371 171) rotate(30) scale(1.08)"/>
+                        <use href="#grainb" transform="translate(349 171) rotate(38) scale(1.07)"/>
+                        <use href="#grainb" transform="translate(366 172) rotate(25) scale(1.14)"/>
+                        <use href="#graina" transform="translate(310 172) rotate(42) scale(0.90)"/>
+                        <use href="#graina" transform="translate(353 172) rotate(-44) scale(1.07)"/>
+                        <use href="#grainc" transform="translate(325 172) rotate(59) scale(1.08)"/>
+                        <use href="#graina" transform="translate(295 172) rotate(-37) scale(0.86)"/>
+                        <use href="#grainc" transform="translate(285 172) rotate(54) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(231 172) rotate(-67) scale(1.05)"/>
+                        <use href="#grainb" transform="translate(342 172) rotate(39) scale(1.06)"/>
+                        <use href="#graina" transform="translate(363 172) rotate(64) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(318 172) rotate(47) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(364 173) rotate(19) scale(1.12)"/>
+                        <use href="#grainc" transform="translate(344 173) rotate(57) scale(1.11)"/>
+                        <use href="#grainc" transform="translate(165 173) rotate(49) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(210 173) rotate(41) scale(0.91)"/>
+                        <use href="#graina" transform="translate(254 173) rotate(-57) scale(1.11)"/>
+                        <use href="#graina" transform="translate(130 173) rotate(-8) scale(0.97)"/>
+                        <use href="#graina" transform="translate(132 173) rotate(-46) scale(0.97)"/>
+                        <use href="#graina" transform="translate(220 173) rotate(43) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(121 174) rotate(-31) scale(1.04)"/>
+                        <use href="#graina" transform="translate(123 174) rotate(-35) scale(0.87)"/>
+                        <use href="#graina" transform="translate(173 174) rotate(63) scale(0.86)"/>
+                        <use href="#grainb" transform="translate(221 174) rotate(-15) scale(1.06)"/>
+                        <use href="#grainb" transform="translate(131 174) rotate(-20) scale(0.98)"/>
+                        <use href="#graina" transform="translate(288 175) rotate(19) scale(0.96)"/>
+                        <use href="#grainb" transform="translate(305 175) rotate(-8) scale(0.99)"/>
+                        <use href="#graina" transform="translate(156 175) rotate(5) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(130 175) rotate(43) scale(1.06)"/>
+                        <use href="#graina" transform="translate(387 175) rotate(-66) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(136 175) rotate(-40) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(125 175) rotate(19) scale(0.88)"/>
+                        <use href="#graina" transform="translate(165 175) rotate(-66) scale(1.11)"/>
+                        <use href="#grainb" transform="translate(227 175) rotate(-57) scale(0.87)"/>
+                        <use href="#graina" transform="translate(195 176) rotate(-18) scale(1.10)"/>
+                        <use href="#graina" transform="translate(296 176) rotate(34) scale(1.11)"/>
+                        <use href="#grainb" transform="translate(312 176) rotate(4) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(150 176) rotate(-51) scale(0.95)"/>
+                        <use href="#grainc" transform="translate(245 177) rotate(65) scale(1.12)"/>
+                        <use href="#graina" transform="translate(144 177) rotate(35) scale(1.05)"/>
+                        <use href="#grainb" transform="translate(151 177) rotate(-39) scale(1.05)"/>
+                        <use href="#grainb" transform="translate(327 177) rotate(-53) scale(0.99)"/>
+                        <use href="#graina" transform="translate(123 177) rotate(-9) scale(1.10)"/>
+                        <use href="#graina" transform="translate(335 177) rotate(33) scale(1.07)"/>
+                        <use href="#graina" transform="translate(266 177) rotate(-32) scale(0.85)"/>
+                        <use href="#grainc" transform="translate(135 178) rotate(18) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(310 178) rotate(-67) scale(1.06)"/>
+                        <use href="#grainb" transform="translate(216 178) rotate(35) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(347 178) rotate(-49) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(158 178) rotate(-65) scale(1.06)"/>
+                        <use href="#graina" transform="translate(197 178) rotate(-34) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(170 178) rotate(-56) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(236 178) rotate(55) scale(1.08)"/>
+                        <use href="#grainb" transform="translate(219 178) rotate(-67) scale(0.87)"/>
+                        <use href="#graina" transform="translate(321 179) rotate(-20) scale(1.09)"/>
+                        <use href="#grainb" transform="translate(231 179) rotate(-20) scale(0.88)"/>
+                        <use href="#grainb" transform="translate(390 179) rotate(23) scale(1.03)"/>
+                        <use href="#grainb" transform="translate(323 179) rotate(64) scale(1.06)"/>
+                        <use href="#grainb" transform="translate(309 179) rotate(46) scale(1.02)"/>
+                        <use href="#grainb" transform="translate(388 179) rotate(-64) scale(1.05)"/>
+                        <use href="#grainc" transform="translate(352 179) rotate(13) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(274 179) rotate(38) scale(0.85)"/>
+                        <use href="#grainc" transform="translate(123 180) rotate(24) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(385 180) rotate(-4) scale(1.03)"/>
+                        <use href="#graina" transform="translate(237 180) rotate(23) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(374 180) rotate(-8) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(283 180) rotate(-62) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(356 180) rotate(-11) scale(1.05)"/>
+                        <use href="#grainb" transform="translate(129 180) rotate(-57) scale(0.89)"/>
+                        <use href="#graina" transform="translate(147 180) rotate(51) scale(0.88)"/>
+                        <use href="#grainb" transform="translate(156 180) rotate(-54) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(362 180) rotate(22) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(267 181) rotate(-34) scale(0.87)"/>
+                        <use href="#graina" transform="translate(119 181) rotate(25) scale(0.98)"/>
+                        <use href="#graina" transform="translate(160 181) rotate(42) scale(1.14)"/>
+                        <use href="#graina" transform="translate(391 181) rotate(-4) scale(1.06)"/>
+                        <use href="#grainb" transform="translate(182 181) rotate(-62) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(392 181) rotate(35) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(233 182) rotate(-41) scale(1.09)"/>
+                        <use href="#graina" transform="translate(280 182) rotate(61) scale(1.03)"/>
+                        <use href="#grainc" transform="translate(311 182) rotate(-34) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(196 183) rotate(64) scale(0.87)"/>
+                        <use href="#grainc" transform="translate(280 183) rotate(64) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(398 183) rotate(51) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(342 183) rotate(39) scale(1.07)"/>
+                        <use href="#grainc" transform="translate(397 183) rotate(-2) scale(0.91)"/>
+                        <use href="#graina" transform="translate(204 183) rotate(6) scale(0.96)"/>
+                        <use href="#graina" transform="translate(351 183) rotate(-47) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(256 183) rotate(23) scale(1.13)"/>
+                        <use href="#graina" transform="translate(349 183) rotate(2) scale(1.02)"/>
+                        <use href="#grainc" transform="translate(259 184) rotate(19) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(262 184) rotate(-30) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(141 184) rotate(-48) scale(0.85)"/>
+                        <use href="#graina" transform="translate(260 184) rotate(-58) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(344 184) rotate(35) scale(1.13)"/>
+                        <use href="#graina" transform="translate(270 184) rotate(10) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(219 185) rotate(35) scale(1.07)"/>
+                        <use href="#grainb" transform="translate(205 185) rotate(38) scale(1.00)"/>
+                        <use href="#graina" transform="translate(346 185) rotate(22) scale(1.15)"/>
+                        <use href="#grainb" transform="translate(235 185) rotate(-19) scale(1.02)"/>
+                        <use href="#grainc" transform="translate(176 186) rotate(40) scale(0.97)"/>
+                        <use href="#graina" transform="translate(377 186) rotate(18) scale(0.99)"/>
+                        <use href="#graina" transform="translate(237 186) rotate(19) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(182 186) rotate(36) scale(0.89)"/>
+                        <use href="#grainc" transform="translate(218 186) rotate(-18) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(128 187) rotate(-7) scale(1.02)"/>
+                        <use href="#grainc" transform="translate(186 187) rotate(4) scale(0.86)"/>
+                        <use href="#grainc" transform="translate(356 187) rotate(41) scale(0.85)"/>
+                        <use href="#graina" transform="translate(168 187) rotate(18) scale(0.88)"/>
+                        <use href="#graina" transform="translate(330 187) rotate(39) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(395 187) rotate(39) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(400 187) rotate(-60) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(197 187) rotate(67) scale(0.99)"/>
+                        <use href="#graina" transform="translate(356 187) rotate(-50) scale(0.94)"/>
+                        <use href="#graina" transform="translate(364 187) rotate(-11) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(261 187) rotate(-33) scale(1.08)"/>
+                        <use href="#grainc" transform="translate(365 187) rotate(44) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(122 188) rotate(-41) scale(1.03)"/>
+                        <use href="#graina" transform="translate(352 188) rotate(-31) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(311 188) rotate(3) scale(1.03)"/>
+                        <use href="#grainb" transform="translate(163 188) rotate(-29) scale(1.14)"/>
+                        <use href="#graina" transform="translate(335 188) rotate(-32) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(377 188) rotate(27) scale(1.10)"/>
+                        <use href="#grainb" transform="translate(276 188) rotate(26) scale(0.95)"/>
+                        <use href="#graina" transform="translate(371 189) rotate(-28) scale(0.93)"/>
+                        <use href="#graina" transform="translate(306 189) rotate(-15) scale(0.86)"/>
+                        <use href="#graina" transform="translate(275 189) rotate(-63) scale(1.05)"/>
+                        <use href="#graina" transform="translate(163 189) rotate(-8) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(395 189) rotate(-4) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(243 189) rotate(-3) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(190 189) rotate(8) scale(1.07)"/>
+                        <use href="#grainb" transform="translate(256 189) rotate(-54) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(246 189) rotate(-31) scale(0.99)"/>
+                        <use href="#grainc" transform="translate(268 190) rotate(60) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(398 190) rotate(-7) scale(0.97)"/>
+                        <use href="#graina" transform="translate(400 190) rotate(-20) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(385 190) rotate(-36) scale(1.07)"/>
+                        <use href="#grainb" transform="translate(119 190) rotate(10) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(148 191) rotate(-35) scale(1.08)"/>
+                        <use href="#graina" transform="translate(321 191) rotate(-38) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(138 191) rotate(-40) scale(1.11)"/>
+                        <use href="#graina" transform="translate(396 191) rotate(-55) scale(0.99)"/>
+                        <use href="#grainb" transform="translate(361 191) rotate(32) scale(0.88)"/>
+                        <use href="#grainb" transform="translate(345 191) rotate(54) scale(1.05)"/>
+                        <use href="#grainc" transform="translate(211 191) rotate(40) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(261 191) rotate(59) scale(1.09)"/>
+                        <use href="#graina" transform="translate(226 191) rotate(66) scale(0.86)"/>
+                        <use href="#graina" transform="translate(314 191) rotate(-54) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(123 191) rotate(26) scale(0.87)"/>
+                        <use href="#grainc" transform="translate(262 192) rotate(-20) scale(1.01)"/>
+                        <use href="#grainc" transform="translate(389 192) rotate(42) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(262 192) rotate(-48) scale(1.14)"/>
+                        <use href="#graina" transform="translate(211 192) rotate(41) scale(0.88)"/>
+                        <use href="#grainc" transform="translate(278 192) rotate(1) scale(1.11)"/>
+                        <use href="#grainc" transform="translate(371 192) rotate(-9) scale(0.89)"/>
+                        <use href="#grainc" transform="translate(346 192) rotate(-8) scale(1.08)"/>
+                        <use href="#grainb" transform="translate(305 193) rotate(29) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(377 193) rotate(21) scale(1.14)"/>
+                        <use href="#grainb" transform="translate(169 194) rotate(36) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(308 194) rotate(-6) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(327 194) rotate(16) scale(1.05)"/>
+                        <use href="#graina" transform="translate(161 194) rotate(26) scale(0.93)"/>
+                        <use href="#grainb" transform="translate(397 194) rotate(61) scale(1.11)"/>
+                        <use href="#grainb" transform="translate(185 194) rotate(27) scale(1.04)"/>
+                        <use href="#graina" transform="translate(362 194) rotate(35) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(345 194) rotate(-59) scale(0.87)"/>
+                        <use href="#graina" transform="translate(303 194) rotate(5) scale(1.04)"/>
+                        <use href="#grainb" transform="translate(344 194) rotate(-2) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(125 194) rotate(-65) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(222 195) rotate(66) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(348 195) rotate(0) scale(1.05)"/>
+                        <use href="#grainc" transform="translate(333 195) rotate(-6) scale(1.12)"/>
+                        <use href="#grainc" transform="translate(211 195) rotate(29) scale(1.14)"/>
+                        <use href="#graina" transform="translate(325 195) rotate(40) scale(0.89)"/>
+                        <use href="#graina" transform="translate(321 195) rotate(-64) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(396 195) rotate(3) scale(1.13)"/>
+                        <use href="#grainc" transform="translate(131 195) rotate(-14) scale(1.15)"/>
+                        <use href="#grainb" transform="translate(119 195) rotate(-3) scale(0.88)"/>
+                        <use href="#graina" transform="translate(374 196) rotate(18) scale(0.88)"/>
+                        <use href="#grainc" transform="translate(177 196) rotate(1) scale(0.89)"/>
+                        <use href="#grainc" transform="translate(225 196) rotate(52) scale(1.07)"/>
+                        <use href="#graina" transform="translate(132 196) rotate(-52) scale(1.01)"/>
+                        <use href="#grainc" transform="translate(299 196) rotate(8) scale(0.95)"/>
+                        <use href="#graina" transform="translate(372 196) rotate(-21) scale(1.05)"/>
+                        <use href="#graina" transform="translate(350 196) rotate(22) scale(1.06)"/>
+                        <use href="#grainb" transform="translate(298 196) rotate(-11) scale(0.98)"/>
+                        <use href="#graina" transform="translate(137 196) rotate(37) scale(1.02)"/>
+                        <use href="#graina" transform="translate(217 197) rotate(-38) scale(0.95)"/>
+                        <use href="#grainc" transform="translate(280 197) rotate(-13) scale(0.98)"/>
+                        <use href="#graina" transform="translate(272 197) rotate(52) scale(1.11)"/>
+                        <use href="#grainc" transform="translate(141 197) rotate(-10) scale(0.97)"/>
+                        <use href="#graina" transform="translate(160 197) rotate(43) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(345 198) rotate(-24) scale(1.00)"/>
+                        <use href="#graina" transform="translate(219 198) rotate(34) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(379 198) rotate(19) scale(0.87)"/>
+                        <use href="#graina" transform="translate(335 199) rotate(-19) scale(1.10)"/>
+                        <use href="#grainb" transform="translate(303 199) rotate(51) scale(0.93)"/>
+                        <use href="#grainb" transform="translate(330 199) rotate(-38) scale(0.85)"/>
+                        <use href="#graina" transform="translate(123 199) rotate(38) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(133 199) rotate(17) scale(0.99)"/>
+                        <use href="#grainb" transform="translate(141 199) rotate(-60) scale(1.04)"/>
+                        <use href="#graina" transform="translate(355 199) rotate(-42) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(213 199) rotate(-51) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(221 199) rotate(-17) scale(1.13)"/>
+                        <use href="#graina" transform="translate(402 199) rotate(4) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(406 199) rotate(32) scale(1.09)"/>
+                        <use href="#graina" transform="translate(215 199) rotate(-45) scale(0.87)"/>
+                        <use href="#grainc" transform="translate(330 200) rotate(-33) scale(0.90)"/>
+                        <use href="#grainc" transform="translate(364 200) rotate(-55) scale(1.15)"/>
+                        <use href="#graina" transform="translate(167 200) rotate(55) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(266 200) rotate(45) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(182 200) rotate(3) scale(0.93)"/>
+                        <use href="#graina" transform="translate(336 200) rotate(-54) scale(1.00)"/>
+                        <use href="#graina" transform="translate(237 200) rotate(-61) scale(1.05)"/>
+                        <use href="#graina" transform="translate(132 201) rotate(7) scale(1.10)"/>
+                        <use href="#graina" transform="translate(127 201) rotate(-24) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(334 201) rotate(-14) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(200 201) rotate(40) scale(0.96)"/>
+                        <use href="#grainb" transform="translate(133 201) rotate(65) scale(0.90)"/>
+                        <use href="#grainc" transform="translate(266 201) rotate(-26) scale(0.95)"/>
+                        <use href="#graina" transform="translate(237 201) rotate(32) scale(0.96)"/>
+                        <use href="#grainc" transform="translate(330 201) rotate(-39) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(122 201) rotate(15) scale(1.08)"/>
+                        <use href="#grainc" transform="translate(355 202) rotate(-45) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(184 202) rotate(-59) scale(0.99)"/>
+                        <use href="#grainc" transform="translate(196 202) rotate(-69) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(288 203) rotate(-12) scale(0.87)"/>
+                        <use href="#graina" transform="translate(307 203) rotate(47) scale(1.02)"/>
+                        <use href="#graina" transform="translate(180 203) rotate(-2) scale(1.15)"/>
+                        <use href="#grainb" transform="translate(285 203) rotate(-16) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(400 203) rotate(66) scale(0.89)"/>
+                        <use href="#grainc" transform="translate(383 203) rotate(57) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(398 203) rotate(-2) scale(1.06)"/>
+                        <use href="#grainb" transform="translate(248 204) rotate(28) scale(0.90)"/>
+                        <use href="#graina" transform="translate(366 204) rotate(27) scale(0.91)"/>
+                        <use href="#graina" transform="translate(375 204) rotate(-10) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(187 204) rotate(20) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(222 204) rotate(18) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(377 204) rotate(4) scale(1.11)"/>
+                        <use href="#grainc" transform="translate(190 204) rotate(-56) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(385 204) rotate(63) scale(0.85)"/>
+                        <use href="#grainc" transform="translate(237 205) rotate(30) scale(1.10)"/>
+                        <use href="#grainb" transform="translate(398 205) rotate(-42) scale(0.87)"/>
+                        <use href="#grainb" transform="translate(148 205) rotate(-35) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(277 205) rotate(-42) scale(1.07)"/>
+                        <use href="#grainc" transform="translate(281 205) rotate(40) scale(1.07)"/>
+                        <use href="#graina" transform="translate(352 205) rotate(25) scale(1.07)"/>
+                        <use href="#graina" transform="translate(257 206) rotate(66) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(207 206) rotate(52) scale(0.97)"/>
+                        <use href="#graina" transform="translate(133 206) rotate(-14) scale(0.99)"/>
+                        <use href="#grainc" transform="translate(218 206) rotate(33) scale(0.93)"/>
+                        <use href="#graina" transform="translate(164 206) rotate(44) scale(0.94)"/>
+                        <use href="#graina" transform="translate(391 206) rotate(37) scale(1.10)"/>
+                        <use href="#graina" transform="translate(235 206) rotate(7) scale(0.90)"/>
+                        <use href="#graina" transform="translate(228 206) rotate(15) scale(1.15)"/>
+                        <use href="#graina" transform="translate(355 207) rotate(42) scale(1.09)"/>
+                        <use href="#grainb" transform="translate(316 207) rotate(-26) scale(0.85)"/>
+                        <use href="#graina" transform="translate(123 207) rotate(-39) scale(0.95)"/>
+                        <use href="#graina" transform="translate(289 207) rotate(-8) scale(1.13)"/>
+                        <use href="#graina" transform="translate(280 207) rotate(-29) scale(1.08)"/>
+                        <use href="#grainc" transform="translate(177 207) rotate(-32) scale(0.95)"/>
+                        <use href="#grainc" transform="translate(273 207) rotate(53) scale(0.86)"/>
+                        <use href="#graina" transform="translate(261 208) rotate(-51) scale(0.86)"/>
+                        <use href="#graina" transform="translate(269 208) rotate(-35) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(382 208) rotate(-68) scale(1.05)"/>
+                        <use href="#graina" transform="translate(144 208) rotate(-56) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(332 208) rotate(62) scale(1.05)"/>
+                        <use href="#grainc" transform="translate(218 208) rotate(2) scale(0.94)"/>
+                        <use href="#graina" transform="translate(161 208) rotate(-33) scale(0.99)"/>
+                        <use href="#grainb" transform="translate(266 208) rotate(28) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(300 208) rotate(17) scale(0.93)"/>
+                        <use href="#grainc" transform="translate(386 209) rotate(55) scale(1.04)"/>
+                        <use href="#graina" transform="translate(239 209) rotate(20) scale(0.88)"/>
+                        <use href="#graina" transform="translate(143 209) rotate(11) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(145 209) rotate(-56) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(219 209) rotate(68) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(301 209) rotate(-63) scale(1.14)"/>
+                        <use href="#grainb" transform="translate(202 209) rotate(54) scale(1.07)"/>
+                        <use href="#grainc" transform="translate(233 210) rotate(-1) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(135 210) rotate(40) scale(0.96)"/>
+                        <use href="#grainb" transform="translate(327 210) rotate(58) scale(0.97)"/>
+                        <use href="#graina" transform="translate(394 210) rotate(-55) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(327 210) rotate(-11) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(200 210) rotate(21) scale(1.02)"/>
+                        <use href="#graina" transform="translate(134 211) rotate(32) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(325 211) rotate(6) scale(0.94)"/>
+                        <use href="#graina" transform="translate(354 211) rotate(57) scale(0.86)"/>
+                        <use href="#graina" transform="translate(168 211) rotate(51) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(354 211) rotate(-43) scale(0.99)"/>
+                        <use href="#graina" transform="translate(208 211) rotate(-60) scale(0.96)"/>
+                        <use href="#graina" transform="translate(188 211) rotate(0) scale(0.92)"/>
+                        <use href="#graina" transform="translate(376 211) rotate(-45) scale(0.98)"/>
+                        <use href="#graina" transform="translate(396 212) rotate(-8) scale(1.11)"/>
+                        <use href="#graina" transform="translate(162 212) rotate(-62) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(234 212) rotate(57) scale(1.00)"/>
+                        <use href="#graina" transform="translate(372 212) rotate(-46) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(191 213) rotate(29) scale(1.01)"/>
+                        <use href="#graina" transform="translate(130 213) rotate(33) scale(0.90)"/>
+                        <use href="#grainc" transform="translate(288 214) rotate(51) scale(1.06)"/>
+                        <use href="#grainc" transform="translate(366 214) rotate(-15) scale(1.03)"/>
+                        <use href="#grainb" transform="translate(385 214) rotate(-6) scale(1.15)"/>
+                        <use href="#graina" transform="translate(245 215) rotate(-2) scale(0.90)"/>
+                        <use href="#grainc" transform="translate(192 215) rotate(27) scale(0.98)"/>
+                        <use href="#graina" transform="translate(286 215) rotate(11) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(187 215) rotate(25) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(331 216) rotate(-69) scale(0.94)"/>
+                        <use href="#grainc" transform="translate(267 216) rotate(-9) scale(1.09)"/>
+                        <use href="#graina" transform="translate(286 216) rotate(53) scale(1.03)"/>
+                        <use href="#grainc" transform="translate(284 216) rotate(-23) scale(0.85)"/>
+                        <use href="#grainc" transform="translate(202 216) rotate(12) scale(0.98)"/>
+                        <use href="#graina" transform="translate(339 216) rotate(-41) scale(0.93)"/>
+                        <use href="#graina" transform="translate(388 216) rotate(-44) scale(0.98)"/>
+                        <use href="#graina" transform="translate(241 217) rotate(-41) scale(1.12)"/>
+                        <use href="#grainc" transform="translate(288 217) rotate(23) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(294 217) rotate(14) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(266 217) rotate(-24) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(256 218) rotate(14) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(253 218) rotate(-18) scale(0.97)"/>
+                        <use href="#graina" transform="translate(362 218) rotate(49) scale(0.92)"/>
+                        <use href="#graina" transform="translate(261 218) rotate(3) scale(1.11)"/>
+                        <use href="#grainc" transform="translate(204 219) rotate(17) scale(1.09)"/>
+                        <use href="#grainb" transform="translate(222 219) rotate(-67) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(269 219) rotate(-42) scale(0.90)"/>
+                        <use href="#grainc" transform="translate(333 219) rotate(-52) scale(0.85)"/>
+                        <use href="#grainc" transform="translate(239 219) rotate(-69) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(348 220) rotate(-29) scale(1.04)"/>
+                        <use href="#graina" transform="translate(311 220) rotate(-55) scale(1.03)"/>
+                        <use href="#grainc" transform="translate(261 220) rotate(-20) scale(0.86)"/>
+                        <use href="#graina" transform="translate(385 220) rotate(-50) scale(0.88)"/>
+                        <use href="#grainb" transform="translate(252 220) rotate(-68) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(196 221) rotate(-45) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(207 221) rotate(26) scale(1.04)"/>
+                        <use href="#grainc" transform="translate(248 222) rotate(57) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(155 222) rotate(-58) scale(1.03)"/>
+                        <use href="#grainb" transform="translate(140 222) rotate(40) scale(1.03)"/>
+                        <use href="#graina" transform="translate(141 222) rotate(17) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(167 222) rotate(-39) scale(0.97)"/>
+                        <use href="#graina" transform="translate(168 222) rotate(-42) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(375 223) rotate(33) scale(0.86)"/>
+                        <use href="#graina" transform="translate(272 223) rotate(64) scale(1.01)"/>
+                        <use href="#graina" transform="translate(328 223) rotate(35) scale(1.13)"/>
+                        <use href="#graina" transform="translate(134 223) rotate(47) scale(0.92)"/>
+                        <use href="#graina" transform="translate(349 224) rotate(-64) scale(0.97)"/>
+                        <use href="#graina" transform="translate(255 224) rotate(57) scale(1.03)"/>
+                        <use href="#grainc" transform="translate(233 224) rotate(-10) scale(0.87)"/>
+                        <use href="#grainc" transform="translate(378 225) rotate(7) scale(1.10)"/>
+                        <use href="#graina" transform="translate(328 225) rotate(42) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(220 225) rotate(-44) scale(1.10)"/>
+                        <use href="#grainc" transform="translate(240 225) rotate(37) scale(0.91)"/>
+                        <use href="#grainb" transform="translate(209 225) rotate(-22) scale(0.94)"/>
+                        <use href="#graina" transform="translate(337 225) rotate(-14) scale(1.11)"/>
+                        <use href="#grainc" transform="translate(209 225) rotate(60) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(357 225) rotate(36) scale(1.05)"/>
+                        <use href="#graina" transform="translate(198 225) rotate(10) scale(0.87)"/>
+                        <use href="#graina" transform="translate(302 226) rotate(47) scale(0.89)"/>
+                        <use href="#grainb" transform="translate(196 226) rotate(-54) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(248 226) rotate(12) scale(0.88)"/>
+                        <use href="#grainb" transform="translate(363 226) rotate(33) scale(0.88)"/>
+                        <use href="#grainb" transform="translate(230 226) rotate(-22) scale(0.94)"/>
+                        <use href="#graina" transform="translate(213 226) rotate(47) scale(1.12)"/>
+                        <use href="#grainc" transform="translate(268 226) rotate(28) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(225 227) rotate(-30) scale(1.10)"/>
+                        <use href="#graina" transform="translate(340 227) rotate(-54) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(142 227) rotate(-0) scale(0.96)"/>
+                        <use href="#grainb" transform="translate(364 227) rotate(28) scale(0.88)"/>
+                        <use href="#graina" transform="translate(281 228) rotate(-70) scale(1.15)"/>
+                        <use href="#graina" transform="translate(236 228) rotate(1) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(139 228) rotate(34) scale(0.97)"/>
+                        <use href="#grainb" transform="translate(296 229) rotate(-20) scale(0.92)"/>
+                        <use href="#grainb" transform="translate(381 229) rotate(-63) scale(1.12)"/>
+                        <use href="#grainc" transform="translate(337 229) rotate(-68) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(328 229) rotate(30) scale(0.93)"/>
+                        <use href="#grainb" transform="translate(337 229) rotate(-5) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(229 229) rotate(42) scale(1.02)"/>
+                        <use href="#grainb" transform="translate(183 229) rotate(-44) scale(1.07)"/>
+                        <use href="#grainb" transform="translate(228 230) rotate(-66) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(335 230) rotate(-21) scale(1.05)"/>
+                        <use href="#grainb" transform="translate(220 230) rotate(-69) scale(0.96)"/>
+                        <use href="#graina" transform="translate(356 230) rotate(1) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(281 230) rotate(-21) scale(0.98)"/>
+                        <use href="#grainc" transform="translate(196 231) rotate(66) scale(0.85)"/>
+                        <use href="#grainc" transform="translate(280 231) rotate(0) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(174 231) rotate(61) scale(0.96)"/>
+                        <use href="#grainb" transform="translate(148 231) rotate(-22) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(270 231) rotate(47) scale(1.11)"/>
+                        <use href="#graina" transform="translate(228 232) rotate(-56) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(153 232) rotate(46) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(228 232) rotate(-59) scale(0.92)"/>
+                        <use href="#graina" transform="translate(157 232) rotate(17) scale(1.04)"/>
+                        <use href="#graina" transform="translate(228 233) rotate(19) scale(0.97)"/>
+                        <use href="#graina" transform="translate(173 233) rotate(-42) scale(1.07)"/>
+                        <use href="#grainc" transform="translate(357 233) rotate(-67) scale(1.03)"/>
+                        <use href="#grainc" transform="translate(321 234) rotate(-9) scale(0.99)"/>
+                        <use href="#grainb" transform="translate(368 234) rotate(25) scale(0.96)"/>
+                        <use href="#grainb" transform="translate(325 234) rotate(-13) scale(1.05)"/>
+                        <use href="#graina" transform="translate(361 234) rotate(6) scale(1.11)"/>
+                        <use href="#graina" transform="translate(219 235) rotate(-8) scale(0.91)"/>
+                        <use href="#graina" transform="translate(348 235) rotate(-53) scale(1.10)"/>
+                        <use href="#grainb" transform="translate(194 235) rotate(21) scale(0.85)"/>
+                        <use href="#grainc" transform="translate(187 235) rotate(10) scale(1.15)"/>
+                        <use href="#graina" transform="translate(267 235) rotate(-17) scale(1.01)"/>
+                        <use href="#grainc" transform="translate(357 235) rotate(-69) scale(1.03)"/>
+                        <use href="#grainc" transform="translate(352 236) rotate(62) scale(0.89)"/>
+                        <use href="#graina" transform="translate(180 237) rotate(-70) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(354 237) rotate(-11) scale(0.88)"/>
+                        <use href="#grainb" transform="translate(259 237) rotate(9) scale(0.86)"/>
+                        <use href="#grainc" transform="translate(232 237) rotate(27) scale(0.91)"/>
+                        <use href="#grainc" transform="translate(219 238) rotate(6) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(201 238) rotate(-33) scale(1.00)"/>
+                        <use href="#grainb" transform="translate(175 238) rotate(-10) scale(0.90)"/>
+                        <use href="#graina" transform="translate(365 238) rotate(-58) scale(0.89)"/>
+                        <use href="#grainc" transform="translate(179 239) rotate(-5) scale(1.11)"/>
+                        <use href="#grainb" transform="translate(276 239) rotate(-6) scale(0.87)"/>
+                        <use href="#graina" transform="translate(158 239) rotate(-69) scale(1.03)"/>
+                        <use href="#graina" transform="translate(349 240) rotate(69) scale(0.93)"/>
+                        <use href="#graina" transform="translate(188 240) rotate(43) scale(1.07)"/>
+                        <use href="#grainb" transform="translate(215 240) rotate(47) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(207 241) rotate(-47) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(215 241) rotate(-47) scale(1.03)"/>
+                        <use href="#grainb" transform="translate(217 241) rotate(7) scale(0.87)"/>
+                        <use href="#grainb" transform="translate(250 241) rotate(-39) scale(0.97)"/>
+                        <use href="#graina" transform="translate(172 241) rotate(-41) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(162 242) rotate(-33) scale(0.90)"/>
+                        <use href="#grainb" transform="translate(305 242) rotate(2) scale(1.08)"/>
+                        <use href="#grainc" transform="translate(224 243) rotate(26) scale(0.90)"/>
+                        <use href="#graina" transform="translate(347 243) rotate(-41) scale(0.99)"/>
+                        <use href="#graina" transform="translate(254 243) rotate(55) scale(1.08)"/>
+                        <use href="#grainc" transform="translate(168 243) rotate(-62) scale(0.89)"/>
+                        <use href="#grainc" transform="translate(220 244) rotate(-12) scale(1.12)"/>
+                        <use href="#graina" transform="translate(176 244) rotate(-33) scale(1.12)"/>
+                        <use href="#grainc" transform="translate(350 244) rotate(70) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(210 245) rotate(52) scale(0.93)"/>
+                        <use href="#graina" transform="translate(354 245) rotate(67) scale(0.85)"/>
+                        <use href="#grainb" transform="translate(288 246) rotate(-4) scale(0.95)"/>
+                        <use href="#grainc" transform="translate(285 246) rotate(-29) scale(1.00)"/>
+                        <use href="#grainc" transform="translate(321 246) rotate(-25) scale(1.12)"/>
+                        <use href="#grainc" transform="translate(230 247) rotate(59) scale(0.98)"/>
+                        <use href="#graina" transform="translate(299 247) rotate(7) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(303 247) rotate(67) scale(1.06)"/>
+                        <use href="#graina" transform="translate(317 247) rotate(-18) scale(1.15)"/>
+                        <use href="#grainb" transform="translate(251 247) rotate(-63) scale(1.14)"/>
+                        <use href="#grainc" transform="translate(269 248) rotate(-66) scale(1.14)"/>
+                        <use href="#grainb" transform="translate(339 248) rotate(25) scale(0.94)"/>
+                        <use href="#grainb" transform="translate(268 249) rotate(30) scale(1.01)"/>
+                        <use href="#grainb" transform="translate(294 249) rotate(32) scale(1.02)"/>
+                        <use href="#grainb" transform="translate(196 249) rotate(-8) scale(1.05)"/>
+                        <use href="#grainc" transform="translate(330 250) rotate(-24) scale(1.11)"/>
+                        <use href="#graina" transform="translate(330 251) rotate(9) scale(0.89)"/>
+                        <use href="#grainc" transform="translate(313 252) rotate(-48) scale(1.05)"/>
+                        <use href="#grainb" transform="translate(322 252) rotate(-11) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(284 252) rotate(-24) scale(0.94)"/>
+                        <use href="#graina" transform="translate(307 252) rotate(-64) scale(1.12)"/>
+                        <use href="#grainb" transform="translate(216 252) rotate(-64) scale(1.13)"/>
+                        <use href="#grainb" transform="translate(205 253) rotate(32) scale(1.05)"/>
+                        <use href="#grainb" transform="translate(266 254) rotate(30) scale(0.87)"/>
+                        <use href="#graina" transform="translate(317 254) rotate(-57) scale(1.10)"/>
+                        <use href="#graina" transform="translate(319 255) rotate(-41) scale(1.05)"/>
+                        <use href="#grainb" transform="translate(230 255) rotate(-68) scale(0.98)"/>
+                        <use href="#grainb" transform="translate(276 255) rotate(40) scale(1.04)"/>
+                        <use href="#grainb" transform="translate(225 256) rotate(44) scale(0.89)"/>
+                        <use href="#graina" transform="translate(255 256) rotate(26) scale(1.11)"/>
+                        <use href="#graina" transform="translate(239 256) rotate(46) scale(0.96)"/>
+                        <use href="#graina" transform="translate(315 256) rotate(-8) scale(0.95)"/>
+                        <use href="#grainb" transform="translate(267 257) rotate(-47) scale(0.92)"/>
+                        <use href="#grainc" transform="translate(232 257) rotate(-68) scale(0.97)"/>
+                        <use href="#grainc" transform="translate(293 259) rotate(54) scale(0.87)"/>
+                        <use href="#grainc" transform="translate(219 259) rotate(-40) scale(1.09)"/>
+                        <use href="#grainc" transform="translate(250 260) rotate(66) scale(0.95)"/>
+                    </svg>
+                </div>
+
+                <!-- 3. CHICKEN -->
+                <div class="layer layer-chicken" data-title="Golden chicken" data-text="Crispy, juicy chicken, fresh from the fire.">
+                    <svg viewBox="0 0 520 400" aria-hidden="true">
+                        <defs>
+                            <radialGradient id="skinA" cx="0.4" cy="0.3" r="0.8">
+                                <stop offset="0" stop-color="#f0b45a"/>
+                                <stop offset="0.55" stop-color="#cf7d2c"/>
+                                <stop offset="1" stop-color="#8f4514"/>
+                            </radialGradient>
+                            <radialGradient id="skinB" cx="0.4" cy="0.3" r="0.8">
+                                <stop offset="0" stop-color="#eba84d"/>
+                                <stop offset="0.55" stop-color="#c46f24"/>
+                                <stop offset="1" stop-color="#83400f"/>
+                            </radialGradient>
+                            <clipPath id="clipA"><path d="M226 236 C220 192 284 166 342 176 C398 186 424 226 402 258 C380 290 300 296 262 276 C238 264 228 250 226 236 Z"/></clipPath>
+                            <clipPath id="clipB"><path d="M326 204 C334 166 392 156 424 182 C452 204 442 248 410 258 C378 266 336 248 326 204 Z"/></clipPath>
+                            <filter id="chBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+                            <filter id="chShadow" x="-30%" y="-40%" width="170%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+                        </defs>
+                        <!-- bone end of the drumstick -->
+                        <g transform="rotate(28 446 226)">
+                            <rect x="432" y="212" width="38" height="22" rx="11" fill="#efe3c8" stroke="#b9a678" stroke-width="2"/>
+                            <circle cx="466" cy="217" r="8" fill="#f6ecd4" stroke="#b9a678" stroke-width="2"/>
+                            <circle cx="466" cy="231" r="8" fill="#f6ecd4" stroke="#b9a678" stroke-width="2"/>
+                        </g>
+                        <!-- shadows -->
+                        <path d="M326 204 C334 166 392 156 424 182 C452 204 442 248 410 258 C378 266 336 248 326 204 Z" transform="translate(4 12)" fill="#000" opacity="0.4" filter="url(#chShadow)"/>
+                        <path d="M226 236 C220 192 284 166 342 176 C398 186 424 226 402 258 C380 290 300 296 262 276 C238 264 228 250 226 236 Z" transform="translate(4 14)" fill="#000" opacity="0.45" filter="url(#chShadow)"/>
+                        
+                        <g clip-path="url(#clipB)">
+                            <path d="M326 204 C334 166 392 156 424 182 C452 204 442 248 410 258 C378 266 336 248 326 204 Z" fill="url(#skinB)"/>
+                            <g filter="url(#chBlur)"><ellipse cx="350" cy="198" rx="20" ry="12" fill="#4d1d06" opacity="0.5"/><ellipse cx="415" cy="236" rx="18" ry="10" fill="#4d1d06" opacity="0.45"/></g>
+                            <ellipse cx="383" cy="216" rx="4.9" ry="2.1" transform="rotate(1 383 216)" fill="#5a2408" opacity="0.36"/>
+                            <ellipse cx="349" cy="211" rx="3.9" ry="2.8" transform="rotate(-32 349 211)" fill="#5a2408" opacity="0.29"/>
+                            <ellipse cx="337" cy="242" rx="4.1" ry="1.3" transform="rotate(39 337 242)" fill="#5a2408" opacity="0.44"/>
+                            <ellipse cx="408" cy="222" rx="2.2" ry="1.2" transform="rotate(2 408 222)" fill="#5a2408" opacity="0.23"/>
+                            <ellipse cx="350" cy="183" rx="1.7" ry="2.1" transform="rotate(-5 350 183)" fill="#5a2408" opacity="0.41"/>
+                            <ellipse cx="391" cy="225" rx="3.4" ry="2.5" transform="rotate(-3 391 225)" fill="#5a2408" opacity="0.28"/>
+                            <ellipse cx="452" cy="262" rx="4.6" ry="2.6" transform="rotate(-15 452 262)" fill="#5a2408" opacity="0.27"/>
+                            <ellipse cx="362" cy="165" rx="4.4" ry="2.0" transform="rotate(28 362 165)" fill="#5a2408" opacity="0.31"/>
+                            <ellipse cx="447" cy="246" rx="1.6" ry="1.6" transform="rotate(33 447 246)" fill="#5a2408" opacity="0.33"/>
+                            <ellipse cx="450" cy="199" rx="1.9" ry="2.5" transform="rotate(22 450 199)" fill="#5a2408" opacity="0.28"/>
+                            <ellipse cx="337" cy="193" rx="5.1" ry="2.7" transform="rotate(-31 337 193)" fill="#5a2408" opacity="0.28"/>
+                            <ellipse cx="339" cy="164" rx="4.5" ry="1.6" transform="rotate(5 339 164)" fill="#5a2408" opacity="0.32"/>
+                            <ellipse cx="350" cy="234" rx="2.1" ry="2.5" transform="rotate(-31 350 234)" fill="#5a2408" opacity="0.32"/>
+                            <ellipse cx="353" cy="186" rx="5.1" ry="2.8" transform="rotate(-16 353 186)" fill="#5a2408" opacity="0.42"/>
+                            <ellipse cx="353" cy="199" rx="4.7" ry="2.5" transform="rotate(-32 353 199)" fill="#5a2408" opacity="0.45"/>
+                            <ellipse cx="353" cy="185" rx="4.4" ry="1.9" transform="rotate(-16 353 185)" fill="#5a2408" opacity="0.24"/>
+                            <ellipse cx="337" cy="219" rx="2.5" ry="2.4" transform="rotate(-10 337 219)" fill="#5a2408" opacity="0.32"/>
+                            <ellipse cx="447" cy="208" rx="3.7" ry="2.9" transform="rotate(-25 447 208)" fill="#5a2408" opacity="0.26"/>
+                            <ellipse cx="440" cy="243" rx="2.5" ry="1.6" transform="rotate(19 440 243)" fill="#5a2408" opacity="0.44"/>
+                            <ellipse cx="351" cy="257" rx="4.8" ry="2.4" transform="rotate(-6 351 257)" fill="#5a2408" opacity="0.24"/>
+                            <ellipse cx="331" cy="258" rx="2.5" ry="2.6" transform="rotate(-19 331 258)" fill="#5a2408" opacity="0.41"/>
+                            <ellipse cx="401" cy="189" rx="2.2" ry="2.6" transform="rotate(-34 401 189)" fill="#5a2408" opacity="0.27"/>
+                            <ellipse cx="396" cy="247" rx="3.8" ry="1.8" transform="rotate(33 396 247)" fill="#5a2408" opacity="0.27"/>
+                            <ellipse cx="328" cy="186" rx="3.2" ry="1.3" transform="rotate(-26 328 186)" fill="#5a2408" opacity="0.30"/>
+                            <ellipse cx="398" cy="172" rx="2.9" ry="3.0" transform="rotate(38 398 172)" fill="#5a2408" opacity="0.37"/>
+                            <ellipse cx="413" cy="219" rx="2.1" ry="1.3" transform="rotate(-39 413 219)" fill="#5a2408" opacity="0.43"/>
+                            <ellipse cx="414" cy="258" rx="1.7" ry="2.5" transform="rotate(-1 414 258)" fill="#5a2408" opacity="0.39"/>
+                            <ellipse cx="366" cy="262" rx="1.9" ry="2.3" transform="rotate(19 366 262)" fill="#5a2408" opacity="0.43"/>
+                            <ellipse cx="419" cy="231" rx="4.5" ry="3.0" transform="rotate(-12 419 231)" fill="#5a2408" opacity="0.38"/>
+                            <ellipse cx="440" cy="249" rx="3.1" ry="2.8" transform="rotate(29 440 249)" fill="#5a2408" opacity="0.35"/>
+                            <ellipse cx="405" cy="198" rx="3.7" ry="2.4" transform="rotate(-34 405 198)" fill="#5a2408" opacity="0.37"/>
+                            <ellipse cx="451" cy="249" rx="4.2" ry="2.0" transform="rotate(19 451 249)" fill="#5a2408" opacity="0.35"/>
+                            <ellipse cx="382" cy="245" rx="1.9" ry="2.7" transform="rotate(-38 382 245)" fill="#5a2408" opacity="0.36"/>
+                            <ellipse cx="387" cy="182" rx="4.1" ry="2.2" transform="rotate(9 387 182)" fill="#5a2408" opacity="0.43"/>
+                            <ellipse cx="358" cy="159" rx="2.7" ry="2.6" transform="rotate(-24 358 159)" fill="#5a2408" opacity="0.26"/>
+                            <ellipse cx="440" cy="227" rx="3.2" ry="3.0" transform="rotate(-14 440 227)" fill="#5a2408" opacity="0.37"/>
+                            <ellipse cx="351" cy="203" rx="4.5" ry="3.0" transform="rotate(30 351 203)" fill="#5a2408" opacity="0.31"/>
+                            <ellipse cx="399" cy="191" rx="2.1" ry="2.2" transform="rotate(27 399 191)" fill="#5a2408" opacity="0.42"/>
+                            <ellipse cx="416" cy="257" rx="2.6" ry="1.5" transform="rotate(-4 416 257)" fill="#5a2408" opacity="0.28"/>
+                            <ellipse cx="353" cy="201" rx="3.9" ry="2.2" transform="rotate(-15 353 201)" fill="#5a2408" opacity="0.41"/>
+                            <ellipse cx="450" cy="205" rx="1.9" ry="1.3" transform="rotate(30 450 205)" fill="#5a2408" opacity="0.23"/>
+                            <ellipse cx="415" cy="217" rx="2.7" ry="2.8" transform="rotate(-38 415 217)" fill="#5a2408" opacity="0.25"/>
+                            <ellipse cx="383" cy="161" rx="4.6" ry="1.7" transform="rotate(-29 383 161)" fill="#5a2408" opacity="0.23"/>
+                            <ellipse cx="405" cy="204" rx="3.9" ry="2.5" transform="rotate(25 405 204)" fill="#5a2408" opacity="0.44"/>
+                            <ellipse cx="412" cy="179" rx="3.3" ry="1.6" transform="rotate(-39 412 179)" fill="#5a2408" opacity="0.33"/>
+                            <ellipse cx="416" cy="177" rx="2.6" ry="1.9" transform="rotate(16 416 177)" fill="#5a2408" opacity="0.34"/>
+                            <ellipse cx="403" cy="237" rx="3.0" ry="2.8" transform="rotate(32 403 237)" fill="#5a2408" opacity="0.24"/>
+                            <ellipse cx="444" cy="233" rx="2.1" ry="2.1" transform="rotate(10 444 233)" fill="#5a2408" opacity="0.43"/>
+                            <ellipse cx="373" cy="217" rx="4.8" ry="2.8" transform="rotate(36 373 217)" fill="#5a2408" opacity="0.33"/>
+                            <ellipse cx="408" cy="179" rx="4.2" ry="2.8" transform="rotate(11 408 179)" fill="#5a2408" opacity="0.39"/>
+                            <ellipse cx="353" cy="252" rx="5.1" ry="3.2" transform="rotate(3 353 252)" fill="#5a2408" opacity="0.40"/>
+                            <ellipse cx="366" cy="253" rx="4.7" ry="1.9" transform="rotate(-33 366 253)" fill="#5a2408" opacity="0.32"/>
+                            <ellipse cx="395" cy="238" rx="3.4" ry="1.3" transform="rotate(25 395 238)" fill="#5a2408" opacity="0.23"/>
+                            <ellipse cx="427" cy="176" rx="2.8" ry="2.8" transform="rotate(-29 427 176)" fill="#5a2408" opacity="0.25"/>
+                            <ellipse cx="391" cy="233" rx="4.6" ry="2.6" transform="rotate(36 391 233)" fill="#5a2408" opacity="0.33"/>
+                            <ellipse cx="446" cy="167" rx="2.4" ry="2.3" transform="rotate(-17 446 167)" fill="#5a2408" opacity="0.39"/>
+                            <ellipse cx="406" cy="212" rx="4.6" ry="2.3" transform="rotate(-15 406 212)" fill="#5a2408" opacity="0.31"/>
+                            <ellipse cx="433" cy="252" rx="2.3" ry="2.9" transform="rotate(37 433 252)" fill="#5a2408" opacity="0.34"/>
+                            <ellipse cx="398" cy="179" rx="3.5" ry="2.2" transform="rotate(8 398 179)" fill="#5a2408" opacity="0.23"/>
+                            <ellipse cx="448" cy="212" rx="3.0" ry="2.8" transform="rotate(5 448 212)" fill="#5a2408" opacity="0.33"/>
+                            <ellipse cx="413" cy="165" rx="3.5" ry="2.0" transform="rotate(37 413 165)" fill="#5a2408" opacity="0.43"/>
+                            <ellipse cx="360" cy="207" rx="2.1" ry="2.1" transform="rotate(25 360 207)" fill="#5a2408" opacity="0.43"/>
+                            <ellipse cx="386" cy="191" rx="2.3" ry="2.4" transform="rotate(34 386 191)" fill="#5a2408" opacity="0.25"/>
+                            <ellipse cx="424" cy="160" rx="2.3" ry="1.7" transform="rotate(15 424 160)" fill="#5a2408" opacity="0.29"/>
+                            <ellipse cx="371" cy="222" rx="2.0" ry="2.7" transform="rotate(-30 371 222)" fill="#5a2408" opacity="0.34"/>
+                            <ellipse cx="358" cy="179" rx="3.5" ry="2.1" transform="rotate(-10 358 179)" fill="#5a2408" opacity="0.32"/>
+                            <ellipse cx="393" cy="175" rx="2.3" ry="2.5" transform="rotate(11 393 175)" fill="#5a2408" opacity="0.34"/>
+                            <ellipse cx="433" cy="222" rx="4.7" ry="1.7" transform="rotate(19 433 222)" fill="#5a2408" opacity="0.41"/>
+                            <ellipse cx="440" cy="191" rx="2.7" ry="3.0" transform="rotate(-23 440 191)" fill="#5a2408" opacity="0.45"/>
+                            <ellipse cx="438" cy="172" rx="2.5" ry="2.7" transform="rotate(-19 438 172)" fill="#5a2408" opacity="0.24"/>
+                            <ellipse cx="431" cy="202" rx="4.4" ry="1.5" transform="rotate(-8 431 202)" fill="#f6cf7a" opacity="0.47"/>
+                            <ellipse cx="328" cy="179" rx="4.1" ry="3.0" transform="rotate(37 328 179)" fill="#f6cf7a" opacity="0.33"/>
+                            <ellipse cx="390" cy="237" rx="3.4" ry="2.6" transform="rotate(-25 390 237)" fill="#f6cf7a" opacity="0.32"/>
+                            <ellipse cx="339" cy="162" rx="3.6" ry="2.2" transform="rotate(5 339 162)" fill="#f6cf7a" opacity="0.34"/>
+                            <ellipse cx="349" cy="179" rx="4.6" ry="3.2" transform="rotate(34 349 179)" fill="#f6cf7a" opacity="0.32"/>
+                            <ellipse cx="334" cy="257" rx="3.3" ry="2.7" transform="rotate(-14 334 257)" fill="#f6cf7a" opacity="0.42"/>
+                            <ellipse cx="391" cy="203" rx="3.8" ry="1.2" transform="rotate(16 391 203)" fill="#f6cf7a" opacity="0.51"/>
+                            <ellipse cx="349" cy="205" rx="4.3" ry="2.0" transform="rotate(-24 349 205)" fill="#f6cf7a" opacity="0.34"/>
+                            <ellipse cx="391" cy="160" rx="4.8" ry="2.8" transform="rotate(16 391 160)" fill="#f6cf7a" opacity="0.52"/>
+                            <ellipse cx="405" cy="200" rx="3.8" ry="2.2" transform="rotate(39 405 200)" fill="#f6cf7a" opacity="0.50"/>
+                            <ellipse cx="359" cy="253" rx="4.3" ry="2.8" transform="rotate(25 359 253)" fill="#f6cf7a" opacity="0.40"/>
+                            <ellipse cx="439" cy="250" rx="4.1" ry="2.7" transform="rotate(21 439 250)" fill="#f6cf7a" opacity="0.40"/>
+                            <ellipse cx="417" cy="165" rx="2.8" ry="2.1" transform="rotate(-39 417 165)" fill="#f6cf7a" opacity="0.39"/>
+                            <ellipse cx="406" cy="223" rx="2.4" ry="3.1" transform="rotate(13 406 223)" fill="#f6cf7a" opacity="0.38"/>
+                            <ellipse cx="409" cy="217" rx="3.5" ry="2.0" transform="rotate(40 409 217)" fill="#f6cf7a" opacity="0.46"/>
+                            <ellipse cx="414" cy="237" rx="5.1" ry="1.2" transform="rotate(9 414 237)" fill="#f6cf7a" opacity="0.48"/>
+                            <ellipse cx="358" cy="200" rx="1.8" ry="1.6" transform="rotate(-10 358 200)" fill="#f6cf7a" opacity="0.32"/>
+                            <ellipse cx="358" cy="252" rx="3.6" ry="2.2" transform="rotate(37 358 252)" fill="#f6cf7a" opacity="0.44"/>
+                            <ellipse cx="451" cy="224" rx="4.5" ry="1.4" transform="rotate(8 451 224)" fill="#f6cf7a" opacity="0.49"/>
+                            <ellipse cx="332" cy="255" rx="2.2" ry="2.1" transform="rotate(-26 332 255)" fill="#f6cf7a" opacity="0.42"/>
+                            <ellipse cx="403" cy="164" rx="5.0" ry="2.0" transform="rotate(2 403 164)" fill="#f6cf7a" opacity="0.45"/>
+                            <ellipse cx="372" cy="188" rx="4.0" ry="2.3" transform="rotate(-17 372 188)" fill="#f6cf7a" opacity="0.48"/>
+                            <ellipse cx="363" cy="159" rx="2.5" ry="1.3" transform="rotate(-27 363 159)" fill="#f6cf7a" opacity="0.49"/>
+                            <ellipse cx="375" cy="251" rx="4.3" ry="1.3" transform="rotate(39 375 251)" fill="#f6cf7a" opacity="0.54"/>
+                            <ellipse cx="335" cy="252" rx="3.1" ry="2.2" transform="rotate(38 335 252)" fill="#f6cf7a" opacity="0.36"/>
+                            <ellipse cx="392" cy="255" rx="4.2" ry="2.1" transform="rotate(38 392 255)" fill="#f6cf7a" opacity="0.50"/>
+                            <ellipse cx="402" cy="170" rx="3.8" ry="2.1" transform="rotate(-24 402 170)" fill="#f6cf7a" opacity="0.31"/>
+                            <ellipse cx="393" cy="171" rx="3.2" ry="2.5" transform="rotate(-4 393 171)" fill="#f6cf7a" opacity="0.37"/>
+                            <ellipse cx="399" cy="202" rx="4.4" ry="2.3" transform="rotate(40 399 202)" fill="#f6cf7a" opacity="0.54"/>
+                            <ellipse cx="419" cy="183" rx="2.0" ry="3.0" transform="rotate(23 419 183)" fill="#f6cf7a" opacity="0.46"/>
+                            <ellipse cx="371" cy="186" rx="4.1" ry="2.3" transform="rotate(7 371 186)" fill="#f6cf7a" opacity="0.46"/>
+                            <ellipse cx="421" cy="178" rx="2.5" ry="3.2" transform="rotate(33 421 178)" fill="#f6cf7a" opacity="0.52"/>
+                            <ellipse cx="331" cy="164" rx="2.6" ry="2.1" transform="rotate(10 331 164)" fill="#f6cf7a" opacity="0.33"/>
+                            <ellipse cx="394" cy="166" rx="1.9" ry="2.6" transform="rotate(4 394 166)" fill="#f6cf7a" opacity="0.46"/>
+                            <ellipse cx="373" cy="208" rx="2.4" ry="1.9" transform="rotate(20 373 208)" fill="#f6cf7a" opacity="0.51"/>
+                            <ellipse cx="335" cy="170" rx="4.5" ry="2.4" transform="rotate(22 335 170)" fill="#f6cf7a" opacity="0.35"/>
+                            <ellipse cx="379" cy="185" rx="4.5" ry="1.9" transform="rotate(12 379 185)" fill="#f6cf7a" opacity="0.55"/>
+                            <ellipse cx="367" cy="215" rx="4.3" ry="3.0" transform="rotate(-6 367 215)" fill="#f6cf7a" opacity="0.39"/>
+                            <ellipse cx="338" cy="249" rx="1.9" ry="1.4" transform="rotate(5 338 249)" fill="#f6cf7a" opacity="0.42"/>
+                            <ellipse cx="412" cy="189" rx="4.4" ry="1.4" transform="rotate(-23 412 189)" fill="#f6cf7a" opacity="0.47"/>
+                            <ellipse cx="336" cy="190" rx="4.2" ry="2.6" transform="rotate(-17 336 190)" fill="#f6cf7a" opacity="0.34"/>
+                            <ellipse cx="371" cy="234" rx="2.9" ry="1.4" transform="rotate(17 371 234)" fill="#f6cf7a" opacity="0.44"/>
+                            <ellipse cx="442" cy="256" rx="4.9" ry="2.1" transform="rotate(24 442 256)" fill="#f6cf7a" opacity="0.38"/>
+                            <ellipse cx="366" cy="200" rx="5.0" ry="3.0" transform="rotate(-20 366 200)" fill="#f6cf7a" opacity="0.39"/>
+                            <ellipse cx="372" cy="196" rx="3.0" ry="2.0" transform="rotate(-24 372 196)" fill="#f6cf7a" opacity="0.44"/>
+                            <ellipse cx="426" cy="214" rx="4.6" ry="2.3" transform="rotate(-26 426 214)" fill="#f6cf7a" opacity="0.49"/>
+                            <ellipse cx="437" cy="187" rx="1.7" ry="2.2" transform="rotate(4 437 187)" fill="#f6cf7a" opacity="0.44"/>
+                            <ellipse cx="448" cy="226" rx="4.5" ry="1.3" transform="rotate(4 448 226)" fill="#f6cf7a" opacity="0.50"/>
+                            <ellipse cx="337" cy="166" rx="4.3" ry="3.0" transform="rotate(-33 337 166)" fill="#f6cf7a" opacity="0.46"/>
+                            <ellipse cx="344" cy="236" rx="3.9" ry="1.7" transform="rotate(-22 344 236)" fill="#f6cf7a" opacity="0.49"/>
+                            <ellipse cx="392" cy="238" rx="3.0" ry="1.9" transform="rotate(37 392 238)" fill="#f6cf7a" opacity="0.47"/>
+                            <ellipse cx="388" cy="214" rx="4.2" ry="2.6" transform="rotate(33 388 214)" fill="#f6cf7a" opacity="0.40"/>
+                            <ellipse cx="430" cy="227" rx="4.7" ry="2.8" transform="rotate(27 430 227)" fill="#f6cf7a" opacity="0.52"/>
+                            <ellipse cx="447" cy="225" rx="3.5" ry="2.6" transform="rotate(24 447 225)" fill="#f6cf7a" opacity="0.41"/>
+                            <ellipse cx="379" cy="173" rx="4.3" ry="3.2" transform="rotate(-10 379 173)" fill="#f6cf7a" opacity="0.34"/>
+                            <path d="M326 204 C334 166 392 156 424 182 C452 204 442 248 410 258 C378 266 336 248 326 204 Z" fill="none" stroke="#6e2f0e" stroke-width="5" opacity="0.35"/>
+                        </g>
+                        
+                        <g clip-path="url(#clipA)">
+                            <path d="M226 236 C220 192 284 166 342 176 C398 186 424 226 402 258 C380 290 300 296 262 276 C238 264 228 250 226 236 Z" fill="url(#skinA)"/>
+                            <g filter="url(#chBlur)"><ellipse cx="270" cy="222" rx="22" ry="12" fill="#4d1d06" opacity="0.5"/><ellipse cx="372" cy="262" rx="26" ry="11" fill="#4d1d06" opacity="0.45"/><ellipse cx="330" cy="196" rx="30" ry="9" fill="#f2b95a" opacity="0.5"/></g>
+                            <ellipse cx="263" cy="222" rx="2.7" ry="3.1" transform="rotate(-35 263 222)" fill="#5a2408" opacity="0.29"/>
+                            <ellipse cx="245" cy="251" rx="4.4" ry="1.6" transform="rotate(-35 245 251)" fill="#5a2408" opacity="0.33"/>
+                            <ellipse cx="340" cy="284" rx="1.7" ry="1.4" transform="rotate(-25 340 284)" fill="#5a2408" opacity="0.27"/>
+                            <ellipse cx="270" cy="260" rx="3.7" ry="1.6" transform="rotate(-25 270 260)" fill="#5a2408" opacity="0.28"/>
+                            <ellipse cx="257" cy="265" rx="2.7" ry="2.3" transform="rotate(25 257 265)" fill="#5a2408" opacity="0.33"/>
+                            <ellipse cx="275" cy="282" rx="4.9" ry="1.9" transform="rotate(4 275 282)" fill="#5a2408" opacity="0.44"/>
+                            <ellipse cx="319" cy="196" rx="1.8" ry="3.1" transform="rotate(24 319 196)" fill="#5a2408" opacity="0.31"/>
+                            <ellipse cx="329" cy="234" rx="2.6" ry="3.2" transform="rotate(13 329 234)" fill="#5a2408" opacity="0.27"/>
+                            <ellipse cx="224" cy="228" rx="2.9" ry="2.8" transform="rotate(17 224 228)" fill="#5a2408" opacity="0.36"/>
+                            <ellipse cx="254" cy="188" rx="2.8" ry="1.7" transform="rotate(30 254 188)" fill="#5a2408" opacity="0.34"/>
+                            <ellipse cx="351" cy="295" rx="2.6" ry="2.3" transform="rotate(-28 351 295)" fill="#5a2408" opacity="0.40"/>
+                            <ellipse cx="222" cy="273" rx="4.6" ry="2.8" transform="rotate(-33 222 273)" fill="#5a2408" opacity="0.28"/>
+                            <ellipse cx="367" cy="180" rx="3.3" ry="2.1" transform="rotate(36 367 180)" fill="#5a2408" opacity="0.35"/>
+                            <ellipse cx="395" cy="207" rx="4.4" ry="2.0" transform="rotate(33 395 207)" fill="#5a2408" opacity="0.24"/>
+                            <ellipse cx="389" cy="195" rx="3.6" ry="2.3" transform="rotate(-27 389 195)" fill="#5a2408" opacity="0.41"/>
+                            <ellipse cx="285" cy="208" rx="1.9" ry="1.8" transform="rotate(-3 285 208)" fill="#5a2408" opacity="0.38"/>
+                            <ellipse cx="295" cy="256" rx="2.0" ry="2.0" transform="rotate(-3 295 256)" fill="#5a2408" opacity="0.44"/>
+                            <ellipse cx="390" cy="252" rx="1.6" ry="2.0" transform="rotate(17 390 252)" fill="#5a2408" opacity="0.27"/>
+                            <ellipse cx="336" cy="227" rx="1.6" ry="3.2" transform="rotate(24 336 227)" fill="#5a2408" opacity="0.27"/>
+                            <ellipse cx="346" cy="205" rx="3.0" ry="2.3" transform="rotate(-16 346 205)" fill="#5a2408" opacity="0.30"/>
+                            <ellipse cx="301" cy="253" rx="2.5" ry="1.6" transform="rotate(19 301 253)" fill="#5a2408" opacity="0.30"/>
+                            <ellipse cx="413" cy="240" rx="4.2" ry="1.9" transform="rotate(26 413 240)" fill="#5a2408" opacity="0.24"/>
+                            <ellipse cx="250" cy="180" rx="4.0" ry="2.6" transform="rotate(-26 250 180)" fill="#5a2408" opacity="0.31"/>
+                            <ellipse cx="391" cy="244" rx="1.9" ry="1.7" transform="rotate(-27 391 244)" fill="#5a2408" opacity="0.25"/>
+                            <ellipse cx="304" cy="177" rx="4.9" ry="2.1" transform="rotate(1 304 177)" fill="#5a2408" opacity="0.37"/>
+                            <ellipse cx="377" cy="273" rx="3.0" ry="1.9" transform="rotate(-7 377 273)" fill="#5a2408" opacity="0.22"/>
+                            <ellipse cx="303" cy="258" rx="5.1" ry="2.8" transform="rotate(13 303 258)" fill="#5a2408" opacity="0.36"/>
+                            <ellipse cx="226" cy="210" rx="2.8" ry="2.5" transform="rotate(-31 226 210)" fill="#5a2408" opacity="0.31"/>
+                            <ellipse cx="325" cy="269" rx="4.6" ry="2.4" transform="rotate(-27 325 269)" fill="#5a2408" opacity="0.40"/>
+                            <ellipse cx="404" cy="238" rx="2.9" ry="2.2" transform="rotate(-29 404 238)" fill="#5a2408" opacity="0.38"/>
+                            <ellipse cx="421" cy="234" rx="4.2" ry="2.9" transform="rotate(-24 421 234)" fill="#5a2408" opacity="0.44"/>
+                            <ellipse cx="349" cy="193" rx="1.9" ry="1.7" transform="rotate(6 349 193)" fill="#5a2408" opacity="0.38"/>
+                            <ellipse cx="288" cy="287" rx="2.9" ry="2.1" transform="rotate(-30 288 287)" fill="#5a2408" opacity="0.44"/>
+                            <ellipse cx="249" cy="284" rx="3.6" ry="2.3" transform="rotate(5 249 284)" fill="#5a2408" opacity="0.28"/>
+                            <ellipse cx="406" cy="295" rx="4.5" ry="2.4" transform="rotate(-30 406 295)" fill="#5a2408" opacity="0.41"/>
+                            <ellipse cx="280" cy="283" rx="2.5" ry="2.3" transform="rotate(26 280 283)" fill="#5a2408" opacity="0.26"/>
+                            <ellipse cx="333" cy="178" rx="1.7" ry="1.6" transform="rotate(39 333 178)" fill="#5a2408" opacity="0.44"/>
+                            <ellipse cx="355" cy="207" rx="4.0" ry="2.7" transform="rotate(-9 355 207)" fill="#5a2408" opacity="0.36"/>
+                            <ellipse cx="384" cy="170" rx="2.3" ry="2.1" transform="rotate(-29 384 170)" fill="#5a2408" opacity="0.31"/>
+                            <ellipse cx="337" cy="190" rx="3.5" ry="1.7" transform="rotate(5 337 190)" fill="#5a2408" opacity="0.30"/>
+                            <ellipse cx="352" cy="173" rx="4.0" ry="1.5" transform="rotate(37 352 173)" fill="#5a2408" opacity="0.36"/>
+                            <ellipse cx="317" cy="221" rx="3.8" ry="2.6" transform="rotate(21 317 221)" fill="#5a2408" opacity="0.39"/>
+                            <ellipse cx="320" cy="295" rx="4.6" ry="2.9" transform="rotate(-7 320 295)" fill="#5a2408" opacity="0.32"/>
+                            <ellipse cx="336" cy="284" rx="3.5" ry="2.3" transform="rotate(-5 336 284)" fill="#5a2408" opacity="0.43"/>
+                            <ellipse cx="287" cy="175" rx="4.2" ry="3.0" transform="rotate(19 287 175)" fill="#5a2408" opacity="0.36"/>
+                            <ellipse cx="374" cy="207" rx="3.7" ry="1.3" transform="rotate(-30 374 207)" fill="#5a2408" opacity="0.32"/>
+                            <ellipse cx="324" cy="219" rx="1.8" ry="2.6" transform="rotate(2 324 219)" fill="#5a2408" opacity="0.28"/>
+                            <ellipse cx="284" cy="219" rx="2.4" ry="1.3" transform="rotate(33 284 219)" fill="#5a2408" opacity="0.44"/>
+                            <ellipse cx="356" cy="279" rx="3.1" ry="2.8" transform="rotate(-22 356 279)" fill="#5a2408" opacity="0.39"/>
+                            <ellipse cx="336" cy="284" rx="2.0" ry="2.8" transform="rotate(-30 336 284)" fill="#5a2408" opacity="0.34"/>
+                            <ellipse cx="414" cy="168" rx="2.5" ry="1.8" transform="rotate(-14 414 168)" fill="#5a2408" opacity="0.23"/>
+                            <ellipse cx="403" cy="272" rx="3.0" ry="1.9" transform="rotate(7 403 272)" fill="#5a2408" opacity="0.23"/>
+                            <ellipse cx="228" cy="283" rx="2.7" ry="2.2" transform="rotate(35 228 283)" fill="#5a2408" opacity="0.44"/>
+                            <ellipse cx="317" cy="194" rx="2.7" ry="3.0" transform="rotate(32 317 194)" fill="#5a2408" opacity="0.26"/>
+                            <ellipse cx="391" cy="213" rx="3.3" ry="1.5" transform="rotate(30 391 213)" fill="#5a2408" opacity="0.45"/>
+                            <ellipse cx="263" cy="249" rx="2.3" ry="3.0" transform="rotate(-36 263 249)" fill="#5a2408" opacity="0.24"/>
+                            <ellipse cx="369" cy="208" rx="4.8" ry="2.9" transform="rotate(17 369 208)" fill="#5a2408" opacity="0.25"/>
+                            <ellipse cx="363" cy="288" rx="3.2" ry="1.4" transform="rotate(-22 363 288)" fill="#5a2408" opacity="0.29"/>
+                            <ellipse cx="366" cy="193" rx="2.3" ry="1.7" transform="rotate(13 366 193)" fill="#5a2408" opacity="0.40"/>
+                            <ellipse cx="297" cy="253" rx="4.8" ry="2.4" transform="rotate(-22 297 253)" fill="#5a2408" opacity="0.29"/>
+                            <ellipse cx="409" cy="253" rx="2.6" ry="2.5" transform="rotate(-33 409 253)" fill="#5a2408" opacity="0.45"/>
+                            <ellipse cx="311" cy="236" rx="3.5" ry="1.3" transform="rotate(8 311 236)" fill="#5a2408" opacity="0.29"/>
+                            <ellipse cx="273" cy="271" rx="1.9" ry="1.8" transform="rotate(20 273 271)" fill="#5a2408" opacity="0.28"/>
+                            <ellipse cx="278" cy="238" rx="2.3" ry="3.0" transform="rotate(39 278 238)" fill="#5a2408" opacity="0.23"/>
+                            <ellipse cx="315" cy="264" rx="3.0" ry="3.1" transform="rotate(-0 315 264)" fill="#5a2408" opacity="0.26"/>
+                            <ellipse cx="334" cy="251" rx="2.9" ry="2.5" transform="rotate(23 334 251)" fill="#5a2408" opacity="0.34"/>
+                            <ellipse cx="324" cy="276" rx="4.1" ry="2.2" transform="rotate(36 324 276)" fill="#5a2408" opacity="0.26"/>
+                            <ellipse cx="379" cy="189" rx="3.8" ry="1.7" transform="rotate(-5 379 189)" fill="#5a2408" opacity="0.40"/>
+                            <ellipse cx="381" cy="269" rx="2.4" ry="2.2" transform="rotate(-22 381 269)" fill="#5a2408" opacity="0.35"/>
+                            <ellipse cx="323" cy="173" rx="3.7" ry="2.6" transform="rotate(6 323 173)" fill="#5a2408" opacity="0.42"/>
+                            <ellipse cx="258" cy="187" rx="1.7" ry="2.2" transform="rotate(-5 258 187)" fill="#f6cf7a" opacity="0.41"/>
+                            <ellipse cx="275" cy="270" rx="1.9" ry="3.0" transform="rotate(6 275 270)" fill="#f6cf7a" opacity="0.44"/>
+                            <ellipse cx="382" cy="198" rx="2.1" ry="1.8" transform="rotate(-37 382 198)" fill="#f6cf7a" opacity="0.38"/>
+                            <ellipse cx="347" cy="235" rx="2.6" ry="2.4" transform="rotate(-33 347 235)" fill="#f6cf7a" opacity="0.51"/>
+                            <ellipse cx="257" cy="201" rx="2.2" ry="2.6" transform="rotate(26 257 201)" fill="#f6cf7a" opacity="0.50"/>
+                            <ellipse cx="234" cy="221" rx="2.9" ry="1.6" transform="rotate(38 234 221)" fill="#f6cf7a" opacity="0.31"/>
+                            <ellipse cx="321" cy="265" rx="5.2" ry="1.5" transform="rotate(-4 321 265)" fill="#f6cf7a" opacity="0.49"/>
+                            <ellipse cx="230" cy="199" rx="4.8" ry="1.5" transform="rotate(-9 230 199)" fill="#f6cf7a" opacity="0.37"/>
+                            <ellipse cx="308" cy="178" rx="1.7" ry="3.2" transform="rotate(21 308 178)" fill="#f6cf7a" opacity="0.48"/>
+                            <ellipse cx="268" cy="200" rx="3.6" ry="1.7" transform="rotate(-3 268 200)" fill="#f6cf7a" opacity="0.53"/>
+                            <ellipse cx="296" cy="211" rx="5.1" ry="2.4" transform="rotate(-37 296 211)" fill="#f6cf7a" opacity="0.40"/>
+                            <ellipse cx="353" cy="175" rx="2.8" ry="2.6" transform="rotate(29 353 175)" fill="#f6cf7a" opacity="0.45"/>
+                            <ellipse cx="401" cy="227" rx="3.0" ry="2.9" transform="rotate(-10 401 227)" fill="#f6cf7a" opacity="0.50"/>
+                            <ellipse cx="266" cy="212" rx="2.3" ry="2.3" transform="rotate(-27 266 212)" fill="#f6cf7a" opacity="0.35"/>
+                            <ellipse cx="265" cy="228" rx="2.7" ry="2.1" transform="rotate(39 265 228)" fill="#f6cf7a" opacity="0.47"/>
+                            <ellipse cx="396" cy="194" rx="3.0" ry="1.3" transform="rotate(15 396 194)" fill="#f6cf7a" opacity="0.39"/>
+                            <ellipse cx="277" cy="170" rx="2.3" ry="1.7" transform="rotate(-9 277 170)" fill="#f6cf7a" opacity="0.53"/>
+                            <ellipse cx="366" cy="202" rx="2.9" ry="1.5" transform="rotate(35 366 202)" fill="#f6cf7a" opacity="0.39"/>
+                            <ellipse cx="377" cy="261" rx="4.9" ry="1.2" transform="rotate(-14 377 261)" fill="#f6cf7a" opacity="0.40"/>
+                            <ellipse cx="239" cy="281" rx="2.8" ry="2.7" transform="rotate(2 239 281)" fill="#f6cf7a" opacity="0.31"/>
+                            <ellipse cx="302" cy="199" rx="1.7" ry="1.5" transform="rotate(8 302 199)" fill="#f6cf7a" opacity="0.31"/>
+                            <ellipse cx="285" cy="222" rx="3.6" ry="1.5" transform="rotate(17 285 222)" fill="#f6cf7a" opacity="0.37"/>
+                            <ellipse cx="369" cy="253" rx="2.1" ry="1.6" transform="rotate(-18 369 253)" fill="#f6cf7a" opacity="0.48"/>
+                            <ellipse cx="304" cy="217" rx="4.7" ry="1.7" transform="rotate(-17 304 217)" fill="#f6cf7a" opacity="0.39"/>
+                            <ellipse cx="266" cy="173" rx="1.7" ry="2.5" transform="rotate(5 266 173)" fill="#f6cf7a" opacity="0.50"/>
+                            <ellipse cx="419" cy="206" rx="4.0" ry="3.0" transform="rotate(-23 419 206)" fill="#f6cf7a" opacity="0.47"/>
+                            <ellipse cx="357" cy="290" rx="4.7" ry="1.7" transform="rotate(11 357 290)" fill="#f6cf7a" opacity="0.32"/>
+                            <ellipse cx="308" cy="218" rx="1.8" ry="2.0" transform="rotate(-14 308 218)" fill="#f6cf7a" opacity="0.42"/>
+                            <ellipse cx="279" cy="188" rx="3.0" ry="2.2" transform="rotate(-27 279 188)" fill="#f6cf7a" opacity="0.47"/>
+                            <ellipse cx="270" cy="180" rx="2.8" ry="2.0" transform="rotate(-28 270 180)" fill="#f6cf7a" opacity="0.45"/>
+                            <ellipse cx="364" cy="239" rx="4.1" ry="1.2" transform="rotate(-9 364 239)" fill="#f6cf7a" opacity="0.39"/>
+                            <ellipse cx="235" cy="220" rx="1.8" ry="2.2" transform="rotate(7 235 220)" fill="#f6cf7a" opacity="0.42"/>
+                            <ellipse cx="288" cy="200" rx="1.7" ry="1.9" transform="rotate(31 288 200)" fill="#f6cf7a" opacity="0.44"/>
+                            <ellipse cx="275" cy="254" rx="2.3" ry="2.1" transform="rotate(9 275 254)" fill="#f6cf7a" opacity="0.54"/>
+                            <ellipse cx="295" cy="242" rx="5.0" ry="2.7" transform="rotate(10 295 242)" fill="#f6cf7a" opacity="0.46"/>
+                            <ellipse cx="305" cy="221" rx="2.6" ry="2.9" transform="rotate(30 305 221)" fill="#f6cf7a" opacity="0.40"/>
+                            <ellipse cx="406" cy="173" rx="2.1" ry="2.2" transform="rotate(-15 406 173)" fill="#f6cf7a" opacity="0.39"/>
+                            <ellipse cx="419" cy="187" rx="2.3" ry="1.7" transform="rotate(14 419 187)" fill="#f6cf7a" opacity="0.36"/>
+                            <ellipse cx="222" cy="238" rx="3.0" ry="1.7" transform="rotate(-1 222 238)" fill="#f6cf7a" opacity="0.46"/>
+                            <ellipse cx="333" cy="248" rx="3.6" ry="2.9" transform="rotate(38 333 248)" fill="#f6cf7a" opacity="0.38"/>
+                            <ellipse cx="292" cy="281" rx="2.7" ry="2.6" transform="rotate(16 292 281)" fill="#f6cf7a" opacity="0.47"/>
+                            <ellipse cx="417" cy="274" rx="2.2" ry="2.4" transform="rotate(-1 417 274)" fill="#f6cf7a" opacity="0.44"/>
+                            <ellipse cx="297" cy="205" rx="4.3" ry="2.3" transform="rotate(-21 297 205)" fill="#f6cf7a" opacity="0.36"/>
+                            <ellipse cx="288" cy="191" rx="3.4" ry="1.5" transform="rotate(-35 288 191)" fill="#f6cf7a" opacity="0.32"/>
+                            <ellipse cx="243" cy="258" rx="2.0" ry="2.1" transform="rotate(22 243 258)" fill="#f6cf7a" opacity="0.42"/>
+                            <ellipse cx="255" cy="279" rx="4.7" ry="1.3" transform="rotate(-20 255 279)" fill="#f6cf7a" opacity="0.43"/>
+                            <ellipse cx="383" cy="218" rx="4.2" ry="1.7" transform="rotate(17 383 218)" fill="#f6cf7a" opacity="0.38"/>
+                            <ellipse cx="289" cy="265" rx="4.6" ry="2.9" transform="rotate(5 289 265)" fill="#f6cf7a" opacity="0.41"/>
+                            <ellipse cx="365" cy="248" rx="4.6" ry="2.8" transform="rotate(-30 365 248)" fill="#f6cf7a" opacity="0.39"/>
+                            <ellipse cx="357" cy="198" rx="2.3" ry="1.2" transform="rotate(7 357 198)" fill="#f6cf7a" opacity="0.54"/>
+                            <ellipse cx="418" cy="185" rx="4.1" ry="2.0" transform="rotate(11 418 185)" fill="#f6cf7a" opacity="0.40"/>
+                            <ellipse cx="411" cy="295" rx="1.8" ry="2.6" transform="rotate(-31 411 295)" fill="#f6cf7a" opacity="0.31"/>
+                            <ellipse cx="280" cy="262" rx="5.2" ry="1.4" transform="rotate(-14 280 262)" fill="#f6cf7a" opacity="0.31"/>
+                            <ellipse cx="332" cy="230" rx="2.9" ry="1.8" transform="rotate(24 332 230)" fill="#f6cf7a" opacity="0.51"/>
+                            <ellipse cx="279" cy="218" rx="3.8" ry="2.7" transform="rotate(38 279 218)" fill="#f6cf7a" opacity="0.40"/>
+                            <path d="M226 236 C220 192 284 166 342 176 C398 186 424 226 402 258 C380 290 300 296 262 276 C238 264 228 250 226 236 Z" fill="none" stroke="#6e2f0e" stroke-width="5" opacity="0.35"/>
+                        </g>
+                        <!-- glossy highlights -->
+                        <path d="M262 206 C285 184 330 178 360 186" fill="none" stroke="#fff3cf" stroke-width="5" stroke-linecap="round" opacity="0.4"/>
+                        <path d="M346 178 C366 170 394 172 410 184" fill="none" stroke="#fff3cf" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
+                    </svg>
+                </div>
+
+                <!-- 4. VEGGIES -->
+                <div class="layer layer-veg" data-title="Fresh veggies" data-text="Crunchy carrots and cool cucumber on the side.">
+                    <svg viewBox="0 0 520 400" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="carrotG" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#ffb24a"/>
+                                <stop offset="1" stop-color="#e0761a"/>
+                            </linearGradient>
+                            <filter id="vegShadow" x="-30%" y="-30%" width="170%" height="200%">
+                                <feDropShadow dx="2" dy="5" stdDeviation="3" flood-color="#000" flood-opacity="0.4"/>
+                            </filter>
+                        </defs>
+                        <g filter="url(#vegShadow)">
+                        <g transform="translate(196 132) rotate(-38) scale(1.0)">
+                            <path d="M-36 -9 L24 -4 Q38 0 24 4 L-36 9 Q-42 0 -36 -9 Z" fill="url(#carrotG)"/>
+                            <path d="M-36 -9 L24 -4 Q38 0 24 4 L-36 9 Q-42 0 -36 -9 Z" fill="none" stroke="#b85c10" stroke-width="1.2" opacity="0.6"/>
+                            <path d="M-24 -4 L-18 -3 M-8 3 L-2 2 M6 -2 L12 -1.5 M-14 5 L-9 4.5" stroke="#b85c10" stroke-width="1.4" stroke-linecap="round" opacity="0.6"/>
+                            <path d="M-34 -5 L18 -2" stroke="#ffd08a" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                        </g>
+                        <g transform="translate(318 130) rotate(-14) scale(1.05)">
+                            <path d="M-36 -9 L24 -4 Q38 0 24 4 L-36 9 Q-42 0 -36 -9 Z" fill="url(#carrotG)"/>
+                            <path d="M-36 -9 L24 -4 Q38 0 24 4 L-36 9 Q-42 0 -36 -9 Z" fill="none" stroke="#b85c10" stroke-width="1.2" opacity="0.6"/>
+                            <path d="M-24 -4 L-18 -3 M-8 3 L-2 2 M6 -2 L12 -1.5 M-14 5 L-9 4.5" stroke="#b85c10" stroke-width="1.4" stroke-linecap="round" opacity="0.6"/>
+                            <path d="M-34 -5 L18 -2" stroke="#ffd08a" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                        </g>
+                        <g transform="translate(392 158) rotate(38) scale(0.95)">
+                            <path d="M-36 -9 L24 -4 Q38 0 24 4 L-36 9 Q-42 0 -36 -9 Z" fill="url(#carrotG)"/>
+                            <path d="M-36 -9 L24 -4 Q38 0 24 4 L-36 9 Q-42 0 -36 -9 Z" fill="none" stroke="#b85c10" stroke-width="1.2" opacity="0.6"/>
+                            <path d="M-24 -4 L-18 -3 M-8 3 L-2 2 M6 -2 L12 -1.5 M-14 5 L-9 4.5" stroke="#b85c10" stroke-width="1.4" stroke-linecap="round" opacity="0.6"/>
+                            <path d="M-34 -5 L18 -2" stroke="#ffd08a" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                        </g>
+                        <g transform="translate(262 112) rotate(10) scale(1.15)">
+                            <path d="M-32 16 C-34 -24 34 -24 32 16 Z" fill="#2c7326"/>
+                            <path d="M-26 12 C-27 -17 27 -17 26 12 Z" fill="#cfe5a1"/>
+                            <path d="M-26 12 C-27 -17 27 -17 26 12" fill="none" stroke="#8fc15a" stroke-width="3" opacity="0.8"/>
+                            <path d="M-14 8 C-12 -4 12 -4 14 8" fill="none" stroke="#e9f4c6" stroke-width="2" opacity="0.9"/>
+                            <ellipse cx="-8" cy="3" rx="2.4" ry="1.4" fill="#f4f9dc"/><ellipse cx="0" cy="-1" rx="2.4" ry="1.4" fill="#f4f9dc"/><ellipse cx="8" cy="3" rx="2.4" ry="1.4" fill="#f4f9dc"/>
+                            <path d="M-30 12 C-31 -16 -8 -22 8 -20" fill="none" stroke="#5aa043" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+                        </g>
+                        </g>
+                    </svg>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -181,5 +1491,6 @@
     </script>
 
     <script src="amrogn.js"></script>
+    <script src="build.js"></script>
 </body>
 </html>

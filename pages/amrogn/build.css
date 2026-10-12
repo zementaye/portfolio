@@ -1,0 +1,152 @@
+/* =========================================================
+   BUILD YOUR PLATE — scroll-driven section (Home page)
+   ========================================================= */
+
+.build {
+    position: relative;
+    background: radial-gradient(ellipse at 50% 40%, #4a2c17 0%, var(--color-brown) 70%);
+    color: var(--color-white);
+}
+
+.build-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px 40px 40px; /* top clears the sticky navbar */
+    overflow: hidden;
+}
+
+.build-copy {
+    flex: 0 1 380px;
+}
+
+.build-eyebrow {
+    display: inline-block;
+    color: var(--color-gold);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+}
+
+.build-copy h2 {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    margin-bottom: 18px;
+}
+
+.build-step.swap {
+    animation: build-swap 0.45s ease both;
+}
+
+@keyframes build-swap {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.build-step-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    margin: 0 0 6px;
+}
+
+.build-step-text {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    min-height: 3em;
+}
+
+.build-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 22px;
+}
+
+.build-dot {
+    width: 28px;
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.25);
+    transition: background var(--transition);
+}
+
+.build-dot.on {
+    background: var(--color-gold);
+}
+
+/* The dish: layers are stacked on top of each other, same size */
+.dish {
+    position: relative;
+    flex: 1 1 560px;
+    max-width: 600px;
+    aspect-ratio: 13 / 10;
+}
+
+.layer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    will-change: transform, opacity;
+    pointer-events: none;
+}
+
+.layer svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    display: block;
+}
+
+/* Reduced motion: no pinning, finished dish shown */
+.build.is-static {
+    height: auto !important;
+}
+
+.build.is-static .build-stage {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.build.is-static .layer {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+@media (max-width: 860px) {
+    .build-stage {
+        flex-direction: column-reverse;
+        justify-content: center;
+        gap: 16px;
+        padding: 80px 20px 30px;
+        text-align: center;
+    }
+
+    .build-copy {
+        flex: 0 0 auto;
+    }
+
+    .build-dots {
+        justify-content: center;
+    }
+
+    .build-copy h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .dish {
+        flex: 0 1 auto;
+        width: min(92vw, 460px);
+    }
+}
