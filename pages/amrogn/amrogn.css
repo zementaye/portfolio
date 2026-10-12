@@ -279,10 +279,7 @@ a {
 /* -------- NAVBAR (shared across every page) -------- */
 .navbar {
     background: var(--color-brown);
-    padding: 0 40px;
-    height: 74px;
-    display: flex;
-    align-items: center;
+    padding: 14px 40px;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -290,7 +287,6 @@ a {
 }
 
 .nav-container {
-    width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
     display: flex;
@@ -429,7 +425,7 @@ a {
     gap: 40px;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 100px 40px 70px;
+    padding: 70px 40px;
     background: var(--color-white);
 }
 
@@ -575,7 +571,7 @@ a {
     .hero {
         flex-direction: column;
         text-align: center;
-        padding: 60px 24px 50px;
+        padding: 50px 24px;
     }
 
     .hero-text {
@@ -589,8 +585,7 @@ a {
 
 @media (max-width: 768px) {
     .navbar {
-        padding: 0 20px;
-        height: 64px;
+        padding: 14px 20px;
     }
 
     .nav-toggle {
