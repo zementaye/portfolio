@@ -85,8 +85,8 @@
 /* The dish: layers are stacked on top of each other, same size */
 .dish {
     position: relative;
-    flex: 1 1 560px;
-    max-width: 600px;
+    flex: 1 1 620px;
+    max-width: 680px;
     aspect-ratio: 13 / 10;
 }
 
@@ -116,13 +116,47 @@
 }
 
 .layer-plate .part  { filter: drop-shadow(0 26px 22px rgba(0, 0, 0, 0.55)); }
-.layer-rice .part   { filter: drop-shadow(0 10px 9px rgba(0, 0, 0, 0.35)); }
-.layer-chicken .part { filter: drop-shadow(0 12px 9px rgba(0, 0, 0, 0.5)); }
-.layer-sauce .part  {
-    transform-origin: 0 50%;
-    /* the source splash is cropped flat at the sides: feather those edges */
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 82%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 82%, transparent 100%);
+/* rice, chicken and sauce have their contact shadows baked into the PNGs */
+.layer-sauce .part  { transform-origin: 0 50%; }
+
+/* Rising steam once the dish is complete */
+.steam {
+    position: absolute;
+    left: 34%;
+    top: 4%;
+    width: 34%;
+    height: 40%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.build.is-done .steam { opacity: 1; }
+
+.steam span {
+    position: absolute;
+    bottom: 0;
+    width: 26%;
+    height: 85%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 50% 65%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0) 68%);
+    filter: blur(9px);
+    opacity: 0;
+    animation: steam-rise 4.5s ease-in-out infinite;
+}
+
+.steam span:nth-child(1) { left: 8%;  animation-delay: 0s; }
+.steam span:nth-child(2) { left: 38%; animation-delay: 1.5s; }
+.steam span:nth-child(3) { left: 66%; animation-delay: 3s; }
+
+@keyframes steam-rise {
+    0%   { transform: translate3d(0, 25%, 0) scale(0.7); opacity: 0; }
+    30%  { opacity: 1; }
+    100% { transform: translate3d(8%, -55%, 0) scale(1.35); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .steam span { animation: none; opacity: 0.5; }
 }
 
 /* Reduced motion: no pinning, finished dish shown */

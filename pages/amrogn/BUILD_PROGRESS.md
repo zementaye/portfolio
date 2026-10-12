@@ -30,3 +30,9 @@ Animation complete: plate, rice, chicken, veggies, sauces. Ideas if wanted later
 - Order now: plate -> rice -> chicken (2 drumsticks, staggered drop) -> sauces (wipe left to right, edges feathered by mask in build.css).
 - VEGGIES are NOT in the photo version yet (the drawn SVG ones looked cartoonish next to photos). TODO: get a veggies PNG (carrot sticks / cucumber / lettuce / tomato, 3/4 view, transparent), save as `Pictures/build/veggies.png`, add a layer between chicken and sauces using `<img class="part" ...>` positioned on the rice top/right. Positions are % of the dish (520x400 box).
 - To adjust a photo's position: edit its inline style left/top/width (percent of the dish) in amrogn.html.
+
+## REALISM PASS (batch 7)
+- The PNGs in `Pictures/build/` are now processed versions of the originals: warm colour grade, tone-down of blown whites (rice/plate), flattened contact shadows baked in (rice, both drumsticks), sauce flattened vertically + edges faded (baked). Original untouched stock images were attached by the user in chat; if the originals are re-supplied, they must be re-processed the same way (trim -> grade -> bake shadow) and the left/top/width styles in amrogn.html recomputed, since baked padding changes the image size.
+- Steam: `.steam` in `.dish`, shown by `.build.is-done` (set in build.js when progress > 0.97); animation disabled under prefers-reduced-motion.
+- `.dish` is now max 680px wide.
+- Veggies step deliberately left out (user decision).

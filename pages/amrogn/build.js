@@ -87,6 +87,7 @@
             l.style.opacity = clamp(t * 4, 0, 1);
             l.style.transform = 'translate3d(0,' + dy + '%,0) rotate(' + rot + 'deg) scale(' + sc + ')';
         });
+        sec.classList.toggle('is-done', p > 0.97);
         setCaption(clamp(Math.floor(p * N), 0, N - 1));
     }
 
