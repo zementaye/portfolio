@@ -2,6 +2,14 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-10-14** Redesign portfolio: pinned-poster work section, real project photos, self-hosted font (b79bc9f)
+- **2026-10-12** Amrogn: realism pass on build animation - colour match, contact shadows, flattened sauce, steam (batch 7) (a7e0f2b)
+- **2026-10-12** Amrogn: build animation now uses real photo layers (plate, rice, 2 drumsticks, sauce splash) (batch 6) (9248470)
+- **2026-10-12** Amrogn: scroll build-your-plate animation complete - sauces layer + polish (batch 5) (164939f)
+- **2026-10-12** Amrogn: scroll build-your-plate animation - add veggies layer (batch 4) + rename-zip rule (c038e32)
+- **2026-10-12** Amrogn: scroll build-your-plate animation - engine, plate, rice (batches 1-2) + CLAUDE.md rules (11decc2)
+- **2026-09-07** Add Telegram bots section, wire up new nav link (594e58c)
+- **2026-09-07** Update commit history (deb67a8)
 - **2026-09-07** Redesign UI: wire up scroll/typing/cursor effects, give each project card its own color identity (da9b268)
 - **2026-09-07** Fix navbar height consistency and add breathing room to hero (26e9962)
 - **2026-09-07** Add PWA support (manifest, service worker, offline fallback), Twitter cards, skip-to-content link, focus-visible styles, broken-image fallback (2a40025)
