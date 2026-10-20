@@ -2,6 +2,8 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-10-20** Redesign home page: neutral frame, real project screenshots, new hero (7f018f9)
+- **2026-10-14** Update commit history (525c566)
 - **2026-10-14** Redesign portfolio: pinned-poster work section, real project photos, self-hosted font (b79bc9f)
 - **2026-10-12** Amrogn: realism pass on build animation - colour match, contact shadows, flattened sauce, steam (batch 7) (a7e0f2b)
 - **2026-10-12** Amrogn: build animation now uses real photo layers (plate, rice, 2 drumsticks, sauce splash) (batch 6) (9248470)
