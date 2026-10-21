@@ -5,30 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Zemen Taye | Web developer in Addis Ababa</title>
   <meta name="description" content="Zemen Taye builds online shops, their admin tools and Telegram bots from Addis Ababa. Three shops and three bots, built and shipped.">
-  <meta name="theme-color" content="#EFEEEA" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#12141A" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#05050c">
+  <meta name="color-scheme" content="dark">
   <meta property="og:title" content="Zemen Taye | Web developer in Addis Ababa">
   <meta property="og:description" content="Three shops and three Telegram bots, built and shipped from Addis Ababa.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="Pictures/Work/tomy-desktop.webp">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312141A'/%3E%3Cpath d='M16 17h32v8L27 43h21v6H16v-8l21-18H16z' fill='%233DDC97'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305050c'/%3E%3Cpath d='M16 17h32v8L27 43h21v6H16v-8l21-18H16z' fill='%2317e4ff'/%3E%3C/svg%3E">
   <link rel="preload" href="fonts/bricolage-grotesque-latin-opsz.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
-  <script>
-    document.documentElement.classList.add("js");
-    try {
-      var saved = localStorage.getItem("theme");
-      var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.dataset.theme = dark ? "dark" : "light";
-    } catch (e) {}
-  </script>
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 
 <a class="skip" href="#work">Skip to the work</a>
 
+<!-- Fixed backdrop: aurora, grid, and a particle field that reacts to the pointer -->
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
 <header class="bar" id="bar">
   <a class="wordmark" href="#top" aria-label="Zemen Taye, back to top">
+    <svg class="wordmark-glyph" viewBox="0 0 64 64" width="26" height="26" aria-hidden="true">
+      <defs>
+        <linearGradient id="zg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#8a5cff"/><stop offset=".5" stop-color="#ff3d9a"/><stop offset="1" stop-color="#17e4ff"/>
+        </linearGradient>
+      </defs>
+      <path d="M16 17h32v8L27 43h21v6H16v-8l21-18H16z" fill="url(#zg)"/>
+    </svg>
     Zemen Taye
   </a>
   <nav aria-label="Main">
@@ -37,10 +44,6 @@
     <a class="nav-extra" href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
-  <button id="theme-toggle" class="theme" type="button" aria-pressed="false" aria-label="Switch to the dark theme">
-    <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a.7.7 0 0 0-.9-.9A10 10 0 1 0 21.4 15.5a.7.7 0 0 0-.9-.9z"/></svg>
-    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
-  </button>
 </header>
 
 <main id="top">
@@ -50,9 +53,9 @@
     <div class="wrap">
       <p class="status hero-in" style="--i:0"><span class="dot" aria-hidden="true"></span>Open to remote projects, from Addis Ababa</p>
 
-      <h1 id="hero-title" class="hero-title hero-in" style="--i:1">Online shops, the admin behind them, and the bots around them.</h1>
+      <h1 id="hero-title" class="hero-title">Online shops, the admin behind them, and the bots around them.</h1>
 
-      <div class="hero-row hero-in" style="--i:2">
+      <div class="hero-row hero-in" style="--i:5">
         <p class="hero-lede">I'm Zemen. I build the storefront, the page where the owner edits products, and the Telegram bots that keep a group chat busy.</p>
         <div class="hero-actions">
           <a class="btn" href="#work">See the work</a>
@@ -60,9 +63,10 @@
         </div>
       </div>
 
-      <div class="stage hero-in" style="--i:3" id="stage" role="group" aria-roledescription="carousel" aria-label="Screens from my three shops">
-        <div class="window">
+      <div class="stage hero-in" style="--i:7" id="stage" role="group" aria-roledescription="carousel" aria-label="Screens from my three shops">
+        <div class="window neon tilt" id="stage-window">
           <div class="window-bar" aria-hidden="true">
+            <span class="window-dots"><i></i><i></i><i></i></span>
             <span class="window-url" id="stage-url">Tomy/tomy-fashion.html</span>
           </div>
           <div class="window-body">
@@ -84,6 +88,7 @@
                 <img src="Pictures/Work/istore-desktop.webp" width="1440" height="900" loading="lazy" alt="The Apple Store by Sophi home page with an iPhone 17 Pro Max">
               </picture>
             </a>
+            <span class="scan" aria-hidden="true"></span>
           </div>
         </div>
         <div class="stage-tabs" id="stage-tabs">
@@ -95,104 +100,130 @@
     </div>
   </section>
 
+  <!-- ============ Skills ticker ============ -->
+  <div class="ticker" aria-label="Builds with HTML, CSS, JavaScript, Python, Flask, MongoDB and SQLite">
+    <div class="ticker-track" aria-hidden="true">
+      <ul><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Python</li><li>Flask</li><li>MongoDB</li><li>SQLite</li><li>Telegram bots</li></ul>
+      <ul><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Python</li><li>Flask</li><li>MongoDB</li><li>SQLite</li><li>Telegram bots</li></ul>
+    </div>
+  </div>
+
   <!-- ============ Work ============ -->
-  <section id="work" class="section" aria-labelledby="work-title">
+  <section id="work" class="section section--work" aria-labelledby="work-title">
     <div class="wrap">
       <header class="section-head">
-        <h2 id="work-title" class="section-title">Three shops</h2>
+        <h2 id="work-title" class="section-title" data-scramble>Three shops</h2>
         <p class="section-lede">Each one opens the live site.</p>
       </header>
 
-      <article class="project" style="--tint:#2c2420">
-        <div class="project-media">
-          <div class="window">
-            <div class="window-bar" aria-hidden="true"><span class="window-url">Tomy/tomy-fashion.html</span></div>
-            <img src="Pictures/Work/tomy-desktop.webp" width="1440" height="900" loading="lazy" alt="Tomy Fashion on a desktop screen">
+      <div class="stack">
+        <article class="project" style="--n:0; --c1:#ff8a3d; --c2:#ff3d9a; --c3:#8a5cff">
+          <div class="project-media">
+            <div class="window neon tilt">
+              <div class="window-bar" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span><span class="window-url">Tomy/tomy-fashion.html</span></div>
+              <img src="Pictures/Work/tomy-desktop.webp" width="1440" height="900" loading="lazy" alt="Tomy Fashion on a desktop screen">
+            </div>
+            <div class="phone"><img src="Pictures/Work/tomy-phone.webp" width="780" height="1688" loading="lazy" alt="Tomy Fashion on a phone"></div>
           </div>
-          <div class="phone"><img src="Pictures/Work/tomy-phone.webp" width="780" height="1688" loading="lazy" alt="Tomy Fashion on a phone"></div>
-        </div>
-        <div class="project-text">
-          <h3>Tomy Fashion</h3>
-          <p>A streetwear store. The catalog, prices and cart load from a Flask API, and an admin page lets the owner edit products without touching code.</p>
-          <p class="built">Built with Flask, MongoDB Atlas and JavaScript.</p>
-          <a class="btn" href="Tomy/tomy-fashion.html">Open Tomy Fashion</a>
-        </div>
-      </article>
+          <div class="project-text">
+            <h3>Tomy Fashion</h3>
+            <p>A streetwear store. The catalog, prices and cart load from a Flask API, and an admin page lets the owner edit products without touching code.</p>
+            <ul class="chips" aria-label="Built with"><li>Flask</li><li>MongoDB Atlas</li><li>JavaScript</li></ul>
+            <a class="btn" href="Tomy/tomy-fashion.html">Open Tomy Fashion</a>
+          </div>
+        </article>
 
-      <article class="project project--flip" style="--tint:#f1b23a">
-        <div class="project-media">
-          <div class="window">
-            <div class="window-bar" aria-hidden="true"><span class="window-url">pages/amrogn/amrogn.html</span></div>
-            <img src="Pictures/Work/amrogn-desktop.webp" width="1440" height="900" loading="lazy" alt="Amrogn Chicken on a desktop screen">
+        <article class="project project--flip" style="--n:1; --c1:#ffb340; --c2:#ff5d5d; --c3:#ff3d9a">
+          <div class="project-media">
+            <div class="window neon tilt">
+              <div class="window-bar" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span><span class="window-url">pages/amrogn/amrogn.html</span></div>
+              <img src="Pictures/Work/amrogn-desktop.webp" width="1440" height="900" loading="lazy" alt="Amrogn Chicken on a desktop screen">
+            </div>
+            <div class="phone"><img src="Pictures/Work/amrogn-phone.webp" width="780" height="1688" loading="lazy" alt="Amrogn Chicken on a phone"></div>
           </div>
-          <div class="phone"><img src="Pictures/Work/amrogn-phone.webp" width="780" height="1688" loading="lazy" alt="Amrogn Chicken on a phone"></div>
-        </div>
-        <div class="project-text">
-          <h3>Amrogn Chicken</h3>
-          <p>A restaurant site with the full menu, a map for each of seven branches across Ethiopia, and a home page where the plate builds itself as you scroll.</p>
-          <p class="built">Built with JavaScript.</p>
-          <a class="btn" href="pages/amrogn/amrogn.html">Open Amrogn Chicken</a>
-        </div>
-      </article>
+          <div class="project-text">
+            <h3>Amrogn Chicken</h3>
+            <p>A restaurant site with the full menu, a map for each of seven branches across Ethiopia, and a home page where the plate builds itself as you scroll.</p>
+            <ul class="chips" aria-label="Built with"><li>JavaScript</li></ul>
+            <a class="btn" href="pages/amrogn/amrogn.html">Open Amrogn Chicken</a>
+          </div>
+        </article>
 
-      <article class="project" style="--tint:#d9e1f3">
-        <div class="project-media">
-          <div class="window">
-            <div class="window-bar" aria-hidden="true"><span class="window-url">IStore/istore.html</span></div>
-            <img src="Pictures/Work/istore-desktop.webp" width="1440" height="900" loading="lazy" alt="Apple Store by Sophi on a desktop screen">
+        <article class="project" style="--n:2; --c1:#17e4ff; --c2:#8a5cff; --c3:#3d7bff">
+          <div class="project-media">
+            <div class="window neon tilt">
+              <div class="window-bar" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span><span class="window-url">IStore/istore.html</span></div>
+              <img src="Pictures/Work/istore-desktop.webp" width="1440" height="900" loading="lazy" alt="Apple Store by Sophi on a desktop screen">
+            </div>
+            <div class="phone"><img src="Pictures/Work/istore-phone.webp" width="780" height="1688" loading="lazy" alt="Apple Store by Sophi on a phone"></div>
           </div>
-          <div class="phone"><img src="Pictures/Work/istore-phone.webp" width="780" height="1688" loading="lazy" alt="Apple Store by Sophi on a phone"></div>
-        </div>
-        <div class="project-text">
-          <h3>Apple Store by Sophi</h3>
-          <p>A storefront for Apple devices and accessories, with a page for every product and an AI shopping assistant that answers customer questions.</p>
-          <p class="built">Built with JavaScript and a small Flask backend.</p>
-          <a class="btn" href="IStore/istore.html">Open Apple Store by Sophi</a>
-        </div>
-      </article>
+          <div class="project-text">
+            <h3>Apple Store by Sophi</h3>
+            <p>A storefront for Apple devices and accessories, with a page for every product and an AI shopping assistant that answers customer questions.</p>
+            <ul class="chips" aria-label="Built with"><li>JavaScript</li><li>Flask</li></ul>
+            <a class="btn" href="IStore/istore.html">Open Apple Store by Sophi</a>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
   <!-- ============ Bots ============ -->
   <section id="bots" class="section section--bots" aria-labelledby="bots-title">
     <div class="wrap bots">
-      <header class="bots-head">
-        <h2 id="bots-title" class="section-title">Three bots</h2>
-        <p class="section-lede">Party games for Telegram group chats. In any of them, type <code>/newgame</code> to start a round.</p>
-      </header>
+      <div class="bots-left">
+        <header class="bots-head">
+          <h2 id="bots-title" class="section-title" data-scramble>Three bots</h2>
+          <p class="section-lede">Party games for Telegram group chats. In any of them, type <code>/newgame</code> to start a round.</p>
+        </header>
 
-      <ul class="bot-list">
-        <li class="bot">
-          <h3>Spy</h3>
-          <p>Word Wolf for groups. Everyone gets a secret word except the impostor, who bluffs through three rounds of one-word hints before the vote.</p>
-          <p class="bot-meta"><span>Python, SQLite</span><a href="https://github.com/zementaye/Spy" target="_blank" rel="noopener">Code on GitHub</a></p>
-        </li>
-        <li class="bot">
-          <h3>Truth</h3>
-          <p>Two truths and a lie. One player submits three statements, the rest bet points on which is false. Streaks, bluffing bonuses and a leaderboard.</p>
-          <p class="bot-meta"><span>Python, SQLite</span><a href="https://github.com/zementaye/Truth" target="_blank" rel="noopener">Code on GitHub</a></p>
-        </li>
-        <li class="bot">
-          <h3>Guess Who</h3>
-          <p>Players narrow down a hidden character or word with yes or no questions. Supports custom card packs.</p>
-          <p class="bot-meta"><span>Python</span><a href="https://github.com/zementaye/guess_who" target="_blank" rel="noopener">Code on GitHub</a></p>
-        </li>
-      </ul>
+        <ul class="bot-list">
+          <li class="bot is-active" data-bot="0">
+            <h3>Spy</h3>
+            <p>Word Wolf for groups. Everyone gets a secret word except the impostor, who bluffs through three rounds of one-word hints before the vote.</p>
+            <p class="bot-meta"><span>Python, SQLite</span><a href="https://github.com/zementaye/Spy" target="_blank" rel="noopener">Code on GitHub</a></p>
+          </li>
+          <li class="bot" data-bot="1">
+            <h3>Truth</h3>
+            <p>Two truths and a lie. One player submits three statements, the rest bet points on which is false. Streaks, bluffing bonuses and a leaderboard.</p>
+            <p class="bot-meta"><span>Python, SQLite</span><a href="https://github.com/zementaye/Truth" target="_blank" rel="noopener">Code on GitHub</a></p>
+          </li>
+          <li class="bot" data-bot="2">
+            <h3>Guess Who</h3>
+            <p>Players narrow down a hidden character or word with yes or no questions. Supports custom card packs.</p>
+            <p class="bot-meta"><span>Python</span><a href="https://github.com/zementaye/guess_who" target="_blank" rel="noopener">Code on GitHub</a></p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="terminal neon" id="terminal">
+        <div class="term-bar">
+          <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="term-title" id="term-title">Group chat: Spy</span>
+        </div>
+        <div class="term-tabs" id="term-tabs">
+          <button type="button" class="is-active" aria-pressed="true">Spy</button>
+          <button type="button" aria-pressed="false">Truth</button>
+          <button type="button" aria-pressed="false">Guess Who</button>
+        </div>
+        <div class="term-body" id="term-body" aria-hidden="true"></div>
+        <p class="term-note">A made-up round, to show how a game starts.</p>
+      </div>
     </div>
   </section>
 
   <!-- ============ About ============ -->
   <section id="about" class="section section--about" aria-labelledby="about-title">
     <div class="wrap about">
-      <h2 id="about-title" class="section-title">About</h2>
+      <h2 id="about-title" class="section-title" data-scramble>About</h2>
       <div class="about-body">
         <p class="about-lead">I studied computer science: programming fundamentals, data structures, algorithms and software engineering. Since then I have put that to work on real interfaces and on the systems behind them.</p>
         <p>I care about pages that load fast on a phone, fit any screen and do not look like a template. So far that has meant a clothing store, a restaurant site, a storefront for Apple devices, an admin dashboard and a few bots.</p>
         <dl class="facts">
-          <div><dt>Based in</dt><dd>Addis Ababa, Ethiopia</dd></div>
-          <div><dt>Languages</dt><dd>English, Amharic, French</dd></div>
-          <div><dt>Builds with</dt><dd>HTML, CSS, JavaScript, Python, Flask, MongoDB, SQLite</dd></div>
-          <div><dt>Studied</dt><dd>Computer science</dd></div>
+          <div class="fact"><dt>Based in</dt><dd>Addis Ababa, Ethiopia</dd></div>
+          <div class="fact"><dt>Languages</dt><dd>English, Amharic, French</dd></div>
+          <div class="fact"><dt>Builds with</dt><dd>HTML, CSS, JavaScript, Python, Flask, MongoDB, SQLite</dd></div>
+          <div class="fact"><dt>Studied</dt><dd>Computer science</dd></div>
         </dl>
       </div>
     </div>
@@ -204,7 +235,7 @@
       <h2 id="contact-title" class="contact-ask">Have a project in mind? Write to me.</h2>
       <a class="contact-mail" href="mailto:zemexasma@email.com?subject=Portfolio%20inquiry">zemexasma@email.com</a>
       <div class="contact-actions">
-        <button class="btn btn--flip" type="button" id="copy-email" data-email="zemexasma@email.com">Copy email</button>
+        <button class="btn magnetic" type="button" id="copy-email" data-email="zemexasma@email.com">Copy email</button>
         <span class="copy-status" id="copy-status" role="status"></span>
       </div>
       <div class="contact-foot">
