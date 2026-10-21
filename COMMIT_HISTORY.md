@@ -2,6 +2,8 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-10-21** Add Habesha & World Kitchen card, link LifeHub to its live Vercel site (a8118c4)
+- **2026-10-21** Update commit history (91104ca)
 - **2026-10-21** Add Habesha & World Kitchen project card, recipe finder copy, React/Node/Express skills (759000c)
 - **2026-10-21** Add LifeHub project card and switch contact email to Gmail (2d1543d)
 - **2026-10-21** Redesign home page: dark futuristic theme with interactive headline, particle field and stacked project cards (49bd00f)
