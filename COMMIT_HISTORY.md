@@ -2,6 +2,10 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-10-21** Add Habesha & World Kitchen project card, recipe finder copy, React/Node/Express skills (759000c)
+- **2026-10-21** Add LifeHub project card and switch contact email to Gmail (2d1543d)
+- **2026-10-21** Redesign home page: dark futuristic theme with interactive headline, particle field and stacked project cards (49bd00f)
+- **2026-10-20** Update commit history (75aab01)
 - **2026-10-20** Redesign home page: neutral frame, real project screenshots, new hero (7f018f9)
 - **2026-10-14** Update commit history (525c566)
 - **2026-10-14** Redesign portfolio: pinned-poster work section, real project photos, self-hosted font (b79bc9f)
