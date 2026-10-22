@@ -2,6 +2,8 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-10-22** Add Riddle bot (Emoji Riddles and Hangman) to the Bots section (49d081c)
+- **2026-10-22** Update commit history (3da7386)
 - **2026-10-22** Add AU Youth Community project card (32de488)
 - **2026-10-22** Update commit history (5f785ee)
 - **2026-10-22** Add Amharic Toolkit API card linking to its live Render site (fc85c25)
