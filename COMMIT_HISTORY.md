@@ -2,6 +2,8 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-10-22** Add Amharic Toolkit API project card (7631e4e)
+- **2026-10-21** Update commit history (8f28d44)
 - **2026-10-21** Point LifeHub card to its live Render URL (35227c1)
 - **2026-10-21** Update commit history (f197aa5)
 - **2026-10-21** Add Habesha & World Kitchen card, link LifeHub to its live Vercel site (a8118c4)
