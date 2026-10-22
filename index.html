@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Zemen Taye | Web developer in Addis Ababa</title>
-  <meta name="description" content="Zemen Taye builds online shops, web apps and Telegram bots from Addis Ababa. Three shops, a recipe finder, a life-management app, an Amharic OCR API, a youth community portal and three bots, built and shipped.">
+  <meta name="description" content="Zemen Taye builds online shops, web apps and Telegram bots from Addis Ababa. Three shops, a recipe finder, a life-management app, an Amharic OCR API, a youth community portal and four bots, built and shipped.">
   <meta name="theme-color" content="#05050c">
   <meta name="color-scheme" content="dark">
   <meta property="og:title" content="Zemen Taye | Web developer in Addis Ababa">
@@ -237,8 +237,8 @@
     <div class="wrap bots">
       <div class="bots-left">
         <header class="bots-head">
-          <h2 id="bots-title" class="section-title" data-scramble>Three bots</h2>
-          <p class="section-lede">Party games for Telegram group chats. In any of them, type <code>/newgame</code> to start a round.</p>
+          <h2 id="bots-title" class="section-title" data-scramble>Four bots</h2>
+          <p class="section-lede">Party games for Telegram group chats. In Spy, Truth and Guess Who, type <code>/newgame</code> to start a round. In Riddle, type <code>/emoji</code> or <code>/hangman</code>.</p>
         </header>
 
         <ul class="bot-list">
@@ -257,6 +257,11 @@
             <p>Players narrow down a hidden character or word with yes or no questions. Supports custom card packs.</p>
             <p class="bot-meta"><span>Python</span><a href="https://github.com/zementaye/guess_who" target="_blank" rel="noopener">Code on GitHub</a></p>
           </li>
+          <li class="bot" data-bot="3">
+            <h3>Riddle</h3>
+            <p>Two games in one bot. Emoji Riddles posts an emoji clue and the first correct answer wins the round; in Hangman the group guesses letters or the whole word. Scores are kept per group and rounds survive a restart.</p>
+            <p class="bot-meta"><span>Python, SQLite</span><a href="https://github.com/zementaye/Riddle" target="_blank" rel="noopener">Code on GitHub</a></p>
+          </li>
         </ul>
       </div>
 
@@ -269,6 +274,7 @@
           <button type="button" class="is-active" aria-pressed="true">Spy</button>
           <button type="button" aria-pressed="false">Truth</button>
           <button type="button" aria-pressed="false">Guess Who</button>
+          <button type="button" aria-pressed="false">Riddle</button>
         </div>
         <div class="term-body" id="term-body" aria-hidden="true"></div>
         <p class="term-note">A made-up round, to show how a game starts.</p>

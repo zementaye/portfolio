@@ -484,6 +484,13 @@ const SCRIPTS = [
     ["p", "Dawit", "Is it a footballer?"],
     ["bot", "Guess Who", "No."],
   ] },
+  { title: "Group chat: Riddle", lines: [
+    ["me", "You", "/emoji"],
+    ["bot", "Riddle", "Emoji Riddle! Category: movie. 🦁👑 Type your guess in the chat."],
+    ["p", "Dawit", "frozen?"],
+    ["p", "Hana", "lion king"],
+    ["bot", "Riddle", "Hana solved it first. The answer was The Lion King."],
+  ] },
 ];
 
 const termBody = document.getElementById("term-body");
