@@ -2,6 +2,8 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-10-23** Switch the portfolio to the blue Ice colour scheme (bcf49f8)
+- **2026-10-23** Update commit history (668b0eb)
 - **2026-10-23** Add MJ Logistics Enterprise project card (7a56531)
 - **2026-10-22** Update commit history (7c90384)
 - **2026-10-22** Add Riddle bot (Emoji Riddles and Hangman) to the Bots section (49d081c)
