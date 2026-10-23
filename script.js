@@ -122,7 +122,7 @@ function animateLetters(now) {
     const target = W_MIN + 130 * wave + (W_MAX - W_MIN) * 0.55 * near;
     l.w += (clamp(target, W_MIN, W_MAX) - l.w) * 0.2;
 
-    const hue = (255 + i * 6 + t * 24) % 360;
+    const hue = (215 + i * 6 + t * 24) % 360;
     const heat = Math.max(near, wave * 0.35);
     l.el.style.fontVariationSettings = '"wght" ' + Math.round(l.w);
     l.el.style.color = "hsl(" + hue.toFixed(0) + " " + (25 + heat * 70).toFixed(0) + "% " + (93 - heat * 14).toFixed(0) + "%)";
@@ -159,7 +159,7 @@ if (reduceMotion && letters.length) {
 // ---------------------------------------------------------------------------
 const canvas = document.getElementById("field");
 const ctx = canvas ? canvas.getContext("2d") : null;
-const HUES = [265, 322, 188];
+const HUES = [222, 196, 160];
 let W = 0, H = 0, DPR = 1;
 let particles = [];
 let sparks = [];
