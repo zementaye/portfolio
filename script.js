@@ -159,7 +159,7 @@ if (reduceMotion && letters.length) {
 // ---------------------------------------------------------------------------
 const canvas = document.getElementById("field");
 const ctx = canvas ? canvas.getContext("2d") : null;
-const HUES = [222, 196, 160];
+const HUES = [218, 208, 200];
 let W = 0, H = 0, DPR = 1;
 let particles = [];
 let sparks = [];
