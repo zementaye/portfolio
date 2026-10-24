@@ -2,6 +2,8 @@
 
 Auto-generated from `git log` by `scripts\Update-CommitHistory.ps1`.
 Do not hand-edit â€” re-run the script instead.
+- **2026-10-24** Switch the portfolio to the blue and black Midnight colour scheme (238e498)
+- **2026-10-23** Update commit history (4937948)
 - **2026-10-23** Switch the portfolio to the blue Ice colour scheme (bcf49f8)
 - **2026-10-23** Update commit history (668b0eb)
 - **2026-10-23** Add MJ Logistics Enterprise project card (7a56531)
